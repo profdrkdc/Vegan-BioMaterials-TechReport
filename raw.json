@@ -18,13 +18,13 @@
     "summary": "Gas-fermented protein reaches first Asian market; full island-wide foodservice rollout starts April 2024."
   },
   {
-    "category": "materials",
-    "company": "MycoWorks",
-    "headline": "MycoWorks opens South Carolina plant shipping Reishi mycelium leather to Hermès",
-    "date": "2024-04-03",
-    "url": "https://mycoworks.com/news/sc-facility-opening",
-    "impact": 9,
-    "summary": "First commercial-scale tannery-grade mycelium leather plant licensed to supply luxury brands worldwide."
+    "category": "food",
+    "company": "CULT Food Science",
+    "headline": "Noochies cat treats launch using cultivated chicken hybrid formulation",
+    "date": "2024-04-15",
+    "url": "https://cultfoodscience.com/news/noochies-launch",
+    "impact": 7,
+    "summary": "First consumer product combining regular kibble with cellular chicken enters mass pet channel in Canada."
   },
   {
     "category": "food",
@@ -34,24 +34,6 @@
     "url": "https://formo.bio/series-b-financing",
     "impact": 8,
     "summary": "Record European food-tech round closes; Berlin facility will deliver 200,000 L of precision casein annually."
-  },
-  {
-    "category": "materials",
-    "company": "Mogu",
-    "headline": "Mogu supplies Ikea with mycelium acoustic panels made from waste streams",
-    "date": "2024-04-18",
-    "url": "https://mogu.bio/ikea-collaboration",
-    "impact": 8,
-    "summary": "Italian startup brings fungus-based building panels to flat-pack giant, pilot stores in Netherlands and Spain."
-  },
-  {
-    "category": "food",
-    "company": "CULT Food Science",
-    "headline": "Noochies cat treats launch using cultivated chicken hybrid formulation",
-    "date": "2024-04-15",
-    "url": "https://cultfoodscience.com/news/noochies-launch",
-    "impact": 7,
-    "summary": "First consumer product combining regular kibble with cellular chicken enters mass pet channel in Canada."
   },
   {
     "category": "food",
@@ -64,12 +46,39 @@
   },
   {
     "category": "materials",
+    "company": "MycoWorks",
+    "headline": "MycoWorks opens South Carolina plant shipping Reishi mycelium leather to Hermès",
+    "date": "2024-04-03",
+    "url": "https://mycoworks.com/news/sc-facility-opening",
+    "impact": 9,
+    "summary": "First commercial-scale tannery-grade mycelium leather plant licensed to supply luxury brands worldwide."
+  },
+  {
+    "category": "materials",
     "company": "von Holzhausen",
     "headline": "von Holzhausen debuts Liquidplant oil-free vegan leather in Tesla Model S accessories",
     "date": "2024-03-08",
     "url": "https://vonholzhausen.com/blogs/news/tesla-liquidplant-launch",
     "impact": 7,
     "summary": "Plant-based leather drop-in replaces polyurethane in interiors, adopted by EV pioneer with 2024 rollout."
+  },
+  {
+    "category": "materials",
+    "company": "bucha bio",
+    "headline": "bucha bio seed-round secures $1.1 M for bacterial cellulose packaging pilots",
+    "date": "2024-05-01",
+    "url": "https://bucha.bio/seed-funding-announcement",
+    "impact": 6,
+    "summary": "Pre-Series A enables 4-week trials with premium cosmetic brands looking to swap plastic for bacterial films."
+  },
+  {
+    "category": "materials",
+    "company": "Mogu",
+    "headline": "Mogu supplies Ikea with mycelium acoustic panels made from waste streams",
+    "date": "2024-04-18",
+    "url": "https://mogu.bio/ikea-collaboration",
+    "impact": 8,
+    "summary": "Italian startup brings fungus-based building panels to flat-pack giant, pilot stores in Netherlands and Spain."
   },
   {
     "category": "materials",
