@@ -1,0 +1,20 @@
+[
+  {
+    "category": "food",
+    "company": "Solar Foods",
+    "headline": "Solein powder receives EU novel-food green light",
+    "date": "2025-05-02",
+    "url": "https://solarfoods.fi/news/eu-approval",
+    "impact": 9,
+    "summary": "First gas-fermentation protein cleared for human food sales in Europe."
+  },
+  {
+    "category": "materials",
+    "company": "MycoWorks",
+    "headline": "Reishi mycelium leather featured in Hermès next-gen Birkin",
+    "date": "2025-04-18",
+    "url": "https://mycoworks.com/news/hermes-deal",
+    "impact": 9,
+    "summary": "Luxury fashion house validates mycelium as premium leather."
+  }
+]

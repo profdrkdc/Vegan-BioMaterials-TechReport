@@ -1,0 +1,19 @@
+Act as a research scout.
+Find the 5 most significant news items from the last 90 days in each of these two niches:
+
+1. Vegan food created via precision-fermentation, cellular agriculture or gas-fermentation (think Solein).
+2. Vegan materials that replace leather, plastic or construction inputs using mycelium, bacterial cellulose, etc.
+
+Return pure JSON—no prose—using this schema:
+
+[
+  {
+    "category": "food|materials",
+    "company": "Company Name",
+    "headline": "Short headline",
+    "date": "YYYY-MM-DD",
+    "url": "https://...",
+    "impact": 1-10,
+    "summary": "20-word max"
+  }
+]```

@@ -1,0 +1,20 @@
+name: Generate Newsletter
+on:
+  schedule:
+    - cron: "0 8 * * 1"   # every Monday 08:00 UTC
+  workflow_dispatch:       # manual trigger for testing
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install openai
+      - run: python -m src.fetch
+      - run: python -m src.curate
+      - run: python -m src.draft
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Weekly newsletter auto-draft"
