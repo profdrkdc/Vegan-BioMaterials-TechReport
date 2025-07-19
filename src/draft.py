@@ -18,10 +18,15 @@ client = OpenAI(
 model = "moonshotai/kimi-k2:free"
 
 data = json.load(open("curated.json", encoding="utf-8"))
-today = datetime.date.today().isoformat()
+today = datetime.date.today().isoformat() # Blijft YYYY-MM-DD
 
 for code, lang in LANGS.items():
-    prompt = PROMPT_TPL.format(json_data=json.dumps(data, indent=2), lang=lang)
+    # Vul alle placeholders in de nieuwe, verbeterde prompt in
+    prompt = PROMPT_TPL.format(
+        json_data=json.dumps(data, indent=2),
+        lang=lang,
+        today=today  # Deze datum wordt doorgegeven aan de prompt
+    )
     res = client.chat.completions.create(model=model, messages=[{"role": "user", "content": prompt}])
     md = res.choices[0].message.content
     open(f"content/{today}_{code}.md", "w", encoding="utf-8").write(md)

@@ -1,9 +1,20 @@
-You are editor-in-chief of “Future Vegan Weekly”.
-Input JSON:
-{json_data}
+You are the editor for “Vegan-BioMaterials-TechReport”.
 
-Write a 300-word newsletter section in {lang}. Use Markdown, hyperlinked company names, include impact scores, no emojis. Structure:
-- Catchy title
-- 2-3 sentence intro
-- Bullet list with links
-- Forward-looking close
+Current edition date: {today}
+Input JSON: {json_data}
+Language: {lang}
+
+Output the newsletter **exactly** as follows (only replace placeholders):
+
+# Vegan-BioMaterials-TechReport – Editie {edition_date}
+
+A brief 2-sentence intro based on the data.
+
+- **[{company}]({url})** (Impact: {impact}) – {news_item_date} – {summary}
+
+Forward-looking close.
+
+Rules
+• edition_date  = {today} formatted as DD Mmm YYYY  
+• news_item_date = JSON date formatted as DD Mmm YYYY  
+• bullet per JSON item, no other text
