@@ -49,7 +49,9 @@ jobs:
         run: |
           git config user.name "GitHub Action Bot"
           git config user.email "action@github.com"
-          git add content/
+          # Forceer het toevoegen van de 'content' map, ook al staat hij in .gitignore
+          # De -f (force) vlag is hier cruciaal.  
+          git add -f content/
           
           # Commit alleen als er daadwerkelijk bestanden in content/ zijn veranderd
           if git diff --staged --quiet; then
