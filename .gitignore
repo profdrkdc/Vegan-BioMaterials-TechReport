@@ -1,0 +1,12 @@
+venv/
+
+# Generated data files
+raw.json
+curated.json
+
+# Generated content
+content/
+
+# Python cache
+__pycache__/
+*.pyc

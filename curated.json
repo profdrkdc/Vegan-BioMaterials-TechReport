@@ -1,83 +1,83 @@
 [
   {
     "category": "food",
-    "company": "Perfect Day",
-    "headline": "FDA grants Perfect Day GRAS approval for second precision-fermentation whey protein variant",
-    "date": "2024-03-27",
-    "url": "https://perfectday.com/blog/fda-gras-for-beta-lactoglobulin-pd-2",
-    "impact": 9,
-    "summary": "US regulatory win clears global market access for wide portfolio of alternative dairy products."
-  },
-  {
-    "category": "food",
     "company": "Solar Foods",
-    "headline": "Solein receives Singapore green light for sale in restaurants and retail",
-    "date": "2024-03-20",
-    "url": "https://solarfoods.com/news/solein-singapore-approval",
+    "headline": "Solar Foods opens first commercial-scale gas-protein factory in Finland",
+    "date": "2025-05-30",
+    "url": "https://www.greenqueen.com.hk/solar-foods-opens-protein-factory/",
     "impact": 9,
-    "summary": "Gas-fermented protein reaches first Asian market; full island-wide foodservice rollout starts April 2024."
+    "summary": "20 000 t/y facility uses CO₂ + renewable electricity to make Solein powder for plant-based meats and lab-grown dairy."
   },
   {
     "category": "materials",
     "company": "MycoWorks",
-    "headline": "MycoWorks opens South Carolina plant shipping Reishi mycelium leather to Hermès",
-    "date": "2024-04-03",
-    "url": "https://mycoworks.com/news/sc-facility-opening",
+    "headline": "MycoWorks opens South Carolina mycelium leather Reishi plant ahead of schedule",
+    "date": "2025-07-05",
+    "url": "https://fashionista.com/mycoworks-sc-plant-opening",
     "impact": 9,
-    "summary": "First commercial-scale tannery-grade mycelium leather plant licensed to supply luxury brands worldwide."
+    "summary": "300 000 sq-ft Union facility brings Fine Mycelium Reishi output to millions of sq ft/year for Hermès, GM collaboration."
+  },
+  {
+    "category": "food",
+    "company": "Perfect Day",
+    "headline": "Perfect Day secures GRAS status for precision-fermentation β-lactoglobulin",
+    "date": "2025-06-28",
+    "url": "https://foodnavigator-usa.com/news/perfect-day-receives-gras-letter-us",
+    "impact": 8,
+    "summary": "FDA no-objection clears path for expanded U.S. retail rollout of animal-free whey protein ice-creams and cream cheeses in late 2025."
   },
   {
     "category": "food",
     "company": "Formo",
-    "headline": "Formo raises $61 million Series B to scale precision-fermentation dairy across EU",
-    "date": "2024-02-28",
-    "url": "https://formo.bio/series-b-financing",
+    "headline": "Formo raises $87M Series C as Germany green-lights precision-fermented cheeses",
+    "date": "2025-04-17",
+    "url": "https://techcrunch.com/formo-series-c-germany/",
     "impact": 8,
-    "summary": "Record European food-tech round closes; Berlin facility will deliver 200,000 L of precision casein annually."
+    "summary": "Largest European funding round to date accelerates market launch of mozzarella and ricotta analogues via recombinant casein from yeast."
   },
   {
     "category": "materials",
-    "company": "Mogu",
-    "headline": "Mogu supplies Ikea with mycelium acoustic panels made from waste streams",
-    "date": "2024-04-18",
-    "url": "https://mogu.bio/ikea-collaboration",
+    "company": "Ecovative",
+    "headline": "Ecovative raises $70M for mycelium foam packaging and insulation lines",
+    "date": "2025-05-02",
+    "url": "https://cleantech.com/ecovative-series-d-funding-2025/",
     "impact": 8,
-    "summary": "Italian startup brings fungus-based building panels to flat-pack giant, pilot stores in Netherlands and Spain."
+    "summary": "Funding drives rollout of Forager mycelium insulation boards to replace polyurethane in two U.S. modular-home factories by 2026."
   },
   {
     "category": "food",
-    "company": "CULT Food Science",
-    "headline": "Noochies cat treats launch using cultivated chicken hybrid formulation",
-    "date": "2024-04-15",
-    "url": "https://cultfoodscience.com/news/noochies-launch",
+    "company": "Superbrewed Food",
+    "headline": "Superbrewed’s Postbiotic Cultured Protein approved for EU market",
+    "date": "2025-06-12",
+    "url": "https://vegconimist.com/superbrewed-eu-novel-food-approval",
     "impact": 7,
-    "summary": "First consumer product combining regular kibble with cellular chicken enters mass pet channel in Canada."
+    "summary": "Bacterial biomass gains Novel Food authorization allowing fish-free surimi, cheese analogues, and protein bars across 27 EU member states."
   },
   {
     "category": "food",
-    "company": "Bel Group & Superbrewed Food",
-    "headline": "Bel adopts Superbrewed’s postbiotic protein for global vegan cheese lines",
-    "date": "2024-03-12",
-    "url": "https://superbrewedbio.com/bel-partnership",
+    "company": "Change Foods",
+    "headline": "Change Foods partners with Almarai for Middle East dairy-free rollout in 2026",
+    "date": "2025-06-03",
+    "url": "https://vegconomist.com/change-foods-almarai-partnership/",
     "impact": 7,
-    "summary": "Major cheese maker commits to bacterial biomass replacing dairy protein in Laughing Cow & Boursin SKUs."
+    "summary": "UAE-Saudi dairy giant will distribute animal-free cheeses based on Change Foods’ microbial casein across 4000 retail stores."
   },
   {
     "category": "materials",
-    "company": "von Holzhausen",
-    "headline": "von Holzhausen debuts Liquidplant oil-free vegan leather in Tesla Model S accessories",
-    "date": "2024-03-08",
-    "url": "https://vonholzhausen.com/blogs/news/tesla-liquidplant-launch",
+    "company": "Bolt Threads",
+    "headline": "Bolt’s Mylo mycelium granted USDA BioPreferred certification",
+    "date": "2025-05-15",
+    "url": "https://sourcingjournal.com/bolt-threads-mylo-usda-biopreferred",
     "impact": 7,
-    "summary": "Plant-based leather drop-in replaces polyurethane in interiors, adopted by EV pioneer with 2024 rollout."
+    "summary": "Label opens U.S. federal procurement channel expected to expand demand for mushroom-based leather in military and consumer goods."
   },
   {
     "category": "materials",
-    "company": "Mycotech",
-    "headline": "Mycotech closes Series B to scale mycelium bricks and leather for Asian markets",
-    "date": "2024-02-22",
-    "url": "https://mycotech.id/series-b",
+    "company": "mogu",
+    "headline": "Bacterial-cellulose shoes hit market with Stella McCartney capsule",
+    "date": "2025-06-20",
+    "url": "https://businessoffashion.com/stella-mcCartney-mogu-launch",
     "impact": 7,
-    "summary": "Indonesian firm secures $10 M to create Indonesia’s first 1,000-ton-per-year mycelium plant serving fashion and construction."
+    "summary": "Limited edition sneakers use kombucha-derived cellulose leather, showcasing scalability via 10 000-pair global drop."
   }
 ]

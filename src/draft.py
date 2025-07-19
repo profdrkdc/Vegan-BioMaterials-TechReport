@@ -3,7 +3,7 @@
 Generate bilingual newsletter from curated.json
 Call: python -m src.draft
 """
-import json, os, datetime
+import json, os, datetime, time
 from openai import OpenAI
 
 # --- config ----------------------------------------------------------
@@ -21,13 +21,24 @@ data = json.load(open("curated.json", encoding="utf-8"))
 today = datetime.date.today().isoformat() # Blijft YYYY-MM-DD
 
 for code, lang in LANGS.items():
-    # Vul alle placeholders in de nieuwe, verbeterde prompt in
-    prompt = PROMPT_TPL.format(
-        json_data=json.dumps(data, indent=2),
-        lang=lang,
-        today=today  # Deze datum wordt doorgegeven aan de prompt
-    )
+    # Kies het juiste woord voor de editie op basis van de taal
+    if lang == "Nederlands":
+        edition_word = "Editie"
+    else:
+        edition_word = "Edition"
+
+    # Begin met de onbewerkte template
+    prompt = PROMPT_TPL
+
+    # Vervang alle placeholders die Python moet invullen
+    prompt = prompt.replace('{json_data}', json.dumps(data, indent=2))
+    prompt = prompt.replace('{lang}', lang)
+    prompt = prompt.replace('{today}', today)
+    prompt = prompt.replace('{edition_word}', edition_word) # Voeg deze vervanging toe
+
     res = client.chat.completions.create(model=model, messages=[{"role": "user", "content": prompt}])
     md = res.choices[0].message.content
     open(f"content/{today}_{code}.md", "w", encoding="utf-8").write(md)
     print(f"✅ {today}_{code}.md written")
+
+    time.sleep(10)
