@@ -1,3 +1,5 @@
+# .github/workflows/weekly.yml
+
 # De naam van je GitHub Action
 name: Generate Weekly Newsletter
 
@@ -5,9 +7,16 @@ name: Generate Weekly Newsletter
 on:
   # 1. Een handmatige knop in de Actions-tab om te testen
   workflow_dispatch:
+
   # 2. Een vast schema (deze cron-job betekent 'elke maandag om 8:00 UTC')
   schedule:
     - cron: '0 8 * * 1'
+  
+  # 3. Draai ook bij een push naar een van deze specifieke branches
+  push:
+    branches:
+      - main         # Voor de Kimi/OpenRouter versie
+      - gemini-api   # Voor de Google Gemini versie
 
 # De taken die de Action moet uitvoeren
 jobs:
@@ -19,7 +28,7 @@ jobs:
       contents: write
 
     steps:
-      # Stap 1: De code van je repository downloaden naar de machine
+      # Stap 1: De code van de juiste branch downloaden naar de machine
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -36,13 +45,18 @@ jobs:
           pip install -r requirements.txt
 
       # Stap 4: De scripts draaien om de nieuwsbrieven te genereren
+      # De Action gebruikt de correcte API key afhankelijk van de branch
       - name: Run Python scripts to generate content
         env:
+          # Gebruik de Kimi/OpenRouter key als we op de main branch zijn
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          # Gebruik de Google key als we op de gemini-api branch zijn
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: |
-          python -m src.fetch
-          python -m src.curate
-          python -m src.draft
+          # De python scripts op de uitgecheckte branch zullen automatisch de juiste logica gebruiken
+          python3 -m src.fetch
+          python3 -m src.curate
+          python3 -m src.draft
 
       # Stap 5: De nieuwe nieuwsbrieven terug committen naar de repository
       - name: Commit and push new content
@@ -50,7 +64,6 @@ jobs:
           git config user.name "GitHub Action Bot"
           git config user.email "action@github.com"
           # Forceer het toevoegen van de 'content' map, ook al staat hij in .gitignore
-          # De -f (force) vlag is hier cruciaal.  
           git add -f content/
           
           # Commit alleen als er daadwerkelijk bestanden in content/ zijn veranderd
