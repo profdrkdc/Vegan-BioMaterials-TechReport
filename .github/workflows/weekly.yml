@@ -1,24 +1,60 @@
-name: Generate Newsletter
-on:
-  schedule:
-    - cron: "0 8 * * 1"   # every Monday 08:00 UTC
-  workflow_dispatch:       # manual trigger for testing
+# De naam van je GitHub Action
+name: Generate Weekly Newsletter
 
+# Wanneer moet deze Action draaien?
+on:
+  # 1. Een handmatige knop in de Actions-tab om te testen
+  workflow_dispatch:
+  # 2. Een vast schema (deze cron-job betekent 'elke maandag om 8:00 UTC')
+  schedule:
+    - cron: '0 8 * * 1'
+
+# De taken die de Action moet uitvoeren
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  generate-and-commit:
+    runs-on: ubuntu-latest # Draai op een standaard Linux-machine
+
+    # Geef de job permissie om code terug te schrijven naar de repository
     permissions:
       contents: write
-    env:
-      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with: { python-version: "3.11" }
-      - run: pip install openai
-      - run: python -m src.fetch
-      - run: python -m src.curate
-      - run: python -m src.draft
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      # Stap 1: De code van je repository downloaden naar de machine
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Stap 2: Python installeren en configureren
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          commit_message: "Weekly newsletter auto-draft"
+          python-version: '3.11'
+
+      # Stap 3: De benodigde bibliotheken installeren via requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Stap 4: De scripts draaien om de nieuwsbrieven te genereren
+      - name: Run Python scripts to generate content
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          python -m src.fetch
+          python -m src.curate
+          python -m src.draft
+
+      # Stap 5: De nieuwe nieuwsbrieven terug committen naar de repository
+      - name: Commit and push new content
+        run: |
+          git config user.name "GitHub Action Bot"
+          git config user.email "action@github.com"
+          git add content/
+          
+          # Commit alleen als er daadwerkelijk bestanden in content/ zijn veranderd
+          if git diff --staged --quiet; then
+            echo "Geen wijzigingen in de nieuwsbrief om te committen."
+          else
+            git commit -m "Update wekelijkse nieuwsbrief"
+            git push
+          fi
