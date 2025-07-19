@@ -1,26 +1,30 @@
+# src/fetch.py
+
 #!/usr/bin/env python3
 """
-Fetch the latest vegan tech news from the AI model.
+Fetch the latest vegan tech news from the AI model (Gemini).
 Saves the raw output to raw.json.
 Call: python -m src.fetch
 """
 import json
 import os
 import datetime
-import time # VOEG TOE
-from openai import OpenAI
+import time
+import google.generativeai as genai
 
 # --- Configuratie ----------------------------------------------------
 PROMPT_FILE = "prompts/step1.txt"
 OUTPUT_FILE = "raw.json"
-MAX_RETRIES = 3 # Aantal nieuwe pogingen
+MAX_RETRIES = 3
 # ---------------------------------------------------------------------
 
-client = OpenAI(
-    base_url=os.getenv("OPENROUTER_URL", "https://openrouter.ai/api/v1"),
-    api_key=os.getenv("OPENROUTER_API_KEY") or os.getenv("KIMI_API_KEY")
-)
-model = "moonshotai/kimi-k2:free"
+# --- Configuratie voor Gemini ---
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
+if not GOOGLE_API_KEY:
+    raise ValueError("GOOGLE_API_KEY environment variable not set.")
+genai.configure(api_key=GOOGLE_API_KEY)
+model = genai.GenerativeModel('gemini-2.5-pro') # <-- Aangepast naar 2.5 Pro
+# ------------------------------------
 
 # Lees de prompt template
 with open(PROMPT_FILE, "r", encoding="utf-8") as f:
@@ -30,30 +34,33 @@ with open(PROMPT_FILE, "r", encoding="utf-8") as f:
 today = datetime.date.today().isoformat()
 prompt = prompt_template.replace('{today}', today)
 
-print("🤖 AI wordt aangeroepen om de laatste data te verzamelen...")
+print("🤖 Gemini wordt aangeroepen om de laatste data te verzamelen...")
+raw_content = "" # Initialiseer raw_content
 
 # Loop voor meerdere pogingen
 for attempt in range(MAX_RETRIES):
     try:
-        res = client.chat.completions.create(
-            model=model,
-            messages=[{"role": "user", "content": prompt}]
-        )
-        raw_content = res.choices[0].message.content
-        data = json.loads(raw_content) # Probeer de JSON te parsen
-
-        # Als het succesvol is, schrijf de data weg en stop de loop
+        response = model.generate_content(prompt)
+        raw_content = response.text
+        
+        # Verwijder de ```json ... ``` markdown die Gemini soms toevoegt
+        if raw_content.strip().startswith("```json"):
+            raw_content = raw_content.strip()[7:-3].strip()
+            
+        data = json.loads(raw_content)
+        
         with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
+            
         print(f"✅ Ruwe data succesvol verzameld en opgeslagen in {OUTPUT_FILE}.")
-        break # Verlaat de loop na succes
-
-    except (json.JSONDecodeError, IndexError) as e:
-        print(f"⚠️ Poging {attempt + 1} van de {MAX_RETRIES} mislukt: Kon AI-respons niet parsen als JSON. Fout: {e}")
+        break
+        
+    except (json.JSONDecodeError, IndexError, ValueError) as e:
+        print(f"⚠️ Poging {attempt + 1} van de {MAX_RETRIES} mislukt: Kon AI-respons niet parsen. Fout: {e}")
         if attempt + 1 == MAX_RETRIES:
             print("❌ Alle pogingen zijn mislukt. Het script stopt.")
             print("--- Laatst ontvangen van AI ---")
             print(raw_content)
             print("------------------------")
-            exit(1) # Stop het script met een foutcode
-        time.sleep(5) # Wacht 5 seconden voor de volgende poging
+            exit(1)
+        time.sleep(5)
