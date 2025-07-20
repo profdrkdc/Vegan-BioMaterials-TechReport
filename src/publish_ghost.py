@@ -3,11 +3,11 @@ import os
 import glob
 import jwt
 import requests
-import markdown # <-- DE CRUCIALE IMPORT
+import markdown
 from datetime import datetime, timedelta
 
 # ==============================================================================
-# De Ghost Admin API implementatie (blijft ongewijzigd)
+# De Ghost Admin API implementatie
 # ==============================================================================
 class GhostAdminAPI:
     def __init__(self, ghost_url, admin_api_key):
@@ -21,32 +21,57 @@ class GhostAdminAPI:
         iat = int(datetime.now().timestamp())
         exp = iat + 300
         payload = {'iat': iat, 'exp': exp, 'aud': '/admin/'}
-        token = jwt.encode(
-            payload,
-            bytes.fromhex(self.key_secret),
-            algorithm='HS256',
-            headers={'kid': self.key_id}
-        )
+        token = jwt.encode(payload, bytes.fromhex(self.key_secret), algorithm='HS256', headers={'kid': self.key_id})
         return token
 
-    def create_post(self, title, html_content, status='published', tags=None):
+    def _make_request(self, method, endpoint, data=None):
         token = self._get_jwt_token()
         headers = {'Authorization': f'Ghost {token}'}
+        url = f"{self.api_url}{endpoint}"
         
+        if method.upper() == 'GET':
+            response = requests.get(url, headers=headers)
+        elif method.upper() == 'POST':
+            response = requests.post(url, headers=headers, json=data)
+        elif method.upper() == 'PUT':
+            response = requests.put(url, headers=headers, json=data)
+        else:
+            raise ValueError(f"Unsupported HTTP method: {method}")
+        
+        response.raise_for_status()
+        return response
+
+    # STAP 1: Maak een DRAFT post aan
+    def create_post_draft(self, title, html_content, tags=None):
         post_data = {
             'posts': [{
                 'title': title,
-                'html': html_content, # Deze functie verwacht nu pure HTML
-                'status': status
+                'html': html_content,
+                'status': 'draft' # Altijd als draft aanmaken
             }]
         }
         if tags:
             post_data['posts'][0]['tags'] = [{'name': tag} for tag in tags]
         
-        url = f"{self.api_url}/posts/"
-        response = requests.post(url, headers=headers, json=post_data)
-        response.raise_for_status()
-        return response.json()
+        response = self._make_request('POST', '/posts/', post_data)
+        return response.json()['posts'][0]
+
+    # STAP 2: Publiceer de DRAFT
+    def publish_post(self, post_id):
+        # We moeten eerst de post ophalen om de 'updated_at' timestamp te krijgen
+        get_response = self._make_request('GET', f'/posts/{post_id}/')
+        current_post = get_response.json()['posts'][0]
+        updated_at = current_post['updated_at']
+
+        # Nu sturen we de update om de status te wijzigen
+        update_data = {
+            'posts': [{
+                'status': 'published',
+                'updated_at': updated_at # Verplicht voor updates
+            }]
+        }
+        response = self._make_request('PUT', f'/posts/{post_id}/', update_data)
+        return response.json()['posts'][0]
 
 # ==============================================================================
 # De hoofdlogica van ons script
@@ -59,8 +84,6 @@ if __name__ == "__main__":
         print(f"Error: De omgevingsvariabele {e} is niet ingesteld.")
         exit(1)
 
-    CONTENT_DIR = "content"
-
     try:
         ghost = GhostAdminAPI(ghost_url=GHOST_URL, admin_api_key=GHOST_KEY)
         print("Ghost Admin API client succesvol geïnitialiseerd.")
@@ -68,6 +91,7 @@ if __name__ == "__main__":
         print(f"Fout bij het initialiseren van de Ghost API client: {e}")
         exit(1)
 
+    CONTENT_DIR = "content"
     search_path = os.path.join(CONTENT_DIR, "*.md")
     files = glob.glob(search_path)
     
@@ -76,23 +100,30 @@ if __name__ == "__main__":
         exit(0)
 
     for filepath in files:
-        print(f"\nVerwerken van bestand: {filepath}")
+        print(f"\n--- Verwerken van bestand: {filepath} ---")
         with open(filepath, 'r', encoding='utf-8') as f:
-            markdown_text = f.read() # Lees de markdown
+            markdown_text = f.read()
             title = markdown_text.splitlines()[0].strip().replace('# ', '')
         
-        # --- DE DEFINITIEVE FIX: Converteer Markdown naar HTML ---
         html_from_markdown = markdown.markdown(markdown_text)
         
         try:
-            ghost.create_post(
+            # STAP 1: Maak de draft
+            print(f"Stap 1: Draft aanmaken voor '{title}'...")
+            draft_post = ghost.create_post_draft(
                 title=title,
-                html_content=html_from_markdown, # Geef de geconverteerde HTML door
-                status='published',
+                html_content=html_from_markdown,
                 tags=['weekly-update']
             )
-            print(f"Post '{title}' succesvol gepubliceerd naar Ghost.")
+            post_id = draft_post['id']
+            print(f"Draft succesvol aangemaakt met ID: {post_id}")
+
+            # STAP 2: Publiceer de draft
+            print(f"Stap 2: Publiceren van post ID {post_id}...")
+            published_post = ghost.publish_post(post_id)
+            print(f"SUCCESS: Post '{published_post['title']}' succesvol gepubliceerd.")
+
         except Exception as e:
-            print(f"!!! Fout bij het publiceren van '{title}': {e}")
+            print(f"!!! FOUT bij het verwerken van '{title}': {e}")
             import traceback
             traceback.print_exc()
