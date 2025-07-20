@@ -10,18 +10,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
-    # --- FIX: Stel een standaard werkmap in voor alle 'run' commando's in deze job ---
-    defaults:
-      run:
-        working-directory: ./Vegan-BioMaterials-TechReport
-
     steps:
-      # Stap 1: Check de code uit in een specifieke submap om de naam te controleren
+      # Stap 1: Check de code uit. Geen 'path' of 'working-directory' meer.
+      # De code staat nu direct in de hoofdmap van de runner.
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          path: 'Vegan-BioMaterials-TechReport' # Zorgt voor een consistente mapnaam
 
       # Stap 2: Zet Python op
       - name: Set up Python 3.11
@@ -30,7 +23,7 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      # Stap 3: Installeer dependencies (draait nu in de juiste map)
+      # Stap 3: Installeer dependencies
       - name: Install dependencies
         run: pip install -r requirements.txt
 
@@ -48,48 +41,40 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python src/main.py
 
-      # Stap 6: Upload artifact, zorg ervoor dat het pad correct is
+      # Stap 6: Upload artifact. Het pad is nu weer simpel.
       - name: Upload markdown content as artifact
         uses: actions/upload-artifact@v4
         with:
           name: markdown-content
-          path: ./Vegan-BioMaterials-TechReport/content/*.md
+          path: content/
 
   deploy-substack:
     needs: build
     runs-on: ubuntu-latest
-
-    # --- FIX: Stel ook hier de werkmap in ---
-    defaults:
-      run:
-        working-directory: ./Vegan-BioMaterials-TechReport
-
     steps:
-      # Stap 1: Check de code opnieuw uit (best practice voor een nieuwe job)
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          path: 'Vegan-BioMaterials-TechReport'
-
-      # Stap 2: Download het artifact naar de juiste content-map
+      # Stap 1: Download het artifact
       - name: Download markdown content artifact
         uses: actions/download-artifact@v4
         with:
           name: markdown-content
-          path: ./Vegan-BioMaterials-TechReport/content
+          path: content/
 
-      # Stap 3: Zet Python op
+      # Stap 2: Zet Python op
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'
 
-      # Stap 4: Installeer dependencies
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+      # Stap 3: Installeer de publicatie-dependencies.
+      # Let op: we hebben de code hier niet opnieuw nodig, alleen python en de library.
+      - name: Install publishing dependencies
+        run: pip install python-substack
 
-      # Stap 5: Voer het publicatie-script uit
+      # Stap 4: Voer het publicatie-script uit. We hebben een klein, zelfstandig script nodig.
+      # Om het robuust te maken, checken we de code toch even uit.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Publish to Substack
         env:
           SUBSTACK_EMAIL: ${{ secrets.SUBSTACK_EMAIL }}
