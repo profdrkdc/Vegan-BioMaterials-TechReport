@@ -52,7 +52,8 @@ jobs:
           name: markdown-content
           path: content/
 
-  deploy-substack:
+  # JOB 2: Publiceer de .md bestanden naar Ghost
+  deploy-ghost:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -73,9 +74,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Publish to Substack
+      - name: Publish to Ghost
         env:
-          SUBSTACK_EMAIL: ${{ secrets.SUBSTACK_EMAIL }}
-          SUBSTACK_PASSWORD: ${{ secrets.SUBSTACK_PASSWORD }}
-          SUBSTACK_PUBLICATION_URL: ${{ secrets.SUBSTACK_PUBLICATION_URL }}
-        run: python3 src/publish_substack.py
+          GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
+          GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
+        run: python3 src/publish_ghost.py

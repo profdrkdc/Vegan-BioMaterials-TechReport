@@ -1,2 +1,2 @@
 google-generativeai
-python-substack
+ghost-admin-api
