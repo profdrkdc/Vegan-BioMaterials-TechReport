@@ -3,10 +3,11 @@ import os
 import glob
 import jwt
 import requests
+import markdown # <-- DE CRUCIALE IMPORT
 from datetime import datetime, timedelta
 
 # ==============================================================================
-# De correcte, handmatige Ghost Admin API implementatie
+# De Ghost Admin API implementatie (blijft ongewijzigd)
 # ==============================================================================
 class GhostAdminAPI:
     def __init__(self, ghost_url, admin_api_key):
@@ -28,16 +29,14 @@ class GhostAdminAPI:
         )
         return token
 
-    def create_post(self, title, markdown_content, status='published', tags=None):
+    def create_post(self, title, html_content, status='published', tags=None):
         token = self._get_jwt_token()
         headers = {'Authorization': f'Ghost {token}'}
         
-        # --- DE BEWEZEN, WERKENDE METHODE ---
-        # We sturen de content in het 'html' veld. Ghost zet de markdown zelf om.
         post_data = {
             'posts': [{
                 'title': title,
-                'html': markdown_content,
+                'html': html_content, # Deze functie verwacht nu pure HTML
                 'status': status
             }]
         }
@@ -79,13 +78,16 @@ if __name__ == "__main__":
     for filepath in files:
         print(f"\nVerwerken van bestand: {filepath}")
         with open(filepath, 'r', encoding='utf-8') as f:
-            markdown_content = f.read()
-            title = markdown_content.splitlines()[0].strip().replace('# ', '')
+            markdown_text = f.read() # Lees de markdown
+            title = markdown_text.splitlines()[0].strip().replace('# ', '')
+        
+        # --- DE DEFINITIEVE FIX: Converteer Markdown naar HTML ---
+        html_from_markdown = markdown.markdown(markdown_text)
         
         try:
             ghost.create_post(
                 title=title,
-                markdown_content=markdown_content,
+                html_content=html_from_markdown, # Geef de geconverteerde HTML door
                 status='published',
                 tags=['weekly-update']
             )
