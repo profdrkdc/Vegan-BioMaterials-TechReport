@@ -2,10 +2,11 @@
 import os
 import jwt
 import requests
+import json
 from datetime import datetime, timedelta
 
 # ==============================================================================
-# De Ghost Admin API implementatie (blijft ongewijzigd)
+# De Ghost Admin API implementatie met ingebouwde "zwarte doos" recorder
 # ==============================================================================
 class GhostAdminAPI:
     def __init__(self, ghost_url, admin_api_key):
@@ -27,17 +28,34 @@ class GhostAdminAPI:
         )
         return token
 
-    # Deze functie doet maar één ding: een post aanmaken met de data die we geven.
     def create_post(self, post_data):
         token = self._get_jwt_token()
         headers = {'Authorization': f'Ghost {token}'}
         url = f"{self.api_url}/posts/"
+
+        # --- ZWARTE DOOS: WAT VERSTUREN WE? ---
+        print("\n================= ZWARTE DOOS - VERZONDEN DATA ==================")
+        print(json.dumps(post_data, indent=2))
+        print("=================================================================\n")
+        
         response = requests.post(url, headers=headers, json=post_data)
-        response.raise_for_status()
+        
+        # --- ZWARTE DOOS: WAT KRIJGEN WE TERUG? ---
+        print("\n================ ZWARTE DOOS - ONTVANGEN DATA =================")
+        print(f"Status Code: {response.status_code}")
+        try:
+            print("Response Body:")
+            print(json.dumps(response.json(), indent=2))
+        except json.JSONDecodeError:
+            print("Response Body (geen JSON):")
+            print(response.text)
+        print("=================================================================\n")
+
+        response.raise_for_status() # Stopt als er een HTTP-fout is
         return response.json()
 
 # ==============================================================================
-# De hoofdlogica: Maak één enkele, hardgecodeerde DRAFT
+# De hoofdlogica: Maak één enkele, hardgecodeerde DRAFT en neem alles op
 # ==============================================================================
 if __name__ == "__main__":
     try:
@@ -54,27 +72,22 @@ if __name__ == "__main__":
         print(f"Fout bij het initialiseren van de Ghost API client: {e}")
         exit(1)
 
-    # --- DE HARDGECODEERDE TEST ---
-    print("\n--- Test met hardgecodeerde content ---")
+    hardcoded_title = "API Blackbox Test"
+    hardcoded_html_content = "<h2>Test</h2><p>Dit is de content.</p>"
 
-    hardcoded_title = "API Test: Hardcoded Draft"
-    hardcoded_html_content = "<h2>Test Content</h2><p>Als je deze tekst kunt lezen, werkt de API-verbinding en het aanmaken van een draft perfect.</p><p>Het probleem ligt dan 100% zeker bij het inlezen of converteren van het .md-bestand.</p>"
-
-    # Dit is de exacte payload-structuur van de succesvolle test
     post_payload = {
         'posts': [{
             'title': hardcoded_title,
             'html': hardcoded_html_content,
-            'status': 'draft' # Aanmaken als DRAFT
+            'status': 'draft'
         }]
     }
 
     try:
-        print("Poging om één DRAFT post aan te maken met hardcoded content...")
+        print("Poging om één DRAFT post aan te maken en de communicatie op te nemen...")
         ghost.create_post(post_payload)
-        print(f"SUCCESS: Draft post '{hardcoded_title}' zou nu moeten bestaan in Ghost.")
-        print("Controleer je Ghost admin panel in de 'Drafts' sectie.")
+        print("SUCCESS: De API call is uitgevoerd. Analyseer de 'ZWARTE DOOS' logs.")
     except Exception as e:
-        print(f"!!! FOUT bij het aanmaken van de hardcoded draft: {e}")
+        print(f"!!! FOUT tijdens de API call: {e}")
         import traceback
         traceback.print_exc()
