@@ -1,26 +1,18 @@
-# De naam van je GitHub Action
-name: Generate Weekly Newsletter
+name: Weekly Content Generation and Deployment
 
-# Wanneer moet deze Action draaien?
 on:
-  # 1. Een handmatige knop in de Actions-tab om te testen
+  schedule:
+    - cron: '0 8 * * 5' # Elke vrijdag om 8 uur UTC
   workflow_dispatch:
-
   # 2. Een vast schema (deze cron-job betekent 'elke maandag om 8:00 UTC')
   schedule:
     - cron: '0 8 * * 1'
-  
-  # 3. Draai ook bij een push naar een van deze specifieke branches
-  push:
-    branches:
-      - main         # Voor de Kimi/OpenRouter versie
-      - gemini-api   # Voor de Google Gemini versie
 
-# De taken die de Action moet uitvoeren
 jobs:
   generate-and-commit:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Draai op een standaard Linux-machine
 
+    # Geef de job permissie om code terug te schrijven naar de repository
     permissions:
       contents: write
 
@@ -28,34 +20,37 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Stap 2: Python installeren en configureren
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
+      # Stap 3: De benodigde bibliotheken installeren via requirements.txt
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # Stap 4: De scripts draaien om de nieuwsbrieven te genereren
       - name: Run Python scripts to generate content
         env:
-          # Gebruik de Kimi/OpenRouter key als we op de main branch zijn
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          # Gebruik de Google key als we op de gemini-api branch zijn
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: |
-          # De python scripts op de uitgecheckte branch gebruiken de juiste logica
-          python3 -m src.fetch
-          python3 -m src.curate
-          python3 -m src.draft
+          python -m src.fetch
+          python -m src.curate
+          python -m src.draft
 
+      # Stap 5: De nieuwe nieuwsbrieven terug committen naar de repository
       - name: Commit and push new content
         run: |
           git config user.name "GitHub Action Bot"
           git config user.email "action@github.com"
+          # Forceer het toevoegen van de 'content' map, ook al staat hij in .gitignore
+          # De -f (force) vlag is hier cruciaal.  
           git add -f content/
           
+          # Commit alleen als er daadwerkelijk bestanden in content/ zijn veranderd
           if git diff --staged --quiet; then
             echo "Geen wijzigingen in de nieuwsbrief om te committen."
           else

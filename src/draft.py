@@ -1,56 +1,82 @@
 #!/usr/bin/env python3
 """
-Generate bilingual newsletter from curated.json
+Generate bilingual newsletter from curated.json (using Gemini).
 Call: python -m src.draft
 """
-import json, os, datetime, time
-from openai import OpenAI
+import json
+import os
+import datetime
+import time
+import google.generativeai as genai
 
 # --- config ----------------------------------------------------------
 LANGS = {"nl": "Nederlands", "en": "English"}
-PROMPT_TPL = open("prompts/step3.txt", encoding="utf-8").read()
+PROMPT_TPL_PATH = "prompts/step3.txt"
+CURATED_DATA_PATH = "curated.json"
+OUTPUT_DIR = "content"
 # ---------------------------------------------------------------------
 
-# Initialiseer de client
-client = OpenAI(
-    base_url=os.getenv("OPENROUTER_URL", "https://openrouter.ai/api/v1"),
-    api_key=os.getenv("OPENROUTER_API_KEY") or os.getenv("KIMI_API_KEY")
-)
-model = "moonshotai/kimi-k2:free"
+# --- Configuratie voor Gemini ---
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
+if not GOOGLE_API_KEY:
+    raise ValueError("GOOGLE_API_KEY environment variable not set.")
+genai.configure(api_key=GOOGLE_API_KEY)
+model = genai.GenerativeModel('gemini-2.5-pro')
+# ------------------------------------
+
+# Lees de prompt template
+with open(PROMPT_TPL_PATH, "r", encoding="utf-8") as f:
+    PROMPT_TPL = f.read()
 
 # Laad de gecureerde data
-data = json.load(open("curated.json", encoding="utf-8"))
-today = datetime.date.today().isoformat()
+try:
+    with open(CURATED_DATA_PATH, "r", encoding="utf-8") as f:
+        data = json.load(f)
+except (FileNotFoundError, json.JSONDecodeError) as e:
+    print(f"❌ Fout bij het laden van {CURATED_DATA_PATH}. Draai eerst fetch.py en curate.py. Fout: {e}")
+    exit(1)
+
+today = datetime.date.today()
+today_iso = today.isoformat()
 
 # Zorg ervoor dat de output-directory bestaat.
-# Dit voorkomt een FileNotFoundError in schone omgevingen zoals GitHub Actions.
-os.makedirs("content", exist_ok=True)
-# ---------------------------------
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Genereer de nieuwsbrief voor elke taal
 for code, lang in LANGS.items():
-    # Kies het juiste woord voor de editie op basis van de taal
-    if lang == "Nederlands":
-        edition_word = "Editie"
-    else:
-        edition_word = "Edition"
+    edition_word = "Editie" if lang == "Nederlands" else "Edition"
+    edition_date = today.strftime('%d %b %Y') # e.g., 19 Jul 2025
 
-    # Begin met de onbewerkte template
+    # Gebruik .replace() om alleen de placeholders te vervangen die we kennen.
+    # Dit laat de placeholders voor de AI (zoals {company}) intact.
     prompt = PROMPT_TPL
-
-    # Vervang alle placeholders die Python moet invullen
-    prompt = prompt.replace('{json_data}', json.dumps(data, indent=2))
+    prompt = prompt.replace('{json_data}', json.dumps(data, indent=2, ensure_ascii=False))
     prompt = prompt.replace('{lang}', lang)
-    prompt = prompt.replace('{today}', today)
     prompt = prompt.replace('{edition_word}', edition_word)
+    prompt = prompt.replace('{edition_date}', edition_date)
 
-    # Roep de AI aan
-    res = client.chat.completions.create(model=model, messages=[{"role": "user", "content": prompt}])
-    md = res.choices[0].message.content
+    print(f"🤖 Gemini wordt aangeroepen voor de {lang} nieuwsbrief...")
 
-    # Schrijf het resultaat naar een .md-bestand
-    open(f"content/{today}_{code}.md", "w", encoding="utf-8").write(md)
-    print(f"✅ {today}_{code}.md written")
+    try:
+        response = model.generate_content(prompt)
+        md = response.text
 
-    # Wacht 10 seconden om rate-limiting te voorkomen
-    time.sleep(10)
+        # Schoon de output op (soms voegt de AI markdown-codeblokken toe)
+        if md.strip().startswith("```markdown"):
+            md = md.strip()[10:-3].strip()
+        elif md.strip().startswith("```"):
+             md = md.strip()[3:-3].strip()
+
+
+        output_filename = f"{OUTPUT_DIR}/{today_iso}_{code}.md"
+        with open(output_filename, "w", encoding="utf-8") as f:
+            f.write(md)
+
+        print(f"✅ {output_filename} geschreven")
+
+    except Exception as e:
+        print(f"❌ Fout tijdens het aanroepen van de Gemini API voor {lang}: {e}")
+
+    # Wacht 10 seconden tussen aanroepen om rate-limiting te voorkomen
+    if code != list(LANGS.keys())[-1]:
+        time.sleep(10)
