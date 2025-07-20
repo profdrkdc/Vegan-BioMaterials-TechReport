@@ -11,73 +11,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # Stap 1: Check de code uit. Geen 'path' of 'working-directory' meer.
-      # De code staat nu direct in de hoofdmap van de runner.
+      # Stap 1: Check de code uit. We raken hier niets meer aan.
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Stap 2: Zet Python op
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: 'pip'
+      # --- DIAGNOSTISCHE STAP ---
+      # Deze stap toont ons de exacte mappenstructuur op de server.
+      - name: 1. LIST ALL FILES to find the correct path
+        run: ls -R
+        shell: bash
 
-      # Stap 3: Installeer dependencies
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      # Stap 4: Genereer content (main branch)
-      - name: Run script to generate content (Main Branch)
-        if: github.ref == 'refs/heads/main'
-        env:
-          KIMI_API_KEY: ${{ secrets.KIMI_API_KEY }} 
+      # Stap 2: We proberen het script te draaien.
+      # Deze stap zal waarschijnlijk weer falen, maar de output van stap 1
+      # zal ons vertellen hoe we dit definitief kunnen fixen.
+      - name: 2. Attempt to run Python script
         run: python src/main.py
-
-      # Stap 5: Genereer content (gemini-api branch)
-      - name: Run script to generate content (Gemini Branch)
-        if: github.ref == 'refs/heads/gemini-api'
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python src/main.py
-
-      # Stap 6: Upload artifact. Het pad is nu weer simpel.
-      - name: Upload markdown content as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: markdown-content
-          path: content/
-
-  deploy-substack:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      # Stap 1: Download het artifact
-      - name: Download markdown content artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: markdown-content
-          path: content/
-
-      # Stap 2: Zet Python op
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      # Stap 3: Installeer de publicatie-dependencies.
-      # Let op: we hebben de code hier niet opnieuw nodig, alleen python en de library.
-      - name: Install publishing dependencies
-        run: pip install python-substack
-
-      # Stap 4: Voer het publicatie-script uit. We hebben een klein, zelfstandig script nodig.
-      # Om het robuust te maken, checken we de code toch even uit.
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Publish to Substack
-        env:
-          SUBSTACK_EMAIL: ${{ secrets.SUBSTACK_EMAIL }}
-          SUBSTACK_PASSWORD: ${{ secrets.SUBSTACK_PASSWORD }}
-          SUBSTACK_PUBLICATION_URL: ${{ secrets.SUBSTACK_PUBLICATION_URL }}
-        run: python scripts/publish_substack.py
+        # Als de map inderdaad dubbel is, zou het commando moeten zijn:
+        # run: python Vegan-BioMaterials-TechReport/src/main.py
