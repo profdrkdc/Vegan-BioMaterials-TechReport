@@ -3,6 +3,7 @@ import os
 import glob
 import jwt
 import requests
+import json # We hebben json nodig om de content correct te formateren
 from datetime import datetime, timedelta
 
 # ==============================================================================
@@ -18,7 +19,7 @@ class GhostAdminAPI:
 
     def _get_jwt_token(self):
         iat = int(datetime.now().timestamp())
-        exp = iat + 300  # Token is 5 minuten geldig
+        exp = iat + 300
         payload = {'iat': iat, 'exp': exp, 'aud': '/admin/'}
         token = jwt.encode(
             payload,
@@ -32,26 +33,37 @@ class GhostAdminAPI:
         token = self._get_jwt_token()
         headers = {'Authorization': f'Ghost {token}'}
         
+        # --- DE FIX: Verpak de markdown in het MobileDoc-formaat ---
+        # Dit is de meest betrouwbare manier om content te publiceren.
+        mobiledoc = {
+            "version": "0.3.1",
+            "markups": [],
+            "atoms": [],
+            "cards": [
+                ["markdown", {"markdown": markdown_content}]
+            ]
+        }
+        
         post_data = {
             'posts': [{
                 'title': title,
-                'html': markdown_content,  # Ghost kan direct markdown in het html-veld verwerken
+                # De 'mobiledoc' moet als een JSON-string worden meegegeven.
+                'mobiledoc': json.dumps(mobiledoc),
                 'status': status
             }]
         }
         if tags:
             post_data['posts'][0]['tags'] = [{'name': tag} for tag in tags]
         
-        url = f"{self.api_url}/posts/"
+        url = f"{self.api_url}/posts/?source=html" # source=html is een best practice
         response = requests.post(url, headers=headers, json=post_data)
-        response.raise_for_status()  # Stopt het script als er een HTTP-fout is
+        response.raise_for_status()
         return response.json()
 
 # ==============================================================================
 # De hoofdlogica van ons script
 # ==============================================================================
 if __name__ == "__main__":
-    # --- Configuratie ---
     try:
         GHOST_URL = os.environ['GHOST_ADMIN_API_URL']
         GHOST_KEY = os.environ['GHOST_ADMIN_API_KEY']
@@ -61,7 +73,6 @@ if __name__ == "__main__":
 
     CONTENT_DIR = "content"
 
-    # --- Initialiseer de API ---
     try:
         ghost = GhostAdminAPI(ghost_url=GHOST_URL, admin_api_key=GHOST_KEY)
         print("Ghost Admin API client succesvol geïnitialiseerd.")
@@ -69,7 +80,6 @@ if __name__ == "__main__":
         print(f"Fout bij het initialiseren van de Ghost API client: {e}")
         exit(1)
 
-    # --- Verwerk bestanden ---
     search_path = os.path.join(CONTENT_DIR, "*.md")
     files = glob.glob(search_path)
     
