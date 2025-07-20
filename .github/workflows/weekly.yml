@@ -3,85 +3,93 @@
 name: Weekly Content Generation and Deployment
 
 on:
-  # Draait elke vrijdag om 08:00 UTC
   schedule:
     - cron: '0 8 * * 5'
-  
-  # Maakt het mogelijk om de workflow handmatig te starten vanuit de GitHub UI
   workflow_dispatch:
 
 jobs:
-  # Eerste job: Genereer de content-bestanden
   build:
     runs-on: ubuntu-latest
+    
+    # --- FIX: Stel een standaard werkmap in voor alle 'run' commando's in deze job ---
+    defaults:
+      run:
+        working-directory: ./Vegan-BioMaterials-TechReport
+
     steps:
-      # Stap 1: Check de code uit van de repository
+      # Stap 1: Check de code uit in een specifieke submap om de naam te controleren
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      # Stap 2: Zet de juiste Python-versie op
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-          cache: 'pip' # Versnelt toekomstige runs door dependencies in cache op te slaan
+          path: 'Vegan-BioMaterials-TechReport' # Zorgt voor een consistente mapnaam
 
-      # Stap 3: Installeer de benodigde Python-bibliotheken
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      # Stap 4: Genereer content, met een conditie voor de 'main' branch
-      # Gebruikt de Kimi/OpenRouter API key
-      - name: Run script to generate content (Main Branch)
-        if: github.ref == 'refs/heads/main'
-        env:
-          # Zorg ervoor dat je een secret hebt met de naam 'KIMI_API_KEY' of pas de naam hier aan
-          KIMI_API_KEY: ${{ secrets.KIMI_API_KEY }} 
-        run: python src/main.py
-
-      # Stap 5: Genereer content, met een conditie voor de 'gemini-api' branch
-      # Gebruikt de Google Gemini API key
-      - name: Run script to generate content (Gemini Branch)
-        if: github.ref == 'refs/heads/gemini-api'
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python src/main.py
-
-      # Stap 6: Upload de gegenereerde .md bestanden als een 'artifact'
-      # Dit maakt de bestanden beschikbaar voor de volgende job (deploy)
-      - name: Upload markdown content as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: markdown-content
-          path: content/*.md
-
-  # Tweede job: Publiceer de content naar Substack
-  deploy-substack:
-    # Deze job start pas als de 'build' job succesvol is afgerond
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      # Stap 1: Download het 'markdown-content' artifact dat in de build job is geüpload
-      - name: Download markdown content artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: markdown-content
-          path: content # Pak het artifact uit in een map genaamd 'content'
-
-      # Stap 2: Zet Python op (vereist voor het publish-script)
+      # Stap 2: Zet Python op
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
 
-      # Stap 3: Installeer de dependencies (opnieuw nodig in deze verse runner, maar het gaat snel door de cache)
-      # Dit installeert o.a. de 'python-substack' bibliotheek
+      # Stap 3: Installeer dependencies (draait nu in de juiste map)
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # Stap 4: Voer het publicatie-script uit
-      # Geef de benodigde credentials veilig door via GitHub Secrets
+      # Stap 4: Genereer content (main branch)
+      - name: Run script to generate content (Main Branch)
+        if: github.ref == 'refs/heads/main'
+        env:
+          KIMI_API_KEY: ${{ secrets.KIMI_API_KEY }} 
+        run: python src/main.py
+
+      # Stap 5: Genereer content (gemini-api branch)
+      - name: Run script to generate content (Gemini Branch)
+        if: github.ref == 'refs/heads/gemini-api'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python src/main.py
+
+      # Stap 6: Upload artifact, zorg ervoor dat het pad correct is
+      - name: Upload markdown content as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: markdown-content
+          path: ./Vegan-BioMaterials-TechReport/content/*.md
+
+  deploy-substack:
+    needs: build
+    runs-on: ubuntu-latest
+
+    # --- FIX: Stel ook hier de werkmap in ---
+    defaults:
+      run:
+        working-directory: ./Vegan-BioMaterials-TechReport
+
+    steps:
+      # Stap 1: Check de code opnieuw uit (best practice voor een nieuwe job)
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          path: 'Vegan-BioMaterials-TechReport'
+
+      # Stap 2: Download het artifact naar de juiste content-map
+      - name: Download markdown content artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: markdown-content
+          path: ./Vegan-BioMaterials-TechReport/content
+
+      # Stap 3: Zet Python op
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      # Stap 4: Installeer dependencies
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Stap 5: Voer het publicatie-script uit
       - name: Publish to Substack
         env:
           SUBSTACK_EMAIL: ${{ secrets.SUBSTACK_EMAIL }}
