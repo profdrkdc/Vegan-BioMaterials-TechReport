@@ -4,27 +4,82 @@ name: Weekly Content Generation and Deployment
 
 on:
   schedule:
-    - cron: '0 8 * * 5'
+    - cron: '0 8 * * 5' # Elke vrijdag om 8 uur UTC
   workflow_dispatch:
 
 jobs:
+  # JOB 1: Genereer de .md bestanden
   build:
     runs-on: ubuntu-latest
     steps:
-      # Stap 1: Check de code uit. We raken hier niets meer aan.
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # --- DIAGNOSTISCHE STAP ---
-      # Deze stap toont ons de exacte mappenstructuur op de server.
-      - name: 1. LIST ALL FILES to find the correct path
-        run: ls -R
-        shell: bash
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
 
-      # Stap 2: We proberen het script te draaien.
-      # Deze stap zal waarschijnlijk weer falen, maar de output van stap 1
-      # zal ons vertellen hoe we dit definitief kunnen fixen.
-      - name: 2. Attempt to run Python script
-        run: python src/main.py
-        # Als de map inderdaad dubbel is, zou het commando moeten zijn:
-        # run: python Vegan-BioMaterials-TechReport/src/main.py
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # --- START HERSTELDE LOGICA ---
+      # Deze stappen komen rechtstreeks uit je werkende, oude workflow.
+      - name: Generate content for 'main' branch
+        if: github.ref == 'refs/heads/main'
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          python3 -m src.fetch
+          python3 -m src.curate
+          python3 -m src.draft
+
+      - name: Generate content for 'gemini-api' branch
+        if: github.ref == 'refs/heads/gemini-api'
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: |
+          python3 -m src.fetch
+          python3 -m src.curate
+          python3 -m src.draft
+      # --- EINDE HERSTELDE LOGICA ---
+
+      - name: Upload markdown content as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: markdown-content
+          path: content/
+
+  # JOB 2: Publiceer de .md bestanden naar Substack
+  deploy-substack:
+    # Start pas als de 'build' job succesvol is
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download markdown content artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: markdown-content
+          # Plaats de .md bestanden in de juiste map
+          path: content/
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Publish to Substack
+        env:
+          SUBSTACK_EMAIL: ${{ secrets.SUBSTACK_EMAIL }}
+          SUBSTACK_PASSWORD: ${{ secrets.SUBSTACK_PASSWORD }}
+          SUBSTACK_PUBLICATION_URL: ${{ secrets.SUBSTACK_PUBLICATION_URL }}
+        run: python3 src/publish_substack.py
