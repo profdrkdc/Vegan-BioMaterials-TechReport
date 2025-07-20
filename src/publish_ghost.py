@@ -1,64 +1,75 @@
-# src/publish_ghost.py
-import os
-import glob
-from ghost_client import Ghost
+# .github/workflows/weekly.yml
 
-# --- Configuratie ---
-try:
-    GHOST_URL = os.environ['GHOST_ADMIN_API_URL']
-    # De 'ghost-client' bibliotheek splitst de API key in een ID en een SECRET,
-    # gescheiden door een dubbele punt.
-    GHOST_KEY = os.environ['GHOST_ADMIN_API_KEY']
-    GHOST_ADMIN_ID, GHOST_ADMIN_SECRET = GHOST_KEY.split(':')
-except KeyError as e:
-    print(f"Error: De omgevingsvariabele {e} is niet ingesteld.")
-    exit(1)
-except ValueError:
-    print("Error: GHOST_ADMIN_API_KEY heeft niet het juiste formaat. Moet 'id:secret' zijn.")
-    exit(1)
+name: Weekly Content Generation and Deployment
 
-CONTENT_DIR = "content"
+on:
+  schedule:
+    - cron: '0 8 * * 5'
+  workflow_dispatch:
 
-# --- Hoofdlogica ---
-if __name__ == "__main__":
-    # Initialiseer de Ghost API
-    try:
-        ghost = Ghost(
-            GHOST_URL,
-            client_id=GHOST_ADMIN_ID,
-            client_secret=GHOST_ADMIN_SECRET
-        )
-        print("Succesvol verbonden met de Ghost API.")
-    except Exception as e:
-        print(f"Fout bij het verbinden met de Ghost API: {e}")
-        exit(1)
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Generate content for 'main' branch
+        if: github.ref == 'refs/heads/main'
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: |
+          python3 -m src.fetch
+          python3 -m src.curate
+          python3 -m src.draft
+      - name: Generate content for 'gemini-api' branch
+        if: github.ref == 'refs/heads/gemini-api'
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: |
+          python3 -m src.fetch
+          python3 -m src.curate
+          python3 -m src.draft
+      - name: Upload markdown content as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: markdown-content
+          path: content/
 
-    # Vind alle .md bestanden in de content map
-    search_path = os.path.join(CONTENT_DIR, "*.md")
-    files = glob.glob(search_path)
-    
-    if not files:
-        print(f"Geen .md bestanden gevonden in de map {CONTENT_DIR}.")
-        exit(0)
+  deploy-ghost:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Download markdown content artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: markdown-content
+          path: content/
 
-    for filepath in files:
-        print(f"\nVerwerken van bestand: {filepath}")
-        with open(filepath, 'r', encoding='utf-8') as f:
-            content = f.read()
+      # --- DIAGNOSTISCHE STAP ---
+      # Toon ons de exacte mappenstructuur NA het downloaden van het artifact
+      - name: Verify downloaded files
+        run: ls -R
 
-        try:
-            # Maak een nieuwe post aan
-            ghost.posts.create(
-                title='Titel wordt automatisch uit Markdown gehaald',
-                custom_excerpt='Gepubliceerd via GitHub Action',
-                markdown=content,
-                status='published',
-                tags=['weekly-update'] # Optioneel
-            )
-            print(f"Post van bestand '{filepath}' succesvol gepubliceerd.")
-
-        except Exception as e:
-            print(f"Fout bij het publiceren van '{filepath}': {e}")
-            # Print de volledige error voor meer details
-            import traceback
-            traceback.print_exc()
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Publish to Ghost
+        env:
+          GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
+          GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
+        run: python3 src/publish_ghost.py
