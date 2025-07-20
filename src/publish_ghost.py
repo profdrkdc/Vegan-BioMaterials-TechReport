@@ -1,14 +1,20 @@
 # src/publish_ghost.py
 import os
 import glob
-from ghost_admin_api import GhostAdminAPI
+from ghost_client import Ghost
 
 # --- Configuratie ---
 try:
     GHOST_URL = os.environ['GHOST_ADMIN_API_URL']
+    # De 'ghost-client' bibliotheek splitst de API key in een ID en een SECRET,
+    # gescheiden door een dubbele punt.
     GHOST_KEY = os.environ['GHOST_ADMIN_API_KEY']
+    GHOST_ADMIN_ID, GHOST_ADMIN_SECRET = GHOST_KEY.split(':')
 except KeyError as e:
     print(f"Error: De omgevingsvariabele {e} is niet ingesteld.")
+    exit(1)
+except ValueError:
+    print("Error: GHOST_ADMIN_API_KEY heeft niet het juiste formaat. Moet 'id:secret' zijn.")
     exit(1)
 
 CONTENT_DIR = "content"
@@ -17,12 +23,12 @@ CONTENT_DIR = "content"
 if __name__ == "__main__":
     # Initialiseer de Ghost API
     try:
-        ghost = GhostAdminAPI(
-            url=GHOST_URL,
-            key=GHOST_KEY,
-            version="v5.0"
+        ghost = Ghost(
+            GHOST_URL,
+            client_id=GHOST_ADMIN_ID,
+            client_secret=GHOST_ADMIN_SECRET
         )
-        print("Succesvol verbonden met de Ghost Admin API.")
+        print("Succesvol verbonden met de Ghost API.")
     except Exception as e:
         print(f"Fout bij het verbinden met de Ghost API: {e}")
         exit(1)
@@ -38,22 +44,21 @@ if __name__ == "__main__":
     for filepath in files:
         print(f"\nVerwerken van bestand: {filepath}")
         with open(filepath, 'r', encoding='utf-8') as f:
-            lines = f.readlines()
-        
-        # Haal titel eruit (eerste regel, zonder '# ')
-        title = lines[0].strip().replace('# ', '')
-        # De rest is de body
-        html_content = "".join(lines)
-        
+            content = f.read()
+
         try:
             # Maak een nieuwe post aan
-            response = ghost.posts.create({
-                'title': title,
-                'html': html_content, # Ghost accepteert direct Markdown/HTML
-                'status': 'published', # Zet op 'draft' als je het eerst wilt reviewen
-                # 'tags': ['news', 'weekly-update'] # Optioneel: voeg tags toe
-            })
-            print(f"Post '{title}' succesvol gepubliceerd naar Ghost.")
+            ghost.posts.create(
+                title='Titel wordt automatisch uit Markdown gehaald',
+                custom_excerpt='Gepubliceerd via GitHub Action',
+                markdown=content,
+                status='published',
+                tags=['weekly-update'] # Optioneel
+            )
+            print(f"Post van bestand '{filepath}' succesvol gepubliceerd.")
 
         except Exception as e:
-            print(f"Fout bij het publiceren van '{title}': {e}")
+            print(f"Fout bij het publiceren van '{filepath}': {e}")
+            # Print de volledige error voor meer details
+            import traceback
+            traceback.print_exc()
