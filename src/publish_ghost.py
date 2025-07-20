@@ -3,11 +3,11 @@ import os
 import glob
 import jwt
 import requests
-import markdown # We hebben de markdown-conversie weer nodig
+import markdown
 from datetime import datetime, timedelta
 
 # ==============================================================================
-# De Ghost Admin API implementatie (blijft ongewijzigd)
+# De Ghost Admin API implementatie
 # ==============================================================================
 class GhostAdminAPI:
     def __init__(self, ghost_url, admin_api_key):
@@ -21,27 +21,54 @@ class GhostAdminAPI:
         iat = int(datetime.now().timestamp())
         exp = iat + 300
         payload = {'iat': iat, 'exp': exp, 'aud': '/admin/'}
-        token = jwt.encode(
-            payload,
-            bytes.fromhex(self.key_secret),
-            algorithm='HS256',
-            headers={'kid': self.key_id}
-        )
+        token = jwt.encode(payload, bytes.fromhex(self.key_secret), algorithm='HS256', headers={'kid': self.key_id})
         return token
 
-    def create_post(self, post_data):
+    def _make_request(self, method, endpoint, data=None):
         token = self._get_jwt_token()
         headers = {'Authorization': f'Ghost {token}'}
+        url = f"{self.api_url}{endpoint}"
         
-        # De bewezen, werkende URL
-        url = f"{self.api_url}/posts/?source=html"
+        if method.upper() == 'POST':
+            response = requests.post(url, headers=headers, json=data)
+        elif method.upper() == 'PUT':
+            response = requests.put(url, headers=headers, json=data)
+        else:
+            raise ValueError(f"Unsupported HTTP method: {method}")
         
-        response = requests.post(url, headers=headers, json=post_data)
         response.raise_for_status()
-        return response.json()
+        return response
+
+    # STAP 1: Maak een DRAFT post aan
+    def create_post_draft(self, title, html_content, tags=None):
+        endpoint = "/posts/?source=html"
+        post_data = {
+            'posts': [{
+                'title': title,
+                'html': html_content,
+                'status': 'draft'
+            }]
+        }
+        if tags:
+            post_data['posts'][0]['tags'] = [{'name': tag} for tag in tags]
+        
+        response = self._make_request('POST', endpoint, post_data)
+        return response.json()['posts'][0]
+
+    # STAP 2: Publiceer de DRAFT
+    def publish_draft(self, post_id, updated_at):
+        endpoint = f"/posts/{post_id}/"
+        update_data = {
+            'posts': [{
+                'status': 'published',
+                'updated_at': updated_at # Verplicht voor updates
+            }]
+        }
+        response = self._make_request('PUT', endpoint, update_data)
+        return response.json()['posts'][0]
 
 # ==============================================================================
-# De hoofdlogica: Maak drafts aan op basis van de .md bestanden
+# De hoofdlogica: De Finale Workflow
 # ==============================================================================
 if __name__ == "__main__":
     try:
@@ -72,25 +99,26 @@ if __name__ == "__main__":
             markdown_text = f.read()
             title = markdown_text.splitlines()[0].strip().replace('# ', '')
         
-        # Converteer de markdown naar HTML
         html_from_markdown = markdown.markdown(markdown_text)
         
-        # Bouw de payload op basis van de werkende test
-        post_payload = {
-            'posts': [{
-                'title': title,
-                'html': html_from_markdown,
-                'status': 'draft'
-            }]
-        }
-
         try:
-            print(f"Poging om een DRAFT post aan te maken voor '{title}'...")
-            ghost.create_post(post_payload)
-            print(f"SUCCESS: Draft post '{title}' succesvol aangemaakt.")
+            # STAP 1: Maak de draft
+            print(f"Stap 1: Draft aanmaken voor '{title}'...")
+            draft_post = ghost.create_post_draft(
+                title=title,
+                html_content=html_from_markdown,
+                tags=['weekly-update']
+            )
+            post_id = draft_post['id']
+            updated_at = draft_post['updated_at']
+            print(f"Draft succesvol aangemaakt met ID: {post_id}")
+
+            # STAP 2: Publiceer de draft
+            print(f"Stap 2: Publiceren van post ID {post_id}...")
+            published_post = ghost.publish_draft(post_id, updated_at)
+            print(f"SUCCESS: Post '{published_post['title']}' is nu gepubliceerd!")
+
         except Exception as e:
-            print(f"!!! FOUT bij het aanmaken van de draft: {e}")
+            print(f"!!! FOUT bij het verwerken van '{title}': {e}")
             import traceback
             traceback.print_exc()
-
-    print("\nAlle bestanden zijn verwerkt. Controleer je 'Drafts' in Ghost.")
