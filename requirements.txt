@@ -1,2 +1,5 @@
+# requirements.txt
+
 google-generativeai
-ghost-client
+requests
+PyJWT
