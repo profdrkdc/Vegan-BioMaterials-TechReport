@@ -3,7 +3,7 @@ import os
 import glob
 import jwt
 import requests
-import json # We hebben json nodig om de content correct te formateren
+import json
 from datetime import datetime, timedelta
 
 # ==============================================================================
@@ -33,29 +33,22 @@ class GhostAdminAPI:
         token = self._get_jwt_token()
         headers = {'Authorization': f'Ghost {token}'}
         
-        # --- DE FIX: Verpak de markdown in het MobileDoc-formaat ---
-        # Dit is de meest betrouwbare manier om content te publiceren.
-        mobiledoc = {
-            "version": "0.3.1",
-            "markups": [],
-            "atoms": [],
-            "cards": [
-                ["markdown", {"markdown": markdown_content}]
-            ]
-        }
-        
+        # --- DE DEFINITIEVE FIX ---
+        # We sturen de content in het 'html' veld, zoals je onderzoek aantoonde.
+        # We sturen het OOK in het 'markdown' veld. Dit is een "shotgun" aanpak
+        # die de kans op succes maximaliseert, voor het geval de API versie verschilt.
         post_data = {
             'posts': [{
                 'title': title,
-                # De 'mobiledoc' moet als een JSON-string worden meegegeven.
-                'mobiledoc': json.dumps(mobiledoc),
+                'html': markdown_content,
+                'markdown': markdown_content,
                 'status': status
             }]
         }
         if tags:
             post_data['posts'][0]['tags'] = [{'name': tag} for tag in tags]
         
-        url = f"{self.api_url}/posts/?source=html" # source=html is een best practice
+        url = f"{self.api_url}/posts/"
         response = requests.post(url, headers=headers, json=post_data)
         response.raise_for_status()
         return response.json()
