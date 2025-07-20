@@ -7,7 +7,7 @@ import json
 from datetime import datetime, timedelta
 
 # ==============================================================================
-# De correcte, handmatige Ghost Admin API implementatie
+# De Ghost Admin API implementatie
 # ==============================================================================
 class GhostAdminAPI:
     def __init__(self, ghost_url, admin_api_key):
@@ -29,32 +29,17 @@ class GhostAdminAPI:
         )
         return token
 
-    def create_post(self, title, markdown_content, status='published', tags=None):
+    # Een 'rauwe' create-functie die precies verstuurt wat we meegeven
+    def create_post_raw(self, post_data):
         token = self._get_jwt_token()
         headers = {'Authorization': f'Ghost {token}'}
-        
-        # --- DE DEFINITIEVE FIX ---
-        # We sturen de content in het 'html' veld, zoals je onderzoek aantoonde.
-        # We sturen het OOK in het 'markdown' veld. Dit is een "shotgun" aanpak
-        # die de kans op succes maximaliseert, voor het geval de API versie verschilt.
-        post_data = {
-            'posts': [{
-                'title': title,
-                'html': markdown_content,
-                'markdown': markdown_content,
-                'status': status
-            }]
-        }
-        if tags:
-            post_data['posts'][0]['tags'] = [{'name': tag} for tag in tags]
-        
-        url = f"{self.api_url}/posts/"
+        url = f"{self.api_url}/posts/?source=html"
         response = requests.post(url, headers=headers, json=post_data)
         response.raise_for_status()
         return response.json()
 
 # ==============================================================================
-# De hoofdlogica van ons script
+# De hoofdlogica: Het Experiment
 # ==============================================================================
 if __name__ == "__main__":
     try:
@@ -64,8 +49,6 @@ if __name__ == "__main__":
         print(f"Error: De omgevingsvariabele {e} is niet ingesteld.")
         exit(1)
 
-    CONTENT_DIR = "content"
-
     try:
         ghost = GhostAdminAPI(ghost_url=GHOST_URL, admin_api_key=GHOST_KEY)
         print("Ghost Admin API client succesvol geïnitialiseerd.")
@@ -73,28 +56,49 @@ if __name__ == "__main__":
         print(f"Fout bij het initialiseren van de Ghost API client: {e}")
         exit(1)
 
-    search_path = os.path.join(CONTENT_DIR, "*.md")
-    files = glob.glob(search_path)
+    # --- Definitie van de Experimenten ---
+    test_content_markdown = "## Test Content\n\nThis is de **markdown** content van de test."
+    test_content_html = "<h2>Test Content</h2><p>This is de <b>HTML</b> content van de test.</p>"
     
-    if not files:
-        print(f"Geen .md bestanden gevonden in de map {CONTENT_DIR}.")
-        exit(0)
+    # JSON-structuur voor MobileDoc (oudere Ghost versies)
+    mobiledoc_payload = json.dumps({
+        "version": "0.3.1", "markups": [], "atoms": [],
+        "cards": [["markdown", {"markdown": "This is content in a **MobileDoc** card."}]]
+    })
+    
+    # JSON-structuur voor Lexical (moderne Ghost versies)
+    lexical_payload = json.dumps({
+        "root": {"children": [{"children": [{"detail": 0, "format": 0, "mode": "normal", "style": "", "text": "This is content in the Lexical format.", "type": "text", "version": 1}], "direction": "ltr", "format": "", "indent": 0, "type": "paragraph", "version": 1}], "direction": "ltr", "format": "", "indent": 0, "type": "root", "version": 1}
+    })
 
-    for filepath in files:
-        print(f"\nVerwerken van bestand: {filepath}")
-        with open(filepath, 'r', encoding='utf-8') as f:
-            markdown_content = f.read()
-            title = markdown_content.splitlines()[0].strip().replace('# ', '')
-        
+    tests = [
+        {
+            "name": "HTML Field Test",
+            "data": {"posts": [{"title": "API Test: HTML Field", "html": test_content_html}]}
+        },
+        {
+            "name": "Markdown Field Test",
+            "data": {"posts": [{"title": "API Test: Markdown Field", "markdown": test_content_markdown}]}
+        },
+        {
+            "name": "MobileDoc Field Test",
+            "data": {"posts": [{"title": "API Test: MobileDoc Field", "mobiledoc": mobiledoc_payload}]}
+        },
+        {
+            "name": "Lexical Field Test",
+            "data": {"posts": [{"title": "API Test: Lexical Field", "lexical": lexical_payload}]}
+        }
+    ]
+
+    # --- Voer de Experimenten uit ---
+    for test in tests:
+        print(f"\n--- Running: {test['name']} ---")
         try:
-            ghost.create_post(
-                title=title,
-                markdown_content=markdown_content,
-                status='published',
-                tags=['weekly-update']
-            )
-            print(f"Post '{title}' succesvol gepubliceerd naar Ghost.")
+            ghost.create_post_raw(test['data'])
+            print(f"SUCCESS: Post '{test['data']['posts'][0]['title']}' succesvol aangemaakt.")
         except Exception as e:
-            print(f"!!! Fout bij het publiceren van '{title}': {e}")
-            import traceback
-            traceback.print_exc()
+            print(f"FAILURE: Kon post niet aanmaken voor test '{test['name']}'.")
+            print(f"Error: {e}")
+
+    print("\nAlle tests zijn voltooid. Controleer je Ghost admin panel om te zien welke posts de juiste content hebben.")
+    
