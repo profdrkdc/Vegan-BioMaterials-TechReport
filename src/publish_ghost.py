@@ -1,12 +1,13 @@
 # src/publish_ghost.py
 import os
+import glob
 import jwt
 import requests
-import json
+import markdown # We hebben de markdown-conversie weer nodig
 from datetime import datetime, timedelta
 
 # ==============================================================================
-# De Ghost Admin API implementatie met ingebouwde "zwarte doos" recorder
+# De Ghost Admin API implementatie (blijft ongewijzigd)
 # ==============================================================================
 class GhostAdminAPI:
     def __init__(self, ghost_url, admin_api_key):
@@ -32,34 +33,15 @@ class GhostAdminAPI:
         token = self._get_jwt_token()
         headers = {'Authorization': f'Ghost {token}'}
         
-        # --- FIX 1: Jouw suggestie is hier geïmplementeerd ---
+        # De bewezen, werkende URL
         url = f"{self.api_url}/posts/?source=html"
-
-        # --- ZWARTE DOOS: WAT VERSTUREN WE? ---
-        print("\n================= ZWARTE DOOS - VERZONDEN DATA ==================")
-        print(f"URL: {url}")
-        print("Payload:")
-        print(json.dumps(post_data, indent=2))
-        print("=================================================================\n")
         
         response = requests.post(url, headers=headers, json=post_data)
-        
-        # --- ZWARTE DOOS: WAT KRIJGEN WE TERUG? ---
-        print("\n================ ZWARTE DOOS - ONTVANGEN DATA =================")
-        print(f"Status Code: {response.status_code}")
-        try:
-            print("Response Body:")
-            print(json.dumps(response.json(), indent=2))
-        except json.JSONDecodeError:
-            print("Response Body (geen JSON):")
-            print(response.text)
-        print("=================================================================\n")
-
         response.raise_for_status()
         return response.json()
 
 # ==============================================================================
-# De hoofdlogica: Maak één enkele, hardgecodeerde DRAFT en neem alles op
+# De hoofdlogica: Maak drafts aan op basis van de .md bestanden
 # ==============================================================================
 if __name__ == "__main__":
     try:
@@ -76,23 +58,39 @@ if __name__ == "__main__":
         print(f"Fout bij het initialiseren van de Ghost API client: {e}")
         exit(1)
 
-    hardcoded_title = "API Blackbox Test v2"
-    hardcoded_html_content = "<h2>Test v2</h2><p>Deze test gebruikt de <b>?source=html</b> parameter.</p>"
+    CONTENT_DIR = "content"
+    search_path = os.path.join(CONTENT_DIR, "*.md")
+    files = glob.glob(search_path)
+    
+    if not files:
+        print(f"Geen .md bestanden gevonden in de map {CONTENT_DIR}.")
+        exit(0)
 
-    post_payload = {
-        'posts': [{
-            'title': hardcoded_title,
-            'html': hardcoded_html_content,
-            'status': 'draft'
-        }]
-    }
+    for filepath in files:
+        print(f"\n--- Verwerken van bestand: {filepath} ---")
+        with open(filepath, 'r', encoding='utf-8') as f:
+            markdown_text = f.read()
+            title = markdown_text.splitlines()[0].strip().replace('# ', '')
+        
+        # Converteer de markdown naar HTML
+        html_from_markdown = markdown.markdown(markdown_text)
+        
+        # Bouw de payload op basis van de werkende test
+        post_payload = {
+            'posts': [{
+                'title': title,
+                'html': html_from_markdown,
+                'status': 'draft'
+            }]
+        }
 
-    try:
-        print("Poging om één DRAFT post aan te maken met de correcte URL...")
-        # --- FIX 2: De functie heet 'create_post' ---
-        ghost.create_post(post_payload)
-        print("SUCCESS: De API call is uitgevoerd. Analyseer de 'ZWARTE DOOS' logs.")
-    except Exception as e:
-        print(f"!!! FOUT tijdens de API call: {e}")
-        import traceback
-        traceback.print_exc()
+        try:
+            print(f"Poging om een DRAFT post aan te maken voor '{title}'...")
+            ghost.create_post(post_payload)
+            print(f"SUCCESS: Draft post '{title}' succesvol aangemaakt.")
+        except Exception as e:
+            print(f"!!! FOUT bij het aanmaken van de draft: {e}")
+            import traceback
+            traceback.print_exc()
+
+    print("\nAlle bestanden zijn verwerkt. Controleer je 'Drafts' in Ghost.")
