@@ -1,59 +1,90 @@
+# .github/workflows/weekly.yml
+
 name: Weekly Content Generation and Deployment
 
 on:
+  # Draait elke vrijdag om 08:00 UTC
   schedule:
-    - cron: '0 8 * * 5' # Elke vrijdag om 8 uur UTC
+    - cron: '0 8 * * 5'
+  
+  # Maakt het mogelijk om de workflow handmatig te starten vanuit de GitHub UI
   workflow_dispatch:
-  # 2. Een vast schema (deze cron-job betekent 'elke maandag om 8:00 UTC')
-  schedule:
-    - cron: '0 8 * * 1'
 
 jobs:
-  generate-and-commit:
-    runs-on: ubuntu-latest # Draai op een standaard Linux-machine
-
-    # Geef de job permissie om code terug te schrijven naar de repository
-    permissions:
-      contents: write
-
+  # Eerste job: Genereer de content-bestanden
+  build:
+    runs-on: ubuntu-latest
     steps:
+      # Stap 1: Check de code uit van de repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Stap 2: Python installeren en configureren
-      - name: Set up Python
+      # Stap 2: Zet de juiste Python-versie op
+      - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip' # Versnelt toekomstige runs door dependencies in cache op te slaan
 
-      # Stap 3: De benodigde bibliotheken installeren via requirements.txt
+      # Stap 3: Installeer de benodigde Python-bibliotheken
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+        run: pip install -r requirements.txt
 
-      # Stap 4: De scripts draaien om de nieuwsbrieven te genereren
-      - name: Run Python scripts to generate content
+      # Stap 4: Genereer content, met een conditie voor de 'main' branch
+      # Gebruikt de Kimi/OpenRouter API key
+      - name: Run script to generate content (Main Branch)
+        if: github.ref == 'refs/heads/main'
         env:
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: |
-          python -m src.fetch
-          python -m src.curate
-          python -m src.draft
+          # Zorg ervoor dat je een secret hebt met de naam 'KIMI_API_KEY' of pas de naam hier aan
+          KIMI_API_KEY: ${{ secrets.KIMI_API_KEY }} 
+        run: python src/main.py
 
-      # Stap 5: De nieuwe nieuwsbrieven terug committen naar de repository
-      - name: Commit and push new content
-        run: |
-          git config user.name "GitHub Action Bot"
-          git config user.email "action@github.com"
-          # Forceer het toevoegen van de 'content' map, ook al staat hij in .gitignore
-          # De -f (force) vlag is hier cruciaal.  
-          git add -f content/
-          
-          # Commit alleen als er daadwerkelijk bestanden in content/ zijn veranderd
-          if git diff --staged --quiet; then
-            echo "Geen wijzigingen in de nieuwsbrief om te committen."
-          else
-            git commit -m "Update wekelijkse nieuwsbrief"
-            git push
-          fi
+      # Stap 5: Genereer content, met een conditie voor de 'gemini-api' branch
+      # Gebruikt de Google Gemini API key
+      - name: Run script to generate content (Gemini Branch)
+        if: github.ref == 'refs/heads/gemini-api'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python src/main.py
+
+      # Stap 6: Upload de gegenereerde .md bestanden als een 'artifact'
+      # Dit maakt de bestanden beschikbaar voor de volgende job (deploy)
+      - name: Upload markdown content as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: markdown-content
+          path: content/*.md
+
+  # Tweede job: Publiceer de content naar Substack
+  deploy-substack:
+    # Deze job start pas als de 'build' job succesvol is afgerond
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      # Stap 1: Download het 'markdown-content' artifact dat in de build job is geüpload
+      - name: Download markdown content artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: markdown-content
+          path: content # Pak het artifact uit in een map genaamd 'content'
+
+      # Stap 2: Zet Python op (vereist voor het publish-script)
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      # Stap 3: Installeer de dependencies (opnieuw nodig in deze verse runner, maar het gaat snel door de cache)
+      # Dit installeert o.a. de 'python-substack' bibliotheek
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Stap 4: Voer het publicatie-script uit
+      # Geef de benodigde credentials veilig door via GitHub Secrets
+      - name: Publish to Substack
+        env:
+          SUBSTACK_EMAIL: ${{ secrets.SUBSTACK_EMAIL }}
+          SUBSTACK_PASSWORD: ${{ secrets.SUBSTACK_PASSWORD }}
+          SUBSTACK_PUBLICATION_URL: ${{ secrets.SUBSTACK_PUBLICATION_URL }}
+        run: python scripts/publish_substack.py
