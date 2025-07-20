@@ -1,64 +1,58 @@
-# De naam van je GitHub Action
-name: Generate Weekly Newsletter
+name: Weekly Content Generation and Deployment
 
-# Wanneer moet deze Action draaien?
 on:
-  # 1. Een handmatige knop in de Actions-tab om te testen
+  schedule:
+    - cron: '0 8 * * 5' # Elke vrijdag om 8 uur UTC
   workflow_dispatch:
 
-  # 2. Een vast schema (deze cron-job betekent 'elke maandag om 8:00 UTC')
-  schedule:
-    - cron: '0 8 * * 1'
-  
-  # 3. Draai ook bij een push naar een van deze specifieke branches
-  push:
-    branches:
-      - main         # Voor de Kimi/OpenRouter versie
-      - gemini-api   # Voor de Google Gemini versie
-
-# De taken die de Action moet uitvoeren
 jobs:
-  generate-and-commit:
+  build:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # Gebruik een nieuwere versie
 
-      - name: Set up Python
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5 # Gebruik een nieuwere versie
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run script to generate content
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} # Of een andere API key afhankelijk van de branch
+        run: python src/main.py
+
+      - name: Upload markdown content as artifact
+        uses: actions/upload-artifact@v4 # Gebruik een nieuwere versie
+        with:
+          name: markdown-content
+          path: content/*.md
+
+  deploy-substack:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: pip install -r requirements.txt # Zorgt ervoor dat python-substack wordt geinstalleerd
+
+      - name: Download markdown content artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: markdown-content
+          path: content
+
+      - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Run Python scripts to generate content
+      - name: Publish to Substack
         env:
-          # Gebruik de Kimi/OpenRouter key als we op de main branch zijn
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          # Gebruik de Google key als we op de gemini-api branch zijn
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-        run: |
-          # De python scripts op de uitgecheckte branch gebruiken de juiste logica
-          python3 -m src.fetch
-          python3 -m src.curate
-          python3 -m src.draft
-
-      - name: Commit and push new content
-        run: |
-          git config user.name "GitHub Action Bot"
-          git config user.email "action@github.com"
-          git add -f content/
-          
-          if git diff --staged --quiet; then
-            echo "Geen wijzigingen in de nieuwsbrief om te committen."
-          else
-            git commit -m "Update wekelijkse nieuwsbrief"
-            git push
-          fi
+          SUBSTACK_EMAIL: ${{ secrets.SUBSTACK_EMAIL }}
+          SUBSTACK_PASSWORD: ${{ secrets.SUBSTACK_PASSWORD }}
+          SUBSTACK_PUBLICATION_URL: ${{ secrets.SUBSTACK_PUBLICATION_URL }}
+        run: python scripts/publish_substack.py
