@@ -1,9 +1,7 @@
 # src/publish_ghost.py
 import os
-import glob
 import jwt
 import requests
-import markdown
 from datetime import datetime, timedelta
 
 # ==============================================================================
@@ -39,7 +37,7 @@ class GhostAdminAPI:
         return response.json()
 
 # ==============================================================================
-# De hoofdlogica: Maak één enkele, perfecte DRAFT
+# De hoofdlogica: Maak één enkele, hardgecodeerde DRAFT
 # ==============================================================================
 if __name__ == "__main__":
     try:
@@ -56,40 +54,27 @@ if __name__ == "__main__":
         print(f"Fout bij het initialiseren van de Ghost API client: {e}")
         exit(1)
 
-    CONTENT_DIR = "content"
-    # We zoeken nu maar naar één bestand om het simpel te houden.
-    search_path = os.path.join(CONTENT_DIR, "*_en.md")
-    files = glob.glob(search_path)
-    
-    if not files:
-        print(f"Geen Engels .md bestand gevonden in de map {CONTENT_DIR}.")
-        exit(0)
-    
-    # Pak het eerste Engelse bestand dat je vindt
-    filepath = files[0]
-    print(f"\n--- Verwerken van bestand: {filepath} ---")
-    
-    with open(filepath, 'r', encoding='utf-8') as f:
-        markdown_text = f.read()
-        title = markdown_text.splitlines()[0].strip().replace('# ', '')
-    
-    html_from_markdown = markdown.markdown(markdown_text)
-    
+    # --- DE HARDGECODEERDE TEST ---
+    print("\n--- Test met hardgecodeerde content ---")
+
+    hardcoded_title = "API Test: Hardcoded Draft"
+    hardcoded_html_content = "<h2>Test Content</h2><p>Als je deze tekst kunt lezen, werkt de API-verbinding en het aanmaken van een draft perfect.</p><p>Het probleem ligt dan 100% zeker bij het inlezen of converteren van het .md-bestand.</p>"
+
     # Dit is de exacte payload-structuur van de succesvolle test
     post_payload = {
         'posts': [{
-            'title': f"DRAFT of: {title}",
-            'html': html_from_markdown,
-            'status': 'draft' # De cruciale stap: AANMAKEN ALS DRAFT
+            'title': hardcoded_title,
+            'html': hardcoded_html_content,
+            'status': 'draft' # Aanmaken als DRAFT
         }]
     }
 
     try:
-        print("Poging om één enkele DRAFT post aan te maken...")
+        print("Poging om één DRAFT post aan te maken met hardcoded content...")
         ghost.create_post(post_payload)
-        print(f"SUCCESS: Draft post '{post_payload['posts'][0]['title']}' succesvol aangemaakt.")
-        print("Controleer je Ghost admin panel.")
+        print(f"SUCCESS: Draft post '{hardcoded_title}' zou nu moeten bestaan in Ghost.")
+        print("Controleer je Ghost admin panel in de 'Drafts' sectie.")
     except Exception as e:
-        print(f"!!! FOUT bij het aanmaken van de draft: {e}")
+        print(f"!!! FOUT bij het aanmaken van de hardcoded draft: {e}")
         import traceback
         traceback.print_exc()
