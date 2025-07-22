@@ -25,16 +25,15 @@ def generate_longread_article(topic: str, output_path: str):
 
     if AI_PROVIDER == 'google':
         if not os.getenv('GOOGLE_API_KEY'): raise ValueError("GOOGLE_API_KEY niet ingesteld.")
-        llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash-latest", temperature=0.7, top_p=0.9)
-    elif AI_PROVIDER == 'openrouter':
+        llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash-latest", temperature=0.7)
+    elif AI_PROVIDER in ['openrouter_kimi', 'openrouter_mistral']:
         if not os.getenv('OPENROUTER_API_KEY'): raise ValueError("OPENROUTER_API_KEY niet ingesteld.")
+        model_id = "moonshotai/kimi-k2:free" if AI_PROVIDER == 'openrouter_kimi' else "mistralai/mistral-7b-instruct"
         llm = ChatOpenAI(
-            # --- FIX IS HIER ---
-            model_name="moonshot-v1-128k",
+            model_name=model_id,
             openai_api_key=os.getenv('OPENROUTER_API_KEY'),
             openai_api_base="https://openrouter.ai/api/v1",
-            temperature=0.7,
-            top_p=0.9
+            temperature=0.7
         )
     else:
         raise ValueError(f"Ongeldige AI_PROVIDER: {AI_PROVIDER}.")

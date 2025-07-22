@@ -1,20 +1,9 @@
 # src/select_topic.py
-import os
-import glob
-import argparse
-import google.generativeai as genai
-from openai import OpenAI
-
-def get_latest_newsletter_file(content_dir="content"):
-    search_path = os.path.join(content_dir, "*_en.md")
-    files = glob.glob(search_path)
-    if not files:
-        raise FileNotFoundError(f"Geen Engelse nieuwsbrief (*_en.md) gevonden in '{content_dir}'.")
-    return max(files)
-
+# (vervang de functie select_best_topic)
 def select_best_topic(newsletter_content: str) -> str:
     AI_PROVIDER = os.getenv('AI_PROVIDER', 'google')
     model = None
+    model_id_for_log = ""
     print(f"Gekozen AI Provider voor topic selectie: {AI_PROVIDER}")
 
     if AI_PROVIDER == 'google':
@@ -22,17 +11,16 @@ def select_best_topic(newsletter_content: str) -> str:
         if not GOOGLE_API_KEY: raise ValueError("GOOGLE_API_KEY niet ingesteld.")
         genai.configure(api_key=GOOGLE_API_KEY)
         model = genai.GenerativeModel('gemini-1.5-flash-latest')
-    elif AI_PROVIDER == 'openrouter':
+        model_id_for_log = 'gemini-1.5-flash-latest'
+    elif AI_PROVIDER in ['openrouter_kimi', 'openrouter_mistral']:
         OPENROUTER_API_KEY = os.getenv('OPENROUTER_API_KEY')
         if not OPENROUTER_API_KEY: raise ValueError("OPENROUTER_API_KEY niet ingesteld.")
+        model_id = "moonshotai/kimi-k2:free" if AI_PROVIDER == 'openrouter_kimi' else "mistralai/mistral-7b-instruct"
+        model_id_for_log = model_id
         openrouter_client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=OPENROUTER_API_KEY)
         class OpenRouterModel:
             def generate_content(self, prompt):
-                response = openrouter_client.chat.completions.create(
-                    # --- FIX IS HIER ---
-                    model="moonshot-v1-128k",
-                    messages=[{"role": "user", "content": prompt}]
-                )
+                response = openrouter_client.chat.completions.create(model=model_id, messages=[{"role": "user", "content": prompt}])
                 return type('obj', (object,), {'text': response.choices.message.content})()
         model = OpenRouterModel()
     else:
