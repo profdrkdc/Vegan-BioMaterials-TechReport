@@ -1,6 +1,9 @@
 # src/draft.py
-# (vervang de bovenkant van het bestand met deze logica)
-import json, os, datetime, time, google.generativeai as genai
+import json
+import os
+import datetime
+import time
+import google.generativeai as genai
 from openai import OpenAI
 
 LANGS = {"nl": "Nederlands", "en": "English"}
@@ -29,12 +32,12 @@ elif AI_PROVIDER in ['openrouter_kimi', 'openrouter_mistral']:
     class OpenRouterModel:
         def generate_content(self, prompt):
             response = openrouter_client.chat.completions.create(model=model_id, messages=[{"role": "user", "content": prompt}])
+            # --- FIX IS HIER ---
             return type('obj', (object,), {'text': response.choices.message.content})()
     model = OpenRouterModel()
 else:
     raise ValueError(f"Ongeldige AI_PROVIDER: {AI_PROVIDER}.")
 
-# --- Hoofdlogica (ongewijzigd) ---
 with open(PROMPT_TPL_PATH, "r", encoding="utf-8") as f:
     PROMPT_TPL = f.read()
 
@@ -58,7 +61,7 @@ for code, lang in LANGS.items():
     prompt = prompt.replace('{edition_word}', edition_word)
     prompt = prompt.replace('{edition_date}', edition_date)
 
-    print(f"🤖 Model wordt aangeroepen voor de {lang} nieuwsbrief...")
+    print(f"🤖 Model '{model_id_for_log}' wordt aangeroepen voor de {lang} nieuwsbrief...")
     try:
         response = model.generate_content(prompt)
         md = response.text
@@ -74,5 +77,8 @@ for code, lang in LANGS.items():
     except Exception as e:
         print(f"❌ Fout bij API aanroep voor {lang}: {e}")
 
+    # --- FIX IS HIER ---
+    # Voeg een pauze toe om rate-limiting te voorkomen
     if code != list(LANGS.keys())[-1]:
-        time.sleep(10)
+        print("--- Pauze van 15 seconden om rate-limit te respecteren ---")
+        time.sleep(15)

@@ -37,6 +37,8 @@ elif AI_PROVIDER in ['openrouter_kimi', 'openrouter_mistral']:
                 model=model_id,
                 messages=[{"role": "user", "content": prompt}],
             )
+            # --- FIX IS HIER ---
+            # Correcte manier om de response te benaderen
             return type('obj', (object,), {'text': response.choices[0].message.content})()
     model = OpenRouterModel()
 else:
