@@ -7,8 +7,6 @@ on:
     - cron: '0 8 * * 5'
   workflow_dispatch:
 
-# --- DE FIX IS HIER ---
-# We geven de hele workflow expliciet toestemming om commits te pushen.
 permissions:
   contents: write
 
@@ -61,10 +59,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # --- DE FIX IS HIER ---
+          # Zorg ervoor dat we de JUISTE branch uitchecken (degene die de workflow heeft gestart)
+          ref: ${{ github.ref }}
+
       - name: Install dependencies
         run: pip install -r requirements.txt
+        
       - name: Publish to Ghost
         env:
           GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
           GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
-        run: python3 src/publish_ghost.py
+        run: python3 src.publish_ghost.py
