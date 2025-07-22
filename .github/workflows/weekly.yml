@@ -7,6 +7,11 @@ on:
     - cron: '0 8 * * 5'
   workflow_dispatch:
 
+# --- DE FIX IS HIER ---
+# We geven de hele workflow expliciet toestemming om commits te pushen.
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,8 +31,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Generate Weekly Newsletter
-        id: generate_newsletter
+      - name: Generate All Content
         env:
           AI_PROVIDER: ${{ (github.ref == 'refs/heads/main' && 'openrouter_kimi') || (github.ref == 'refs/heads/gemini-api' && 'google') || (github.ref == 'refs/heads/mistral-api' && 'openrouter_mistral') }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
@@ -36,40 +40,16 @@ jobs:
           python3 -m src.fetch
           python3 -m src.curate
           python3 -m src.draft
-
-      - name: Select Long-Read Topic
-        id: select_topic
-        if: success()
-        env:
-          AI_PROVIDER: ${{ (github.ref == 'refs/heads/main' && 'openrouter_kimi') || (github.ref == 'refs/heads/gemini-api' && 'google') || (github.ref == 'refs/heads/mistral-api' && 'openrouter_mistral') }}
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-        run: |
-          echo "topic=$(python3 -m src.select_topic)" >> $GITHUB_OUTPUT
-
-      - name: Generate Long-Read Article
-        id: generate_longread
-        if: success() && steps.select_topic.outputs.topic != ''
-        env:
-          AI_PROVIDER: ${{ (github.ref == 'refs/heads/main' && 'openrouter_kimi') || (github.ref == 'refs/heads/gemini-api' && 'google') || (github.ref == 'refs/heads/mistral-api' && 'openrouter_mistral') }}
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-        run: |
-          LONGREAD_FILENAME="content/longread_$(date +%Y-%m-%d)_en.md"
-          python3 -m src.generate_longread "${{ steps.select_topic.outputs.topic }}" -o "$LONGREAD_FILENAME"
-
-      # --- NIEUWE DEBUG STAP ---
-      - name: Check Git Status Before Commit
-        if: always() # Draai deze stap altijd, zelfs als een vorige stap faalt
-        run: |
-          echo "--- Running git status ---"
-          git status
-          echo "--- Listing files in content/ directory ---"
-          ls -l content/
+          LONGREAD_TOPIC=$(python3 -m src.select_topic)
+          if [ -z "$LONGREAD_TOPIC" ]; then
+            echo "::warning::Could not select a long-read topic. Skipping article generation."
+          else
+            LONGREAD_FILENAME="content/longread_$(date +%Y-%m-%d)_en.md"
+            python3 -m src.generate_longread "$LONGREAD_TOPIC" -o "$LONGREAD_FILENAME"
+          fi
 
       - name: Commit and push generated content
         id: commit
-        if: success()
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore(ci): add weekly generated content"
