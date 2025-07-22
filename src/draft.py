@@ -1,28 +1,22 @@
 # src/draft.py
-import json
-import os
-import datetime
-import time
-import google.generativeai as genai
+import json, os, datetime, time, google.generativeai as genai
 from openai import OpenAI
 
-LANGS = {"nl": "Nederlands", "en": "English"}
+# --- FIX: Alleen Engels ---
+LANGS = {"en": "English"}
 PROMPT_TPL_PATH = "prompts/step3.txt"
 CURATED_DATA_PATH = "curated.json"
 OUTPUT_DIR = "content"
 AI_PROVIDER = os.getenv('AI_PROVIDER', 'google')
+model, model_id_for_log = None, ""
 
-model = None
-model_id_for_log = ""
 print(f"Gekozen AI Provider: {AI_PROVIDER}")
-
 if AI_PROVIDER == 'google':
     GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
     if not GOOGLE_API_KEY: raise ValueError("GOOGLE_API_KEY niet ingesteld.")
     genai.configure(api_key=GOOGLE_API_KEY)
     model = genai.GenerativeModel('gemini-1.5-flash-latest')
     model_id_for_log = 'gemini-1.5-flash-latest'
-
 elif AI_PROVIDER in ['openrouter_kimi', 'openrouter_mistral']:
     OPENROUTER_API_KEY = os.getenv('OPENROUTER_API_KEY')
     if not OPENROUTER_API_KEY: raise ValueError("OPENROUTER_API_KEY niet ingesteld.")
@@ -32,15 +26,13 @@ elif AI_PROVIDER in ['openrouter_kimi', 'openrouter_mistral']:
     class OpenRouterModel:
         def generate_content(self, prompt):
             response = openrouter_client.chat.completions.create(model=model_id, messages=[{"role": "user", "content": prompt}])
-            # --- FIX IS HIER ---
-            return type('obj', (object,), {'text': response.choices.message.content})()
+            return type('SimpleResponse', (object,), {'text': response.choices.message.content})()
     model = OpenRouterModel()
 else:
     raise ValueError(f"Ongeldige AI_PROVIDER: {AI_PROVIDER}.")
 
 with open(PROMPT_TPL_PATH, "r", encoding="utf-8") as f:
     PROMPT_TPL = f.read()
-
 try:
     with open(CURATED_DATA_PATH, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -53,9 +45,8 @@ today_iso = today.isoformat()
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 for code, lang in LANGS.items():
-    edition_word = "Editie" if lang == "Nederlands" else "Edition"
+    edition_word = "Edition"
     edition_date = today.strftime('%d %b %Y')
-
     prompt = PROMPT_TPL.replace('{json_data}', json.dumps(data, indent=2, ensure_ascii=False))
     prompt = prompt.replace('{lang}', lang)
     prompt = prompt.replace('{edition_word}', edition_word)
@@ -69,7 +60,6 @@ for code, lang in LANGS.items():
             md = md.strip()[10:-3].strip()
         elif md.strip().startswith("```"):
              md = md.strip()[3:-3].strip()
-
         output_filename = f"{OUTPUT_DIR}/{today_iso}_{code}.md"
         with open(output_filename, "w", encoding="utf-8") as f:
             f.write(md)
