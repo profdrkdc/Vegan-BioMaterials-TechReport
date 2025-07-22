@@ -4,8 +4,6 @@ venv/
 raw.json
 curated.json
 
-# Generated content
-content/
 
 # Backup for python
 bUp/
