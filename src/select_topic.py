@@ -29,10 +29,16 @@ def select_best_topic(newsletter_content: str) -> str:
         class OpenRouterModel:
             def generate_content(self, prompt):
                 response = openrouter_client.chat.completions.create(model=model_id, messages=[{"role": "user", "content": prompt}])
-                return type('SimpleResponse', (object,), {'text': response.choices.message.content})()
-        model = OpenRouterModel()
-    else:
-        raise ValueError(f"Ongeldige AI_PROVIDER: {AI_PROVIDER}.")
+            # --- DE ECHTE, ECHTE FIX ---
+            # De rest van de code verwacht een object met een .text attribuut.
+            # We moeten dat object correct construeren.
+            class ResponseWrapper:
+                def __init__(self, content):
+                    self.text = content
+            return ResponseWrapper(response.choices[0].message.content)
+    model = OpenRouterModel()
+else:
+    raise ValueError(f"Ongeldige AI_PROVIDER: {AI_PROVIDER}.")
 
     prompt = f"""... (prompt is ongewijzigd) ...""".format(newsletter_content=newsletter_content)
     

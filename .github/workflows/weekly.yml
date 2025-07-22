@@ -26,53 +26,52 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # --- Branch 1: Main -> OpenRouter Kimi ---
-      - name: Generate Content (main -> Kimi)
-        if: github.ref == 'refs/heads/main'
+      # --- Stap 1: Fetch, Curate, Draft (met branch logica) ---
+      - name: Generate Weekly Newsletter
+        id: generate_newsletter
         env:
-          AI_PROVIDER: openrouter_kimi
+          AI_PROVIDER: ${{ (github.ref == 'refs/heads/main' && 'openrouter_kimi') || (github.ref == 'refs/heads/gemini-api' && 'google') || (github.ref == 'refs/heads/mistral-api' && 'openrouter_mistral') }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: |
-          python3 -m src.fetch
-          python3 -m src.curate
-          python3 -m src.draft
-          LONGREAD_TOPIC=$(python3 -m src.select_topic) && [ -n "$LONGREAD_TOPIC" ]
-          LONGREAD_FILENAME="content/longread_$(date +%Y-%m-%d)_en.md"
-          python3 -m src.generate_longread "$LONGREAD_TOPIC" -o "$LONGREAD_FILENAME"
-
-      # --- Branch 2: gemini-api -> Google Gemini ---
-      - name: Generate Content (gemini-api -> Google)
-        if: github.ref == 'refs/heads/gemini-api'
-        env:
-          AI_PROVIDER: google
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: |
           python3 -m src.fetch
           python3 -m src.curate
           python3 -m src.draft
-          LONGREAD_TOPIC=$(python3 -m src.select_topic) && [ -n "$LONGREAD_TOPIC" ]
-          LONGREAD_FILENAME="content/longread_$(date +%Y-%m-%d)_en.md"
-          python3 -m src.generate_longread "$LONGREAD_TOPIC" -o "$LONGREAD_FILENAME"
 
-      # --- Branch 3: mistral-api -> OpenRouter Mistral ---
-      - name: Generate Content (mistral-api -> Mistral)
-        if: github.ref == 'refs/heads/mistral-api'
+      # --- Stap 2: Select Long-Read Topic ---
+      - name: Select Long-Read Topic
+        id: select_topic
+        # Deze stap draait alleen als de vorige succesvol was
+        if: success()
         env:
-          AI_PROVIDER: openrouter_mistral
+          AI_PROVIDER: ${{ (github.ref == 'refs/heads/main' && 'openrouter_kimi') || (github.ref == 'refs/heads/gemini-api' && 'google') || (github.ref == 'refs/heads/mistral-api' && 'openrouter_mistral') }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: |
-          python3 -m src.fetch
-          python3 -m src.curate
-          python3 -m src.draft
-          LONGREAD_TOPIC=$(python3 -m src.select_topic) && [ -n "$LONGREAD_TOPIC" ]
-          LONGREAD_FILENAME="content/longread_$(date +%Y-%m-%d)_en.md"
-          python3 -m src.generate_longread "$LONGREAD_TOPIC" -o "$LONGREAD_FILENAME"
+          # Vang de output op in een speciale GITHUB_OUTPUT file
+          echo "topic=$(python3 -m src.select_topic)" >> $GITHUB_OUTPUT
 
+      # --- Stap 3: Generate Long-Read Article ---
+      - name: Generate Long-Read Article
+        id: generate_longread
+        if: success() && steps.select_topic.outputs.topic != ''
+        env:
+          AI_PROVIDER: ${{ (github.ref == 'refs/heads/main' && 'openrouter_kimi') || (github.ref == 'refs/heads/gemini-api' && 'google') || (github.ref == 'refs/heads/mistral-api' && 'openrouter_mistral') }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: |
+          LONGREAD_FILENAME="content/longread_$(date +%Y-%m-%d)_en.md"
+          python3 -m src.generate_longread "${{ steps.select_topic.outputs.topic }}" -o "$LONGREAD_FILENAME"
+
+      # --- Stap 4: Commit and Push ---
       - name: Commit and push generated content
         id: commit
+        if: success()
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore(ci): add weekly generated content"
+          # Geef expliciet de map op om te controleren
+          file_pattern: content/*.md
 
   deploy-ghost:
     if: needs.build.outputs.changes_detected == 'true'

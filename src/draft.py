@@ -2,7 +2,6 @@
 import json, os, datetime, time, google.generativeai as genai
 from openai import OpenAI
 
-# --- FIX: Alleen Engels ---
 LANGS = {"en": "English"}
 PROMPT_TPL_PATH = "prompts/step3.txt"
 CURATED_DATA_PATH = "curated.json"
@@ -26,7 +25,13 @@ elif AI_PROVIDER in ['openrouter_kimi', 'openrouter_mistral']:
     class OpenRouterModel:
         def generate_content(self, prompt):
             response = openrouter_client.chat.completions.create(model=model_id, messages=[{"role": "user", "content": prompt}])
-            return type('SimpleResponse', (object,), {'text': response.choices.message.content})()
+            # --- DE ECHTE, ECHTE FIX ---
+            # De rest van de code verwacht een object met een .text attribuut.
+            # We moeten dat object correct construeren.
+            class ResponseWrapper:
+                def __init__(self, content):
+                    self.text = content
+            return ResponseWrapper(response.choices[0].message.content)
     model = OpenRouterModel()
 else:
     raise ValueError(f"Ongeldige AI_PROVIDER: {AI_PROVIDER}.")
@@ -55,7 +60,7 @@ for code, lang in LANGS.items():
     print(f"🤖 Model '{model_id_for_log}' wordt aangeroepen voor de {lang} nieuwsbrief...")
     try:
         response = model.generate_content(prompt)
-        md = response.text
+        md = response.text # Dit zou nu moeten werken
         if md.strip().startswith("```markdown"):
             md = md.strip()[10:-3].strip()
         elif md.strip().startswith("```"):

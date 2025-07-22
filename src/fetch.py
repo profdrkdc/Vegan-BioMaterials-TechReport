@@ -24,13 +24,17 @@ elif AI_PROVIDER in ['openrouter_kimi', 'openrouter_mistral']:
     class OpenRouterModel:
         def generate_content(self, prompt):
             response = openrouter_client.chat.completions.create(model=model_id, messages=[{"role": "user", "content": prompt}])
-            # --- DE ECHTE FIX ---
-            # We maken een simpel object dat .text heeft, net als de Google response
-            return type('SimpleResponse', (object,), {'text': response.choices[0].message.content})()
+          
+            # --- DE ECHTE, ECHTE FIX ---
+            # De rest van de code verwacht een object met een .text attribuut.
+            # We moeten dat object correct construeren.
+            class ResponseWrapper:
+                def __init__(self, content):
+                    self.text = content
+            return ResponseWrapper(response.choices[0].message.content)
     model = OpenRouterModel()
 else:
     raise ValueError(f"Ongeldige AI_PROVIDER: {AI_PROVIDER}.")
-
 with open(PROMPT_FILE, "r", encoding="utf-8") as f:
     prompt_template = f.read()
 today = datetime.date.today().isoformat()
