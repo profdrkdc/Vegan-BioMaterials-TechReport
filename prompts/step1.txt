@@ -1,17 +1,17 @@
 Act as a research scout.
 The current date is {today}.
 
-Find the 5 most significant news items from the 90 days prior to this date in each of these two niches:
+Find the 10 most significant news items from the 90 days prior to this date, covering these two niches combined:
 1. Vegan food created via precision-fermentation, cellular agriculture or gas-fermentation.
 2. Vegan materials that replace leather, plastic or construction inputs.
 
 **CRITICAL RULES FOR OUTPUT:**
-- You MUST ONLY return pure JSON.
-- Your entire response must be a single, valid JSON array.
-- Do not include any commentary, notes, or special tokens like `<|...|>`.
+- You MUST return a SINGLE, FLAT JSON ARRAY containing a total of 10 items.
+- Do not add any introductory text, commentary, notes, or markdown formatting like ```json.
+- Your ENTIRE response MUST be ONLY the pure JSON array, starting with `[` and ending with `]`.
 - Double-check your output to ensure all strings are correctly terminated with a closing quote (`"`).
 
-Return the data using this exact schema:
+Return the data using this exact schema for each item:
 [
   {
     "category": "food|materials",
