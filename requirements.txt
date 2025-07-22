@@ -1,6 +1,19 @@
-# requirements.txt
-
+# Core dependencies for Google AI
 google-generativeai
+langchain
+langchain-google-genai
+
+# Data validation and structuring for LangChain
+pydantic
+
+# Ghost CMS API communication
 requests
 PyJWT
+
+# HTML/Markdown processing
 markdown
+markdownify
+beautifulsoup4
+
+# Environment variable management
+python-dotenv

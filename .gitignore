@@ -7,6 +7,9 @@ curated.json
 # Generated content
 content/
 
+# Backup for python
+bUp/
+
 # Python cache
 __pycache__/
 *.pyc
