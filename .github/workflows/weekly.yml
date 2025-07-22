@@ -10,10 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./Vegan-BioTech-Report
-    
+    # GEEN defaults/working-directory hier, want de structuur is plat.
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,9 +20,8 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip'
-          # --- FIX IS HIER ---
-          # Het pad is relatief tot de root van de checkout.
-          cache-dependency-path: Vegan-BioTech-Report/requirements.txt
+          # Het pad is nu simpelweg het bestand in de root.
+          cache-dependency-path: requirements.txt
 
       - name: Install dependencies
         run: |
@@ -79,34 +75,34 @@ jobs:
           python3 generate_longread.py "$LONGREAD_TOPIC" -o "$LONGREAD_FILENAME"
           echo "::endgroup::"
 
-      - name: Upload entire project folder as artifact
+      - name: Upload markdown content as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: project-folder
-          path: ./Vegan-BioTech-Report
+          name: markdown-content
+          path: ./content/ # De content map in de root
 
   deploy-ghost:
     needs: build
     runs-on: ubuntu-latest
-    # Let op: GEEN default working-directory hier, want de artifact wordt in de root uitgepakt.
     steps:
-      - name: Download project folder artifact
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download markdown content artifact
         uses: actions/download-artifact@v4
         with:
-          name: project-folder
-          
+          name: markdown-content
+          path: content/
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
-          # Hier is het pad correct, want de artifact is in de root uitgepakt
           cache-dependency-path: requirements.txt
 
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+        run: pip install -r requirements.txt
 
       - name: Publish to Ghost
         env:
