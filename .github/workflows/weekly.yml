@@ -58,6 +58,15 @@ jobs:
           LONGREAD_FILENAME="content/longread_$(date +%Y-%m-%d)_en.md"
           python3 -m src.generate_longread "${{ steps.select_topic.outputs.topic }}" -o "$LONGREAD_FILENAME"
 
+      # --- NIEUWE DEBUG STAP ---
+      - name: Check Git Status Before Commit
+        if: always() # Draai deze stap altijd, zelfs als een vorige stap faalt
+        run: |
+          echo "--- Running git status ---"
+          git status
+          echo "--- Listing files in content/ directory ---"
+          ls -l content/
+
       - name: Commit and push generated content
         id: commit
         if: success()
