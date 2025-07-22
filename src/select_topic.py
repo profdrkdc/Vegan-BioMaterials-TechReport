@@ -1,15 +1,21 @@
 # src/select_topic.py
-import os, glob, argparse, time, google.generativeai as genai
+import os
+import glob
+import argparse
+import time
+import google.generativeai as genai
 from openai import OpenAI
 
 def get_latest_newsletter_file(content_dir="content"):
+    """Zoekt en retourneert het pad naar het meest recente Engelse nieuwsbriefbestand."""
     search_path = os.path.join(content_dir, "*_en.md")
     files = glob.glob(search_path)
     if not files:
-        raise FileNotFoundError(f"Geen Engelse nieuwsbrief (*_en.md) gevonden in '{content_dir}'.")
+        raise FileNotFoundError(f"Geen Engelse nieuwsbriefbestanden (*_en.md) gevonden in de map '{content_dir}'.")
     return max(files)
 
 def select_best_topic(newsletter_content: str) -> str:
+    """Gebruikt de AI om het beste long-read onderwerp uit de nieuwsbrief te selecteren."""
     AI_PROVIDER = os.getenv('AI_PROVIDER', 'google')
     model, model_id_for_log = None, ""
     print(f"Gekozen AI Provider voor topic selectie: {AI_PROVIDER}")
@@ -29,22 +35,31 @@ def select_best_topic(newsletter_content: str) -> str:
         class OpenRouterModel:
             def generate_content(self, prompt):
                 response = openrouter_client.chat.completions.create(model=model_id, messages=[{"role": "user", "content": prompt}])
-            # --- DE ECHTE, ECHTE FIX ---
-            # De rest van de code verwacht een object met een .text attribuut.
-            # We moeten dat object correct construeren.
-            class ResponseWrapper:
-                def __init__(self, content):
-                    self.text = content
-            return ResponseWrapper(response.choices[0].message.content)
-    model = OpenRouterModel()
-else:
-    raise ValueError(f"Ongeldige AI_PROVIDER: {AI_PROVIDER}.")
+                class ResponseWrapper:
+                    def __init__(self, content):
+                        self.text = content
+                return ResponseWrapper(response.choices[0].message.content)
+        model = OpenRouterModel()
+    else:
+        raise ValueError(f"Ongeldige AI_PROVIDER: {AI_PROVIDER}.")
 
-    prompt = f"""... (prompt is ongewijzigd) ...""".format(newsletter_content=newsletter_content)
-    
+    # --- FIX: DEZE CODE STAAT NU CORRECT BINNEN DE FUNCTIE ---
+    prompt = f"""
+    You are a senior content strategist for the "Vegan BioTech Report".
+    Your task is to analyze the following weekly newsletter and identify the single most compelling topic for a deep-dive, long-read article (1500-2500 words).
+    The ideal topic should have significant long-term impact, be based on a concrete news item, and be broad enough for a deep analysis.
+    Analyze the newsletter content below:
+    ---
+    {newsletter_content}
+    ---
+    Based on your analysis, formulate a single, descriptive sentence that can be used as a direct input prompt for another AI writer.
+    **CRITICAL:** Your ENTIRE output must be ONLY this single sentence. Do not add any commentary, headings, or quotation marks.
+    """
+
     print(f"🤖 Model '{model_id_for_log}' wordt aangeroepen om onderwerp te selecteren...")
     response = model.generate_content(prompt)
-    return response.text.strip().strip('"')
+    selected_topic = response.text.strip().strip('"')
+    return selected_topic
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Selecteert het beste long-read onderwerp uit de laatste nieuwsbrief.")
@@ -56,6 +71,7 @@ if __name__ == "__main__":
         with open(latest_newsletter, 'r', encoding='utf-8') as f:
             content = f.read()
         topic = select_best_topic(content)
+        # De output van dit script is ENKEL de topic-string.
         print(topic)
     except Exception as e:
         print(f"❌ Fout: {e}")
