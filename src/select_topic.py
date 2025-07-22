@@ -5,7 +5,6 @@ import argparse
 import google.generativeai as genai
 from openai import OpenAI
 
-# --- Functies (ongewijzigd) ---
 def get_latest_newsletter_file(content_dir="content"):
     search_path = os.path.join(content_dir, "*_en.md")
     files = glob.glob(search_path)
@@ -19,23 +18,26 @@ def select_best_topic(newsletter_content: str) -> str:
     print(f"Gekozen AI Provider voor topic selectie: {AI_PROVIDER}")
 
     if AI_PROVIDER == 'google':
-        # ... (Google setup)
         GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
         if not GOOGLE_API_KEY: raise ValueError("GOOGLE_API_KEY niet ingesteld.")
         genai.configure(api_key=GOOGLE_API_KEY)
         model = genai.GenerativeModel('gemini-1.5-flash-latest')
     elif AI_PROVIDER == 'openrouter':
-        # ... (OpenRouter setup)
         OPENROUTER_API_KEY = os.getenv('OPENROUTER_API_KEY')
         if not OPENROUTER_API_KEY: raise ValueError("OPENROUTER_API_KEY niet ingesteld.")
         openrouter_client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=OPENROUTER_API_KEY)
         class OpenRouterModel:
             def generate_content(self, prompt):
-                response = openrouter_client.chat.completions.create(model="kimi-ml/kimi-2-128k", messages=[{"role": "user", "content": prompt}])
+                response = openrouter_client.chat.completions.create(
+                    # --- FIX IS HIER ---
+                    model="moonshot-v1-128k",
+                    messages=[{"role": "user", "content": prompt}]
+                )
                 return type('obj', (object,), {'text': response.choices.message.content})()
         model = OpenRouterModel()
     else:
         raise ValueError(f"Ongeldige AI_PROVIDER: {AI_PROVIDER}.")
+
 
     prompt = f"""
     You are a senior content strategist for the "Vegan BioTech Report".

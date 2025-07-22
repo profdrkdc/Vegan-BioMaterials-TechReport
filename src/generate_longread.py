@@ -23,14 +23,14 @@ def generate_longread_article(topic: str, output_path: str):
     llm = None
     print(f"Gekozen AI Provider: {AI_PROVIDER}")
 
-    # --- LangChain Model Initialisatie (Dynamisch) ---
     if AI_PROVIDER == 'google':
         if not os.getenv('GOOGLE_API_KEY'): raise ValueError("GOOGLE_API_KEY niet ingesteld.")
         llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash-latest", temperature=0.7, top_p=0.9)
     elif AI_PROVIDER == 'openrouter':
         if not os.getenv('OPENROUTER_API_KEY'): raise ValueError("OPENROUTER_API_KEY niet ingesteld.")
         llm = ChatOpenAI(
-            model_name="kimi-ml/kimi-2-128k",
+            # --- FIX IS HIER ---
+            model_name="moonshot-v1-128k",
             openai_api_key=os.getenv('OPENROUTER_API_KEY'),
             openai_api_base="https://openrouter.ai/api/v1",
             temperature=0.7,

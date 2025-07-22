@@ -19,28 +19,25 @@ print(f"Gekozen AI Provider: {AI_PROVIDER}")
 
 if AI_PROVIDER == 'google':
     GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
-    if not GOOGLE_API_KEY:
-        raise ValueError("GOOGLE_API_KEY environment variable not set for Google provider.")
+    if not GOOGLE_API_KEY: raise ValueError("GOOGLE_API_KEY niet ingesteld.")
     genai.configure(api_key=GOOGLE_API_KEY)
     model = genai.GenerativeModel('gemini-1.5-flash-latest')
 elif AI_PROVIDER == 'openrouter':
     OPENROUTER_API_KEY = os.getenv('OPENROUTER_API_KEY')
-    if not OPENROUTER_API_KEY:
-        raise ValueError("OPENROUTER_API_KEY environment variable not set for OpenRouter provider.")
-    openrouter_client = OpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=OPENROUTER_API_KEY,
-    )
+    if not OPENROUTER_API_KEY: raise ValueError("OPENROUTER_API_KEY niet ingesteld.")
+    openrouter_client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=OPENROUTER_API_KEY)
+    
     class OpenRouterModel:
         def generate_content(self, prompt):
             response = openrouter_client.chat.completions.create(
-                model="kimi-ml/kimi-2-128k",
+                # --- FIX IS HIER ---
+                model="moonshot-v1-128k",
                 messages=[{"role": "user", "content": prompt}],
             )
             return type('obj', (object,), {'text': response.choices.message.content})()
     model = OpenRouterModel()
 else:
-    raise ValueError(f"Ongeldige AI_PROVIDER: {AI_PROVIDER}. Kies 'google' of 'openrouter'.")
+    raise ValueError(f"Ongeldige AI_PROVIDER: {AI_PROVIDER}.")
 
 # --- Hoofdlogica (ongewijzigd) ---
 with open(PROMPT_TPL_PATH, "r", encoding="utf-8") as f:
