@@ -1,5 +1,10 @@
 # src/fetch.py
-import json, os, datetime, time, google.generativeai as genai
+import json
+import os
+import datetime
+import time
+import re # Importeer de regular expression module
+import google.generativeai as genai
 from openai import OpenAI
 
 PROMPT_FILE = "prompts/step1.txt"
@@ -24,10 +29,6 @@ elif AI_PROVIDER in ['openrouter_kimi', 'openrouter_mistral']:
     class OpenRouterModel:
         def generate_content(self, prompt):
             response = openrouter_client.chat.completions.create(model=model_id, messages=[{"role": "user", "content": prompt}])
-          
-            # --- DE ECHTE, ECHTE FIX ---
-            # De rest van de code verwacht een object met een .text attribuut.
-            # We moeten dat object correct construeren.
             class ResponseWrapper:
                 def __init__(self, content):
                     self.text = content
@@ -35,6 +36,7 @@ elif AI_PROVIDER in ['openrouter_kimi', 'openrouter_mistral']:
     model = OpenRouterModel()
 else:
     raise ValueError(f"Ongeldige AI_PROVIDER: {AI_PROVIDER}.")
+
 with open(PROMPT_FILE, "r", encoding="utf-8") as f:
     prompt_template = f.read()
 today = datetime.date.today().isoformat()
@@ -46,13 +48,25 @@ for attempt in range(MAX_RETRIES):
     try:
         response = model.generate_content(prompt)
         raw_content = response.text
-        if raw_content.strip().startswith("```json"):
-            raw_content = raw_content.strip()[7:-3].strip()
-        data = json.loads(raw_content)
-        with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
-        print(f"✅ Ruwe data succesvol verzameld en opgeslagen in {OUTPUT_FILE}.")
-        break
+        
+        # --- DE FIX IS HIER ---
+        # Zoek naar het begin van de JSON array '[' en het einde ']'
+        json_match = re.search(r'\[.*\]', raw_content, re.DOTALL)
+        if not json_match:
+            # Als er geen JSON array wordt gevonden, probeer dan een JSON object
+            json_match = re.search(r'\{.*\}', raw_content, re.DOTALL)
+
+        if json_match:
+            json_string = json_match.group(0)
+            data = json.loads(json_string)
+            with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+            print(f"✅ Ruwe data succesvol verzameld en opgeslagen in {OUTPUT_FILE}.")
+            break # Stop de loop als het succesvol is
+        else:
+            # Als er helemaal geen JSON wordt gevonden, gooi een fout op
+            raise ValueError("Geen valide JSON gevonden in de AI-respons.")
+
     except Exception as e:
         print(f"⚠️ Poging {attempt + 1}/{MAX_RETRIES} mislukt: {e}")
         if attempt + 1 == MAX_RETRIES:
