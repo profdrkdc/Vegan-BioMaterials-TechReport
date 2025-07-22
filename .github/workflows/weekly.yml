@@ -10,7 +10,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # GEEN defaults/working-directory hier, want de structuur is plat.
+    outputs:
+      changes_detected: ${{ steps.commit.outputs.changes_detected }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,7 +21,6 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip'
-          # Het pad is nu simpelweg het bestand in de root.
           cache-dependency-path: requirements.txt
 
       - name: Install dependencies
@@ -34,6 +34,7 @@ jobs:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: |
+          # ... (de run-stappen zijn ongewijzigd) ...
           echo "::group::Generating weekly newsletter (main branch)"
           python3 -m src.fetch
           python3 -m src.curate
@@ -49,8 +50,6 @@ jobs:
           echo "::endgroup::"
           echo "::group::Generating long-read article"
           LONGREAD_FILENAME="content/longread_$(date +%Y-%m-%d)_en.md"
-          # --- DE FIX IS HIER ---
-          # Roep het script aan via zijn module-pad
           python3 -m src.generate_longread "$LONGREAD_TOPIC" -o "$LONGREAD_FILENAME"
           echo "::endgroup::"
 
@@ -59,6 +58,7 @@ jobs:
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: |
+          # ... (de run-stappen zijn ongewijzigd) ...
           echo "::group::Generating weekly newsletter (gemini-api branch)"
           python3 -m src.fetch
           python3 -m src.curate
@@ -74,28 +74,26 @@ jobs:
           echo "::endgroup::"
           echo "::group::Generating long-read article"
           LONGREAD_FILENAME="content/longread_$(date +%Y-%m-%d)_en.md"
-          # --- DE FIX IS HIER ---
           python3 -m src.generate_longread "$LONGREAD_TOPIC" -o "$LONGREAD_FILENAME"
           echo "::endgroup::"
 
-      - name: Upload markdown content as artifact
-        uses: actions/upload-artifact@v4
+      - name: Commit and push generated content
+        id: commit # Geef deze stap een ID
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          name: markdown-content
-          path: ./content/
+          commit_message: "chore(ci): add weekly generated content"
+          # Andere opties zijn niet strikt nodig, de defaults zijn goed
 
   deploy-ghost:
+    # Draai deze job alleen als de vorige job daadwerkelijk iets heeft gecommit
+    if: needs.build.outputs.changes_detected == 'true'
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
+        # Deze stap is nu cruciaal: het checkt de *nieuwe* staat van de repo uit,
+        # inclusief de commit die zojuist is gemaakt.
         uses: actions/checkout@v4
-
-      - name: Download markdown content artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: markdown-content
-          path: content/
 
       - name: Set up Python
         uses: actions/setup-python@v5
