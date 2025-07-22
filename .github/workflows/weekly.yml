@@ -10,7 +10,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # We zetten de default working directory voor de hele job
     defaults:
       run:
         working-directory: ./Vegan-BioTech-Report
@@ -24,7 +23,8 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip'
-          # Cache key moet rekening houden met de geneste requirements.txt
+          # --- FIX IS HIER ---
+          # Het pad is relatief tot de root van de checkout.
           cache-dependency-path: Vegan-BioTech-Report/requirements.txt
 
       - name: Install dependencies
@@ -88,9 +88,7 @@ jobs:
   deploy-ghost:
     needs: build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./ # We werken nu vanuit de gedownloade projectmap
+    # Let op: GEEN default working-directory hier, want de artifact wordt in de root uitgepakt.
     steps:
       - name: Download project folder artifact
         uses: actions/download-artifact@v4
@@ -102,6 +100,7 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip'
+          # Hier is het pad correct, want de artifact is in de root uitgepakt
           cache-dependency-path: requirements.txt
 
       - name: Install dependencies
