@@ -25,34 +25,72 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # --- FIX: 'main' branch step now ALSO provides the GOOGLE_API_KEY ---
-      - name: Generate content for 'main' branch
+      # --- De 'main' branch flow, nu met long-read generatie ---
+      - name: Generate All Content (main branch)
         if: github.ref == 'refs/heads/main'
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: |
+          # Stap 1-3: Genereer de wekelijkse nieuwsbrief
+          echo "::group::Generating weekly newsletter (main branch)"
           python3 -m src.fetch
           python3 -m src.curate
           python3 -m src.draft
+          echo "::endgroup::"
 
-      - name: Generate content for 'gemini-api' branch
+          # Stap 4: Selecteer het long-read onderwerp uit de nieuwsbrief
+          echo "::group::Selecting long-read topic"
+          LONGREAD_TOPIC=$(python3 src/select_topic.py)
+          if [ -z "$LONGREAD_TOPIC" ]; then
+            echo "::error::Failed to select a topic. Exiting."
+            exit 1
+          fi
+          echo "Selected topic: $LONGREAD_TOPIC"
+          echo "::endgroup::"
+
+          # Stap 5: Genereer het Engelstalige long-read artikel
+          echo "::group::Generating long-read article"
+          LONGREAD_FILENAME="content/longread_$(date +%Y-%m-%d)_en.md"
+          python3 generate_longread.py "$LONGREAD_TOPIC" -o "$LONGREAD_FILENAME"
+          echo "::endgroup::"
+
+      # --- De 'gemini-api' branch flow, nu ook met long-read generatie ---
+      - name: Generate All Content (gemini-api branch)
         if: github.ref == 'refs/heads/gemini-api'
         env:
-          # Deze branch heeft alleen de Google key nodig, wat al correct was
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: |
+          # Stap 1-3: Genereer de wekelijkse nieuwsbrief
+          echo "::group::Generating weekly newsletter (gemini-api branch)"
           python3 -m src.fetch
           python3 -m src.curate
           python3 -m src.draft
+          echo "::endgroup::"
 
-      - name: Upload markdown content as artifact
+          # Stap 4: Selecteer het long-read onderwerp uit de nieuwsbrief
+          echo "::group::Selecting long-read topic"
+          LONGREAD_TOPIC=$(python3 src/select_topic.py)
+          if [ -z "$LONGREAD_TOPIC" ]; then
+            echo "::error::Failed to select a topic. Exiting."
+            exit 1
+          fi
+          echo "Selected topic: $LONGREAD_TOPIC"
+          echo "::endgroup::"
+
+          # Stap 5: Genereer het Engelstalige long-read artikel
+          echo "::group::Generating long-read article"
+          LONGREAD_FILENAME="content/longread_$(date +%Y-%m-%d)_en.md"
+          python3 generate_longread.py "$LONGREAD_TOPIC" -o "$LONGREAD_FILENAME"
+          echo "::endgroup::"
+
+      - name: Upload all markdown content as artifact
         uses: actions/upload-artifact@v4
         with:
           name: markdown-content
           path: content/
 
-  # JOB 2: Publiceer de .md bestanden naar Ghost
+  # JOB 2: Publiceer de .md bestanden naar Ghost (geen wijzigingen nodig)
   deploy-ghost:
     needs: build
     runs-on: ubuntu-latest
