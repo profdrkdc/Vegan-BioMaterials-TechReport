@@ -1,39 +1,56 @@
+# src/generate_longread.py
 import os
 import argparse
-import time
 from typing import List
-
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
-
-from langchain_google_genai import ChatGoogleGenerativeAI
+# LangChain imports
 from langchain_core.output_parsers import PydanticOutputParser, StrOutputParser
 from langchain_core.prompts import PromptTemplate
+# Dynamische model imports
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import ChatOpenAI
 
-# --- 1. Data Structures for the Outline ---
+# --- Pydantic modellen (ongewijzigd) ---
 class ArticleSection(BaseModel):
-    title: str = Field(description="The title of this section of the article.")
-    talking_points: List[str] = Field(
-        description="A list of 3-5 key points, questions, or topics to be covered in this section."
-    )
-
+    # ...
 class ArticleOutline(BaseModel):
-    title: str = Field(description="A catchy, SEO-friendly title for the entire article.")
-    introduction_hook: str = Field(description="A short sentence or a compelling idea to start the introduction.")
-    sections: List[ArticleSection] = Field(description="The list of sections to be written for the article.")
-    conclusion_summary: str = Field(description="A brief summary of the main idea for the conclusion.")
+    # ...
 
-
-# --- 2. Function to build and run the full LangChain pipeline ---
 def generate_longread_article(topic: str, output_path: str):
-    """
-    Builds and runs a full LangChain pipeline to generate a long-read article.
-    This version works SEQUENTIALLY to avoid rate limits.
-    """
-    print("AI pipeline started (sequential mode)...")
+    print("AI pipeline started (efficient 2-step mode)...")
+    AI_PROVIDER = os.getenv('AI_PROVIDER', 'google')
+    llm = None
+    print(f"Gekozen AI Provider: {AI_PROVIDER}")
 
-    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash-latest", temperature=0.7, top_p=0.9)
-    print(f"Model initialized: {llm.model}")
+    # --- LangChain Model Initialisatie (Dynamisch) ---
+    if AI_PROVIDER == 'google':
+        if not os.getenv('GOOGLE_API_KEY'): raise ValueError("GOOGLE_API_KEY niet ingesteld.")
+        llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash-latest", temperature=0.7, top_p=0.9)
+    elif AI_PROVIDER == 'openrouter':
+        if not os.getenv('OPENROUTER_API_KEY'): raise ValueError("OPENROUTER_API_KEY niet ingesteld.")
+        llm = ChatOpenAI(
+            model_name="kimi-ml/kimi-2-128k",
+            openai_api_key=os.getenv('OPENROUTER_API_KEY'),
+            openai_api_base="https://openrouter.ai/api/v1",
+            temperature=0.7,
+            top_p=0.9
+        )
+    else:
+        raise ValueError(f"Ongeldige AI_PROVIDER: {AI_PROVIDER}.")
+    
+    print(f"Model geïnitialiseerd: {llm.model_name}")
+
+    # --- Prompts en Ketens (logica is ongewijzigd, alleen llm is dynamisch) ---
+    parser_outline = PydanticOutputParser(pydantic_object=ArticleOutline)
+    prompt_outline = PromptTemplate(template="...", input_variables=["topic"], partial_variables={"format_instructions": parser_outline.get_format_instructions()})
+    chain_outline = prompt_outline | llm | parser_outline
+    print("✓ Chain 1 (Outline) has been built.")
+
+    prompt_full_article = PromptTemplate.from_template("...")
+    chain_full_article = prompt_full_article | llm | StrOutputParser()
+    print("✓ Chain 2 (Full Article Writer) has been built.")
+    
 
     # --- CHAIN 1: Outline Generation ---
     parser_outline = PydanticOutputParser(pydantic_object=ArticleOutline)

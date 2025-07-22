@@ -1,9 +1,11 @@
-# Core dependencies for Google AI
+# Core dependencies
 google-generativeai
 langchain
 langchain-google-genai
+openai
+langchain-openai
 
-# Data validation and structuring for LangChain
+# Data validation and structuring
 pydantic
 
 # Ghost CMS API communication

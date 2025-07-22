@@ -1,49 +1,62 @@
 # src/fetch.py
-
-#!/usr/bin/env python3
-"""
-Fetch the latest vegan tech news from the AI model (Gemini).
-Saves the raw output to raw.json.
-Call: python -m src.fetch
-"""
 import json
 import os
 import datetime
 import time
 import google.generativeai as genai
+from openai import OpenAI
 
-# --- Configuratie ----------------------------------------------------
+# --- Configuratie ---
 PROMPT_FILE = "prompts/step1.txt"
 OUTPUT_FILE = "raw.json"
 MAX_RETRIES = 3
-# ---------------------------------------------------------------------
+AI_PROVIDER = os.getenv('AI_PROVIDER', 'google') # Default naar google als niet ingesteld
 
-# --- Configuratie voor Gemini ---
-GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
-if not GOOGLE_API_KEY:
-    raise ValueError("GOOGLE_API_KEY environment variable not set.")
-genai.configure(api_key=GOOGLE_API_KEY)
-model = genai.GenerativeModel('gemini-2.5-pro') # <-- Aangepast naar 2.5 Pro
-# ------------------------------------
+# --- Model Initialisatie (Dynamisch) ---
+model = None
+print(f"Gekozen AI Provider: {AI_PROVIDER}")
 
-# Lees de prompt template
+if AI_PROVIDER == 'google':
+    GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
+    if not GOOGLE_API_KEY:
+        raise ValueError("GOOGLE_API_KEY environment variable not set for Google provider.")
+    genai.configure(api_key=GOOGLE_API_KEY)
+    model = genai.GenerativeModel('gemini-1.5-flash-latest')
+elif AI_PROVIDER == 'openrouter':
+    OPENROUTER_API_KEY = os.getenv('OPENROUTER_API_KEY')
+    if not OPENROUTER_API_KEY:
+        raise ValueError("OPENROUTER_API_KEY environment variable not set for OpenRouter provider.")
+    openrouter_client = OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=OPENROUTER_API_KEY,
+    )
+    # Wrapper om de OpenAI client compatibel te maken met de .generate_content() methode
+    class OpenRouterModel:
+        def generate_content(self, prompt):
+            response = openrouter_client.chat.completions.create(
+                model="kimi-ml/kimi-2-128k",
+                messages=[{"role": "user", "content": prompt}],
+            )
+            return type('obj', (object,), {'text': response.choices[0].message.content})()
+    model = OpenRouterModel()
+else:
+    raise ValueError(f"Ongeldige AI_PROVIDER: {AI_PROVIDER}. Kies 'google' of 'openrouter'.")
+
+# --- Hoofdlogica (ongewijzigd) ---
 with open(PROMPT_FILE, "r", encoding="utf-8") as f:
     prompt_template = f.read()
 
-# Vul de datum van vandaag in
 today = datetime.date.today().isoformat()
 prompt = prompt_template.replace('{today}', today)
 
-print("🤖 Gemini wordt aangeroepen om de laatste data te verzamelen...")
-raw_content = "" # Initialiseer raw_content
+print("🤖 Model wordt aangeroepen om de laatste data te verzamelen...")
+raw_content = ""
 
-# Loop voor meerdere pogingen
 for attempt in range(MAX_RETRIES):
     try:
         response = model.generate_content(prompt)
         raw_content = response.text
         
-        # Verwijder de ```json ... ``` markdown die Gemini soms toevoegt
         if raw_content.strip().startswith("```json"):
             raw_content = raw_content.strip()[7:-3].strip()
             
@@ -56,11 +69,9 @@ for attempt in range(MAX_RETRIES):
         break
         
     except (json.JSONDecodeError, IndexError, ValueError) as e:
-        print(f"⚠️ Poging {attempt + 1} van de {MAX_RETRIES} mislukt: Kon AI-respons niet parsen. Fout: {e}")
+        print(f"⚠️ Poging {attempt + 1}/{MAX_RETRIES} mislukt: {e}")
         if attempt + 1 == MAX_RETRIES:
-            print("❌ Alle pogingen zijn mislukt. Het script stopt.")
-            print("--- Laatst ontvangen van AI ---")
-            print(raw_content)
-            print("------------------------")
+            print("❌ Alle pogingen zijn mislukt. Script stopt.")
+            print("--- Laatst ontvangen van AI ---\n" + raw_content)
             exit(1)
         time.sleep(5)
