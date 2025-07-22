@@ -3,8 +3,13 @@ import os
 import glob
 import argparse
 import time
+import sys # <-- Importeer de sys module
 import google.generativeai as genai
 from openai import OpenAI
+
+def eprint(*args, **kwargs):
+    """Helper functie om naar stderr te printen."""
+    print(*args, file=sys.stderr, **kwargs)
 
 def get_latest_newsletter_file(content_dir="content"):
     """Zoekt en retourneert het pad naar het meest recente Engelse nieuwsbriefbestand."""
@@ -18,7 +23,8 @@ def select_best_topic(newsletter_content: str) -> str:
     """Gebruikt de AI om het beste long-read onderwerp uit de nieuwsbrief te selecteren."""
     AI_PROVIDER = os.getenv('AI_PROVIDER', 'google')
     model, model_id_for_log = None, ""
-    print(f"Gekozen AI Provider voor topic selectie: {AI_PROVIDER}")
+    # --- FIX: Print naar stderr ---
+    eprint(f"Gekozen AI Provider voor topic selectie: {AI_PROVIDER}")
 
     if AI_PROVIDER == 'google':
         GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
@@ -43,7 +49,6 @@ def select_best_topic(newsletter_content: str) -> str:
     else:
         raise ValueError(f"Ongeldige AI_PROVIDER: {AI_PROVIDER}.")
 
-    # --- FIX: DEZE CODE STAAT NU CORRECT BINNEN DE FUNCTIE ---
     prompt = f"""
     You are a senior content strategist for the "Vegan BioTech Report".
     Your task is to analyze the following weekly newsletter and identify the single most compelling topic for a deep-dive, long-read article (1500-2500 words).
@@ -56,7 +61,8 @@ def select_best_topic(newsletter_content: str) -> str:
     **CRITICAL:** Your ENTIRE output must be ONLY this single sentence. Do not add any commentary, headings, or quotation marks.
     """
 
-    print(f"🤖 Model '{model_id_for_log}' wordt aangeroepen om onderwerp te selecteren...")
+    # --- FIX: Print naar stderr ---
+    eprint(f"🤖 Model '{model_id_for_log}' wordt aangeroepen om onderwerp te selecteren...")
     response = model.generate_content(prompt)
     selected_topic = response.text.strip().strip('"')
     return selected_topic
@@ -67,12 +73,14 @@ if __name__ == "__main__":
     args = parser.parse_args()
     try:
         latest_newsletter = get_latest_newsletter_file(args.content_dir)
-        print(f"Meest recente nieuwsbrief gevonden: {latest_newsletter}")
+        # --- FIX: Print naar stderr ---
+        eprint(f"Meest recente nieuwsbrief gevonden: {latest_newsletter}")
         with open(latest_newsletter, 'r', encoding='utf-8') as f:
             content = f.read()
         topic = select_best_topic(content)
-        # De output van dit script is ENKEL de topic-string.
+        # --- BELANGRIJK: Deze print blijft naar stdout gaan ---
         print(topic)
     except Exception as e:
-        print(f"❌ Fout: {e}")
+        # --- FIX: Print naar stderr ---
+        eprint(f"❌ Fout: {e}")
         exit(1)
