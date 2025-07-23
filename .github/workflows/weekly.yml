@@ -12,9 +12,7 @@ on:
         required: true
         default: 'true'
         type: choice
-        options:
-          - 'true'
-          - 'false'
+        options: [ 'true', 'false' ]
       custom_date:
         description: 'Run for a specific date (YYYY-MM-DD) or "today"'
         required: true
@@ -29,6 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       changes_detected: ${{ steps.commit.outputs.changes_detected }}
+      # --- FIX 1: Geef de commit hash door als output ---
+      commit_hash: ${{ steps.commit.outputs.commit_hash }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -47,19 +47,16 @@ jobs:
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          FORCED_PROVIDER: ${{ github.event.inputs.force_provider || 'auto' }} # Gebruik 'auto' als default voor geplande runs
         run: |
-          # Bouw de command-line vlaggen op basis van de UI-input
           ARCHIVE_FLAG=""
           if [[ "${{ github.event.inputs.archive_content }}" == "false" ]]; then
             ARCHIVE_FLAG="--no-archive"
           fi
-
           DATE_FLAG=""
           if [[ "${{ github.event.inputs.custom_date }}" != "today" ]]; then
             DATE_FLAG="--date ${{ github.event.inputs.custom_date }}"
           fi
-
-          # Voer de dirigent uit met de juiste vlaggen
           python3 -m src.run_pipeline $ARCHIVE_FLAG $DATE_FLAG
 
       - name: Commit and push generated content
@@ -67,7 +64,6 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore(ci): add weekly generated content"
-
 
   deploy-ghost:
     if: needs.build.outputs.changes_detected == 'true'
@@ -77,10 +73,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # Belangrijk: check de main branch uit, waar de commit is gemaakt
-          ref: 'refs/heads/main'
+          # --- FIX 2: Check de exacte commit uit, niet de branch ---
+          ref: ${{ needs.build.outputs.commit_hash }}
+
       - name: Install dependencies
         run: pip install -r requirements.txt
+        
       - name: Publish to Ghost
         env:
           GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
