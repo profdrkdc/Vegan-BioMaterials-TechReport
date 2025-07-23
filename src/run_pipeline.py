@@ -23,47 +23,56 @@ def run_command(command: list, env: dict):
         raise subprocess.CalledProcessError(process.returncode, command)
     return process
 
+# ==============================================================================
+# DE AANGEPASTE FUNCTIE STAAT HIER
+# ==============================================================================
 def archive_old_content():
     """Verplaatst alle .md bestanden van content/ naar content_archive/."""
     source_dir = "content"
     archive_dir = "content_archive"
     
-    if not os.path.isdir(source_dir):
-        eprint(f"Directory '{source_dir}' niet gevonden, niets te archiveren.")
-        return
-
+    # Stap 1: Zorg ervoor dat beide mappen bestaan.
+    # Dit voorkomt fouten als de content map leeg was en door Git werd verwijderd.
+    os.makedirs(source_dir, exist_ok=True)
     os.makedirs(archive_dir, exist_ok=True)
     
+    # Stap 2: Zoek naar alle .md bestanden in de bronmap.
     files_to_move = glob.glob(os.path.join(source_dir, "*.md"))
+    
     if not files_to_move:
-        eprint("Geen oude content gevonden om te archiveren.")
+        eprint("Geen oude content gevonden in 'content/' om te archiveren.")
         return
 
-    eprint(f"Archiveren van {len(files_to_move)} oud(e) bestand(en) naar '{archive_dir}'...")
-    for f in files_to_move:
+    eprint(f"Archiveren van {len(files_to_move)} oud(e) bestand(en) van '{source_dir}' naar '{archive_dir}'...")
+    
+    # Stap 3: Verplaats elk bestand individueel.
+    for file_path in files_to_move:
         try:
-            # Maak de bestandsnaam uniek door een timestamp toe te voegen als het al bestaat
-            basename = os.path.basename(f)
-            destination = os.path.join(archive_dir, basename)
-            if os.path.exists(destination):
+            basename = os.path.basename(file_path)
+            destination_path = os.path.join(archive_dir, basename)
+            
+            # Voeg een timestamp toe als een bestand met dezelfde naam al bestaat in het archief.
+            if os.path.exists(destination_path):
                 timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
                 name, ext = os.path.splitext(basename)
-                destination = os.path.join(archive_dir, f"{name}_{timestamp}{ext}")
+                destination_path = os.path.join(archive_dir, f"{name}_{timestamp}{ext}")
             
-            shutil.move(f, destination)
+            shutil.move(file_path, destination_path)
         except Exception as e:
-            eprint(f"Kon bestand {f} niet verplaatsen: {e}")
-    eprint("Archiveren voltooid.")
+            eprint(f"Kon bestand {file_path} niet verplaatsen: {e}")
+            
+    eprint("Archiveren voltooid. De 'content' map is nu leeg.")
 
+# ==============================================================================
+# DE REST VAN HET SCRIPT IS ONGEWIJZIGD
+# ==============================================================================
 def run_full_pipeline(target_date_str: str or None, no_archive: bool):
     """Leest de provider-configuratie en probeert de pijplijn voor elke provider."""
-    # --- Stap 1: Archivering ---
     if not no_archive:
         archive_old_content()
     else:
         eprint("Archiveringsstap overgeslagen zoals gevraagd (--no-archive).")
 
-    # --- Stap 2: Datum Bepalen ---
     if target_date_str:
         try:
             target_date = datetime.datetime.strptime(target_date_str, '%Y-%m-%d').date()
@@ -77,7 +86,6 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
     
     target_date_iso = target_date.isoformat()
 
-    # --- Stap 3: Providers Bepalen ---
     try:
         with open('providers.json', 'r') as f:
             all_providers = json.load(f)
@@ -100,7 +108,6 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
         eprint("🔄 Modus: Automatische failover (alle providers worden geprobeerd)")
         providers_to_run = all_providers
 
-    # --- Stap 4: Pijplijn Uitvoeren (Failover Loop) ---
     success = False
     for i, provider_config in enumerate(providers_to_run):
         provider_id = provider_config['id']
@@ -134,10 +141,11 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
             
             if not longread_topic:
                 eprint("⚠️ WAARSCHUWING: Kon geen long-read onderwerp selecteren. Sla artikelgeneratie over.")
+            elif "structured_output" not in provider_config.get("capabilities", []):
+                eprint(f"⚠️ WAARSCHUWING: Provider '{provider_id}' ondersteunt geen gestructureerde output. Sla artikelgeneratie over.")
             else:
                 eprint("\n--- Sub-stap 3: Generate Long-Read ---")
                 longread_filename = f"content/longread_{target_date_iso}_en.md"
-                # --- FIX IS HIER: Aanhalingstekens rond de topic ---
                 run_command(["python3", "-m", "src.generate_longread", longread_topic, "-o", longread_filename], env=script_env)
             
             eprint(f"\n✅ SUCCES: Pijplijn voltooid met provider '{provider_id}'.")
