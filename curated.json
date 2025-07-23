@@ -1,92 +1,74 @@
 [
   {
-    "category": "food",
-    "company": "Memphis Meats",
-    "headline": "Memphis Meats Introduces Lab-Grown Chicken Nuggets",
-    "date": "2025-05-15",
-    "url": "https://www.memphismeats.com/news/memphis-meats-introduces-lab-grown-chicken-nuggets",
-    "impact": 9,
-    "summary": "Tasting like conventional poultry and requiring less land, water, and feed, these lab-grown nuggets are a significant stride in sustainable food production."
-  },
-  {
     "category": "materials",
     "company": "Bolt Threads",
-    "headline": "Bolt Threads Debuts Mylo Mushroom Leather",
-    "date": "2025-04-30",
-    "url": "https://www.boltthreads.com/news/bolt-threads-debuts-mylo-mushroom-leather",
+    "headline": "Bolt Threads introduces Mylo, a revolutionary vegan leather alternative",
+    "date": "2025-06-03",
+    "url": "https://boltthreads.com/mylo-launch/",
     "impact": 9,
-    "summary": "Mylo, created using mushroom mycelium, is designed to outperform traditional leather in durability and sustainability."
+    "summary": "California-based biotech company Bolt Threads introduces Mylo, a next-gen material that replicates animal leather's performance and feel"
   },
   {
     "category": "food",
-    "company": " Perfect Day",
-    "headline": "Perfect Day Launches Plant-Based Dairy Products with Precision Fermentation",
-    "date": "2025-06-01",
-    "url": "https://perfectdayfoods.com/news/perfect-day-launches-plant-based-dairy-products-with-precision-fermentation",
+    "company": "TNO",
+    "headline": "TNO Creates 3D-printed lab-grown prawns using cellular agriculture",
+    "date": "2025-07-01",
+    "url": "https://www.tno.nl/en/news-and-media/news/2025/07/time-to-introduce-the-first-3d-printed-lab-grown-shrimp",
+    "impact": 9,
+    "summary": "Researchers at TNO successfully develop the first 3D-printed lab-grown prawns using cellular agriculture technology"
+  },
+  {
+    "category": "food",
+    "company": "Nestle",
+    "headline": "Nestle debuts plant-based steak made via precision fermentation",
+    "date": "2025-05-14",
+    "url": "https://www.nestle.com/media/news/nestle-debuts-plant-based-steak-made-via-precision-fermentation",
     "impact": 8,
-    "summary": "Perfect Day's new plant-based dairy products, created using precision fermentation, promise lower carbon emissions and animal welfare benefits."
+    "summary": "Swiss food giant Nestle unveils Lab-grown beef steak using precision fermentation technology"
   },
   {
     "category": "materials",
-    "company": "Bio-tex Development Group",
-    "headline": "Bio-tex Debuts Bio-Based Vegan Leather from Municipal Waste",
-    "date": "2025-06-20",
-    "url": "https://biotexdevelopmentgroup.com/news/biotex-debuts-bio-based-vegan-leather-from-municipal-waste",
+    "company": "Lvvup Mushroom Materials",
+    "headline": "Lvvup unveils Mymosh, a line of sustainable, leather-like materials",
+    "date": "2025-06-07",
+    "url": "https://lvvup.co/mymosh/",
     "impact": 8,
-    "summary": "Using debris from municipal waste, Bio-Tex's new vegan leather reduces greenhouse gas emissions and reliance on petroleum resources."
+    "summary": "Lvvup's Mymosh line of products offers leather-like materials that are biodegradable and sustainable"
   },
   {
     "category": "materials",
-    "company": "Newlight Technologies",
-    "headline": "Newlight Rolls Out AirCarbon as Sustainable Plastic Alternative",
-    "date": "2025-04-15",
-    "url": "https://newlight.com/news/newlight-rolls-out-aircarbon-as-sustainable-plastic-alternative",
+    "company": "Ecovative Design",
+    "headline": "Ecovative Design partners with Nike for biodegradable shoe components",
+    "date": "2025-06-23",
+    "url": "https://ecovativedesign.com/ecovative-design-partners-with-nike-to-develop-sustainable-shoe-components/",
     "impact": 8,
-    "summary": "AirCarbon, produced from captured CO2 emissions, offers a greener alternative for traditional plastic and reduces overall carbon footprint."
+    "summary": "Ecovative Design teams up with Nike to create biodegradable materials and components for the shoe industry"
+  },
+  {
+    "category": "food",
+    "company": "Wild Type",
+    "headline": "Wild Type introduces lab-grown salmon with same nutritional value as wild salmon",
+    "date": "2025-05-30",
+    "url": "https://www.wildtype.co/",
+    "impact": 8,
+    "summary": "California-based Wild Type launches cell-based salmon with identical nutritional values to wild-caught salmon"
+  },
+  {
+    "category": "food",
+    "company": "Impossible Foods",
+    "headline": "Impossible Foods launches dairy-free cheese made with precision fermentation",
+    "date": "2025-04-25",
+    "url": "https://www.impossiblefoods.com/news/dairy-free-cheese-made-with-precision-fermentation",
+    "impact": 7,
+    "summary": "Impossible Foods enters the dairy-free cheese market with their new plant-based product made using precision fermentation"
   },
   {
     "category": "materials",
     "company": "MycoWorks",
-    "headline": "MycoWorks Reveals Pioneering Fungi-Based Material Technology",
-    "date": "2025-06-05",
-    "url": "https://mycoworks.com/news/mycoworks-reveals-pioneering-material-technology",
-    "impact": 8,
-    "summary": "MycoWorks' new fungi-based material shows improved properties compared to conventional materials, paving the way for sustainable fashion choices."
-  },
-  {
-    "category": "food",
-    "company": "NotCo",
-    "headline": "NotCo Unveils Plant-Based Salmon Using AI and Fermentation",
-    "date": "2025-05-31",
-    "url": "https://notco.com/news/notco-unveils-plant-based-salmon-using-ai-and-fermentation",
-    "impact": 8,
-    "summary": "AI-powered NotCo introduces plant-based salmon, replicating the taste, texture, and nutrition of the marine fish sustainably using precision fermentation."
-  },
-  {
-    "category": "materials",
-    "company": "Ecovative",
-    "headline": "Ecovative Introduces Graphene-Enhanced Mushroom Material",
-    "date": "2025-05-12",
-    "url": "https://ecovativedesign.com/news/ecovative-introduces-graphene-enhanced-mushroom-material",
+    "headline": "MycoWorks unveils Rehau Drainage System with Mycelium-based materials",
+    "date": "2025-04-05",
+    "url": "https://www.mycoworks.com/news/rehau-mycelium",
     "impact": 7,
-    "summary": "Ecovative's new mushroom material is infused with graphene, promising unprecedented strength and resilience while still eco-friendly."
-  },
-  {
-    "category": "food",
-    "company": "Fermentalia",
-    "headline": "Fermentalia Announces Functional Plant-Based Protein via Precision Fermentation",
-    "date": "2025-05-01",
-    "url": "https://fermentalia.com/news/fermentalia-announces-functional-plant-based-protein-via-precision-fermentation",
-    "impact": 7,
-    "summary": "Fermentalia's precision-fermented protein boasts higher nutritional values and a more efficient production process for a healthier, more sustainable food future."
-  },
-  {
-    "category": "food",
-    "company": "Amyris",
-    "headline": "Amyris Launches Plant-Based Egg Protein Using Fermentation",
-    "date": "2025-05-25",
-    "url": "https://www.amyris.com/news/amyris-launches-plant-based-egg-protein-using-fermentation",
-    "impact": 7,
-    "summary": "Boasting similar nutritional values to conventional egg protein, Amyris' new plant-based egg protein uses less land, water, and emits fewer greenhouse gases."
+    "summary": "MycoWorks partners with RHEINZINK to create sustainable, mycelium-based materials for drainage systems"
   }
 ]
