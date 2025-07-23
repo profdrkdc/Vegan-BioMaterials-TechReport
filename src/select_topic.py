@@ -1,53 +1,42 @@
 # src/select_topic.py
-import os
-import glob
-import argparse
-import time
-import sys # <-- Importeer de sys module
+import os, glob, argparse, sys
 import google.generativeai as genai
 from openai import OpenAI
 
 def eprint(*args, **kwargs):
-    """Helper functie om naar stderr te printen."""
     print(*args, file=sys.stderr, **kwargs)
 
 def get_latest_newsletter_file(content_dir="content"):
-    """Zoekt en retourneert het pad naar het meest recente Engelse nieuwsbriefbestand."""
     search_path = os.path.join(content_dir, "*_en.md")
     files = glob.glob(search_path)
     if not files:
-        raise FileNotFoundError(f"Geen Engelse nieuwsbriefbestanden (*_en.md) gevonden in de map '{content_dir}'.")
+        raise FileNotFoundError(f"Geen Engelse nieuwsbrief (*_en.md) gevonden in '{content_dir}'.")
     return max(files)
 
 def select_best_topic(newsletter_content: str) -> str:
-    """Gebruikt de AI om het beste long-read onderwerp uit de nieuwsbrief te selecteren."""
-    AI_PROVIDER = os.getenv('AI_PROVIDER', 'google')
-    model, model_id_for_log = None, ""
-    # --- FIX: Print naar stderr ---
-    eprint(f"Gekozen AI Provider voor topic selectie: {AI_PROVIDER}")
+    # Lees configuratie uit environment
+    API_TYPE = os.getenv('AI_API_TYPE')
+    MODEL_ID = os.getenv('AI_MODEL_ID')
+    API_KEY = os.getenv('AI_API_KEY')
+    BASE_URL = os.getenv('AI_BASE_URL')
+    
+    model = None
+    eprint(f"Provider type: {API_TYPE}, Model: {MODEL_ID}")
 
-    if AI_PROVIDER == 'google':
-        GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
-        if not GOOGLE_API_KEY: raise ValueError("GOOGLE_API_KEY niet ingesteld.")
-        genai.configure(api_key=GOOGLE_API_KEY)
-        model = genai.GenerativeModel('gemini-1.5-flash-latest')
-        model_id_for_log = 'gemini-1.5-flash-latest'
-    elif AI_PROVIDER in ['openrouter_kimi', 'openrouter_mistral']:
-        OPENROUTER_API_KEY = os.getenv('OPENROUTER_API_KEY')
-        if not OPENROUTER_API_KEY: raise ValueError("OPENROUTER_API_KEY niet ingesteld.")
-        model_id = "moonshotai/kimi-k2:free" if AI_PROVIDER == 'openrouter_kimi' else "mistralai/mistral-7b-instruct"
-        model_id_for_log = model_id
-        openrouter_client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=OPENROUTER_API_KEY)
+    if API_TYPE == 'google':
+        genai.configure(api_key=API_KEY)
+        model = genai.GenerativeModel(MODEL_ID)
+    elif API_TYPE == 'openai_compatible':
+        client = OpenAI(base_url=BASE_URL, api_key=API_KEY)
         class OpenRouterModel:
             def generate_content(self, prompt):
-                response = openrouter_client.chat.completions.create(model=model_id, messages=[{"role": "user", "content": prompt}])
+                response = client.chat.completions.create(model=MODEL_ID, messages=[{"role": "user", "content": prompt}])
                 class ResponseWrapper:
-                    def __init__(self, content):
-                        self.text = content
+                    def __init__(self, content): self.text = content
                 return ResponseWrapper(response.choices[0].message.content)
         model = OpenRouterModel()
     else:
-        raise ValueError(f"Ongeldige AI_PROVIDER: {AI_PROVIDER}.")
+        raise ValueError(f"Ongeldig AI_API_TYPE: {API_TYPE}.")
 
     prompt = f"""
     You are a senior content strategist for the "Vegan BioTech Report".
@@ -60,9 +49,8 @@ def select_best_topic(newsletter_content: str) -> str:
     Based on your analysis, formulate a single, descriptive sentence that can be used as a direct input prompt for another AI writer.
     **CRITICAL:** Your ENTIRE output must be ONLY this single sentence. Do not add any commentary, headings, or quotation marks.
     """
-
-    # --- FIX: Print naar stderr ---
-    eprint(f"🤖 Model '{model_id_for_log}' wordt aangeroepen om onderwerp te selecteren...")
+    
+    eprint(f"🤖 Model '{MODEL_ID}' wordt aangeroepen om onderwerp te selecteren...")
     response = model.generate_content(prompt)
     selected_topic = response.text.strip().strip('"')
     return selected_topic
@@ -73,14 +61,12 @@ if __name__ == "__main__":
     args = parser.parse_args()
     try:
         latest_newsletter = get_latest_newsletter_file(args.content_dir)
-        # --- FIX: Print naar stderr ---
         eprint(f"Meest recente nieuwsbrief gevonden: {latest_newsletter}")
         with open(latest_newsletter, 'r', encoding='utf-8') as f:
             content = f.read()
         topic = select_best_topic(content)
-        # --- BELANGRIJK: Deze print blijft naar stdout gaan ---
+        # De enige output naar stdout is de topic zelf
         print(topic)
     except Exception as e:
-        # --- FIX: Print naar stderr ---
         eprint(f"❌ Fout: {e}")
         exit(1)

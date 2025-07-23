@@ -29,23 +29,64 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Generate All Content
+      # --- Poging 1: Hoofdkeuze (Kimi) ---
+      - name: Attempt 1 - Generate Content with Kimi
+        id: run_kimi
+        # Cruciaal: ga door, zelfs als deze stap faalt
+        continue-on-error: true
         env:
-          AI_PROVIDER: ${{ (github.ref == 'refs/heads/main' && 'openrouter_kimi') || (github.ref == 'refs/heads/gemini-api' && 'google') || (github.ref == 'refs/heads/mistral-api' && 'openrouter_mistral') }}
+          AI_PROVIDER: openrouter_kimi
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: |
           python3 -m src.fetch
           python3 -m src.curate
           python3 -m src.draft
           LONGREAD_TOPIC=$(python3 -m src.select_topic)
-          if [ -z "$LONGREAD_TOPIC" ]; then
-            echo "::warning::Could not select a long-read topic. Skipping article generation."
-          else
+          if [ -n "$LONGREAD_TOPIC" ]; then
             LONGREAD_FILENAME="content/longread_$(date +%Y-%m-%d)_en.md"
             python3 -m src.generate_longread "$LONGREAD_TOPIC" -o "$LONGREAD_FILENAME"
           fi
 
+      # --- Poging 2: Tweede Keuze (Mistral) ---
+      - name: Attempt 2 - Generate Content with Mistral
+        id: run_mistral
+        # Draai alleen als de Kimi-stap is mislukt
+        if: steps.run_kimi.outcome == 'failure'
+        continue-on-error: true
+        env:
+          AI_PROVIDER: openrouter_mistral
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          # We draaien exact dezelfde scripts, alleen de AI_PROVIDER is anders
+          python3 -m src.fetch
+          python3 -m src.curate
+          python3 -m src.draft
+          LONGREAD_TOPIC=$(python3 -m src.select_topic)
+          if [ -n "$LONGREAD_TOPIC" ]; then
+            LONGREAD_FILENAME="content/longread_$(date +%Y-%m-%d)_en.md"
+            python3 -m src.generate_longread "$LONGREAD_TOPIC" -o "$LONGREAD_FILENAME"
+          fi
+
+      # --- Poging 3: Noodoplossing (Gemini) ---
+      - name: Attempt 3 - Generate Content with Gemini
+        id: run_gemini
+        # Draai alleen als ZOWEL Kimi als Mistral zijn mislukt
+        if: steps.run_kimi.outcome == 'failure' && steps.run_mistral.outcome == 'failure'
+        env:
+          AI_PROVIDER: google
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: |
+          # We draaien exact dezelfde scripts, alleen de AI_PROVIDER is anders
+          python3 -m src.fetch
+          python3 -m src.curate
+          python3 -m src.draft
+          LONGREAD_TOPIC=$(python3 -m src.select_topic)
+          if [ -n "$LONGREAD_TOPIC" ]; then
+            LONGREAD_FILENAME="content/longread_$(date +%Y-%m-%d)_en.md"
+            python3 -m src.generate_longread "$LONGREAD_TOPIC" -o "$LONGREAD_FILENAME"
+          fi
+
+      # --- Finale Stap: Commit wat er ook is gegenereerd ---
       - name: Commit and push generated content
         id: commit
         uses: stefanzweifel/git-auto-commit-action@v5
@@ -60,15 +101,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # --- DE FIX IS HIER ---
-          # Zorg ervoor dat we de JUISTE branch uitchecken (degene die de workflow heeft gestart)
-          ref: ${{ github.ref }}
-
+          # Belangrijk: check de main branch uit, waar de commit is gemaakt
+          ref: 'refs/heads/main'
       - name: Install dependencies
         run: pip install -r requirements.txt
-        
       - name: Publish to Ghost
         env:
           GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
           GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
-        run: python3 src.publish_ghost.py
+        run: python3 src/publish_ghost.py
