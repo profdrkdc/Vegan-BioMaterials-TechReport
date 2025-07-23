@@ -14,7 +14,7 @@
   {
     "code": "fr",
     "name": "Français",
-    "enabled": true,
+    "enabled": false,
     "edition_word": "Édition"
   },
   {

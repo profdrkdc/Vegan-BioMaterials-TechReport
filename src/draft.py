@@ -1,83 +1,121 @@
-import os
+# src/draft.py
 import json
-from datetime import datetime
-from .ai_provider import generate_content
-from .utils import load_config, get_project_root
+import os
+import datetime
+import time
+import sys
+import argparse
+import google.generativeai as genai
+from openai import OpenAI
 
-def load_enabled_languages():
-    """
-    Leest languages.json en retourneert een lijst van talen
-    waarvan 'enabled' op true staat.
-    """
-    root_dir = get_project_root()
-    languages_path = os.path.join(root_dir, 'languages.json')
+def eprint(*args, **kwargs):
+    """Helper functie om naar stderr te printen."""
+    print(*args, file=sys.stderr, **kwargs)
+
+# --- Configuratie ---
+API_TYPE = os.getenv('AI_API_TYPE')
+MODEL_ID = os.getenv('AI_MODEL_ID')
+API_KEY = os.getenv('AI_API_KEY')
+BASE_URL = os.getenv('AI_BASE_URL')
+
+PROMPT_TPL_PATH = "prompts/step3.txt"
+CURATED_DATA_PATH = "curated.json"
+LANGUAGES_CONFIG_PATH = "languages.json" # Nieuw pad
+OUTPUT_DIR = "content"
+
+# --- AI Model Initialisatie ---
+model = None
+eprint(f"Provider type: {API_TYPE}, Model: {MODEL_ID}")
+
+if API_TYPE == 'google':
+    genai.configure(api_key=API_KEY)
+    model = genai.GenerativeModel(MODEL_ID)
+elif API_TYPE == 'openai_compatible':
+    client = OpenAI(base_url=BASE_URL, api_key=API_KEY)
+    class OpenRouterModel:
+        def generate_content(self, prompt):
+            response = client.chat.completions.create(model=MODEL_ID, messages=[{"role": "user", "content": prompt}])
+            class ResponseWrapper:
+                def __init__(self, content): self.text = content
+            return ResponseWrapper(response.choices[0].message.content)
+    model = OpenRouterModel()
+else:
+    raise ValueError(f"Ongeldig AI_API_TYPE: {API_TYPE}")
+
+# --- Datum Logica ---
+parser = argparse.ArgumentParser(description="Genereer een nieuwsbrief voor een specifieke datum in meerdere talen.")
+parser.add_argument('--date', type=str, help="De datum voor de nieuwsbrief in YYYY-MM-DD formaat.")
+args = parser.parse_args()
+
+if args.date:
     try:
-        with open(languages_path, 'r', encoding='utf-8') as f:
-            all_languages = json.load(f)
-        return [lang for lang in all_languages if lang.get('enabled', False)]
-    except FileNotFoundError:
-        print("Error: languages.json not found in the project root.")
-        return []
-    except json.JSONDecodeError:
-        print("Error: Could not decode languages.json. Please check for syntax errors.")
-        return []
+        target_date = datetime.datetime.strptime(args.date, '%Y-%m-%d').date()
+    except ValueError:
+        eprint(f"❌ Ongeldig datumformaat voor --date: '{args.date}'. Gebruik YYYY-MM-DD.")
+        exit(1)
+else:
+    target_date = datetime.date.today()
 
-def create_newsletter_draft(keywords):
-    """
-    Genereert een nieuwsbrief-concept in meerdere talen op basis van languages.json.
-    """
-    today_str = datetime.now().strftime("%Y-%m-%d")
-    config = load_config()
-    providers = config.get('providers', [])
+today_iso = target_date.isoformat()
+eprint(f"Nieuwsbrieven worden geschreven voor datum: {today_iso}")
 
-    enabled_languages = load_enabled_languages()
-    if not enabled_languages:
-        print("No enabled languages found. Aborting newsletter generation.")
-        return
+# --- Data en Talen Laden ---
+with open(PROMPT_TPL_PATH, "r", encoding="utf-8") as f:
+    PROMPT_TPL = f.read()
+try:
+    with open(CURATED_DATA_PATH, "r", encoding="utf-8") as f:
+        news_data = json.load(f)
+    with open(LANGUAGES_CONFIG_PATH, "r", encoding="utf-8") as f:
+        all_languages = json.load(f)
+except (FileNotFoundError, json.JSONDecodeError) as e:
+    eprint(f"❌ Fout bij laden van configuratie- of databestanden. Fout: {e}")
+    exit(1)
 
-    print(f"Gevonden talen om te genereren: {[lang['name'] for lang in enabled_languages]}")
+# Filter alleen de talen die ingeschakeld zijn
+active_languages = [lang for lang in all_languages if lang.get("enabled", False)]
 
-    for lang_config in enabled_languages:
-        lang_code = lang_config['code']
-        lang_name = lang_config['name']
-        edition_word = lang_config['edition_word']
+if not active_languages:
+    eprint("⚠️ Geen talen ingeschakeld in 'languages.json'. Er worden geen nieuwsbrieven gegenereerd.")
+    exit(0)
+
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+# --- Hoofdlogica: Loop over actieve talen ---
+for lang_config in active_languages:
+    lang_code = lang_config['code']
+    lang_name = lang_config['name']
+    edition_word = lang_config['edition_word']
+    
+    eprint("-" * 30)
+    eprint(f"Voorbereiden van nieuwsbrief voor taal: {lang_name} ({lang_code})")
+    
+    edition_date = target_date.strftime('%d %b %Y')
+    
+    prompt = PROMPT_TPL.replace('{json_data}', json.dumps(news_data, indent=2, ensure_ascii=False))
+    prompt = prompt.replace('{lang}', lang_name)
+    prompt = prompt.replace('{edition_word}', edition_word)
+    prompt = prompt.replace('{edition_date}', edition_date)
+
+    eprint(f"🤖 Model '{MODEL_ID}' wordt aangeroepen voor de {lang_name} nieuwsbrief...")
+    try:
+        response = model.generate_content(prompt)
+        md = response.text
+        # Cleanup van de markdown output
+        if md.strip().startswith("```markdown"):
+            md = md.strip()[10:-3].strip()
+        elif md.strip().startswith("```"):
+             md = md.strip()[3:-3].strip()
         
-        print(f"--- Start generatie voor {lang_name} ({lang_code}) ---")
+        output_filename = f"{OUTPUT_DIR}/{today_iso}_{lang_code}.md"
+        with open(output_filename, "w", encoding="utf-8") as f:
+            f.write(md)
+        eprint(f"✅ {output_filename} geschreven")
 
-        prompt = (
-            f"Je bent een expert in veganisme en biotechnologie. "
-            f"Schrijf een boeiende, informatieve en inspirerende nieuwsbrief in het {lang_name}. "
-            f"De toon is professioneel maar toegankelijk. Gebruik markdown voor de opmaak. "
-            f"De nieuwsbrief moet de volgende secties bevatten: Introductie, Nieuwsoverzicht, "
-            f"Product Spotlight, en een Afsluiting. "
-            f"Focus op de volgende trefwoorden: {', '.join(keywords)}. "
-            f"Begin de nieuwsbrief met een hoofdtitel: '# Vegan BioTech Report: {edition_word} {today_str}'"
-        )
+    except Exception as e:
+        eprint(f"❌ Fout bij API aanroep voor {lang_name}: {e}")
+        # Optioneel: besluit of je wilt doorgaan met de volgende taal of wilt stoppen
+        # Voor nu, we gaan door.
+        continue
 
-        try:
-            content = generate_content(prompt, providers)
-            
-            if content:
-                output_dir = os.path.join(get_project_root(), 'content')
-                os.makedirs(output_dir, exist_ok=True)
-                
-                # Bestandsnaam bevat nu de taalcode
-                file_name = f"{today_str}_{lang_code}.md"
-                file_path = os.path.join(output_dir, file_name)
-                
-                with open(file_path, 'w', encoding='utf-8') as f:
-                    f.write(content)
-                
-                print(f"Succesvol nieuwsbrief-concept opgeslagen voor {lang_name} in: {file_path}")
-            else:
-                print(f"Kon geen content genereren voor {lang_name}.")
-
-        except Exception as e:
-            print(f"Een fout is opgetreden tijdens het genereren voor {lang_name}: {e}")
-        
-        print(f"--- Einde generatie voor {lang_name} ---")
-
-if __name__ == '__main__':
-    # Voorbeeld-trefwoorden voor directe uitvoering
-    sample_keywords = ["cell-based meat", "precision fermentation", "plant-based innovation"]
-    create_newsletter_draft(sample_keywords)
+eprint("-" * 30)
+eprint("✅ Alle ingeschakelde talen zijn verwerkt.")

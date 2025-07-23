@@ -1,66 +1,110 @@
+# src/publish_ghost.py
 import os
 import glob
+import jwt
+import requests
+import markdown
 from datetime import datetime
-from .ghost_client import GhostAdminAPI
-from .utils import get_project_root
 
-def get_language_code_from_filename(filepath):
-    """
-    Extraheert de taalcode uit een bestandsnaam zoals '2025-07-23_nl.md'.
-    Retourneert 'EN' als de code niet gevonden kan worden, als veilige fallback.
-    """
+# ==============================================================================
+# De Ghost Admin API implementatie (ONGEWIJZIGD)
+# ==============================================================================
+class GhostAdminAPI:
+    def __init__(self, ghost_url, admin_api_key):
+        self.ghost_url = ghost_url.rstrip('/')
+        self.api_url = f"{self.ghost_url}/ghost/api/admin"
+        key_parts = admin_api_key.split(':')
+        self.key_id = key_parts[0]
+        self.key_secret = key_parts[1]
+    def _get_jwt_token(self):
+        iat = int(datetime.now().timestamp())
+        exp = iat + 300
+        payload = {'iat': iat, 'exp': exp, 'aud': '/admin/'}
+        token = jwt.encode(payload, bytes.fromhex(self.key_secret), algorithm='HS256', headers={'kid': self.key_id})
+        return token
+    def _make_request(self, method, endpoint, data=None):
+        token = self._get_jwt_token()
+        headers = {'Authorization': f'Ghost {token}'}
+        url = f"{self.api_url}{endpoint}"
+        if method.upper() == 'POST':
+            response = requests.post(url, headers=headers, json=data)
+        elif method.upper() == 'PUT':
+            response = requests.put(url, headers=headers, json=data)
+        else:
+            raise ValueError(f"Unsupported HTTP method: {method}")
+        response.raise_for_status()
+        return response
+    def create_post_draft(self, title, html_content, tags=None):
+        endpoint = "/posts/?source=html"
+        post_data = {'posts': [{'title': title, 'html': html_content, 'status': 'draft'}]}
+        if tags:
+            post_data['posts'][0]['tags'] = [{'name': tag} for tag in tags]
+        response = self._make_request('POST', endpoint, post_data)
+        return response.json()['posts'][0]
+    def publish_draft(self, post_id, updated_at):
+        endpoint = f"/posts/{post_id}/"
+        update_data = {'posts': [{'status': 'published', 'updated_at': updated_at}]}
+        response = self._make_request('PUT', endpoint, update_data)
+        return response.json()['posts'][0]
+
+# ==============================================================================
+# De hoofdlogica: Publiceer ALLES in de content map met taal-tags
+# ==============================================================================
+if __name__ == "__main__":
     try:
-        # Neemt de bestandsnaam, splitst op '_' en pakt het een-na-laatste deel.
-        # Vervolgens wordt de extensie .md verwijderd.
-        filename = os.path.basename(filepath)
-        code = filename.split('_')[-1].split('.')[0]
-        # Controleer of de code een redelijke lengte heeft (bv. 2 of 3 letters)
-        if 2 <= len(code) <= 3 and code.isalpha():
-            return code.upper()
-    except IndexError:
-        pass # Fallback wordt hieronder afgehandeld
-    print(f"Waarschuwing: kon taalcode niet afleiden uit '{filepath}'. Gebruik 'EN' als fallback.")
-    return 'EN'
+        GHOST_URL = os.environ['GHOST_ADMIN_API_URL']
+        GHOST_KEY = os.environ['GHOST_ADMIN_API_KEY']
+    except KeyError as e:
+        print(f"Error: De omgevingsvariabele {e} is niet ingesteld.")
+        exit(1)
 
-def publish_newsletters_to_ghost():
-    """
-    Vindt alle nieuwsbrieven van vandaag, voegt een taaltag toe en publiceert ze naar Ghost.
-    """
-    root_dir = get_project_root()
-    content_dir = os.path.join(root_dir, 'content')
-    today_str = datetime.now().strftime("%Y-%m-%d")
+    try:
+        ghost = GhostAdminAPI(ghost_url=GHOST_URL, admin_api_key=GHOST_KEY)
+        print("Ghost Admin API client succesvol geïnitialiseerd.")
+    except Exception as e:
+        print(f"Fout bij het initialiseren van de Ghost API client: {e}")
+        exit(1)
+
+    CONTENT_DIR = "content"
+    search_path = os.path.join(CONTENT_DIR, "*.md")
+    print(f"Zoeken naar alle bestanden die voldoen aan: '{search_path}'")
+    files_to_publish = glob.glob(search_path)
     
-    # Gebruik een glob-patroon om alle taalversies van vandaag te vinden
-    newsletter_files = glob.glob(os.path.join(content_dir, f"{today_str}_*.md"))
+    if not files_to_publish:
+        print(f"Geen .md bestanden gevonden in '{CONTENT_DIR}' om te publiceren.")
+        exit(0)
 
-    if not newsletter_files:
-        print("Geen nieuwsbriefbestanden gevonden om te publiceren voor vandaag.")
-        return
+    for filepath in files_to_publish:
+        print(f"\n--- Verwerken van bestand: {filepath} ---")
+        filename = os.path.basename(filepath)
+        
+        # Bepaal basis-tag en taal-tag
+        base_tag = 'Long Read' if 'longread' in filename.lower() else 'Weekly Update'
+        
+        # Extract taalcode van de bestandsnaam (bv. 2025-07-23_nl.md -> nl)
+        lang_code = filename.split('_')[-1].split('.')[0]
+        lang_tag = lang_code.upper()
+        
+        final_tags = [base_tag, lang_tag]
 
-    ghost = GhostAdminAPI() # Initialiseert de client
-
-    for filepath in newsletter_files:
         with open(filepath, 'r', encoding='utf-8') as f:
-            content = f.read()
+            markdown_text = f.read()
+            title = markdown_text.splitlines()[0].strip().replace('# ', '')
         
-        # De titel is de eerste regel van de markdown (bv. '# Vegan BioTech Report: ...')
-        title = content.split('\n', 1)[0].lstrip('# ').strip()
-        
-        lang_code_tag = get_language_code_from_filename(filepath)
-        
-        # Voeg de basis-tag en de dynamische taal-tag toe
-        tags = ['Weekly Update', lang_code_tag]
-        
-        print(f"Publiceren van '{title}' met tags {tags}...")
+        html_from_markdown = markdown.markdown(markdown_text)
         
         try:
-            response = ghost.create_post(title, content, tags)
-            if response and 'id' in response['posts'][0]:
-                print(f"Succesvol gepubliceerd: {title}")
-            else:
-                print(f"Fout bij publiceren van {title}. Reactie: {response}")
-        except Exception as e:
-            print(f"Kon post '{title}' niet maken via Ghost API: {e}")
+            print(f"Stap 1: Draft aanmaken voor '{title}' met tags: {final_tags}")
+            draft_post = ghost.create_post_draft(title=title, html_content=html_from_markdown, tags=final_tags)
+            post_id = draft_post['id']
+            updated_at = draft_post['updated_at']
+            print(f"Draft succesvol aangemaakt met ID: {post_id}")
 
-if __name__ == '__main__':
-    publish_newsletters_to_ghost()
+            print(f"Stap 2: Publiceren van post ID {post_id}...")
+            published_post = ghost.publish_draft(post_id, updated_at)
+            print(f"SUCCESS: Post '{published_post['title']}' is nu gepubliceerd!")
+
+        except Exception as e:
+            print(f"!!! FOUT bij het verwerken van '{title}': {e}")
+            import traceback
+            traceback.print_exc()
