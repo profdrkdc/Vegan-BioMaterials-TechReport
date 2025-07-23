@@ -1,7 +1,6 @@
 [
   {
     "id": "kimi",
-    "provider_value": "openrouter_kimi",
     "api_type": "openai_compatible",
     "model_id": "moonshotai/kimi-k2:free",
     "api_key_name": "OPENROUTER_API_KEY",
@@ -9,7 +8,6 @@
   },
   {
     "id": "mistral",
-    "provider_value": "openrouter_mistral",
     "api_type": "openai_compatible",
     "model_id": "mistralai/mistral-7b-instruct",
     "api_key_name": "OPENROUTER_API_KEY",
@@ -17,7 +15,6 @@
   },
   {
     "id": "gemini",
-    "provider_value": "google",
     "api_type": "google",
     "model_id": "gemini-1.5-flash-latest",
     "api_key_name": "GOOGLE_API_KEY",
