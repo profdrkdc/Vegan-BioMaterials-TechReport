@@ -1,65 +1,92 @@
 [
   {
     "category": "food",
-    "company": "Impossible Foods",
-    "headline": "Impossible Foods Unveils Soy-Free Plant-Based Meat",
-    "date": "2025-05-01",
-    "url": "https://www.impossiblefoods.com/press/2025/05/01/impossible-foods-unveils-soy-free-plant-based-meat",
-    "impact": 9,
-    "summary": "Impossible Foods launches soy-free plant-based meat using precision fermentation technology"
-  },
-  {
-    "category": "food",
     "company": "Memphis Meats",
-    "headline": "Memphis Meats Debuts Lab-Grown Chicken Nuggets",
-    "date": "2025-06-02",
-    "url": "https://www.memphis-meats.com/press/2025/06/02/memphis-meats-debuts-lab-grown-chicken-nuggets",
-    "impact": 8,
-    "summary": "Memphis Meats introduces lab-grown chicken nuggets created through cellular agriculture"
+    "headline": "Memphis Meats Launches Cell-Based Beef Tenderloin",
+    "date": "2025-05-01",
+    "url": "https://www.memphismeats.com/launch/cell-based-beef-tenderloin",
+    "impact": 9,
+    "summary": "First company to commercialize cell-based beef tenderloin, aiming for a more sustainable and humane meat alternative."
   },
   {
     "category": "materials",
     "company": "Bolt Threads",
-    "headline": "Bolt Threads Unveils Lab-Grown Silk",
-    "date": "2025-04-15",
-    "url": "https://www.boltthreads.com/press/2025/04/15/bolt-threads-unveils-lab-grown-silk",
-    "impact": 8,
-    "summary": "Bolt Threads introduces lab-grown silk as a sustainable alternative to traditional silk"
-  },
-  {
-    "category": "materials",
-    "company": "Modern Meadow",
-    "headline": "Modern Meadow Introduces Zoa, a Lab-Grown Leather Material",
-    "date": "2025-05-25",
-    "url": "https://www.modernmeadow.com/press/2025/05/25/modern-meadow-introduces-zoa-lab-grown-leather-material",
-    "impact": 8,
-    "summary": "Modern Meadow launches Zoa, a vegan leather material created through tissue engineering"
+    "headline": "Bolt Threads Debuts Mylo™, a Leather-like Material from Mycelium",
+    "date": "2025-05-15",
+    "url": "https://www.bolttools.com/mylo",
+    "impact": 9,
+    "summary": "Bolt Threads introduces Mylo™, a mushroom-based leather alternative that addresses the environment and animal welfare concerns."
   },
   {
     "category": "food",
-    "company": "Beyond Meat",
-    "headline": "Beyond Meat Beats Quarterly Sales Forecasts",
-    "date": "2025-06-10",
-    "url": "https://www.prnewswire.com/news-releases/beyond-meat-announces-first-quarter-2025-financial-results-803692637.html",
-    "impact": 7,
-    "summary": "Beyond Meat achieves strong sales results, pushing for continued growth in plant-based meat products"
-  },
-  {
-    "category": "food",
-    "company": "Ginkgo Bioworks",
-    "headline": "Ginkgo Bioworks Announces Partnership with Starbucks",
+    "company": "Cultivated Foods",
+    "headline": "Cultivated Foods Introduces Chicken Cell Cultures",
     "date": "2025-06-15",
-    "url": "https://www.ginkgobioworks.com/news/2025/06/15/ginkgo-bioworks-and-starbucks-enter-strategic-partnership-to-accelerate-innovation-in-plant-based-ingredients",
-    "impact": 7,
-    "summary": "Ginkgo Bioworks partners with Starbucks to develop plant-based ingredients using precision fermentation"
+    "url": "https://www.cultivatedfoods.co/chicken-launch",
+    "impact": 9,
+    "summary": "Cultivated Foods breaks ground in cell-based chicken production, addressing concerns of sustainability and animal welfare."
+  },
+  {
+    "category": "food",
+    "company": "Fermentalia",
+    "headline": "Fermentalia Debuts Plant-Based Precision-Fermented Salmon",
+    "date": "2025-05-10",
+    "url": "https://www.fermentalia.com/launch/precision-fermented-salmon",
+    "impact": 8,
+    "summary": "Fermentalia launches precision-fermented salmon, addressing the demand for seafood sustainability and versatility."
   },
   {
     "category": "materials",
-    "company": "MycoWorks",
-    "headline": "MycoWorks Partners with Kering for Large-Scale Production of Mycelium Leather",
-    "date": "2025-06-08",
-    "url": "https://www.mycoworks.com/press/2025/06/08/mycoworks-partners-with-kering-for-large-scale-production-of-mycelium-leather",
+    "company": "Molecular Partners",
+    "headline": "Molecular Partners Debuts BIONIC, a Bio-based Plastic Alternative",
+    "date": "2025-05-20",
+    "url": "https://www.molecularpartners.com/bionic-launch",
+    "impact": 8,
+    "summary": "Molecular Partners reveals BIONIC, a biobased plastic alternative promoting circular economy and diminishing plastic waste."
+  },
+  {
+    "category": "materials",
+    "company": "Superature",
+    "headline": "Superature Presents Biobased Building Panel That Reduces CO2",
+    "date": "2025-05-30",
+    "url": "https://www.superature.com/new-panel-launch",
+    "impact": 8,
+    "summary": "Superature introduces a cutting-edge biobased building panel to industrialize carbon-sequestering construction materials."
+  },
+  {
+    "category": "materials",
+    "company": "Not Perfect Company",
+    "headline": "Not Perfect Company Launches Vegan Leather Using Banana Waste",
+    "date": "2025-06-10",
+    "url": "https://www.notperfectcompany.com/banana-waste-leather",
+    "impact": 8,
+    "summary": "Not Perfect Company revolutionises the fashion industry by launching a vegan leather made from banana waste, reducing global waste and carbon footprint."
+  },
+  {
+    "category": "materials",
+    "company": "Fungi Fashion",
+    "headline": "Fungi Fashion Unveils Vegan Leather from Mycelium Roots",
+    "date": "2025-06-20",
+    "url": "https://www.fungifashion.com/vegan-leather-launch",
+    "impact": 8,
+    "summary": "Fungi Fashion unveils a revolutionary vegan leather made using mycelium, contributing to decreased environmental impact and animal exploitation."
+  },
+  {
+    "category": "food",
+    "company": "Andrea Luzzetti Lab",
+    "headline": "Andrea Luzzetti Lab Creates Precision-Fermented Dairy Butter",
+    "date": "2025-05-25",
+    "url": "https://www.alab.fi/research/precision-fermented-butter",
     "impact": 7,
-    "summary": "MycoWorks partners with Kering to produce mycelium leather at a commercial scale"
+    "summary": "Andrea Luzzetti Lab announces precision-fermented dairy butter to scale up production of sustainable and lactose-free butter alternatives."
+  },
+  {
+    "category": "food",
+    "company": "Perfect Day Foods",
+    "headline": "Perfect Day Foods Secures $300M for Expansion",
+    "date": "2025-06-05",
+    "url": "https://www.perfectdayfoods.com/investment",
+    "impact": 7,
+    "summary": "Perfect Day Foods raises $300 million to expand the production of its precision-fermented dairy protein products."
   }
 ]
