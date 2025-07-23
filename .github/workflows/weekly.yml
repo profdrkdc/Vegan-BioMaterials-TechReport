@@ -68,7 +68,7 @@ jobs:
           if ! git diff --quiet --exit-code -- content/ raw.json curated.json archive/; then
             echo "Wijzigingen gedetecteerd, bezig met committen en pushen..."
             # De 'archive/' map toevoegen aan git add
-            git add content/*.md raw.json curated.json archive/
+            git add -f content/*.md raw.json curated.json archive/
             COMMIT_DATE=$(date -u +"%Y-%m-%d")
             git commit -m "docs: Generate content for ${COMMIT_DATE}"
             git push
