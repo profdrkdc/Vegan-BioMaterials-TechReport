@@ -12,7 +12,6 @@ def eprint(*args, **kwargs):
 def translate_article(source_path: str, output_path: str, lang_name: str):
     """Vertaalt een artikel met behoud van Markdown-opmaak."""
     
-    # Lees configuratie uit environment
     API_TYPE = os.getenv('AI_API_TYPE')
     MODEL_ID = os.getenv('AI_MODEL_ID')
     API_KEY = os.getenv('AI_API_KEY')
@@ -40,8 +39,9 @@ def translate_article(source_path: str, output_path: str, lang_name: str):
         with open(source_path, 'r', encoding='utf-8') as f:
             original_text = f.read()
     except FileNotFoundError:
-        eprint(f"❌ Fout: Bronbestand niet gevonden op {source_path}")
+        eprint(f"❌ Fout: Bronbestand niet gevonden op {source_path}", file=sys.stderr)
         exit(1)
+
 
     prompt = f"""
     You are a professional translator specializing in technical and journalistic content.
@@ -49,19 +49,19 @@ def translate_article(source_path: str, output_path: str, lang_name: str):
 
     **CRITICAL RULES:**
     1.  Translate the text accurately, maintaining the original tone and meaning.
-    2.  You MUST preserve ALL original Markdown formatting (e.g., `# `, `## `, `*`, `**`, `_`).
-    3.  Do not add any commentary, notes, or introductions. Your output must be ONLY the translated article text.
+    2.  Pay close attention to idioms and figurative language (e.g., "a foothold", "a double-edged sword"). Do NOT translate these literally. Find the equivalent idiomatic expression in {lang_name} or rephrase the concept naturally.
+    3.  You MUST preserve ALL original Markdown formatting (e.g., `# `, `## `, `*`, `**`, `_`).
+    4.  Do not add any commentary, notes, or introductions. Your output must be ONLY the translated article text.
 
     --- START OF ARTICLE TO TRANSLATE ---
     {original_text}
     --- END OF ARTICLE TO TRANSLATE ---
     """
     
-    eprint(f"🤖 Model '{MODEL_ID}' wordt aangeroepen om artikel naar {lang_name} te vertalen...")
+    eprint(f"🤖 Model '{MODEL_ID}' wordt aangeroepen om artikel naar {lang_name} te vertalen met verbeterde prompt...")
     response = model.generate_content(prompt)
     translated_text = response.text
 
-    # Cleanup van de markdown output
     if translated_text.strip().startswith("```markdown"):
         translated_text = translated_text.strip()[10:-3].strip()
     elif translated_text.strip().startswith("```"):
