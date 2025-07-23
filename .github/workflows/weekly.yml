@@ -22,6 +22,11 @@ jobs:
   build_and_publish:
     runs-on: ubuntu-latest
     
+    # CORRECTIE: Geef de GITHUB_TOKEN schrijfpermissies voor deze job.
+    # Dit is de moderne en veilige manier.
+    permissions:
+      contents: write
+
     # Voorkom dubbele uitvoeringen op dezelfde commit
     concurrency: 
       group: ${{ github.workflow }}-${{ github.ref }}
@@ -29,10 +34,10 @@ jobs:
 
     steps:
       - name: Checkout repository code
+        # CORRECTIE: De 'with: token:' sectie is verwijderd.
+        # De actie gebruikt nu automatisch de GITHUB_TOKEN die de juiste permissies
+        # heeft gekregen via het 'permissions' blok hierboven.
         uses: actions/checkout@v4
-        with:
-          # We hebben een token nodig met write-permissies om terug te kunnen pushen
-          token: ${{ secrets.GH_PAT_TOKEN }}
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -51,8 +56,7 @@ jobs:
 
       - name: Run Full Content Pipeline
         env:
-          # De API-sleutels worden nu direct doorgegeven.
-          # De PREFERRED_PROVIDER variabele is verwijderd.
+          # De PREFERRED_PROVIDER variabele is correct verwijderd.
           KIMI_API_KEY: ${{ secrets.KIMI_API_KEY }}
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -74,13 +78,13 @@ jobs:
       - name: Commit and Push Generated Content
         run: |
           # Controleer of er wijzigingen zijn in de 'content' map of de .json bestanden
-          if ! git diff --quiet --exit-code -- content/ raw.json curated.json; then
+          if ! git diff --quiet --exit-code -- content/ raw.json curated.json archive/; then
             echo "Wijzigingen gedetecteerd, bezig met committen en pushen..."
             git add content/*.md raw.json curated.json archive/*.md
             # Maak een commit message met de datum
             COMMIT_DATE=$(date -u +"%Y-%m-%d")
             git commit -m "docs: Generate content for ${COMMIT_DATE}"
-            git push origin main
+            git push
           else
             echo "Geen wijzigingen om te committen."
           fi
