@@ -137,6 +137,7 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
             else:
                 eprint("\n--- Sub-stap 3: Generate Long-Read ---")
                 longread_filename = f"content/longread_{target_date_iso}_en.md"
+                # --- FIX IS HIER: Aanhalingstekens rond de topic ---
                 run_command(["python3", "-m", "src.generate_longread", longread_topic, "-o", longread_filename], env=script_env)
             
             eprint(f"\n✅ SUCCES: Pijplijn voltooid met provider '{provider_id}'.")

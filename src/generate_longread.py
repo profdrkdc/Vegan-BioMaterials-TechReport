@@ -2,7 +2,7 @@
 import os, sys, argparse
 from typing import List
 from dotenv import load_dotenv
-from pantic import BaseModel, Field
+from pydantic import BaseModel, Field
 from langchain_core.output_parsers import PydanticOutputParser, StrOutputParser
 from langchain_core.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -42,12 +42,36 @@ def generate_longread_article(topic: str, output_path: str):
     eprint(f"LangChain model geïnitialiseerd: {llm.model_name}")
 
     parser_outline = PydanticOutputParser(pydantic_object=ArticleOutline)
-    prompt_outline_text = "..." # (je prompt hier)
+    prompt_outline_text = """
+    You are an expert content strategist specializing in deep-dive analyses of vegan biotech and food-tech.
+    Your task is to create a detailed, logically structured outline for an in-depth article (approx. 1500-2000 words) based on the provided topic.
+    Topic: {topic}
+    The outline should guide the reader from a general overview to specific details and a future outlook.
+    Ensure a catchy title and a list of sections with specific, substantive talking points.
+    {format_instructions}
+    """
     prompt_outline = PromptTemplate(template=prompt_outline_text, input_variables=["topic"], partial_variables={"format_instructions": parser_outline.get_format_instructions()})
     chain_outline = prompt_outline | llm | parser_outline
     eprint("✓ Chain 1 (Outline) has been built.")
 
-    prompt_full_article_text = "..." # (je prompt hier)
+    prompt_full_article_text = """
+    You are a talented writer and final editor. Your task is to write a complete, in-depth, and publication-ready long-read article based on the provided structured outline.
+    Here is the complete outline to follow:
+    ---
+    Article Title: {title}
+    Introduction Hook: {introduction_hook}
+    Conclusion Summary: {conclusion_summary}
+    Sections to write:
+    {sections_list}
+    ---
+    Your tasks:
+    1. Write a compelling, overarching introduction (approx. 150-200 words) inspired by the 'Introduction Hook'.
+    2. Write a detailed and engaging section for EACH item in the 'Sections to write' list. Use the section title and its talking points as a guide for the content of each section.
+    3. Ensure smooth transitions between sections.
+    4. Write a powerful conclusion (approx. 150-200 words) that summarizes the key points, based on the 'Conclusion Summary'.
+    5. Format the entire final result as a single, coherent Markdown document. Start with the main title (H1: # Title). Use H2 (##) for section titles.
+    FINAL ARTICLE:
+    """
     prompt_full_article = PromptTemplate.from_template(prompt_full_article_text)
     chain_full_article = prompt_full_article | llm | StrOutputParser()
     eprint("✓ Chain 2 (Full Article Writer) has been built.")
@@ -78,12 +102,18 @@ def generate_longread_article(topic: str, output_path: str):
         f.write(final_article)
     eprint(f"✅ Article successfully saved as: {output_path}")
 
+# --- FIX IS HIER ---
 if __name__ == "__main__":
+    # Laad .env bestand voor lokale tests (optioneel)
     load_dotenv()
+    
+    # Zet de command-line parser op, net als in de andere scripts
     parser = argparse.ArgumentParser(description="Generate a long-read article on a specific topic using LangChain.")
     parser.add_argument("topic", type=str, help="The main topic of the article.")
     parser.add_argument("-o", "--output", type=str, default="longread_output.md", help="The path to the output Markdown file.")
+    
+    # Parse de argumenten
     args = parser.parse_args()
-    generate_longread_article(args.topic, args.output)```
-
-**Belangrijke wijziging:** Ik heb ook de `print` statements in de scripts aangepast naar `eprint` (printen naar stderr), behalve degene in `select_topic.py` die de uiteindelijke topic-string produceert. Dit maakt de logs in de GitHub Action veel schoner en voorkomt problemen.
+    
+    # Roep de hoofdfunctie aan met de geparste argumenten
+    generate_longread_article(args.topic, args.output)
