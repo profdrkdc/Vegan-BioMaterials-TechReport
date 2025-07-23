@@ -93,7 +93,9 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
         eprint(f"❌ Kon providers.json niet laden. Fout: {e}")
         sys.exit(1)
 
+    
     forced_provider_id = os.getenv('FORCED_PROVIDER')
+    preferred_provider_id = os.getenv('PREFERRED_PROVIDER')
     providers_to_run = []
 
     if forced_provider_id and forced_provider_id != 'auto':
@@ -104,9 +106,23 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
         else:
             eprint(f"❌ Fout: Geforceerde provider '{forced_provider_id}' niet gevonden in providers.json.")
             sys.exit(1)
+    elif preferred_provider_id:
+        eprint(f"🔄 Modus: Branch-voorkeur '{preferred_provider_id}' met automatische failover.")
+        # Zoek de voorkeursprovider
+        preferred_provider = next((p for p in all_providers if p['id'] == preferred_provider_id), None)
+        if preferred_provider:
+            # Voeg de voorkeursprovider als eerste toe
+            providers_to_run.append(preferred_provider)
+            # Voeg alle andere providers toe die niet de voorkeursprovider zijn
+            other_providers = [p for p in all_providers if p['id'] != preferred_provider_id]
+            providers_to_run.extend(other_providers)
+        else:
+            eprint(f"⚠️ Waarschuwing: Voorkeursprovider '{preferred_provider_id}' niet gevonden, gebruik standaard failover.")
+            providers_to_run = all_providers
     else:
-        eprint("🔄 Modus: Automatische failover (alle providers worden geprobeerd)")
+        eprint("🔄 Modus: Standaard automatische failover (geplande run).")
         providers_to_run = all_providers
+        
 
     success = False
     for i, provider_config in enumerate(providers_to_run):

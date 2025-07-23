@@ -7,6 +7,12 @@ on:
     - cron: '0 8 * * 5'
   workflow_dispatch:
     inputs:
+      force_provider:
+        description: 'Force a specific provider (or auto for failover)'
+        required: true
+        default: 'auto'
+        type: choice
+        options: [ 'auto', 'kimi', 'mistral', 'gemini' ]
       archive_content:
         description: 'Archive old content before running?'
         required: true
@@ -27,8 +33,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       changes_detected: ${{ steps.commit.outputs.changes_detected }}
-      # --- FIX 1: Geef de commit hash door als output ---
-      commit_hash: ${{ steps.commit.outputs.commit_hash }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -47,7 +51,10 @@ jobs:
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-          FORCED_PROVIDER: ${{ github.event.inputs.force_provider || 'auto' }} # Gebruik 'auto' als default voor geplande runs
+          FORCED_PROVIDER: ${{ github.event.inputs.force_provider || 'auto' }}
+          # --- DE FIX IS HIER ---
+          # We geven de voorkeur van de branch door aan het script
+          PREFERRED_PROVIDER: ${{ (github.ref == 'refs/heads/main' && 'kimi') || (github.ref == 'refs/heads/gemini-api' && 'gemini') || (github.ref == 'refs/heads/mistral-api' && 'mistral') }}
         run: |
           ARCHIVE_FLAG=""
           if [[ "${{ github.event.inputs.archive_content }}" == "false" ]]; then
@@ -73,12 +80,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # --- FIX 2: Check de exacte commit uit, niet de branch ---
           ref: ${{ needs.build.outputs.commit_hash }}
-
       - name: Install dependencies
         run: pip install -r requirements.txt
-        
       - name: Publish to Ghost
         env:
           GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
