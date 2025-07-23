@@ -124,11 +124,12 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
     # --- TAAK 1: Genereer de Nieuwsbrief ---
     def generate_newsletter_task(provider_config):
         script_env = os.environ.copy()
+        # CORRECTIE: Zorg ervoor dat AI_BASE_URL altijd een string is.
         script_env.update({
             'AI_API_TYPE': provider_config['api_type'],
             'AI_MODEL_ID': provider_config['model_id'],
             'AI_API_KEY': os.getenv(provider_config['api_key_name']),
-            'AI_BASE_URL': provider_config.get('base_url', '')
+            'AI_BASE_URL': provider_config.get('base_url') or ""
         })
         run_command(["python3", "-m", "src.fetch", "--date", target_date_iso], env=script_env)
         run_command(["python3", "-m", "src.curate"], env=script_env)
@@ -144,11 +145,12 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
     # --- TAAK 2: Genereer de Long-Read ---
     def generate_longread_task(provider_config):
         script_env = os.environ.copy()
+        # CORRECTIE: Zorg ervoor dat AI_BASE_URL altijd een string is.
         script_env.update({
             'AI_API_TYPE': provider_config['api_type'],
             'AI_MODEL_ID': provider_config['model_id'],
             'AI_API_KEY': os.getenv(provider_config['api_key_name']),
-            'AI_BASE_URL': provider_config.get('base_url', '')
+            'AI_BASE_URL': provider_config.get('base_url') or ""
         })
         
         eprint("\n--- Sub-stap 2a: Selecteer Long-Read Onderwerp ---")

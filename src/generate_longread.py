@@ -39,22 +39,27 @@ def generate_longread_article(topic: str, output_path: str):
     else:
         raise ValueError(f"Ongeldig AI_API_TYPE: {API_TYPE}")
     
-    # --- DE ENIGE FIX IS HIER ---
     model_name_for_log = getattr(llm, 'model_name', getattr(llm, 'model', 'Onbekend'))
     eprint(f"LangChain model geïnitialiseerd: {model_name_for_log}")
 
-    parser_outline = PydanticOutputParser(pydantic_object=ArticleOutline)
+    # BELANGRIJKE CORRECTIE: Gebruik .with_structured_output voor robuuste JSON
+    # Dit vervangt de oude PydanticOutputParser.
+    structured_llm_outline = llm.with_structured_output(ArticleOutline)
+
     prompt_outline_text = """
     You are an expert content strategist specializing in deep-dive analyses of vegan biotech and food-tech.
     Your task is to create a detailed, logically structured outline for an in-depth article (approx. 1500-2000 words) based on the provided topic.
     Topic: {topic}
     The outline should guide the reader from a general overview to specific details and a future outlook.
     Ensure a catchy title and a list of sections with specific, substantive talking points.
-    {format_instructions}
+    Generate a valid JSON object based on the ArticleOutline schema.
     """
-    prompt_outline = PromptTemplate(template=prompt_outline_text, input_variables=["topic"], partial_variables={"format_instructions": parser_outline.get_format_instructions()})
-    chain_outline = prompt_outline | llm | parser_outline
-    eprint("✓ Chain 1 (Outline) has been built.")
+    # De format_instructions zijn niet meer nodig met with_structured_output
+    prompt_outline = PromptTemplate(template=prompt_outline_text, input_variables=["topic"])
+    
+    # De chain is nu eenvoudiger
+    chain_outline = prompt_outline | structured_llm_outline
+    eprint("✓ Chain 1 (Outline) has been built using structured output.")
 
     prompt_full_article_text = """
     You are a talented writer and final editor. Your task is to write a complete, in-depth, and publication-ready long-read article based on the provided structured outline.
@@ -80,6 +85,7 @@ def generate_longread_article(topic: str, output_path: str):
     eprint("-" * 50)
 
     eprint("Step 1: Generating outline...")
+    # De .invoke call blijft hetzelfde
     outline = chain_outline.invoke({"topic": topic})
     eprint(f"✓ Outline received with title: '{outline.title}'")
     eprint("-" * 50)
@@ -103,6 +109,7 @@ def generate_longread_article(topic: str, output_path: str):
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(final_article)
     eprint(f"✅ Article successfully saved as: {output_path}")
+
 
 if __name__ == "__main__":
     load_dotenv()
