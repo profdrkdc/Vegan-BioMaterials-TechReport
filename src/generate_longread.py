@@ -39,7 +39,9 @@ def generate_longread_article(topic: str, output_path: str):
     else:
         raise ValueError(f"Ongeldig AI_API_TYPE: {API_TYPE}")
     
-    eprint(f"LangChain model geïnitialiseerd: {llm.model_name}")
+    # --- DE ENIGE FIX IS HIER ---
+    model_name_for_log = getattr(llm, 'model_name', getattr(llm, 'model', 'Onbekend'))
+    eprint(f"LangChain model geïnitialiseerd: {model_name_for_log}")
 
     parser_outline = PydanticOutputParser(pydantic_object=ArticleOutline)
     prompt_outline_text = """
@@ -102,18 +104,10 @@ def generate_longread_article(topic: str, output_path: str):
         f.write(final_article)
     eprint(f"✅ Article successfully saved as: {output_path}")
 
-# --- FIX IS HIER ---
 if __name__ == "__main__":
-    # Laad .env bestand voor lokale tests (optioneel)
     load_dotenv()
-    
-    # Zet de command-line parser op, net als in de andere scripts
     parser = argparse.ArgumentParser(description="Generate a long-read article on a specific topic using LangChain.")
     parser.add_argument("topic", type=str, help="The main topic of the article.")
     parser.add_argument("-o", "--output", type=str, default="longread_output.md", help="The path to the output Markdown file.")
-    
-    # Parse de argumenten
     args = parser.parse_args()
-    
-    # Roep de hoofdfunctie aan met de geparste argumenten
     generate_longread_article(args.topic, args.output)
