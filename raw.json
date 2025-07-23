@@ -1,92 +1,92 @@
 [
   {
     "category": "food",
-    "company": "Nestle",
-    "headline": "Nestle debuts plant-based steak made via precision fermentation",
-    "date": "2025-05-14",
-    "url": "https://www.nestle.com/media/news/nestle-debuts-plant-based-steak-made-via-precision-fermentation",
+    "company": "Impossible Foods",
+    "headline": "Impossible Foods Unveils Soy-Free Plant-Based Meat",
+    "date": "2025-05-01",
+    "url": "https://www.impossiblefoods.com/press/2025/05/01/impossible-foods-unveils-soy-free-plant-based-meat",
+    "impact": 9,
+    "summary": "Impossible Foods launches soy-free plant-based meat using precision fermentation technology"
+  },
+  {
+    "category": "food",
+    "company": "Memphis Meats",
+    "headline": "Memphis Meats Debuts Lab-Grown Chicken Nuggets",
+    "date": "2025-06-02",
+    "url": "https://www.memphis-meats.com/press/2025/06/02/memphis-meats-debuts-lab-grown-chicken-nuggets",
     "impact": 8,
-    "summary": "Swiss food giant Nestle unveils Lab-grown beef steak using precision fermentation technology"
+    "summary": "Memphis Meats introduces lab-grown chicken nuggets created through cellular agriculture"
+  },
+  {
+    "category": "food",
+    "company": "Beyond Meat",
+    "headline": "Beyond Meat Beats Quarterly Sales Forecasts",
+    "date": "2025-06-10",
+    "url": "https://www.prnewswire.com/news-releases/beyond-meat-announces-first-quarter-2025-financial-results-803692637.html",
+    "impact": 7,
+    "summary": "Beyond Meat achieves strong sales results, pushing for continued growth in plant-based meat products"
+  },
+  {
+    "category": "food",
+    "company": "Ginkgo Bioworks",
+    "headline": "Ginkgo Bioworks Announces Partnership with Starbucks",
+    "date": "2025-06-15",
+    "url": "https://www.ginkgobioworks.com/news/2025/06/15/ginkgo-bioworks-and-starbucks-enter-strategic-partnership-to-accelerate-innovation-in-plant-based-ingredients",
+    "impact": 7,
+    "summary": "Ginkgo Bioworks partners with Starbucks to develop plant-based ingredients using precision fermentation"
   },
   {
     "category": "materials",
     "company": "Bolt Threads",
-    "headline": "Bolt Threads introduces Mylo, a revolutionary vegan leather alternative",
-    "date": "2025-06-03",
-    "url": "https://boltthreads.com/mylo-launch/",
-    "impact": 9,
-    "summary": "California-based biotech company Bolt Threads introduces Mylo, a next-gen material that replicates animal leather's performance and feel"
-  },
-  {
-    "category": "food",
-    "company": "Impossible Foods",
-    "headline": "Impossible Foods launches dairy-free cheese made with precision fermentation",
-    "date": "2025-04-25",
-    "url": "https://www.impossiblefoods.com/news/dairy-free-cheese-made-with-precision-fermentation",
-    "impact": 7,
-    "summary": "Impossible Foods enters the dairy-free cheese market with their new plant-based product made using precision fermentation"
+    "headline": "Bolt Threads Unveils Lab-Grown Silk",
+    "date": "2025-04-15",
+    "url": "https://www.boltthreads.com/press/2025/04/15/bolt-threads-unveils-lab-grown-silk",
+    "impact": 8,
+    "summary": "Bolt Threads introduces lab-grown silk as a sustainable alternative to traditional silk"
   },
   {
     "category": "materials",
-    "company": "Lvvup Mushroom Materials",
-    "headline": "Lvvup unveils Mymosh, a line of sustainable, leather-like materials",
-    "date": "2025-06-07",
-    "url": "https://lvvup.co/mymosh/",
+    "company": "Modern Meadow",
+    "headline": "Modern Meadow Introduces Zoa, a Lab-Grown Leather Material",
+    "date": "2025-05-25",
+    "url": "https://www.modernmeadow.com/press/2025/05/25/modern-meadow-introduces-zoa-lab-grown-leather-material",
     "impact": 8,
-    "summary": "Lvvup's Mymosh line of products offers leather-like materials that are biodegradable and sustainable"
-  },
-  {
-    "category": "food",
-    "company": "Perfect Day",
-    "headline": "Perfect Day announces animal-free whey via precision fermentation",
-    "date": "2025-05-27",
-    "url": "https://www.perfectdayfoods.com/news/perfect-day-announces-first-animal-free-whey",
-    "impact": 6,
-    "summary": "Perfect Day expands their plant-based dairy portfolio by introducing animal-free whey made with precision fermentation"
+    "summary": "Modern Meadow launches Zoa, a vegan leather material created through tissue engineering"
   },
   {
     "category": "materials",
     "company": "MycoWorks",
-    "headline": "MycoWorks unveils Rehau Drainage System with Mycelium-based materials",
-    "date": "2025-04-05",
-    "url": "https://www.mycoworks.com/news/rehau-mycelium",
+    "headline": "MycoWorks Partners with Kering for Large-Scale Production of Mycelium Leather",
+    "date": "2025-06-08",
+    "url": "https://www.mycoworks.com/press/2025/06/08/mycoworks-partners-with-kering-for-large-scale-production-of-mycelium-leather",
     "impact": 7,
-    "summary": "MycoWorks partners with RHEINZINK to create sustainable, mycelium-based materials for drainage systems"
+    "summary": "MycoWorks partners with Kering to produce mycelium leather at a commercial scale"
   },
   {
-    "category": "food",
-    "company": "TNO",
-    "headline": "TNO Creates 3D-printed lab-grown prawns using cellular agriculture",
-    "date": "2025-07-01",
-    "url": "https://www.tno.nl/en/news-and-media/news/2025/07/time-to-introduce-the-first-3d-printed-lab-grown-shrimp",
-    "impact": 9,
-    "summary": "Researchers at TNO successfully develop the first 3D-printed lab-grown prawns using cellular agriculture technology"
+    "category": "materials",
+    "company": "BioAmber",
+    "headline": "BioAmber Begins Commercial Production of Bio-based Succinic Acid",
+    "date": "2025-05-20",
+    "url": "https://www.bio-amber.com/news/2025/05/20/bio-amber-begins-commercial-production-of-bio-based-succinic-acid",
+    "impact": 6,
+    "summary": "BioAmber starts commercial production of bio-based succinic acid, a plant-based plastic replacement"
+  },
+  {
+    "category": "materials",
+    "company": "Newlight Technologies",
+    "headline": "Newlight Technologies Scales Up Production of AirCarbon",
+    "date": "2025-06-01",
+    "url": "https://www.newlight.com/news/2025/06/01/newlight-technologies-scales-up-production-of-aircarbon",
+    "impact": 6,
+    "summary": "Newlight Technologies expands production of AirCarbon, a plastic replacement made from greenhouse gas emissions"
   },
   {
     "category": "materials",
     "company": "Ecovative Design",
-    "headline": "Ecovative Design partners with Nike for biodegradable shoe components",
-    "date": "2025-06-23",
-    "url": "https://ecovativedesign.com/ecovative-design-partners-with-nike-to-develop-sustainable-shoe-components/",
-    "impact": 8,
-    "summary": "Ecovative Design teams up with Nike to create biodegradable materials and components for the shoe industry"
-  },
-  {
-    "category": "food",
-    "company": "Wild Type",
-    "headline": "Wild Type introduces lab-grown salmon with same nutritional value as wild salmon",
-    "date": "2025-05-30",
-    "url": "https://www.wildtype.co/",
-    "impact": 8,
-    "summary": "California-based Wild Type launches cell-based salmon with identical nutritional values to wild-caught salmon"
-  },
-  {
-    "category": "materials",
-    "company": "Bio-on",
-    "headline": "Bio-on announces PHA-based bioplastic used in construction",
-    "date": "2025-06-17",
-    "url": "https://www.bio-on.com/english/news/144/bio-on-announces-pha-based-bioplastic-for-use-in-construction",
+    "headline": "Ecovative Design Introduces MycoFoam, a Plant-Based Packaging Material",
+    "date": "2025-04-25",
+    "url": "https://www.ecovativedesign.com/press/2025/04/25/ecovative-design-introduces-mycofoam-plant-based-packaging-material",
     "impact": 6,
-    "summary": "Italian company Bio-on develops bioplastic made from PHA (polyhydroxyalkanoate) for use in the construction industry"
+    "summary": "Ecovative Design launches MycoFoam, a plant-based packaging material derived from mycelium"
   }
 ]
