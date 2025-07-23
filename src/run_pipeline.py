@@ -61,23 +61,18 @@ def get_provider_list():
     eprint("🔄 Modus: Standaard automatische failover (volgens providers.json).")
     return all_providers
 
-# --- AANGEPASTE FUNCTIE ---
 def run_task(task_name: str, task_function, providers_to_run):
-    """Probeert een taakfunctie uit te voeren met de lijst van providers."""
+    # Deze functie blijft ongewijzigd
     for i, provider_config in enumerate(providers_to_run):
         provider_id = provider_config['id']
         api_key_name = provider_config['api_key_name']
         api_key_value = os.getenv(api_key_name)
-
         eprint("\n" + "="*50)
-        # De log-regel is nu specifieker
         eprint(f"POGING {i+1}/{len(providers_to_run)} voor taak '{task_name}': Gebruik provider '{provider_id}'")
         eprint("="*50)
-
         if not api_key_value:
             eprint(f"⚠️ WAARSCHUWING: API-sleutel '{api_key_name}' niet gevonden. Provider wordt overgeslagen.")
             continue
-        
         try:
             result = task_function(provider_config)
             eprint(f"✅ SUCCES: Taak '{task_name}' voltooid met provider '{provider_id}'.")
@@ -86,7 +81,6 @@ def run_task(task_name: str, task_function, providers_to_run):
             eprint(f"❌ MISLUKT: Taak '{task_name}' gefaald met provider '{provider_id}'. Fout: {e}")
             if i < len(providers_to_run) - 1:
                 eprint("Probeer de volgende provider...")
-    
     return None, None
 
 def run_full_pipeline(target_date_str: str or None, no_archive: bool):
@@ -103,9 +97,8 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
         eprint("❌ Geen geldige providers gevonden om de pijplijn mee te draaien.")
         sys.exit(1)
 
-    # --- TAAK 1: Genereer de Nieuwsbrief ---
+    # TAAK 1: Genereer de Nieuwsbrief
     def generate_newsletter_task(provider_config):
-        # ... (deze innerlijke functie blijft ongewijzigd)
         script_env = os.environ.copy()
         script_env['AI_API_TYPE'] = provider_config['api_type']
         script_env['AI_MODEL_ID'] = provider_config['model_id']
@@ -117,7 +110,6 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
         run_command(["python3", "-m", "src.draft", "--date", target_date_iso], env=script_env)
         return True
 
-    # --- AANGEPASTE AANROEP ---
     successful_provider, newsletter_success = run_task(
         "Nieuwsbrief Generatie", generate_newsletter_task, providers_to_run
     )
@@ -126,32 +118,65 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
         eprint("\n❌ DRAMATISCHE FOUT: Kon met geen enkele provider de nieuwsbrief genereren.")
         sys.exit(1)
 
-    # --- TAAK 2: Genereer de Long-Read ---
+    # --- TAAK 2: Genereer en Vertaal de Long-Read ---
     def generate_longread_task(provider_config):
-        # ... (deze innerlijke functie blijft ongewijzigd)
         script_env = os.environ.copy()
         script_env['AI_API_TYPE'] = provider_config['api_type']
         script_env['AI_MODEL_ID'] = provider_config['model_id']
         script_env['AI_API_KEY'] = os.getenv(provider_config['api_key_name'])
         if provider_config.get('base_url'):
             script_env['AI_BASE_URL'] = provider_config['base_url']
+
+        # Stap 2a & 2b: Genereer de Engelse basisversie
         eprint("\n--- Sub-stap 2a: Selecteer Long-Read Onderwerp ---")
         process = run_command(["python3", "-m", "src.select_topic"], env=script_env)
         longread_topic = process.stdout.strip()
         if not longread_topic:
             eprint("⚠️ WAARSCHUWING: Kon geen long-read onderwerp selecteren met deze provider.")
             return None
-        eprint("\n--- Sub-stap 2b: Genereer Long-Read Artikel ---")
-        longread_filename = f"content/longread_{target_date_iso}_en.md"
-        run_command(["python3", "-m", "src.generate_longread", longread_topic, "-o", longread_filename], env=script_env)
-        return True
+        
+        eprint("\n--- Sub-stap 2b: Genereer Engels Long-Read Artikel ---")
+        longread_filename_en = f"content/longread_{target_date_iso}_en.md"
+        run_command(["python3", "-m", "src.generate_longread", longread_topic, "-o", longread_filename_en], env=script_env)
+
+        # --- NIEUWE STAP 2c: Vertaal de Long-Read ---
+        eprint("\n--- Sub-stap 2c: Vertaal Long-Read naar andere talen ---")
+        try:
+            with open('languages.json', 'r', encoding='utf-8') as f:
+                languages = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError) as e:
+            eprint(f"⚠️ WAARSCHUWING: Kon 'languages.json' niet laden, vertalingen worden overgeslagen. Fout: {e}")
+            return True # De Engelse versie is gelukt, dus dit is geen fatale fout
+
+        active_languages = [lang for lang in languages if lang.get("enabled")]
+        for lang_config in active_languages:
+            if lang_config['code'] == 'en':
+                continue # Sla Engels over, want dat is onze bron
+            
+            lang_code = lang_config['code']
+            lang_name = lang_config['name']
+            eprint(f"Vertalen naar {lang_name} ({lang_code})...")
+            
+            longread_filename_lang = f"content/longread_{target_date_iso}_{lang_code}.md"
+            
+            try:
+                run_command([
+                    "python3", "-m", "src.translate_longread",
+                    longread_filename_en,
+                    longread_filename_lang,
+                    "--lang_name", lang_name
+                ], env=script_env)
+            except Exception as e:
+                eprint(f"⚠️ Fout bij vertalen naar {lang_name}: {e}. Deze taal wordt overgeslagen.")
+                continue
+
+        return True # Geef aan dat de taak succesvol was
 
     longread_providers = [p for p in providers_to_run if p['id'] == successful_provider['id']]
     longread_providers.extend([p for p in providers_to_run if p['id'] != successful_provider['id']])
     
-    # --- AANGEPASTE AANROEP ---
     _, longread_success = run_task(
-        "Long-Read Generatie", generate_longread_task, longread_providers
+        "Long-Read Generatie & Vertaling", generate_longread_task, longread_providers
     )
 
     if not longread_success:
