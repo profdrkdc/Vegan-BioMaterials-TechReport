@@ -3,7 +3,6 @@
 name: Weekly Content Pipeline
 
 on:
-  # Maakt handmatige activatie mogelijk via de Actions tab
   workflow_dispatch:
     inputs:
       date:
@@ -13,30 +12,20 @@ on:
         description: 'Skip archiving old content (true/false)'
         required: false
         default: 'false'
-
-  # Geplande wekelijkse uitvoering, elke maandag om 08:00 UTC
   schedule:
     - cron: '0 8 * * 1'
 
 jobs:
   build_and_publish:
     runs-on: ubuntu-latest
-    
-    # CORRECTIE: Geef de GITHUB_TOKEN schrijfpermissies voor deze job.
-    # Dit is de moderne en veilige manier.
     permissions:
       contents: write
-
-    # Voorkom dubbele uitvoeringen op dezelfde commit
     concurrency: 
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
 
     steps:
       - name: Checkout repository code
-        # CORRECTIE: De 'with: token:' sectie is verwijderd.
-        # De actie gebruikt nu automatisch de GITHUB_TOKEN die de juiste permissies
-        # heeft gekregen via het 'permissions' blok hierboven.
         uses: actions/checkout@v4
 
       - name: Set up Python 3.11
@@ -56,14 +45,14 @@ jobs:
 
       - name: Run Full Content Pipeline
         env:
-          # De PREFERRED_PROVIDER variabele is correct verwijderd.
-          KIMI_API_KEY: ${{ secrets.KIMI_API_KEY }}
-          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # CORRECTIE: De naam van de secret voor de Google API-sleutel
+          # is nu gecorrigeerd naar GOOGLE_API_KEY, zodat deze overeenkomt
+          # met de naam van de secret in de GitHub repository.
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
           GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
         run: |
-          # Bepaal de argumenten op basis van de workflow input
           ARGS=""
           if [ "${{ github.event.inputs.date }}" != "" ]; then
             ARGS="$ARGS --date ${{ github.event.inputs.date }}"
@@ -71,17 +60,15 @@ jobs:
           if [ "${{ github.event.inputs.no_archive }}" == "true" ]; then
             ARGS="$ARGS --no_archive"
           fi
-          
-          # Voer de pipeline uit met de samengestelde argumenten
           python3 -m src.run_pipeline $ARGS
 
       - name: Commit and Push Generated Content
         run: |
-          # Controleer of er wijzigingen zijn in de 'content' map of de .json bestanden
+          # De 'archive/' map toevoegen aan git diff om te controleren of er bestanden zijn gearchiveerd
           if ! git diff --quiet --exit-code -- content/ raw.json curated.json archive/; then
             echo "Wijzigingen gedetecteerd, bezig met committen en pushen..."
-            git add content/*.md raw.json curated.json archive/*.md
-            # Maak een commit message met de datum
+            # De 'archive/' map toevoegen aan git add
+            git add content/*.md raw.json curated.json archive/
             COMMIT_DATE=$(date -u +"%Y-%m-%d")
             git commit -m "docs: Generate content for ${COMMIT_DATE}"
             git push
