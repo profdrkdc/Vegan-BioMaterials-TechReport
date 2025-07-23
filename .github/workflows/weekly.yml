@@ -44,14 +44,11 @@ jobs:
           git config --global user.email 'actions-bot@users.noreply.github.com'
 
       - name: Run Full Content Pipeline
+        id: content_generation
         env:
-          # CORRECTIE: De naam van de secret voor de Google API-sleutel
-          # is nu gecorrigeerd naar GOOGLE_API_KEY, zodat deze overeenkomt
-          # met de naam van de secret in de GitHub repository.
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-          GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
-          GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
+          # Ghost secrets zijn hier niet meer nodig, worden in de publish stap gebruikt
         run: |
           ARGS=""
           if [ "${{ github.event.inputs.date }}" != "" ]; then
@@ -62,15 +59,29 @@ jobs:
           fi
           python3 -m src.run_pipeline $ARGS
 
-      - name: Commit and Push Generated Content
+      # ====================================================================
+      # CORRECTIE: De ontbrekende publicatie-stap is hier toegevoegd.
+      # ====================================================================
+      - name: Publish to Ghost
+        # Deze stap draait alleen als de vorige stap (content generatie) succesvol was.
+        if: success()
+        env:
+          GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
+          GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
         run: |
-          # De 'archive/' map toevoegen aan git diff om te controleren of er bestanden zijn gearchiveerd
+          echo "Publiceren van gegenereerde content naar Ghost CMS..."
+          python3 -m src.publish_ghost
+
+      - name: Commit and Push Generated Content
+        # Deze stap draait ook alleen als de voorgaande stappen succesvol waren.
+        if: success()
+        run: |
+          # Controleer of er überhaupt wijzigingen zijn om te committen
           if ! git diff --quiet --exit-code -- content/ raw.json curated.json archive/; then
             echo "Wijzigingen gedetecteerd, bezig met committen en pushen..."
-            # De 'archive/' map toevoegen aan git add
             git add -f content/*.md raw.json curated.json archive/
             COMMIT_DATE=$(date -u +"%Y-%m-%d")
-            git commit -m "docs: Generate content for ${COMMIT_DATE}"
+            git commit -m "docs: Generate and publish content for ${COMMIT_DATE}"
             git push
           else
             echo "Geen wijzigingen om te committen."
