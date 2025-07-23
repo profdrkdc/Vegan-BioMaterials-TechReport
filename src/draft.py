@@ -4,7 +4,7 @@ import os
 import datetime
 import time
 import sys
-import argparse # <-- Belangrijke import
+import argparse
 import google.generativeai as genai
 from openai import OpenAI
 
@@ -12,17 +12,18 @@ def eprint(*args, **kwargs):
     """Helper functie om naar stderr te printen."""
     print(*args, file=sys.stderr, **kwargs)
 
-# Lees configuratie uit environment
+# --- Configuratie ---
 API_TYPE = os.getenv('AI_API_TYPE')
 MODEL_ID = os.getenv('AI_MODEL_ID')
 API_KEY = os.getenv('AI_API_KEY')
 BASE_URL = os.getenv('AI_BASE_URL')
 
-LANGS = {"en": "English"}
 PROMPT_TPL_PATH = "prompts/step3.txt"
 CURATED_DATA_PATH = "curated.json"
+LANGUAGES_CONFIG_PATH = "languages.json" # Nieuw pad
 OUTPUT_DIR = "content"
 
+# --- AI Model Initialisatie ---
 model = None
 eprint(f"Provider type: {API_TYPE}, Model: {MODEL_ID}")
 
@@ -41,13 +42,11 @@ elif API_TYPE == 'openai_compatible':
 else:
     raise ValueError(f"Ongeldig AI_API_TYPE: {API_TYPE}")
 
-# --- NIEUWE LOGICA VOOR DATUM ---
-# Parse de command-line argumenten
-parser = argparse.ArgumentParser(description="Genereer een nieuwsbrief voor een specifieke datum.")
+# --- Datum Logica ---
+parser = argparse.ArgumentParser(description="Genereer een nieuwsbrief voor een specifieke datum in meerdere talen.")
 parser.add_argument('--date', type=str, help="De datum voor de nieuwsbrief in YYYY-MM-DD formaat.")
 args = parser.parse_args()
 
-# Bepaal de te gebruiken datum
 if args.date:
     try:
         target_date = datetime.datetime.strptime(args.date, '%Y-%m-%d').date()
@@ -58,44 +57,65 @@ else:
     target_date = datetime.date.today()
 
 today_iso = target_date.isoformat()
-eprint(f"Nieuwsbrief wordt geschreven voor datum: {today_iso}")
-# --- EINDE NIEUWE LOGICA ---
+eprint(f"Nieuwsbrieven worden geschreven voor datum: {today_iso}")
 
+# --- Data en Talen Laden ---
 with open(PROMPT_TPL_PATH, "r", encoding="utf-8") as f:
     PROMPT_TPL = f.read()
 try:
     with open(CURATED_DATA_PATH, "r", encoding="utf-8") as f:
-        data = json.load(f)
+        news_data = json.load(f)
+    with open(LANGUAGES_CONFIG_PATH, "r", encoding="utf-8") as f:
+        all_languages = json.load(f)
 except (FileNotFoundError, json.JSONDecodeError) as e:
-    eprint(f"❌ Fout bij laden {CURATED_DATA_PATH}. Fout: {e}")
+    eprint(f"❌ Fout bij laden van configuratie- of databestanden. Fout: {e}")
     exit(1)
+
+# Filter alleen de talen die ingeschakeld zijn
+active_languages = [lang for lang in all_languages if lang.get("enabled", False)]
+
+if not active_languages:
+    eprint("⚠️ Geen talen ingeschakeld in 'languages.json'. Er worden geen nieuwsbrieven gegenereerd.")
+    exit(0)
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-for code, lang in LANGS.items():
-    edition_word = "Edition"
-    # Gebruik de 'target_date' variabele
+# --- Hoofdlogica: Loop over actieve talen ---
+for lang_config in active_languages:
+    lang_code = lang_config['code']
+    lang_name = lang_config['name']
+    edition_word = lang_config['edition_word']
+    
+    eprint("-" * 30)
+    eprint(f"Voorbereiden van nieuwsbrief voor taal: {lang_name} ({lang_code})")
+    
     edition_date = target_date.strftime('%d %b %Y')
     
-    prompt = PROMPT_TPL.replace('{json_data}', json.dumps(data, indent=2, ensure_ascii=False))
-    prompt = prompt.replace('{lang}', lang)
+    prompt = PROMPT_TPL.replace('{json_data}', json.dumps(news_data, indent=2, ensure_ascii=False))
+    prompt = prompt.replace('{lang}', lang_name)
     prompt = prompt.replace('{edition_word}', edition_word)
     prompt = prompt.replace('{edition_date}', edition_date)
 
-    eprint(f"🤖 Model '{MODEL_ID}' wordt aangeroepen voor de {lang} nieuwsbrief...")
+    eprint(f"🤖 Model '{MODEL_ID}' wordt aangeroepen voor de {lang_name} nieuwsbrief...")
     try:
         response = model.generate_content(prompt)
         md = response.text
+        # Cleanup van de markdown output
         if md.strip().startswith("```markdown"):
             md = md.strip()[10:-3].strip()
         elif md.strip().startswith("```"):
              md = md.strip()[3:-3].strip()
         
-        # Gebruik de 'today_iso' variabele die is afgeleid van 'target_date'
-        output_filename = f"{OUTPUT_DIR}/{today_iso}_{code}.md"
+        output_filename = f"{OUTPUT_DIR}/{today_iso}_{lang_code}.md"
         with open(output_filename, "w", encoding="utf-8") as f:
             f.write(md)
         eprint(f"✅ {output_filename} geschreven")
+
     except Exception as e:
-        eprint(f"❌ Fout bij API aanroep voor {lang}: {e}")
-        raise e
+        eprint(f"❌ Fout bij API aanroep voor {lang_name}: {e}")
+        # Optioneel: besluit of je wilt doorgaan met de volgende taal of wilt stoppen
+        # Voor nu, we gaan door.
+        continue
+
+eprint("-" * 30)
+eprint("✅ Alle ingeschakelde talen zijn verwerkt.")

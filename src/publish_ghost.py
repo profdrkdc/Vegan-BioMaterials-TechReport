@@ -4,13 +4,13 @@ import glob
 import jwt
 import requests
 import markdown
+import time # <-- Nodig voor de pauze
 from datetime import datetime
 
 # ==============================================================================
 # De Ghost Admin API implementatie (ONGEWIJZIGD)
 # ==============================================================================
 class GhostAdminAPI:
-    # ... (deze klasse is ongewijzigd) ...
     def __init__(self, ghost_url, admin_api_key):
         self.ghost_url = ghost_url.rstrip('/')
         self.api_url = f"{self.ghost_url}/ghost/api/admin"
@@ -33,6 +33,7 @@ class GhostAdminAPI:
             response = requests.put(url, headers=headers, json=data)
         else:
             raise ValueError(f"Unsupported HTTP method: {method}")
+        # Dit zal een error gooien bij 4xx of 5xx status codes
         response.raise_for_status()
         return response
     def create_post_draft(self, title, html_content, tags=None):
@@ -49,27 +50,28 @@ class GhostAdminAPI:
         return response.json()['posts'][0]
 
 # ==============================================================================
-# De hoofdlogica: Publiceer ALLES in de content map
+# De hoofdlogica: Publiceer ALLES met een ingebouwd retry-mechanisme
 # ==============================================================================
 if __name__ == "__main__":
     try:
         GHOST_URL = os.environ['GHOST_ADMIN_API_URL']
         GHOST_KEY = os.environ['GHOST_ADMIN_API_KEY']
     except KeyError as e:
-        print(f"Error: De omgevingsvariabele {e} is niet ingesteld.")
+        print(f"Error: De omgevingsvariabele {e} is niet ingesteld.", file=sys.stderr)
         exit(1)
 
     try:
         ghost = GhostAdminAPI(ghost_url=GHOST_URL, admin_api_key=GHOST_KEY)
         print("Ghost Admin API client succesvol geïnitialiseerd.")
     except Exception as e:
-        print(f"Fout bij het initialiseren van de Ghost API client: {e}")
+        print(f"Fout bij het initialiseren van de Ghost API client: {e}", file=sys.stderr)
         exit(1)
 
     CONTENT_DIR = "content"
-    # --- TERUG NAAR DE SIMPELE, ROBUUSTE LOGICA ---
+    MAX_RETRIES = 3
+    RETRY_DELAY = 10 # seconden
+
     search_path = os.path.join(CONTENT_DIR, "*.md")
-    print(f"Zoeken naar alle bestanden die voldoen aan: '{search_path}'")
     files_to_publish = glob.glob(search_path)
     
     if not files_to_publish:
@@ -78,26 +80,46 @@ if __name__ == "__main__":
 
     for filepath in files_to_publish:
         print(f"\n--- Verwerken van bestand: {filepath} ---")
+        filename = os.path.basename(filepath)
+        
+        base_tag = 'Long Read' if 'longread' in filename.lower() else 'Weekly Update'
+        lang_code = filename.split('_')[-1].split('.')[0]
+        lang_tag = lang_code.upper()
+        final_tags = [base_tag, lang_tag]
+
         with open(filepath, 'r', encoding='utf-8') as f:
             markdown_text = f.read()
-            is_longread = 'longread' in os.path.basename(filepath).lower()
-            tag = 'Long Read' if is_longread else 'Weekly Update'
             title = markdown_text.splitlines()[0].strip().replace('# ', '')
         
         html_from_markdown = markdown.markdown(markdown_text)
         
-        try:
-            print(f"Stap 1: Draft aanmaken voor '{title}' met tag '{tag}'...")
-            draft_post = ghost.create_post_draft(title=title, html_content=html_from_markdown, tags=[tag])
-            post_id = draft_post['id']
-            updated_at = draft_post['updated_at']
-            print(f"Draft succesvol aangemaakt met ID: {post_id}")
+        # --- NIEUWE RETRY LOGICA ---
+        for attempt in range(MAX_RETRIES):
+            try:
+                print(f"Poging {attempt + 1}/{MAX_RETRIES}: Draft aanmaken voor '{title}' met tags: {final_tags}")
+                draft_post = ghost.create_post_draft(title=title, html_content=html_from_markdown, tags=final_tags)
+                post_id = draft_post['id']
+                updated_at = draft_post['updated_at']
+                print(f"Draft succesvol aangemaakt met ID: {post_id}")
 
-            print(f"Stap 2: Publiceren van post ID {post_id}...")
-            published_post = ghost.publish_draft(post_id, updated_at)
-            print(f"SUCCESS: Post '{published_post['title']}' is nu gepubliceerd!")
+                print(f"Stap 2: Publiceren van post ID {post_id}...")
+                published_post = ghost.publish_draft(post_id, updated_at)
+                print(f"SUCCESS: Post '{published_post['title']}' is nu gepubliceerd!")
+                
+                # Als alles goed gaat, breek uit de retry-loop voor dit bestand
+                break 
 
-        except Exception as e:
-            print(f"!!! FOUT bij het verwerken van '{title}': {e}")
-            import traceback
-            traceback.print_exc()
+            except requests.exceptions.RequestException as e:
+                print(f"!!! FOUT (Poging {attempt + 1}) bij API-aanroep voor '{title}': {e}", file=sys.stderr)
+                if attempt + 1 == MAX_RETRIES:
+                    print(f"!!! DEFINITIEVE FOUT: Kon '{title}' niet publiceren na {MAX_RETRIES} pogingen.", file=sys.stderr)
+                else:
+                    print(f"Wacht {RETRY_DELAY} seconden voor de volgende poging...")
+                    time.sleep(RETRY_DELAY)
+            except Exception as e:
+                # Vang andere onverwachte fouten op
+                print(f"!!! ONVERWACHTE FOUT bij het verwerken van '{title}': {e}", file=sys.stderr)
+                import traceback
+                traceback.print_exc()
+                # Breek de loop voor dit bestand bij een onverwachte fout
+                break

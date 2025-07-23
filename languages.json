@@ -1,0 +1,32 @@
+[
+  {
+    "code": "en",
+    "name": "English",
+    "enabled": true,
+    "edition_word": "Edition"
+  },
+  {
+    "code": "nl",
+    "name": "Nederlands",
+    "enabled": true,
+    "edition_word": "Editie"
+  },
+  {
+    "code": "fr",
+    "name": "Français",
+    "enabled": false,
+    "edition_word": "Édition"
+  },
+  {
+    "code": "de",
+    "name": "Deutsch",
+    "enabled": false,
+    "edition_word": "Ausgabe"
+  },
+  {
+    "code": "es",
+    "name": "Español",
+    "enabled": false,
+    "edition_word": "Edición"
+  }
+]

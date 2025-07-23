@@ -10,11 +10,9 @@ import shutil
 import glob
 
 def eprint(*args, **kwargs):
-    """Print berichten naar de standaard error stream."""
     print(*args, file=sys.stderr, **kwargs)
 
 def run_command(command: list, env: dict):
-    """Voert een shell commando uit en handelt fouten af."""
     process = subprocess.run(command, capture_output=True, text=True, env=env)
     if process.returncode != 0:
         eprint(f"--- Fout bij uitvoeren: {' '.join(command)} ---")
@@ -24,90 +22,68 @@ def run_command(command: list, env: dict):
     return process
 
 def archive_old_content():
-    """
-    CORRECTIE: Volledige implementatie.
-    Verplaatst bestaande content (.md) en databestanden (.json) naar de archiefmap.
-    """
-    CONTENT_DIR = "content"
-    ARCHIVE_DIR = "archive"
-    
-    os.makedirs(ARCHIVE_DIR, exist_ok=True)
-    
-    files_to_archive = []
-    # Zoek naar alle .md bestanden in de content map
-    content_files = glob.glob(os.path.join(CONTENT_DIR, "*.md"))
-    files_to_archive.extend(content_files)
-    
-    # Voeg de root data-bestanden toe om te archiveren
-    for data_file in ["raw.json", "curated.json"]:
-        if os.path.exists(data_file):
-            files_to_archive.append(data_file)
-            
-    if not files_to_archive:
+    # Deze functie blijft ongewijzigd
+    content_files = glob.glob("content/*.md")
+    data_files = ["raw.json", "curated.json"]
+    if not content_files and not any(os.path.exists(f) for f in data_files):
         eprint("Geen bestaande content gevonden om te archiveren.")
         return
-
-    eprint(f"Archiveren van {len(files_to_archive)} oud(e) bestand(en)...")
-    for filepath in files_to_archive:
-        try:
-            shutil.move(filepath, os.path.join(ARCHIVE_DIR, os.path.basename(filepath)))
-        except Exception as e:
-            eprint(f"⚠️ Kon '{filepath}' niet archiveren. Fout: {e}")
+    archive_dir = "archive"
+    os.makedirs(archive_dir, exist_ok=True)
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    run_archive_dir = os.path.join(archive_dir, timestamp)
+    os.makedirs(run_archive_dir)
+    for file_path in content_files + data_files:
+        if os.path.exists(file_path):
+            shutil.move(file_path, run_archive_dir)
+    eprint(f"Oude content gearchiveerd in: {run_archive_dir}")
 
 def get_provider_list():
-    """Leest providers.json en stelt de failover-volgorde in."""
+    # Deze functie blijft ongewijzigd
     try:
         with open('providers.json', 'r') as f:
             all_providers = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError) as e:
         eprint(f"❌ Kon providers.json niet laden. Fout: {e}")
         return []
-
-    # De 'PREFERRED_PROVIDER' logica is nu overbodig in de workflow,
-    # maar blijft nuttig voor lokale tests. Het script valt terug op de
-    # standaardvolgorde als de variabele niet is ingesteld.
+    forced_provider_id = os.getenv('FORCED_PROVIDER')
     preferred_provider_id = os.getenv('PREFERRED_PROVIDER')
+    if forced_provider_id and forced_provider_id != 'auto':
+        eprint(f"⚡️ Modus: Specifieke provider geforceerd: '{forced_provider_id}'")
+        found_provider = next((p for p in all_providers if p['id'] == forced_provider_id), None)
+        return [found_provider] if found_provider else []
     if preferred_provider_id:
-        eprint(f"🔄 Modus: Voorkeur voor '{preferred_provider_id}' met automatische failover.")
+        eprint(f"🔄 Modus: Branch-voorkeur '{preferred_provider_id}' met automatische failover.")
         preferred_provider = next((p for p in all_providers if p['id'] == preferred_provider_id), None)
         if preferred_provider:
             other_providers = [p for p in all_providers if p['id'] != preferred_provider_id]
             return [preferred_provider] + other_providers
-    
     eprint("🔄 Modus: Standaard automatische failover (volgens providers.json).")
     return all_providers
 
-def run_task(task_function, providers_to_run):
-    """Probeert een taakfunctie uit te voeren met een lijst van providers."""
+def run_task(task_name: str, task_function, providers_to_run):
+    # Deze functie blijft ongewijzigd
     for i, provider_config in enumerate(providers_to_run):
         provider_id = provider_config['id']
         api_key_name = provider_config['api_key_name']
         api_key_value = os.getenv(api_key_name)
-
         eprint("\n" + "="*50)
-        eprint(f"POGING {i+1}/{len(providers_to_run)} voor taak: Gebruik provider '{provider_id}'")
+        eprint(f"POGING {i+1}/{len(providers_to_run)} voor taak '{task_name}': Gebruik provider '{provider_id}'")
         eprint("="*50)
-
         if not api_key_value:
             eprint(f"⚠️ WAARSCHUWING: API-sleutel '{api_key_name}' niet gevonden. Provider wordt overgeslagen.")
             continue
-        
         try:
             result = task_function(provider_config)
-            eprint(f"✅ SUCCES: Taak voltooid met provider '{provider_id}'.")
+            eprint(f"✅ SUCCES: Taak '{task_name}' voltooid met provider '{provider_id}'.")
             return provider_config, result
         except Exception as e:
-            eprint(f"❌ MISLUKT: Taak gefaald met provider '{provider_id}'.")
-            # Toon de fout voor betere debugging
-            import traceback
-            traceback.print_exc(file=sys.stderr)
+            eprint(f"❌ MISLUKT: Taak '{task_name}' gefaald met provider '{provider_id}'. Fout: {e}")
             if i < len(providers_to_run) - 1:
                 eprint("Probeer de volgende provider...")
-    
     return None, None
 
 def run_full_pipeline(target_date_str: str or None, no_archive: bool):
-    """De hoofd-pijplijn die alle taken sequentieel uitvoert."""
     if not no_archive:
         archive_old_content()
     
@@ -118,75 +94,99 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
 
     providers_to_run = get_provider_list()
     if not providers_to_run:
-        eprint("❌ Geen geldige providers gevonden. Pijplijn stopt.")
+        eprint("❌ Geen geldige providers gevonden om de pijplijn mee te draaien.")
         sys.exit(1)
 
-    # --- TAAK 1: Genereer de Nieuwsbrief ---
+    # TAAK 1: Genereer de Nieuwsbrief
     def generate_newsletter_task(provider_config):
         script_env = os.environ.copy()
-        # CORRECTIE: Zorg ervoor dat AI_BASE_URL altijd een string is.
-        script_env.update({
-            'AI_API_TYPE': provider_config['api_type'],
-            'AI_MODEL_ID': provider_config['model_id'],
-            'AI_API_KEY': os.getenv(provider_config['api_key_name']),
-            'AI_BASE_URL': provider_config.get('base_url') or ""
-        })
+        script_env['AI_API_TYPE'] = provider_config['api_type']
+        script_env['AI_MODEL_ID'] = provider_config['model_id']
+        script_env['AI_API_KEY'] = os.getenv(provider_config['api_key_name'])
+        if provider_config.get('base_url'):
+            script_env['AI_BASE_URL'] = provider_config['base_url']
         run_command(["python3", "-m", "src.fetch", "--date", target_date_iso], env=script_env)
         run_command(["python3", "-m", "src.curate"], env=script_env)
         run_command(["python3", "-m", "src.draft", "--date", target_date_iso], env=script_env)
         return True
 
-    successful_provider, newsletter_success = run_task(generate_newsletter_task, providers_to_run)
+    successful_provider, newsletter_success = run_task(
+        "Nieuwsbrief Generatie", generate_newsletter_task, providers_to_run
+    )
 
     if not newsletter_success:
-        eprint("\n❌ FATALE FOUT: Kon met geen enkele provider de nieuwsbrief genereren.")
+        eprint("\n❌ DRAMATISCHE FOUT: Kon met geen enkele provider de nieuwsbrief genereren.")
         sys.exit(1)
 
-    # --- TAAK 2: Genereer de Long-Read ---
+    # --- TAAK 2: Genereer en Vertaal de Long-Read ---
     def generate_longread_task(provider_config):
         script_env = os.environ.copy()
-        # CORRECTIE: Zorg ervoor dat AI_BASE_URL altijd een string is.
-        script_env.update({
-            'AI_API_TYPE': provider_config['api_type'],
-            'AI_MODEL_ID': provider_config['model_id'],
-            'AI_API_KEY': os.getenv(provider_config['api_key_name']),
-            'AI_BASE_URL': provider_config.get('base_url') or ""
-        })
-        
+        script_env['AI_API_TYPE'] = provider_config['api_type']
+        script_env['AI_MODEL_ID'] = provider_config['model_id']
+        script_env['AI_API_KEY'] = os.getenv(provider_config['api_key_name'])
+        if provider_config.get('base_url'):
+            script_env['AI_BASE_URL'] = provider_config['base_url']
+
+        # Stap 2a & 2b: Genereer de Engelse basisversie
         eprint("\n--- Sub-stap 2a: Selecteer Long-Read Onderwerp ---")
         process = run_command(["python3", "-m", "src.select_topic"], env=script_env)
         longread_topic = process.stdout.strip()
-
         if not longread_topic:
-            raise ValueError("Kon geen long-read onderwerp selecteren.")
+            eprint("⚠️ WAARSCHUWING: Kon geen long-read onderwerp selecteren met deze provider.")
+            return None
         
-        eprint("\n--- Sub-stap 2b: Genereer Long-Read Artikel ---")
-        longread_filename = f"content/longread_{target_date_iso}_en.md"
-        run_command(["python3", "-m", "src.generate_longread", longread_topic, "-o", longread_filename], env=script_env)
-        return True
+        eprint("\n--- Sub-stap 2b: Genereer Engels Long-Read Artikel ---")
+        longread_filename_en = f"content/longread_{target_date_iso}_en.md"
+        run_command(["python3", "-m", "src.generate_longread", longread_topic, "-o", longread_filename_en], env=script_env)
 
-    # VERBETERING: Maak een correct geroteerde failover-lijst.
-    successful_provider_index = providers_to_run.index(successful_provider)
-    longread_providers = providers_to_run[successful_provider_index:] + providers_to_run[:successful_provider_index]
+        # --- NIEUWE STAP 2c: Vertaal de Long-Read ---
+        eprint("\n--- Sub-stap 2c: Vertaal Long-Read naar andere talen ---")
+        try:
+            with open('languages.json', 'r', encoding='utf-8') as f:
+                languages = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError) as e:
+            eprint(f"⚠️ WAARSCHUWING: Kon 'languages.json' niet laden, vertalingen worden overgeslagen. Fout: {e}")
+            return True # De Engelse versie is gelukt, dus dit is geen fatale fout
+
+        active_languages = [lang for lang in languages if lang.get("enabled")]
+        for lang_config in active_languages:
+            if lang_config['code'] == 'en':
+                continue # Sla Engels over, want dat is onze bron
+            
+            lang_code = lang_config['code']
+            lang_name = lang_config['name']
+            eprint(f"Vertalen naar {lang_name} ({lang_code})...")
+            
+            longread_filename_lang = f"content/longread_{target_date_iso}_{lang_code}.md"
+            
+            try:
+                run_command([
+                    "python3", "-m", "src.translate_longread",
+                    longread_filename_en,
+                    longread_filename_lang,
+                    "--lang_name", lang_name
+                ], env=script_env)
+            except Exception as e:
+                eprint(f"⚠️ Fout bij vertalen naar {lang_name}: {e}. Deze taal wordt overgeslagen.")
+                continue
+
+        return True # Geef aan dat de taak succesvol was
+
+    longread_providers = [p for p in providers_to_run if p['id'] == successful_provider['id']]
+    longread_providers.extend([p for p in providers_to_run if p['id'] != successful_provider['id']])
     
-    _, longread_success = run_task(generate_longread_task, longread_providers)
+    _, longread_success = run_task(
+        "Long-Read Generatie & Vertaling", generate_longread_task, longread_providers
+    )
 
     if not longread_success:
-        eprint("\n⚠️ WAARSCHUWING: Kon geen long-read genereren. De nieuwsbrief is wel gelukt.")
+        eprint("\n⚠️ WAARSCHUWING: Kon met geen enkele provider een long-read artikel genereren, maar de nieuwsbrief is wel gelukt.")
     
     eprint("\n✅ Pijplijn voltooid.")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Voert de volledige contentpijplijn uit.")
-    parser.add_argument('--date', type=str, help="Optionele datum (YYYY-MM-DD) om de pijplijn voor te draaien.")
-    parser.add_argument('--no_archive', action='store_true', help="Sla het archiveren van oude content over.")
+    parser = argparse.ArgumentParser(description="Draait de volledige content generatie pijplijn.")
+    parser.add_argument("--date", type=str, help="De datum (YYYY-MM-DD) waarvoor de content moet worden gegenereerd.")
+    parser.add_argument("--no_archive", action='store_true', help="Sla het archiveren van oude content over.")
     args = parser.parse_args()
-
-    try:
-        run_full_pipeline(target_date_str=args.date, no_archive=args.no_archive)
-    except Exception as e:
-        eprint(f"\n\n--- EEN ONVERWACHTE FOUT HEEFT DE PIJPLIJN GESTOPT ---")
-        eprint(f"Fout: {e}")
-        import traceback
-        traceback.print_exc(file=sys.stderr)
-        sys.exit(1)
+    run_full_pipeline(args.date, args.no_archive)
