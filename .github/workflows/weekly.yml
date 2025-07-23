@@ -6,6 +6,17 @@ on:
   schedule:
     - cron: '0 8 * * 5'
   workflow_dispatch:
+    inputs:
+      force_provider:
+        description: 'Force a specific provider (or auto for failover)'
+        required: true
+        default: 'auto'
+        type: choice
+        options:
+          - auto
+          - kimi
+          - mistral
+          - gemini
 
 permissions:
   contents: write
@@ -29,64 +40,15 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # --- Poging 1: Hoofdkeuze (Kimi) ---
-      - name: Attempt 1 - Generate Content with Kimi
-        id: run_kimi
-        # Cruciaal: ga door, zelfs als deze stap faalt
-        continue-on-error: true
+      - name: Run Full Content Pipeline
         env:
-          AI_PROVIDER: openrouter_kimi
+          # Geef ALLE mogelijke sleutels door
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: |
-          python3 -m src.fetch
-          python3 -m src.curate
-          python3 -m src.draft
-          LONGREAD_TOPIC=$(python3 -m src.select_topic)
-          if [ -n "$LONGREAD_TOPIC" ]; then
-            LONGREAD_FILENAME="content/longread_$(date +%Y-%m-%d)_en.md"
-            python3 -m src.generate_longread "$LONGREAD_TOPIC" -o "$LONGREAD_FILENAME"
-          fi
-
-      # --- Poging 2: Tweede Keuze (Mistral) ---
-      - name: Attempt 2 - Generate Content with Mistral
-        id: run_mistral
-        # Draai alleen als de Kimi-stap is mislukt
-        if: steps.run_kimi.outcome == 'failure'
-        continue-on-error: true
-        env:
-          AI_PROVIDER: openrouter_mistral
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: |
-          # We draaien exact dezelfde scripts, alleen de AI_PROVIDER is anders
-          python3 -m src.fetch
-          python3 -m src.curate
-          python3 -m src.draft
-          LONGREAD_TOPIC=$(python3 -m src.select_topic)
-          if [ -n "$LONGREAD_TOPIC" ]; then
-            LONGREAD_FILENAME="content/longread_$(date +%Y-%m-%d)_en.md"
-            python3 -m src.generate_longread "$LONGREAD_TOPIC" -o "$LONGREAD_FILENAME"
-          fi
-
-      # --- Poging 3: Noodoplossing (Gemini) ---
-      - name: Attempt 3 - Generate Content with Gemini
-        id: run_gemini
-        # Draai alleen als ZOWEL Kimi als Mistral zijn mislukt
-        if: steps.run_kimi.outcome == 'failure' && steps.run_mistral.outcome == 'failure'
-        env:
-          AI_PROVIDER: google
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-        run: |
-          # We draaien exact dezelfde scripts, alleen de AI_PROVIDER is anders
-          python3 -m src.fetch
-          python3 -m src.curate
-          python3 -m src.draft
-          LONGREAD_TOPIC=$(python3 -m src.select_topic)
-          if [ -n "$LONGREAD_TOPIC" ]; then
-            LONGREAD_FILENAME="content/longread_$(date +%Y-%m-%d)_en.md"
-            python3 -m src.generate_longread "$LONGREAD_TOPIC" -o "$LONGREAD_FILENAME"
-          fi
+          # Geef de gekozen provider door aan het script
+          FORCED_PROVIDER: ${{ github.event.inputs.force_provider }}
+        run: python3 -m src.run_pipeline
 
-      # --- Finale Stap: Commit wat er ook is gegenereerd ---
       - name: Commit and push generated content
         id: commit
         uses: stefanzweifel/git-auto-commit-action@v5

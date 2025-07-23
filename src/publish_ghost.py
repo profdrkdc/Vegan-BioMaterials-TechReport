@@ -4,10 +4,10 @@ import glob
 import jwt
 import requests
 import markdown
-from datetime import datetime, timedelta
+from datetime import datetime, date # <-- Wijziging: 'date' toegevoegd
 
 # ==============================================================================
-# De Ghost Admin API implementatie
+# De Ghost Admin API implementatie (ONGEWIJZIGD)
 # ==============================================================================
 class GhostAdminAPI:
     def __init__(self, ghost_url, admin_api_key):
@@ -39,7 +39,6 @@ class GhostAdminAPI:
         response.raise_for_status()
         return response
 
-    # STAP 1: Maak een DRAFT post aan
     def create_post_draft(self, title, html_content, tags=None):
         endpoint = "/posts/?source=html"
         post_data = {
@@ -55,20 +54,19 @@ class GhostAdminAPI:
         response = self._make_request('POST', endpoint, post_data)
         return response.json()['posts'][0]
 
-    # STAP 2: Publiceer de DRAFT
     def publish_draft(self, post_id, updated_at):
         endpoint = f"/posts/{post_id}/"
         update_data = {
             'posts': [{
                 'status': 'published',
-                'updated_at': updated_at # Verplicht voor updates
+                'updated_at': updated_at
             }]
         }
         response = self._make_request('PUT', endpoint, update_data)
         return response.json()['posts'][0]
 
 # ==============================================================================
-# De hoofdlogica: De Finale Workflow
+# De hoofdlogica: De Finale Workflow (AANGEPAST)
 # ==============================================================================
 if __name__ == "__main__":
     try:
@@ -86,28 +84,41 @@ if __name__ == "__main__":
         exit(1)
 
     CONTENT_DIR = "content"
-    search_path = os.path.join(CONTENT_DIR, "*.md")
-    files = glob.glob(search_path)
     
-    if not files:
-        print(f"Geen .md bestanden gevonden in de map {CONTENT_DIR}.")
+    # --- NIEUWE, SLIMME LOGICA ---
+    # Genereer de bestandsnaam-prefix voor vandaag (bv. "2025-07-23")
+    today_iso = date.today().isoformat()
+    # Maak een zoekpatroon dat alleen bestanden van vandaag vindt
+    search_pattern = f"{today_iso}*.md"
+    search_path = os.path.join(CONTENT_DIR, search_pattern)
+    
+    print(f"Zoeken naar bestanden die voldoen aan: '{search_path}'")
+    files_to_publish = glob.glob(search_path)
+    
+    if not files_to_publish:
+        print(f"Geen nieuwe .md bestanden gevonden voor vandaag ({today_iso}) om te publiceren.")
         exit(0)
 
-    for filepath in files:
+    for filepath in files_to_publish:
         print(f"\n--- Verwerken van bestand: {filepath} ---")
         with open(filepath, 'r', encoding='utf-8') as f:
             markdown_text = f.read()
+            # Bepaal een logische tag op basis van de bestandsnaam
+            is_longread = 'longread' in os.path.basename(filepath).lower()
+            tag = 'Long Read' if is_longread else 'Weekly Update'
+            
+            # Pak de titel uit de eerste regel
             title = markdown_text.splitlines()[0].strip().replace('# ', '')
         
         html_from_markdown = markdown.markdown(markdown_text)
         
         try:
             # STAP 1: Maak de draft
-            print(f"Stap 1: Draft aanmaken voor '{title}'...")
+            print(f"Stap 1: Draft aanmaken voor '{title}' met tag '{tag}'...")
             draft_post = ghost.create_post_draft(
                 title=title,
                 html_content=html_from_markdown,
-                tags=['weekly-update']
+                tags=[tag] # Gebruik de dynamische tag
             )
             post_id = draft_post['id']
             updated_at = draft_post['updated_at']

@@ -25,6 +25,23 @@ def run_full_pipeline():
         eprint(f"❌ Kon providers.json niet laden. Fout: {e}")
         sys.exit(1)
 
+    # Controleer of een specifieke provider is geforceerd
+    forced_provider_id = os.getenv('FORCED_PROVIDER')
+    providers_to_run = []
+
+    if forced_provider_id and forced_provider_id != 'auto':
+        eprint(f"⚡️ Modus: Specifieke provider geforceerd: '{forced_provider_id}'")
+        # Zoek de geforceerde provider in de configuratie
+        found_provider = next((p for p in all_providers if p['id'] == forced_provider_id), None)
+        if found_provider:
+            providers_to_run.append(found_provider)
+        else:
+            eprint(f"❌ Fout: Geforceerde provider '{forced_provider_id}' niet gevonden in providers.json.")
+            sys.exit(1)
+    else:
+        eprint("🔄 Modus: Automatische failover (alle providers worden geprobeerd)")
+        providers_to_run = all_providers
+        
     success = False
     for i, provider_config in enumerate(providers):
         provider_id = provider_config['id']
