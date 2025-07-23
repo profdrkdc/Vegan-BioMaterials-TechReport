@@ -1,9 +1,15 @@
 # src/draft.py
-import json, os, datetime, time, sys
+import json
+import os
+import datetime
+import time
+import sys
+import argparse # <-- Belangrijke import
 import google.generativeai as genai
 from openai import OpenAI
 
 def eprint(*args, **kwargs):
+    """Helper functie om naar stderr te printen."""
     print(*args, file=sys.stderr, **kwargs)
 
 # Lees configuratie uit environment
@@ -35,6 +41,26 @@ elif API_TYPE == 'openai_compatible':
 else:
     raise ValueError(f"Ongeldig AI_API_TYPE: {API_TYPE}")
 
+# --- NIEUWE LOGICA VOOR DATUM ---
+# Parse de command-line argumenten
+parser = argparse.ArgumentParser(description="Genereer een nieuwsbrief voor een specifieke datum.")
+parser.add_argument('--date', type=str, help="De datum voor de nieuwsbrief in YYYY-MM-DD formaat.")
+args = parser.parse_args()
+
+# Bepaal de te gebruiken datum
+if args.date:
+    try:
+        target_date = datetime.datetime.strptime(args.date, '%Y-%m-%d').date()
+    except ValueError:
+        eprint(f"❌ Ongeldig datumformaat voor --date: '{args.date}'. Gebruik YYYY-MM-DD.")
+        exit(1)
+else:
+    target_date = datetime.date.today()
+
+today_iso = target_date.isoformat()
+eprint(f"Nieuwsbrief wordt geschreven voor datum: {today_iso}")
+# --- EINDE NIEUWE LOGICA ---
+
 with open(PROMPT_TPL_PATH, "r", encoding="utf-8") as f:
     PROMPT_TPL = f.read()
 try:
@@ -44,13 +70,13 @@ except (FileNotFoundError, json.JSONDecodeError) as e:
     eprint(f"❌ Fout bij laden {CURATED_DATA_PATH}. Fout: {e}")
     exit(1)
 
-today = datetime.date.today()
-today_iso = today.isoformat()
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 for code, lang in LANGS.items():
     edition_word = "Edition"
-    edition_date = today.strftime('%d %b %Y')
+    # Gebruik de 'target_date' variabele
+    edition_date = target_date.strftime('%d %b %Y')
+    
     prompt = PROMPT_TPL.replace('{json_data}', json.dumps(data, indent=2, ensure_ascii=False))
     prompt = prompt.replace('{lang}', lang)
     prompt = prompt.replace('{edition_word}', edition_word)
@@ -64,11 +90,12 @@ for code, lang in LANGS.items():
             md = md.strip()[10:-3].strip()
         elif md.strip().startswith("```"):
              md = md.strip()[3:-3].strip()
+        
+        # Gebruik de 'today_iso' variabele die is afgeleid van 'target_date'
         output_filename = f"{OUTPUT_DIR}/{today_iso}_{code}.md"
         with open(output_filename, "w", encoding="utf-8") as f:
             f.write(md)
         eprint(f"✅ {output_filename} geschreven")
     except Exception as e:
         eprint(f"❌ Fout bij API aanroep voor {lang}: {e}")
-        # Gooi de fout opnieuw op zodat de orchestrator het weet
         raise e
