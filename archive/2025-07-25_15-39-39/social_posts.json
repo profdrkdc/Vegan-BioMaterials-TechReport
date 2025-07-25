@@ -1,0 +1,26 @@
+[
+  {
+    "platform": "x_twitter",
+    "text_content": "This week in the Vegan BioTech Report: The future of eco-friendly materials and major breakthroughs in precision fermentation. Read the full analysis now! #foodtech #biotech #sustainability",
+    "link_to_share": "{{GHOST_POST_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
+    "platform": "instagram",
+    "text_content": "Is this the end of traditional leather? Our latest deep-dive explores the new generation of mycelium-based materials that are revolutionizing fashion and design. Link in bio for the full story!\n\n#veganleather #mycelium #biomaterials #sustainablefashion #biotech",
+    "link_to_share": "{{GHOST_POST_URL}}",
+    "image_prompt": "A hyper-realistic, luxurious handbag that seamlessly transitions from mushroom gills on one side to high-fashion vegan leather on the other, displayed in a minimalist boutique setting, soft lighting.",
+    "reddit_details": null
+  },
+  {
+    "platform": "reddit",
+    "text_content": "Our new long-read investigates how precision fermentation is moving beyond food additives to create bulk proteins, potentially disrupting the entire dairy and egg industry within a decade.",
+    "link_to_share": "{{GHOST_POST_URL}}",
+    "image_prompt": null,
+    "reddit_details": {
+      "suggested_subreddit": "r/futurology",
+      "post_title": "A deep-dive into how precision fermentation is now creating bulk proteins, challenging the economic viability of traditional animal agriculture."
+    }
+  }
+]

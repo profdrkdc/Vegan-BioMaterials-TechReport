@@ -1,0 +1,47 @@
+[
+  {
+    "category": "food",
+    "company": "Perfect Day",
+    "headline": "Perfect Day secures $100M for scaling vegan cheese production",
+    "date": "2025-05-01",
+    "url": "https://example.com/perfectday1",
+    "impact": 8,
+    "summary": "Series C funding fuels expansion of precision-fermentation dairy alternatives."
+  },
+  {
+    "category": "food",
+    "company": "Geltor",
+    "headline": "Geltor partners with food giant for vegan collagen rollout",
+    "date": "2025-07-18",
+    "url": "https://example.com/geltor1",
+    "impact": 8,
+    "summary": "Major partnership accelerates market adoption of precision-fermentation collagen."
+  },
+  {
+    "category": "food",
+    "company": "Redefine Meat",
+    "headline": "Redefine Meat launches 3D-printed vegan steak in US supermarkets",
+    "date": "2025-05-15",
+    "url": "https://example.com/redefinemeat1",
+    "impact": 7,
+    "summary": "First major US retail launch of cellular agriculture-based meat alternative."
+  },
+  {
+    "category": "materials",
+    "company": "Modern Meadow",
+    "headline": "Modern Meadow unveils bio-fabricated leather with improved durability",
+    "date": "2025-06-10",
+    "url": "https://example.com/modernmeadow1",
+    "impact": 7,
+    "summary": "Significant breakthrough in bio-fabricated leather strength and lifespan."
+  },
+  {
+    "category": "food",
+    "company": "Clara Foods",
+    "headline": "Clara Foods secures funding for large-scale egg white production",
+    "date": "2025-04-12",
+    "url": "https://example.com/clarafoods1",
+    "impact": 7,
+    "summary": "Precision fermentation-based egg whites poised for wider market penetration."
+  }
+]
