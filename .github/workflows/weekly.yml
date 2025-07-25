@@ -35,8 +35,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python3 -m pip install --upgrade pip
-          pip3 install -r requirements.txt
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
 
       - name: Configure Git
         run: |
@@ -48,8 +49,8 @@ jobs:
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-          # Ghost secrets zijn hier niet meer nodig, worden in de publish stap gebruikt
         run: |
+          source venv/bin/activate
           ARGS=""
           if [ "${{ github.event.inputs.date }}" != "" ]; then
             ARGS="$ARGS --date ${{ github.event.inputs.date }}"
@@ -60,23 +61,23 @@ jobs:
           python3 -m src.run_pipeline $ARGS
 
       - name: Publish to Ghost
-        # Deze stap draait alleen als de vorige stap (content generatie) succesvol was.
         if: success()
         env:
           GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
           GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
         run: |
+          source venv/bin/activate
           echo "Publiceren van gegenereerde content naar Ghost CMS..."
           python3 -m src.publish_ghost
 
       - name: Commit and Push Generated Content
-        # Deze stap draait ook alleen als de voorgaande stappen succesvol waren.
         if: success()
         run: |
           # Controleer of er überhaupt wijzigingen zijn om te committen
-          if ! git diff --quiet --exit-code -- content/ raw.json curated.json archive/; then
+          if ! git diff --quiet --exit-code -- content/ raw.json curated.json social_posts.json archive/; then
             echo "Wijzigingen gedetecteerd, bezig met committen en pushen..."
-            git add -f content/*.md raw.json curated.json archive/
+            # --- CORRECTIE HIERONDER ---
+            git add -f content/*.md raw.json curated.json social_posts.json archive/
             COMMIT_DATE=$(date -u +"%Y-%m-%d")
             git commit -m "docs: Generate and publish content for ${COMMIT_DATE}"
             git push
