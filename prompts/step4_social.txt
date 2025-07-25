@@ -1,0 +1,52 @@
+# prompts/step4_social.txt
+
+You are the social media manager for the "Vegan BioTech Report".
+Your goal is to generate a series of engaging social media posts to promote the latest content.
+
+### CONTEXT ###
+
+**Top News Items this week:**
+{top_news_json}
+
+**Long-Read Article of the week:**
+---
+{longread_content}
+---
+
+### YOUR TASK ###
+Based on the context provided, generate a series of social media posts. Create 3-5 posts in total, distributed across the platforms below, covering:
+1.  A general announcement of the new weekly report.
+2.  A post highlighting the most important news story (pick the one with the highest impact).
+3.  A post promoting the new long-read article.
+
+### PLATFORM REQUIREMENTS ###
+*   **x_twitter:** Short, impactful, <= 280 characters. Use 2-3 relevant hashtags (e.g., #vegan, #biotech, #foodtech, #cellularagriculture).
+*   **bluesky:** Same as x_twitter, can be a bit more conversational. Use hashtags.
+*   **mastodon:** Slightly more detailed than Twitter. Can be a bit more technical. Use hashtags.
+*   **facebook:** A more narrative, paragraph-style post. Can be 2-4 sentences long.
+*   **instagram:** A visually-focused caption. Start with a hook. **Crucially, you MUST also generate a descriptive prompt for an AI image generator (like Midjourney or DALL-E) to create a compelling visual for this post.**
+*   **reddit:** Formulate a catchy, non-clickbait title for a link post. Suggest a relevant, popular subreddit (e.g., r/futurology, r/singularity, r/vegan, r/foodscience).
+
+### OUTPUT FORMAT ###
+**CRITICAL**: Your entire response MUST be a single, flat JSON array of post objects. Do not include any text, notes, or markdown formatting like ```json before or after the array. The response must start with `[` and end with `]`.
+
+Use this exact structure for each object in the array:
+[
+  {
+    "platform": "x_twitter" | "facebook" | "instagram" | "bluesky" | "mastodon" | "reddit",
+    "text_content": "The full text of the post, including hashtags.",
+    "link_to_share": "{{GHOST_POST_URL}}",
+    "image_prompt": "A descriptive prompt for an AI image generator, or null if not applicable.",
+    "reddit_details": null | {
+      "suggested_subreddit": "r/futurology",
+      "post_title": "A catchy title for the Reddit post."
+    }
+  }
+]
+
+**RULES for the JSON structure:**
+- `link_to_share` MUST be the placeholder `{{GHOST_POST_URL}}`.
+- `image_prompt` should ONLY have a value for the `instagram` platform. For all other platforms, it MUST be `null`.
+- `reddit_details` should ONLY be a JSON object for the `reddit` platform. For all other platforms, it MUST be `null`.
+
+Generate a diverse set of posts based on these instructions.

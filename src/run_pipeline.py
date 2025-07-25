@@ -22,9 +22,8 @@ def run_command(command: list, env: dict):
     return process
 
 def archive_old_content():
-    # Deze functie blijft ongewijzigd
     content_files = glob.glob("content/*.md")
-    data_files = ["raw.json", "curated.json"]
+    data_files = ["raw.json", "curated.json", "social_posts.json"] # social_posts.json toegevoegd
     if not content_files and not any(os.path.exists(f) for f in data_files):
         eprint("Geen bestaande content gevonden om te archiveren.")
         return
@@ -39,7 +38,6 @@ def archive_old_content():
     eprint(f"Oude content gearchiveerd in: {run_archive_dir}")
 
 def get_provider_list():
-    # Deze functie blijft ongewijzigd
     try:
         with open('providers.json', 'r') as f:
             all_providers = json.load(f)
@@ -62,7 +60,6 @@ def get_provider_list():
     return all_providers
 
 def run_task(task_name: str, task_function, providers_to_run):
-    # Deze functie blijft ongewijzigd
     for i, provider_config in enumerate(providers_to_run):
         provider_id = provider_config['id']
         api_key_name = provider_config['api_key_name']
@@ -118,7 +115,7 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
         eprint("\n❌ DRAMATISCHE FOUT: Kon met geen enkele provider de nieuwsbrief genereren.")
         sys.exit(1)
 
-    # --- TAAK 2: Genereer en Vertaal de Long-Read ---
+    # TAAK 2: Genereer en Vertaal de Long-Read
     def generate_longread_task(provider_config):
         script_env = os.environ.copy()
         script_env['AI_API_TYPE'] = provider_config['api_type']
@@ -126,39 +123,30 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
         script_env['AI_API_KEY'] = os.getenv(provider_config['api_key_name'])
         if provider_config.get('base_url'):
             script_env['AI_BASE_URL'] = provider_config['base_url']
-
-        # Stap 2a & 2b: Genereer de Engelse basisversie
         eprint("\n--- Sub-stap 2a: Selecteer Long-Read Onderwerp ---")
         process = run_command(["python3", "-m", "src.select_topic"], env=script_env)
         longread_topic = process.stdout.strip()
         if not longread_topic:
             eprint("⚠️ WAARSCHUWING: Kon geen long-read onderwerp selecteren met deze provider.")
             return None
-        
         eprint("\n--- Sub-stap 2b: Genereer Engels Long-Read Artikel ---")
         longread_filename_en = f"content/longread_{target_date_iso}_en.md"
         run_command(["python3", "-m", "src.generate_longread", longread_topic, "-o", longread_filename_en], env=script_env)
-
-        # --- NIEUWE STAP 2c: Vertaal de Long-Read ---
         eprint("\n--- Sub-stap 2c: Vertaal Long-Read naar andere talen ---")
         try:
             with open('languages.json', 'r', encoding='utf-8') as f:
                 languages = json.load(f)
         except (FileNotFoundError, json.JSONDecodeError) as e:
             eprint(f"⚠️ WAARSCHUWING: Kon 'languages.json' niet laden, vertalingen worden overgeslagen. Fout: {e}")
-            return True # De Engelse versie is gelukt, dus dit is geen fatale fout
-
+            return True
         active_languages = [lang for lang in languages if lang.get("enabled")]
         for lang_config in active_languages:
             if lang_config['code'] == 'en':
-                continue # Sla Engels over, want dat is onze bron
-            
+                continue
             lang_code = lang_config['code']
             lang_name = lang_config['name']
             eprint(f"Vertalen naar {lang_name} ({lang_code})...")
-            
             longread_filename_lang = f"content/longread_{target_date_iso}_{lang_code}.md"
-            
             try:
                 run_command([
                     "python3", "-m", "src.translate_longread",
@@ -169,8 +157,7 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
             except Exception as e:
                 eprint(f"⚠️ Fout bij vertalen naar {lang_name}: {e}. Deze taal wordt overgeslagen.")
                 continue
-
-        return True # Geef aan dat de taak succesvol was
+        return True
 
     longread_providers = [p for p in providers_to_run if p['id'] == successful_provider['id']]
     longread_providers.extend([p for p in providers_to_run if p['id'] != successful_provider['id']])
@@ -182,6 +169,28 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
     if not longread_success:
         eprint("\n⚠️ WAARSCHUWING: Kon met geen enkele provider een long-read artikel genereren, maar de nieuwsbrief is wel gelukt.")
     
+    # --- TAAK 3: Genereer Social Media Posts ---
+    eprint("\n--- Starten van Taak 3: Social Media Post Generatie ---")
+    def generate_socials_task(provider_config):
+        script_env = os.environ.copy()
+        script_env['AI_API_TYPE'] = provider_config['api_type']
+        script_env['AI_MODEL_ID'] = provider_config['model_id']
+        script_env['AI_API_KEY'] = os.getenv(provider_config['api_key_name'])
+        if provider_config.get('base_url'):
+            script_env['AI_BASE_URL'] = provider_config['base_url']
+        
+        run_command(["python3", "-m", "src.generate_social_posts"], env=script_env)
+        return True
+
+    social_providers = longread_providers 
+
+    _, social_posts_success = run_task(
+        "Social Media Generatie", generate_socials_task, social_providers
+    )
+
+    if not social_posts_success:
+        eprint("\n⚠️ WAARSCHUWING: Kon met geen enkele provider social media posts genereren.")
+
     eprint("\n✅ Pijplijn voltooid.")
 
 if __name__ == "__main__":
