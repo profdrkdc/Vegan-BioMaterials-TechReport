@@ -1,26 +1,47 @@
 [
   {
     "platform": "x_twitter",
-    "text_content": "This week in the Vegan BioTech Report: The future of eco-friendly materials and major breakthroughs in precision fermentation. Read the full analysis now! #foodtech #biotech #sustainability",
+    "text_content": "Our latest Vegan BioTech Report is OUT! 🚀 This week: massive investments in air protein, new sustainable materials from MycoWorks, & cultivated bacon! #veganbiotech #foodtech #sustainablefashion",
+    "link_to_share": "{{GHOST_POST_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
+    "platform": "bluesky",
+    "text_content": "Huge news! Air Protein just secured $75M to scale up their air-based protein production!  This is HUGE for sustainable food. What do you think? #airprotein #alternativeprotein #veganfuture",
+    "link_to_share": "{{GHOST_POST_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
+    "platform": "mastodon",
+    "text_content": "Air Protein's $75M Series C funding round signals a major step forward in sustainable protein production.  Their technology, which cultivates protein from air, addresses key environmental and ethical concerns within the food industry.  Read our in-depth analysis! #sustainablefood #proteinproduction #biotech #vegan",
+    "link_to_share": "{{GHOST_POST_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
+    "platform": "facebook",
+    "text_content": "The future of food and fashion is here!  This week's Vegan BioTech Report explores the revolutionary advancements in alternative proteins and sustainable biomaterials. From lab-grown meat to mycelium leather, learn how biotech is reshaping industries and creating a more sustainable future. Check out our latest long-read article!",
     "link_to_share": "{{GHOST_POST_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "Is this the end of traditional leather? Our latest deep-dive explores the new generation of mycelium-based materials that are revolutionizing fashion and design. Link in bio for the full story!\n\n#veganleather #mycelium #biomaterials #sustainablefashion #biotech",
+    "text_content": "🤯  The future is sustainable & delicious!  MycoWorks' partnership with Adidas is changing the game in sustainable fashion.  What innovative biomaterials are you excited about? #veganfashion #myceliumleather #sustainablematerials #biotech",
     "link_to_share": "{{GHOST_POST_URL}}",
-    "image_prompt": "A hyper-realistic, luxurious handbag that seamlessly transitions from mushroom gills on one side to high-fashion vegan leather on the other, displayed in a minimalist boutique setting, soft lighting.",
+    "image_prompt": "A stylish pair of Adidas shoes made from mycelium leather, futuristic and sleek design, vibrant green and white color scheme, high-resolution, photorealistic",
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Our new long-read investigates how precision fermentation is moving beyond food additives to create bulk proteins, potentially disrupting the entire dairy and egg industry within a decade.",
+    "text_content": null,
     "link_to_share": "{{GHOST_POST_URL}}",
     "image_prompt": null,
     "reddit_details": {
       "suggested_subreddit": "r/futurology",
-      "post_title": "A deep-dive into how precision fermentation is now creating bulk proteins, challenging the economic viability of traditional animal agriculture."
+      "post_title": "Biotech Revolution: How Alternative Proteins & Sustainable Biomaterials Will Reshape Food & Fashion"
     }
   }
 ]

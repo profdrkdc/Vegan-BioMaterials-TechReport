@@ -1,47 +1,47 @@
 [
   {
     "category": "food",
-    "company": "Perfect Day",
-    "headline": "Perfect Day secures $100M for scaling vegan cheese production",
-    "date": "2025-05-01",
-    "url": "https://example.com/perfectday1",
+    "company": "Air Protein",
+    "headline": "Air Protein secures major investment",
+    "date": "2025-04-12",
+    "url": "https://example.com/airprotein",
+    "impact": 9,
+    "summary": "Raises $75M to scale up production of air-based protein for food applications."
+  },
+  {
+    "category": "materials",
+    "company": "MycoWorks",
+    "headline": "MycoWorks partners with Adidas",
+    "date": "2025-04-28",
+    "url": "https://example.com/mycoworks",
     "impact": 8,
-    "summary": "Series C funding fuels expansion of precision-fermentation dairy alternatives."
+    "summary": "New sustainable footwear line using mycelium-based leather alternative."
   },
   {
     "category": "food",
-    "company": "Geltor",
-    "headline": "Geltor partners with food giant for vegan collagen rollout",
+    "company": "Meatable",
+    "headline": "Meatable announces cultivated bacon",
     "date": "2025-07-18",
-    "url": "https://example.com/geltor1",
+    "url": "https://example.com/meatable",
     "impact": 8,
-    "summary": "Major partnership accelerates market adoption of precision-fermentation collagen."
+    "summary": "New cultivated bacon product shows promise in taste and texture."
   },
   {
     "category": "food",
-    "company": "Redefine Meat",
-    "headline": "Redefine Meat launches 3D-printed vegan steak in US supermarkets",
-    "date": "2025-05-15",
-    "url": "https://example.com/redefinemeat1",
+    "company": "Perfect Day",
+    "headline": "Perfect Day secures Series D funding",
+    "date": "2025-05-01",
+    "url": "https://example.com/perfectday",
     "impact": 7,
-    "summary": "First major US retail launch of cellular agriculture-based meat alternative."
+    "summary": "Secures $100M to expand production of precision-fermented dairy proteins."
   },
   {
     "category": "materials",
     "company": "Modern Meadow",
-    "headline": "Modern Meadow unveils bio-fabricated leather with improved durability",
+    "headline": "Modern Meadow unveils bio-leather",
     "date": "2025-06-10",
-    "url": "https://example.com/modernmeadow1",
+    "url": "https://example.com/modernmeadow",
     "impact": 7,
-    "summary": "Significant breakthrough in bio-fabricated leather strength and lifespan."
-  },
-  {
-    "category": "food",
-    "company": "Clara Foods",
-    "headline": "Clara Foods secures funding for large-scale egg white production",
-    "date": "2025-04-12",
-    "url": "https://example.com/clarafoods1",
-    "impact": 7,
-    "summary": "Precision fermentation-based egg whites poised for wider market penetration."
+    "summary": "Next-gen bio-fabricated leather with superior durability and sustainability."
   }
 ]

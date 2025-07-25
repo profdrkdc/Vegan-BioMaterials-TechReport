@@ -2,91 +2,91 @@
   {
     "category": "food",
     "company": "Perfect Day",
-    "headline": "Perfect Day secures $100M for scaling vegan cheese production",
+    "headline": "Perfect Day secures Series D funding",
     "date": "2025-05-01",
-    "url": "https://example.com/perfectday1",
-    "impact": 8,
-    "summary": "Series C funding fuels expansion of precision-fermentation dairy alternatives."
+    "url": "https://example.com/perfectday",
+    "impact": 7,
+    "summary": "Secures $100M to expand production of precision-fermented dairy proteins."
   },
   {
     "category": "food",
     "company": "Redefine Meat",
-    "headline": "Redefine Meat launches 3D-printed vegan steak in US supermarkets",
+    "headline": "Redefine Meat launches new alt-steak",
     "date": "2025-05-15",
-    "url": "https://example.com/redefinemeat1",
-    "impact": 7,
-    "summary": "First major US retail launch of cellular agriculture-based meat alternative."
+    "url": "https://example.com/redefinemeat",
+    "impact": 6,
+    "summary": "Improved texture and flavor in 3D-printed plant-based steak alternative."
   },
   {
     "category": "materials",
     "company": "MycoWorks",
-    "headline": "MycoWorks partners with Adidas for new line of vegan shoes",
-    "date": "2025-04-20",
-    "url": "https://example.com/mycoworks1",
-    "impact": 6,
-    "summary": "Mycelium-based leather alternative expands into major athletic footwear brand."
+    "headline": "MycoWorks partners with Adidas",
+    "date": "2025-04-28",
+    "url": "https://example.com/mycoworks",
+    "impact": 8,
+    "summary": "New sustainable footwear line using mycelium-based leather alternative."
   },
   {
     "category": "materials",
     "company": "Modern Meadow",
-    "headline": "Modern Meadow unveils bio-fabricated leather with improved durability",
+    "headline": "Modern Meadow unveils bio-leather",
     "date": "2025-06-10",
-    "url": "https://example.com/modernmeadow1",
+    "url": "https://example.com/modernmeadow",
     "impact": 7,
-    "summary": "Significant breakthrough in bio-fabricated leather strength and lifespan."
-  },
-  {
-    "category": "food",
-    "company": "Impossible Foods",
-    "headline": "Impossible Foods announces new plant-based bacon using precision fermentation",
-    "date": "2025-06-25",
-    "url": "https://example.com/impossiblefoods1",
-    "impact": 6,
-    "summary": "Expands product line with precision-fermentation based meat alternative."
-  },
-  {
-    "category": "materials",
-    "company": "Pangaia",
-    "headline": "Pangaia launches clothing line using seaweed-based vegan leather",
-    "date": "2025-05-28",
-    "url": "https://example.com/pangaia1",
-    "impact": 5,
-    "summary": "Sustainable fashion brand adopts innovative, renewable vegan material."
+    "summary": "Next-gen bio-fabricated leather with superior durability and sustainability."
   },
   {
     "category": "food",
     "company": "Clara Foods",
-    "headline": "Clara Foods secures funding for large-scale egg white production",
-    "date": "2025-04-12",
-    "url": "https://example.com/clarafoods1",
-    "impact": 7,
-    "summary": "Precision fermentation-based egg whites poised for wider market penetration."
+    "headline": "Clara Foods expands egg-white production",
+    "date": "2025-05-20",
+    "url": "https://example.com/clarafoods",
+    "impact": 5,
+    "summary": "Increases capacity to meet growing demand for precision-fermented egg whites."
   },
   {
     "category": "materials",
-    "company": "BioMason",
-    "headline": "BioMason receives grant to scale sustainable construction materials",
-    "date": "2025-05-05",
-    "url": "https://example.com/biomason1",
+    "company": "Pangaia",
+    "headline": "Pangaia launches seaweed-based fabric",
+    "date": "2025-06-25",
+    "url": "https://example.com/pangaia",
     "impact": 6,
-    "summary": "Funding boost for bio-based concrete alternatives using microbial processes."
+    "summary": "New clothing line uses sustainable seaweed-derived materials for reduced environmental impact."
   },
   {
     "category": "food",
-    "company": "Geltor",
-    "headline": "Geltor partners with food giant for vegan collagen rollout",
-    "date": "2025-07-18",
-    "url": "https://example.com/geltor1",
-    "impact": 8,
-    "summary": "Major partnership accelerates market adoption of precision-fermentation collagen."
+    "company": "Air Protein",
+    "headline": "Air Protein secures major investment",
+    "date": "2025-04-12",
+    "url": "https://example.com/airprotein",
+    "impact": 9,
+    "summary": "Raises $75M to scale up production of air-based protein for food applications."
+  },
+  {
+    "category": "materials",
+    "company": "BioMASON",
+    "headline": "BioMASON develops new bio-cement",
+    "date": "2025-05-05",
+    "url": "https://example.com/biomason",
+    "impact": 6,
+    "summary": "Sustainable alternative to traditional cement with reduced carbon footprint."
   },
   {
     "category": "materials",
     "company": "Notpla",
-    "headline": "Notpla's seaweed packaging gets regulatory approval in EU",
-    "date": "2025-07-01",
-    "url": "https://example.com/notpla1",
+    "headline": "Notpla partners with major food chain",
+    "date": "2025-06-01",
+    "url": "https://example.com/notpla",
     "impact": 5,
-    "summary": "Seaweed-based packaging alternative gains crucial regulatory clearance."
+    "summary": "Seaweed-based packaging solution adopted by large retailer for food applications."
+  },
+  {
+    "category": "food",
+    "company": "Meatable",
+    "headline": "Meatable announces cultivated bacon",
+    "date": "2025-07-18",
+    "url": "https://example.com/meatable",
+    "impact": 8,
+    "summary": "New cultivated bacon product shows promise in taste and texture."
   }
 ]
