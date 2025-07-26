@@ -1,47 +1,47 @@
 [
   {
-    "category": "materials",
-    "company": "Modern Meadow",
-    "headline": "Modern Meadow unveils biofabricated leather",
-    "date": "2025-06-01",
-    "url": "https://example.com/modernmeadow",
+    "category": "food",
+    "company": "BioMilk",
+    "headline": "BioMilk secures EU approval for fermented casein",
+    "date": "2025-06-25",
+    "url": "https://example.com/biomilk1",
     "impact": 9,
-    "summary": "New biofabricated leather offers superior durability and sustainability."
+    "summary": "Regulatory milestone opens doors for wider market access in Europe."
   },
   {
     "category": "food",
     "company": "Perfect Day",
-    "headline": "Perfect Day secures Series C funding",
-    "date": "2025-04-28",
-    "url": "https://example.com/perfectday",
+    "headline": "Perfect Day secures $100M for dairy expansion",
+    "date": "2025-05-01",
+    "url": "https://example.com/perfectday1",
     "impact": 8,
-    "summary": "Secures major investment to scale production of precision-fermentation dairy proteins."
+    "summary": "Series C funding fuels large-scale production of precision-fermentation dairy proteins."
   },
   {
     "category": "materials",
     "company": "BioMason",
-    "headline": "BioMason receives grant for bio-cement",
-    "date": "2025-07-01",
-    "url": "https://example.com/biomason",
+    "headline": "BioMason secures contract for sustainable building blocks",
+    "date": "2025-07-22",
+    "url": "https://example.com/biomason1",
     "impact": 8,
-    "summary": "Government funding accelerates development of sustainable bio-cement."
+    "summary": "Large-scale project utilizes bio-based construction materials."
   },
   {
     "category": "materials",
     "company": "MycoWorks",
-    "headline": "MycoWorks partners with Adidas",
+    "headline": "Reishi™ leather debuts in high-fashion line",
     "date": "2025-05-15",
-    "url": "https://example.com/mycoworks",
+    "url": "https://example.com/mycoworks1",
     "impact": 7,
-    "summary": "Releases new line of mycelium-based leather for Adidas footwear."
+    "summary": "Luxury brand adopts sustainable mycelium-based leather alternative."
   },
   {
-    "category": "food",
-    "company": "Geltor",
-    "headline": "Geltor partners with Unilever for vegan collagen",
-    "date": "2025-06-22",
-    "url": "https://example.com/geltor",
+    "category": "materials",
+    "company": "Modern Meadow",
+    "headline": "Modern Meadow partners with Adidas on leather alternative",
+    "date": "2025-05-28",
+    "url": "https://example.com/modernmeadow1",
     "impact": 7,
-    "summary": "Precision fermentation collagen used in Unilever's new beauty products."
+    "summary": "Collaboration focuses on scaling up production of bio-fabricated leather."
   }
 ]

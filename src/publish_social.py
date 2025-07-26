@@ -3,12 +3,85 @@ import os
 import sys
 import json
 from dotenv import load_dotenv
+import google.generativeai as genai
+from openai import OpenAI
 
 def eprint(*args, **kwargs):
     """Helper functie om naar stderr te printen."""
     print(*args, file=sys.stderr, **kwargs)
-    
-# (De functie post_to_mastodon blijft ongewijzigd)
+
+def get_ai_model():
+    """Initialiseert en retourneert het geconfigureerde AI-model."""
+    API_TYPE = os.getenv('AI_API_TYPE')
+    MODEL_ID = os.getenv('AI_MODEL_ID')
+    API_KEY = os.getenv('AI_API_KEY')
+    BASE_URL = os.getenv('AI_BASE_URL')
+
+    if not all([API_TYPE, MODEL_ID, API_KEY]):
+        eprint("⚠️ WAARSCHUWING: AI-configuratievariabelen niet volledig ingesteld voor flair-selectie.")
+        return None
+
+    try:
+        if API_TYPE == 'google':
+            genai.configure(api_key=API_KEY)
+            return genai.GenerativeModel(MODEL_ID)
+        elif API_TYPE == 'openai_compatible':
+            client = OpenAI(base_url=BASE_URL, api_key=API_KEY)
+            class OpenRouterModel:
+                def generate_content(self, prompt):
+                    response = client.chat.completions.create(model=MODEL_ID, messages=[{"role": "user", "content": prompt}])
+                    content = ""
+                    if response.choices and response.choices[0].message:
+                        content = response.choices[0].message.content
+                    class ResponseWrapper:
+                        def __init__(self, text): self.text = text
+                    return ResponseWrapper(content)
+            return OpenRouterModel()
+        else:
+            eprint(f"⚠️ WAARSCHUWING: Ongeldig AI_API_TYPE '{API_TYPE}' voor flair-selectie.")
+            return None
+    except Exception as e:
+        eprint(f"⚠️ WAARSCHUWING: Kon AI-model voor flair-selectie niet initialiseren. Fout: {e}")
+        return None
+
+def select_best_flair_with_ai(title: str, available_flairs: list, model) -> str or None:
+    """Gebruikt AI om de beste flair te selecteren uit een lijst."""
+    if not model or not available_flairs:
+        return None
+
+    flair_texts = [f"'{flair['text']}'" for flair in available_flairs]
+    flair_list_str = ", ".join(flair_texts)
+
+    prompt = f"""
+    You are a Reddit expert. Your task is to select the most appropriate flair for a post.
+    Analyze the post title and choose the best option from the list of available flairs.
+
+    Post Title: "{title}"
+
+    Available Flairs: [{flair_list_str}]
+
+    CRITICAL: Respond with ONLY the single, exact text of the best flair from the provided list.
+    For example, if you choose the flair 'Biology', your entire response must be just: Biology
+    Do not add any explanation, punctuation, or quotation marks.
+    """
+
+    eprint(f"🤖 AI wordt aangeroepen om de beste flair te kiezen uit: {flair_list_str}")
+    try:
+        response = model.generate_content(prompt)
+        chosen_flair_text = response.text.strip().strip("'\"")
+        
+        # Verifieer dat de AI een geldige flair heeft gekozen
+        for flair in available_flairs:
+            if flair['text'] == chosen_flair_text:
+                eprint(f"✅ AI heeft een geldige flair gekozen: '{chosen_flair_text}'")
+                return flair['id']
+        
+        eprint(f"⚠️ AI koos een ongeldige flair: '{chosen_flair_text}'. Poging wordt gestaakt.")
+        return None
+    except Exception as e:
+        eprint(f"❌ Fout tijdens AI-flair selectie: {e}")
+        return None
+
 def post_to_mastodon(post_content):
     """Publiceert een post op Mastodon."""
     eprint("-> Poging tot publicatie op Mastodon...")
@@ -26,10 +99,7 @@ def post_to_mastodon(post_content):
         return
 
     try:
-        mastodon_api = Mastodon(
-            access_token=access_token,
-            api_base_url=api_base_url
-        )
+        mastodon_api = Mastodon(access_token=access_token, api_base_url=api_base_url)
         status = mastodon_api.status_post(post_content['text_content'])
         eprint(f"✅ SUCCES: Gepost op Mastodon! URL: {status['url']}")
     except MastodonError as e:
@@ -37,26 +107,21 @@ def post_to_mastodon(post_content):
     except Exception as e:
         eprint(f"❌ FOUT: Een onverwachte fout is opgetreden bij Mastodon: {e}")
 
-def find_flair_id(search_term, available_flairs, flair_type=""):
-    """Hulpfunctie om een flair ID te vinden op basis van een zoekterm."""
-    for flair in available_flairs:
-        if flair['text'].lower() == search_term.lower():
-            eprint(f"INFO ({flair_type}): Exacte flair match gevonden: '{flair['text']}'")
-            return flair['id']
-    for flair in available_flairs:
-        if search_term.lower() in flair['text'].lower():
-            eprint(f"INFO ({flair_type}): Gedeeltelijke flair match gevonden: '{flair['text']}'")
-            return flair['id']
-    return None
-    
-def post_to_reddit(post_content):
-    """Publiceert een post op Reddit, inclusief abonneren op de subreddit."""
+def post_to_reddit(post_content, ai_model):
+    """Publiceert een post op Reddit, inclusief dynamische flair-selectie."""
     reddit_details = post_content.get('reddit_details')
     if not reddit_details:
         eprint("❌ FOUT: Kan niet posten op Reddit. 'reddit_details' object ontbreekt.")
         return
-        
+
     target_subreddit = reddit_details.get('suggested_subreddit', 'r/test').lstrip('r/')
+    title = reddit_details.get('post_title')
+    text_content = post_content.get('text_content')
+
+    if not all([title, text_content]):
+        eprint("❌ FOUT: Reddit post mist 'post_title' of 'text_content'.")
+        return
+
     eprint(f"-> Poging tot publicatie op Reddit in r/{target_subreddit}...")
 
     try:
@@ -67,6 +132,7 @@ def post_to_reddit(post_content):
         eprint("❌ FOUT: De 'praw' library is niet geïnstalleerd.")
         return
 
+    # Reddit credentials laden
     client_id = os.getenv('REDDIT_CLIENT_ID')
     client_secret = os.getenv('REDDIT_CLIENT_SECRET')
     username = os.getenv('REDDIT_USERNAME')
@@ -79,54 +145,20 @@ def post_to_reddit(post_content):
 
     try:
         reddit_api = praw.Reddit(
-            client_id=client_id,
-            client_secret=client_secret,
-            username=username,
-            password=password,
-            user_agent=user_agent
+            client_id=client_id, client_secret=client_secret,
+            username=username, password=password, user_agent=user_agent
         )
         subreddit = reddit_api.subreddit(target_subreddit)
-        
-        # --- NIEUWE LOGICA: Abonneer op subreddit als dat nog niet is gebeurd ---
-        try:
-            if not subreddit.user_is_subscriber:
-                eprint(f"INFO: Account is nog geen lid van r/{target_subreddit}. Poging tot abonneren...")
-                subreddit.subscribe()
-                eprint(f"✅ SUCCES: Geabonneerd op r/{target_subreddit}.")
-        except Exception as e:
-            eprint(f"⚠️ WAARSCHUWING: Kon niet automatisch abonneren op subreddit. Fout: {e}")
-        # --- EINDE NIEUWE LOGICA ---
-
-        text_content = post_content.get('text_content')
-        title = reddit_details.get('post_title')
         
         flair_id = None
         try:
             available_flairs = list(subreddit.flair.link_templates)
-            preferred_keyword = "biotech"
-            flair_id = find_flair_id(preferred_keyword, available_flairs, "P1 Preferred")
-
-            if not flair_id:
-                ai_keyword = reddit_details.get('primary_topic_keyword')
-                if ai_keyword:
-                    flair_id = find_flair_id(ai_keyword, available_flairs, "P2 AI")
-
-            if not flair_id:
-                fallback_keywords = ['discussion', 'article']
-                for keyword in fallback_keywords:
-                    flair_id = find_flair_id(keyword, available_flairs, "P3 Fallback")
-                    if flair_id: break
-
+            if available_flairs:
+                flair_id = select_best_flair_with_ai(title, available_flairs, ai_model)
+            else:
+                eprint("INFO: Subreddit heeft geen configureerbare flairs.")
         except Exception as e:
             eprint(f"⚠️ WAARSCHUWING: Kon flairs niet ophalen of verwerken. Fout: {e}")
-
-        if not title:
-            eprint("❌ FOUT: Kan niet posten op Reddit. 'post_title' ontbreekt.")
-            return
-        
-        if not text_content:
-            eprint("❌ FOUT: Kan niet posten op Reddit. 'text_content' is leeg.")
-            return
 
         submission = subreddit.submit(title=title, selftext=text_content, flair_id=flair_id)
         eprint(f"✅ SUCCES: Gepost op Reddit! URL: {submission.shortlink}")
@@ -134,7 +166,7 @@ def post_to_reddit(post_content):
     except RedditAPIException as e:
         for subexception in e.items:
             if subexception.error_type == 'SUBMIT_VALIDATION_FLAIR_REQUIRED':
-                eprint(f"❌ FOUT: r/{target_subreddit} vereist een flair, maar een geldige kon niet worden gevonden of ingesteld.")
+                eprint(f"❌ FOUT: r/{target_subreddit} vereist een flair, maar een geldige kon niet dynamisch worden gekozen. De AI-selectie is mogelijk mislukt of er zijn geen flairs beschikbaar.")
                 return
         eprint(f"❌ FOUT: Reddit API fout: {e}")
     except PrawcoreException as e:
@@ -145,7 +177,7 @@ def post_to_reddit(post_content):
 if __name__ == "__main__":
     eprint("--- Starting Social Media Publisher ---")
     load_dotenv()
-    
+
     URL_INPUT_FILE = "published_post_url.txt"
     try:
         with open(URL_INPUT_FILE, "r", encoding="utf-8") as f:
@@ -166,6 +198,9 @@ if __name__ == "__main__":
         eprint(f"❌ FOUT: Kan 'social_posts.json' niet lezen of parsen. Fout: {e}")
         sys.exit(1)
 
+    # Initialiseer het AI-model eenmalig voor gebruik in de loop
+    ai_model_for_flairs = get_ai_model()
+
     for post in posts_to_publish:
         platform = post.get("platform")
         eprint(f"\nVerwerken van post voor platform: {platform}")
@@ -176,7 +211,7 @@ if __name__ == "__main__":
         if platform == "mastodon":
             post_to_mastodon(post)
         elif platform == "reddit":
-            post_to_reddit(post)
+            post_to_reddit(post, ai_model_for_flairs)
         else:
             eprint(f"⚠️ WAARSCHUWING: Geen publicatielogica voor platform '{platform}'. Post wordt overgeslagen.")
             
