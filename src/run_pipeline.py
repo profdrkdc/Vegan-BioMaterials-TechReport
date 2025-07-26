@@ -92,7 +92,9 @@ def run_task(task_name: str, task_function, providers_to_run):
     return None, None
 
 def run_full_pipeline(target_date_str: str or None, no_archive: bool, publish_social: bool):
-    if not no_archive:
+    # --- DE AANPASSING IS HIER ---
+    # Voer alleen archivering uit als we NIET in publish-only modus zijn.
+    if not no_archive and not publish_social:
         archive_old_content()
     
     target_date = datetime.date.today()
@@ -131,7 +133,6 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool, publish_so
     def publish_social_task(provider_config):
         if not os.path.exists("social_posts.json"):
             eprint("❌ FOUT: 'social_posts.json' niet gevonden. Draai eerst de pipeline zonder --publish-social.")
-            # We gooien een exception zodat run_task dit als een mislukking ziet
             raise FileNotFoundError("social_posts.json niet gevonden.")
         
         script_env = build_script_env(provider_config)
@@ -164,4 +165,3 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     run_full_pipeline(args.date, args.no_archive, args.publish_social)
-    
