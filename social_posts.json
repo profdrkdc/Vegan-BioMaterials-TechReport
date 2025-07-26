@@ -1,41 +1,41 @@
 [
   {
     "platform": "bluesky",
-    "text_content": "Whoa, just finished reading about Air Protein's massive new facility! 🤯  They're scaling up their air-based protein production – seriously game-changing stuff for sustainable food.  Check it out! {{GHOST_ARTICLE_URL}}",
+    "text_content": "Huge news! MycoWorks just secured Series C funding! This is a massive step forward for sustainable materials and the vegan biotech revolution.  Read more about how they're changing the game in fashion, automotive, and furniture: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "mastodon",
-    "text_content": "Air Protein's new mega-facility is revolutionizing sustainable protein production! This in-depth article explores their technology, impact on global food security, environmental benefits, and competitive landscape. Learn more and join the conversation: {{GHOST_ARTICLE_URL}} #AirProtein #SustainableFood #AlternativeProtein #FoodTech #Biotech",
+    "text_content": "MycoWorks' Series C funding is a game-changer for sustainable materials!  Their mycelium-based tech is poised to disrupt industries from fashion to automotive. Learn all about it in our latest deep dive: {{GHOST_ARTICLE_URL}} #MycoWorks #SustainableMaterials #VeganBiotech #SeriesC #Innovation",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "facebook",
-    "text_content": "The future of food is here! Air Protein just opened a massive new production facility, poised to disrupt the global food system.  Their innovative technology uses air to create protein, offering a sustainable and scalable solution to feed a growing population.  This detailed article dives into the science, the impact, and the challenges ahead. Learn more and share your thoughts: {{GHOST_ARTICLE_URL}}",
+    "text_content": "The future of sustainable materials is here! MycoWorks, a leader in mycelium-based materials, just received significant Series C funding. This investment will fuel their groundbreaking work in creating eco-friendly alternatives for various industries, from fashion and automotive to furniture.  Their innovative approach uses mushroom roots to create durable, biodegradable materials, offering a compelling solution to the environmental challenges posed by traditional materials.  Learn more about MycoWorks' transformative technology and its impact on the vegan biotech sector in our latest article: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "Could this be the future of food? 🤔 Air Protein's game-changing technology is creating protein from air!  Read all about their new mega-facility and the impact it will have on the world. Link in bio! #sustainablefood #futureoffood #airprotein #cleantech #veganbiotech",
+    "text_content": "🤯  Mushroom leather?  It's REAL and it's revolutionizing sustainable materials!  MycoWorks' Series C funding is HUGE news.  Learn how they're changing the world. Link in bio! #veganbiotech #sustainablefashion #mycelium #innovation #futureofmaterials",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A futuristic, clean and bright image of a large-scale industrial facility producing protein from air.  Show glowing tubes, sleek machinery, and happy, diverse people working collaboratively.  The overall mood should be optimistic and hopeful.",
+    "image_prompt": "A futuristic, sleek image of a luxury handbag made from mushroom leather, with a subtle, glowing mycelium texture.  The background should be a dark, moody forest scene.",
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Just finished reading about Air Protein's HUGE new facility – mind blown!  They're making protein from air, seriously.  The article goes deep into the tech, the environmental impact, and how it could change food security globally.  It's a long read, but SO worth it. What are your thoughts on this kind of innovation?  Is this the future of food?  Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Just finished reading an amazing article about MycoWorks and their recent Series C funding!  Seriously impressed by their mycelium-based materials – it's a total game-changer for sustainable alternatives in so many industries.  They're tackling the environmental impact of traditional materials head-on, and it's inspiring to see this level of innovation.  What do you think is the biggest potential impact of this technology?  Will we see widespread adoption soon? Let's discuss! Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": {
-      "suggested_subreddit": "r/futurology",
-      "post_title": "Air Protein's Mega-Facility: Revolutionizing Sustainable Protein Production",
-      "primary_topic_keyword": "Biotech"
+      "suggested_subreddit": "r/sustainable",
+      "post_title": "MycoWorks' Series C Funding: A Revolution in Sustainable Materials?",
+      "primary_topic_keyword": "Biomaterials"
     }
   }
 ]

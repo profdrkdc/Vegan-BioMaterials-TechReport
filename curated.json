@@ -1,47 +1,56 @@
 [
   {
     "category": "materials",
-    "company": "Modern Meadow",
-    "headline": "Modern Meadow unveils bio-fabricated leather",
-    "date": "2025-06-22",
-    "url": "https://example.com/modernmeadow",
+    "company": "MycoWorks",
+    "headline": "MycoWorks secures Series C funding",
+    "date": "2025-07-10",
+    "url": "https://www.google.com/search?q=MycoWorks+Series+C+funding+2025",
     "impact": 9,
-    "summary": "New bio-fabricated leather offers superior durability and sustainability."
+    "summary": "Significant investment boosts mushroom leather production."
+  },
+  {
+    "category": "food",
+    "company": "Impossible Foods",
+    "headline": "Impossible Foods launches new vegan meat product",
+    "date": "2025-07-15",
+    "url": "https://www.google.com/search?q=Impossible+Foods+new+vegan+meat+product+2025",
+    "impact": 8,
+    "summary": "New product launch with improved taste and texture."
+  },
+  {
+    "category": "materials",
+    "company": "BioMASON",
+    "headline": "BioMASON develops sustainable construction material",
+    "date": "2025-06-25",
+    "url": "https://www.google.com/search?q=BioMASON+sustainable+construction+material+2025",
+    "impact": 8,
+    "summary": "Innovative approach using bacteria to create building blocks."
   },
   {
     "category": "food",
     "company": "Perfect Day",
-    "headline": "Perfect Day secures Series D funding",
-    "date": "2025-05-01",
-    "url": "https://example.com/perfectday",
-    "impact": 8,
-    "summary": "New funding fuels expansion of precision-fermentation dairy products."
-  },
-  {
-    "category": "food",
-    "company": "Air Protein",
-    "headline": "Air Protein announces new production facility",
-    "date": "2025-07-05",
-    "url": "https://example.com/airprotein",
-    "impact": 8,
-    "summary": "Gas fermentation-based protein production scales up significantly."
+    "headline": "Perfect Day expands into new markets",
+    "date": "2025-07-20",
+    "url": "https://www.google.com/search?q=Perfect+Day+expands+markets+2025",
+    "impact": 7,
+    "summary": "Increased production and distribution of dairy-free products."
   },
   {
     "category": "materials",
-    "company": "MycoWorks",
-    "headline": "MycoWorks partners with Adidas",
-    "date": "2025-04-20",
-    "url": "https://example.com/mycoworks",
+    "company": "Modern Meadow",
+    "headline": "Modern Meadow partners with major fashion brand",
+    "date": "2025-07-05",
+    "url": "https://www.google.com/search?q=Modern+Meadow+fashion+partnership+2025",
     "impact": 7,
-    "summary": "Sustainable mushroom leather used in new Adidas shoe line."
+    "summary": "Collaboration to integrate bio-fabricated leather into clothing lines."
   },
   {
     "category": "food",
-    "company": "Clara Foods",
-    "headline": "Clara Foods expands egg-white production",
-    "date": "2025-04-28",
-    "url": "https://example.com/clarafoods",
+    "company": "Eat Just",
+    "headline": "Eat Just expands cultured egg production",
+    "date": "2025-06-10",
+    "url": "https://www.google.com/search?q=Eat+Just+cultured+egg+expansion+2025",
     "impact": 7,
-    "summary": "Increased production of precision-fermented egg whites meets growing demand."
+    "summary": "Increased production capacity meets growing demand."
   }
 ]

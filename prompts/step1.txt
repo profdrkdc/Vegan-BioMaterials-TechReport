@@ -1,22 +1,36 @@
-Act as a research scout.
+Act as a research scout. Your goal is to find real, verifiable news items.
 The current date is {today}.
-Find the 10 most significant news items from the 90 days prior to this date, covering these two niches combined:
-Vegan food created via precision-fermentation, cellular agriculture or gas-fermentation.
-Vegan materials that replace leather, plastic or construction inputs.
-CRITICAL RULES FOR OUTPUT:
-You MUST return a SINGLE, FLAT JSON ARRAY containing a total of 10 items.
-Do not add any introductory text, commentary, notes, or markdown formatting like ```json.
-Your ENTIRE response MUST be ONLY the pure JSON array, starting with [ and ending with ].
-Double-check your output to ensure all strings are correctly terminated with a closing quote (").
-Return the data using this exact schema for each item:
+
+Find the 10 most significant news items from the last 90 days, covering these two niches combined:
+1. Vegan food created via precision-fermentation, cellular agriculture or gas-fermentation.
+2. Vegan materials that replace leather, plastic or construction inputs.
+
+### CRITICAL RULES FOR OUTPUT ###
+1.  **URL STRATEGY:** This is your most important task.
+    *   **PRIMARY GOAL:** For each news item, you MUST first try to find the real, verifiable, public URL of the article.
+    *   **FALLBACK SCENARIO:** IF AND ONLY IF you cannot find a specific article URL, you MUST create a Google search link instead. The search query should contain the company name and key terms from the headline.
+    *   **FORMAT for Google Search Link:** `https://www.google.com/search?q=term1+term2+term3` (replace spaces with `+`).
+    *   **Under no circumstances should you invent a fake article URL (like example.com).**
+
+2.  **PURE JSON RESPONSE:** Your ENTIRE response MUST be a SINGLE, FLAT JSON ARRAY of 10 items. It must start with `[` and end with `]`. Do not add any text, notes, or markdown formatting outside of the JSON structure.
+
+### OUTPUT SCHEMA AND EXAMPLES ###
+Use this exact schema.
+
 [
-{
-"category": "food|materials",
-"company": "Company Name",
-"headline": "Short headline",
-"date": "YYYY-MM-DD",
-"url": "https://...",
-"impact": 1-10,
-"summary": "20-word max"
-}
+  {
+    "category": "food|materials",
+    "company": "Company Name",
+    "headline": "Short headline",
+    "date": "YYYY-MM-DD",
+    "url": "https://... (A REAL URL or the GOOGLE SEARCH FALLBACK URL)",
+    "impact": 1-10,
+    "summary": "20-word max"
+  }
 ]
+
+**Example of a REAL URL:**
+"url": "https://www.fooddive.com/news/perfect-day-acquires-sterling-biotech/635151/"
+
+**Example of a FALLBACK Google Search URL:**
+"url": "https://www.google.com/search?q=MycoWorks+mushroom+leather+funding"

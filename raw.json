@@ -2,91 +2,91 @@
   {
     "category": "food",
     "company": "Perfect Day",
-    "headline": "Perfect Day secures Series D funding",
-    "date": "2025-05-01",
-    "url": "https://example.com/perfectday",
+    "headline": "Perfect Day expands into new markets",
+    "date": "2025-07-20",
+    "url": "https://www.google.com/search?q=Perfect+Day+expands+markets+2025",
+    "impact": 7,
+    "summary": "Increased production and distribution of dairy-free products."
+  },
+  {
+    "category": "food",
+    "company": "Impossible Foods",
+    "headline": "Impossible Foods launches new vegan meat product",
+    "date": "2025-07-15",
+    "url": "https://www.google.com/search?q=Impossible+Foods+new+vegan+meat+product+2025",
     "impact": 8,
-    "summary": "New funding fuels expansion of precision-fermentation dairy products."
+    "summary": "New product launch with improved taste and texture."
   },
   {
     "category": "materials",
     "company": "MycoWorks",
-    "headline": "MycoWorks partners with Adidas",
-    "date": "2025-04-20",
-    "url": "https://example.com/mycoworks",
-    "impact": 7,
-    "summary": "Sustainable mushroom leather used in new Adidas shoe line."
-  },
-  {
-    "category": "food",
-    "company": "Redefine Meat",
-    "headline": "Redefine Meat launches new vegan steak",
-    "date": "2025-05-15",
-    "url": "https://example.com/redefinemeat",
-    "impact": 6,
-    "summary": "3D-printed vegan steak boasts improved texture and taste."
-  },
-  {
-    "category": "materials",
-    "company": "Notpla",
-    "headline": "Notpla seaweed packaging gets EU approval",
-    "date": "2025-06-10",
-    "url": "https://example.com/notpla",
-    "impact": 5,
-    "summary": "Seaweed-based packaging alternative gains regulatory clearance."
-  },
-  {
-    "category": "food",
-    "company": "Clara Foods",
-    "headline": "Clara Foods expands egg-white production",
-    "date": "2025-04-28",
-    "url": "https://example.com/clarafoods",
-    "impact": 7,
-    "summary": "Increased production of precision-fermented egg whites meets growing demand."
+    "headline": "MycoWorks secures Series C funding",
+    "date": "2025-07-10",
+    "url": "https://www.google.com/search?q=MycoWorks+Series+C+funding+2025",
+    "impact": 9,
+    "summary": "Significant investment boosts mushroom leather production."
   },
   {
     "category": "materials",
     "company": "Modern Meadow",
-    "headline": "Modern Meadow unveils bio-fabricated leather",
-    "date": "2025-06-22",
-    "url": "https://example.com/modernmeadow",
-    "impact": 9,
-    "summary": "New bio-fabricated leather offers superior durability and sustainability."
+    "headline": "Modern Meadow partners with major fashion brand",
+    "date": "2025-07-05",
+    "url": "https://www.google.com/search?q=Modern+Meadow+fashion+partnership+2025",
+    "impact": 7,
+    "summary": "Collaboration to integrate bio-fabricated leather into clothing lines."
   },
   {
     "category": "food",
-    "company": "Wild Earth",
-    "headline": "Wild Earth secures major retail partnership",
-    "date": "2025-05-25",
-    "url": "https://example.com/wildearth",
+    "company": "Redefine Meat",
+    "headline": "Redefine Meat expands to US market",
+    "date": "2025-06-30",
+    "url": "https://www.google.com/search?q=Redefine+Meat+US+market+expansion+2025",
     "impact": 6,
-    "summary": "Pet food company expands distribution of precision-fermentation pet food."
+    "summary": "3D-printed vegan meat enters a major new market."
   },
   {
     "category": "materials",
-    "company": "Biohm",
-    "headline": "Biohm's bio-based construction material gains traction",
-    "date": "2025-07-18",
-    "url": "https://example.com/biohm",
-    "impact": 4,
-    "summary": "Mycelium-based construction material shows promise for sustainable building."
+    "company": "BioMASON",
+    "headline": "BioMASON develops sustainable construction material",
+    "date": "2025-06-25",
+    "url": "https://www.google.com/search?q=BioMASON+sustainable+construction+material+2025",
+    "impact": 8,
+    "summary": "Innovative approach using bacteria to create building blocks."
   },
   {
     "category": "food",
-    "company": "Air Protein",
-    "headline": "Air Protein announces new production facility",
-    "date": "2025-07-05",
-    "url": "https://example.com/airprotein",
-    "impact": 8,
-    "summary": "Gas fermentation-based protein production scales up significantly."
+    "company": "Geltor",
+    "headline": "Geltor secures partnership with food manufacturer",
+    "date": "2025-06-20",
+    "url": "https://www.google.com/search?q=Geltor+food+manufacturer+partnership+2025",
+    "impact": 6,
+    "summary": "Collaboration to incorporate collagen into various food products."
   },
   {
     "category": "materials",
     "company": "Pangaia",
-    "headline": "Pangaia launches new line of recycled clothing",
-    "date": "2025-06-01",
-    "url": "https://example.com/pangaia",
+    "headline": "Pangaia launches new line of vegan clothing",
+    "date": "2025-06-15",
+    "url": "https://www.google.com/search?q=Pangaia+vegan+clothing+line+2025",
     "impact": 5,
-    "summary": "Focus on recycled and innovative materials in new clothing line."
+    "summary": "Focus on sustainable and innovative materials."
+  },
+  {
+    "category": "food",
+    "company": "Eat Just",
+    "headline": "Eat Just expands cultured egg production",
+    "date": "2025-06-10",
+    "url": "https://www.google.com/search?q=Eat+Just+cultured+egg+expansion+2025",
+    "impact": 7,
+    "summary": "Increased production capacity meets growing demand."
+  },
+  {
+    "category": "materials",
+    "company": "Notpla",
+    "headline": "Notpla secures investment for seaweed packaging",
+    "date": "2025-05-30",
+    "url": "https://www.google.com/search?q=Notpla+seaweed+packaging+investment+2025",
+    "impact": 6,
+    "summary": "Funding boosts production of sustainable packaging alternatives."
   }
 ]
