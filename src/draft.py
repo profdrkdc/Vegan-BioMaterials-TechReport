@@ -34,11 +34,12 @@ elif API_TYPE == 'openai_compatible':
         def generate_content(self, prompt):
             response = client.chat.completions.create(model=MODEL_ID, messages=[{"role": "user", "content": prompt}])
             content = ""
-            if response.choices and response.choices:
-                if response.choices.message:
-                    content = response.choices.message.content
-                elif hasattr(response.choices, 'text'):
-                    content = response.choices.text
+            # FIX: 'choices' is een lijst. Pak het eerste element.
+            if response.choices and len(response.choices) > 0:
+                choice = response.choices[0]
+                if choice.message and choice.message.content:
+                    content = choice.message.content
+
             class ResponseWrapper:
                 def __init__(self, text): self.text = text
             return ResponseWrapper(content)

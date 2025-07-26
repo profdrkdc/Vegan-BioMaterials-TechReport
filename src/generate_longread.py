@@ -81,9 +81,12 @@ def generate_longread_article(topic: str, output_path: str, outline_output_path:
             if len(title_points_split) != 2:
                 eprint(f"Skipping malformed section: {sec_part}")
                 continue
-                
-            sec_title = title_points_split.strip()
-            talking_points = [p.strip() for p in title_points_split.split(',')]
+            
+            # FIX: Indexeer de lijst `title_points_split` correct.
+            sec_title = title_points_split[0].strip()
+            points_string = title_points_split[1]
+            talking_points = [p.strip() for p in points_string.split(',')]
+            
             sections.append({"title": sec_title, "talking_points": talking_points})
 
         outline_dict = {
@@ -157,4 +160,3 @@ if __name__ == "__main__":
     parser.add_argument("--outline-out", type=str, default="longread_outline.json", help="The path to save the JSON outline.")
     args = parser.parse_args()
     generate_longread_article(args.topic, args.output, args.outline_out)
-    

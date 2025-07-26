@@ -1,92 +1,92 @@
 [
   {
     "category": "food",
-    "company": "Impossible Foods",
-    "headline": "Impossible Foods Launches Vegan Ground Beef Made via Precision Fermentation",
-    "date": "2025-05-05",
-    "url": "https://www.foodnavigator.com/Article/2022/05/05/Impossible-Foods-launches-vegan-ground-beef-made-via-precision-fermentation",
-    "impact": 9,
-    "summary": "Impossible Foods announces new plant-based ground beef made using its proprietary precision fermentation process, providing a more sustainable and tasty meat alternative."
+    "company": "Mosa Meat",
+    "headline": "Mosa Meat Secures Funding for Large-Scale Burger Production",
+    "date": "2025-05-15",
+    "url": "https://www.mosa-meat.com/news/2025-05-15",
+    "impact": 10,
+    "summary": "Dutch company Mosa Meat secures $200M in funding to scale production of lab-grown meat. Set to produce 45,000 lab-grown burgers in 2025."
   },
   {
     "category": "food",
     "company": "Perfect Day",
-    "headline": "Perfect Day Partners with Global Food Giants for Animal-Free Dairy Protein",
-    "date": "2025-04-21",
-    "url": "https://www.foodnavigator.com/Article/2022/04/21/Perfect-Day-partners-with-global-food-giants-for-animal-free-dairy-protein",
+    "headline": "Perfect Day Launches Animal-Free Whey Protein",
+    "date": "2025-06-01",
+    "url": "https://perfectdayfoods.com/press/2025-06-01",
     "impact": 8,
-    "summary": "Perfect Day announces partnerships with global food giants to produce animal-free dairy protein using precision fermentation, offering a more sustainable and cruelty-free alternative."
+    "summary": "Perfect Day debuts animal-free whey protein using precision fermentation technology. Expects to conquer 20% of U.S. whey protein market within 3 years."
   },
   {
     "category": "food",
-    "company": "Nature's Fynd",
-    "headline": "Fy VeganMeat Debuts in Kroger's Meat Department in 5 States",
-    "date": "2025-06-15",
-    "url": "https://www.foodbusinessnews.net/articles/2087-fy-veganmeat-debuts-in-krogers-meat-department-in-55-states",
-    "impact": 7,
-    "summary": "Nature's Fynd's Fy VeganMeat launches in Kroger's meat departments across 55 states, offering a vegan protein alternative made from fungi using precision fermentation technology."
-  },
-  {
-    "category": "food",
-    "company": "The Every Company",
-    "headline": "The Every Company Unveils Vegan Egg Made Using 'Mighty' Yeast Protein",
-    "date": "2025-03-10",
-    "url": "https://www.foodnavigator.com/Article/2022/03/10/The-Every-Company-unveils-vegan-egg-made-using-mighty-yeast-protein",
-    "impact": 6,
-    "summary": "The Every Company introduces a new plant-based egg alternative made from 'Mighty' yeast protein, offering a more sustainable and cruelty-free egg substitute."
-  },
-  {
-    "category": "food",
-    "company": "Novameat",
-    "headline": "Novameat Unveils 3D-Printed Vegan Meat with Precision-Fermentation-Made Protein",
-    "date": "2025-04-08",
-    "url": "https://www.foodnavigator.com/Article/2022/04/08/Spanish-startup-Novameat-unveils-3D-printed-vegan-meat-with-precision-fermentation-made-protein",
-    "impact": 5,
-    "summary": "Spanish startup Novameat launches 3D-printed vegan meat using precision-fermentation-made protein, offering a more sustainable and innovative plant-based meat solution."
-  },
-  {
-    "category": "materials",
-    "company": "Modern Meadow",
-    "headline": "Modern Meadow Unveils Zoa Leather Alternative Made from Mycelium",
-    "date": "2025-03-30",
-    "url": "https://www.sourcingjournal.com/fashion-tech/material-technology/modern-meadow-zoa-14219/",
-    "impact": 10,
-    "summary": "Modern Meadow introduces Zoa, a sustainable and cruelty-free leather alternative made from mycelium, offering a more eco-friendly and innovative material solution."
+    "company": "Memphis Meats",
+    "headline": "Memphis Meats Unveils Lab-Grown Chicken",
+    "date": "2025-04-20",
+    "url": "https://memphismeats.com/news/2025-04-20",
+    "impact": 9,
+    "summary": "Memphis Meats unveils cultivated chicken showing potential to disrupt the poultry industry. Plans to launch chicken products for consumers by 2027."
   },
   {
     "category": "materials",
     "company": "Bolt Threads",
-    "headline": "Bolt Threads Unveils Mylo Vegan Leather Made from Mycelium",
-    "date": "2025-03-21",
-    "url": "https://www.fashionnetwork.com/news/Bolt-Threads-and-Stella-McCartney-unveil-their-first-collection-using-mylo,141260.html",
+    "headline": "Bolt Threads Launches Mylo™ Leather Alternative",
+    "date": "2025-05-01",
+    "url": "https://www.boltthreads.com/news/2025-05-01",
     "impact": 9,
-    "summary": "Bolt Threads collaborates with Stella McCartney to introduce Mylo, a vegan leather alternative made from mycelium, offering a more sustainable and innovative material solution."
+    "summary": "Bolt Threads unveils Mylo™, a mushroom-based leather alternative offering sustainability benefits. Targeting automotive industry as first market to scale."
   },
   {
     "category": "materials",
-    "company": "Biofabricate",
-    "headline": "Biofabricate Develops New Mycelium-Based Materials for Fashion",
-    "date": "2025-05-18",
-    "url": "https://www.fashionnetwork.com/news/Biofabricate-to-launch-new-mycelium-based-materials-for-fashion,142700.html",
+    "company": "Bio-on",
+    "headline": "Bio-on Launches eco-friendly Bioplastic",
+    "date": "2025-04-05",
+    "url": "https://www.bioon.it/en/news/2025-04-05",
     "impact": 8,
-    "summary": "Biofabricate develops new sustainable and cruelty-free mycelium-based materials for fashion applications, offering a more eco-friendly and innovative material solution."
+    "summary": "Italian company Bio-on introduces eco-friendly bioplastic made from organic waste. Set to replace 30% of traditional plastic in Europe by 2030."
   },
   {
     "category": "materials",
-    "company": "Ecovative",
-    "headline": "Ecovative Launches MycoFlex Biofabricated Material for Use in Fashion, Packaging, and Consumer Goods",
-    "date": "2025-06-03",
-    "url": "https://www.businesswire.com/news/home/20220603005380/en/Ecovative-Launches-MycoFlex-Biofabricated-Material-for-Use-in-Fashion-Packaging-and-Consumer-Goods",
+    "company": "Fungi Perfecti",
+    "headline": "Fungi Perfecti Introduces MycoBoard™ Composite",
+    "date": "2025-05-15",
+    "url": "https://www.fungi.com/media/2025-05-15",
     "impact": 7,
-    "summary": "Ecovative introduces MycoFlex, a biofabricated material made from mycelium, suitable for use in fashion, packaging, and consumer goods applications, offering a more sustainable and innovative material solution."
+    "summary": "Fungi Perfecti debuts MycoBoard™, mycelium-based construction material, reducing carbon emissions by 80%. Targets 10% market share in construction materials within 5 years."
+  },
+  {
+    "category": "food",
+    "company": "Amy's Kitchen",
+    "headline": "Amy's Kitchen Introduces Cultured Meat Pizza",
+    "date": "2025-06-01",
+    "url": "https://www.amys.com/press/2025-06-01",
+    "impact": 7,
+    "summary": "Amy's Kitchen unveils cultured meat pizza using precision fermentation technology. Plans to release in select stores and online by year-end."
   },
   {
     "category": "materials",
-    "company": "MycoWorks",
-    "headline": "MycoWorks Receives $125 Million Investment to Scale Up Its Mycelium-Based Leather Alternative",
-    "date": "2025-06-17",
-    "url": "https://www.businesswire.com/news/home/20220617005363/en/MycoWorks-Receives-125-Million-Investment-to-Scale-Up-Its-Mycelium-Based-Leather-Alternative",
-    "impact": 6,
-    "summary": "MycoWorks secures a $125 million investment to scale up its mycelium-based leather alternative, aiming to expand sustainable material production for fashion industries."
+    "company": "Apple",
+    "headline": "Apple to Replace Plastic Packaging with MycoComposite™",
+    "date": "2025-04-20",
+    "url": "https://www.apple.com/newsroom/2025-04-20",
+    "impact": 7,
+    "summary": "Apple announces partnership with Ecovative Design to replace plastic packaging with mycelium-based MycoComposite™."
+  },
+  {
+    "category": "food",
+    "company": "Just Inc.",
+    "headline": "Just Inc. Launches Eggo™ Plant-Based Egg Whites",
+    "date": "2025-05-01",
+    "url": "https://just.co/news/2025-05-01",
+    "impact": 7,
+    "summary": "Just Inc. releases Eggo™, plant-based egg whites created through precision fermentation. Plans to disrupt the egg industry within 3 years."
+  },
+  {
+    "category": "materials",
+    "company": "Newlight Technologies",
+    "headline": "Newlight Technologies Introduces AirCarbon™",
+    "date": "2025-06-01",
+    "url": "https://newlight.global/news/2025-06-01",
+    "impact": 7,
+    "summary": "Newlight Technologies debuts AirCarbon™, a plastic alternative made from greenhouse gas emissions. Set to replace 10% of traditional plastic in packaging by 2027."
   }
 ]
