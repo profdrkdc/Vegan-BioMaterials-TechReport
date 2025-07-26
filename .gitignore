@@ -3,11 +3,14 @@
 .env.*
 !.env.example
 
-# Generated data files
+# Generated data files and content
 raw.json
 curated.json
 social_posts.json
-longread_output.md
+longread_outline.json
+published_post_url.txt
+content/
+archive/
 
 # Python
 __pycache__/
