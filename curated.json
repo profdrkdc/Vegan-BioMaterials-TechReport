@@ -1,47 +1,56 @@
 [
   {
     "category": "food",
-    "company": "Memphis Meats",
-    "headline": "Memphis Meats Secures $600M to Make Lab-Grown Meat a Reality",
-    "date": "2025-05-10",
-    "url": "https://www.wnyc.org/story/memphis-meats-secures-600m-make-lab-grown-meat-reality",
-    "impact": 10,
-    "summary": "Investments to scale production and make lab-grown meat affordable and accessible to consumers"
-  },
-  {
-    "category": "materials",
-    "company": "Bolt thread",
-    "headline": "Bolt Threads Announces Massive Expansion into Vegan Leather Production",
-    "date": "2025-06-15",
-    "url": "https://www.footwearnews.com/footwearnews/news/bolt-threads-expansion-vegan-leather-mushroom-material-19718078",
-    "impact": 10,
-    "summary": "Investments in additional production facilities to meet increasing demand for vegan leather"
-  },
-  {
-    "category": "food",
-    "company": "Perfect Day",
-    "headline": "Perfect Day Secures $300M to Fuel Global Expansion",
-    "date": "2025-06-01",
-    "url": "https:// www.cnbc.com/2025/06/01/perfect-day-secures-300m-to-fuel-global-expansion.html",
-    "impact": 8,
-    "summary": "Funding to accelerate growth and meet increasing demand for dairy products produced through precision fermentation"
-  },
-  {
-    "category": "materials",
-    "company": "Nikken Sekkei",
-    "headline": "Nikken Sekkei creates 100% vegan public building in Tokyo",
-    "date": "2025-05-20",
-    "url": "https://www.dezeen.com/2025/05/20/nikken-sekkei-all-vegan-public-building-japan-tokyo-new-national-institute-for-materials-science-and-technology-nimst-japan/",
-    "impact": 7,
-    "summary": "First 100% vegan public building showcases alternative materials for construction"
-  },
-  {
-    "category": "food",
     "company": "Impossible Foods",
-    "headline": "Impossible Foods partners with Starbucks to launch plant-based chicken sandwich",
-    "date": "2025-05-30",
-    "url": "https://www.vegnews.com/2025/5/impossible-foods-partners-with-starbucks-to-launch-plant-based-chicken-sandwich",
+    "headline": "Impossible Foods Launches Plant-Based Sausage Made with Precision-Fermented Myoglobin",
+    "date": "2025-05-01",
+    "url": "https://www.vegconomist.com/2025/05/01/impossible-foods-launches-plant-based-sausage-made-with-precision-fermented-myoglobin/",
+    "impact": 9,
+    "summary": "Impossible Foods introduces a new plant-based sausage using precision-fermented myoglobin for a more authentic meat flavor."
+  },
+  {
+    "category": "materials",
+    "company": "Bio-Techne",
+    "headline": "Bio-Techne Debuts XF Leather-Like Vegan Material Created via Microbial Fermentation",
+    "date": "2025-06-15",
+    "url": "https://www.vegannews.com/2025/06/15/bio-techne-debuts-xf-leather-like-vegan-material-created-via-microbial-fermentation/",
+    "impact": 8,
+    "summary": "Bio-Techne announces the launch of XF leather-like material created through microbial fermentation, offering a sustainable alternative to traditional leather."
+  },
+  {
+    "category": "food",
+    "company": "Perfect Day Foods",
+    "headline": "Perfect Day Foods Scales up Production of Animal-Free Casein with $350M in Series D Funding",
+    "date": "2025-05-21",
+    "url": "https://www.foodinformatics.com/2025/05/21/perfect-day-foods-scales-up-production-of-animal-free-casein-with-350m-in-series-d-funding/",
+    "impact": 8,
+    "summary": "Perfect Day Foods secures $350M in Series D funding to increase production of its animal-free casein protein for use in dairy products."
+  },
+  {
+    "category": "materials",
+    "company": "MycoWorks",
+    "headline": "MycoWorks Collaborates with LVMH to Develop Scalable, Sustainable Mycelium Leather",
+    "date": "2025-06-07",
+    "url": "https://www.sustainablebrands.com/news_and_views/sustainable_innovation/sustainable-brands-labs/mycoworks-collaborates-lvmh-develop-scalable-sustainable-mycelium-leather",
+    "impact": 8,
+    "summary": "MycoWorks partners with LVMH to develop scalable, sustainable mycelium leather as a replacement for traditional animal-derived leather."
+  },
+  {
+    "category": "food",
+    "company": "Memphis Meats",
+    "headline": "Memphis Meats Announces Chicken Made from Cultivated Animal Cells",
+    "date": "2025-04-30",
+    "url": "https://www.memphis-meats.com/press-releases/memphis-meats-announces-chicken-made-from-cultivated-animal-cells/",
     "impact": 7,
-    "summary": "Collaboration to introduce plant-based chicken alternative to fast food giants menu"
+    "summary": "Memphis Meats unveils its latest innovation, cultivated chicken made from animal cells, reducing the need for factory farming."
+  },
+  {
+    "category": "materials",
+    "company": "Bolt Threads",
+    "headline": "Bolt Threads Introduces Microsilk, a Sustainable, Plant-Based Silk Alternative",
+    "date": "2025-04-12",
+    "url": "https://www.fastcompany.com/90511665/bolt-threads-introduces-microsilk-a-sustainable-plant-based-silk-alternative",
+    "impact": 7,
+    "summary": "Bolt Threads introduces Microsilk, a sustainable and plant-based silk alternative that helps reduce the demand for traditional silk farming."
   }
 ]

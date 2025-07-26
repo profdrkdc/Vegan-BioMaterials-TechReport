@@ -1,32 +1,32 @@
 [
   {
     "platform": "facebook",
-    "text_content": "🙌 Exciting news in the sustainable food world! Lab-grown meat is poised for massive scale-up with Memphis Meats securing a whopping $600M investment. 🌱🥩 Dive into the potential impact on the environment, animal welfare, cost efficiency, and more in our latest long-read article: {{GHOST_ARTICLE_URL}}️",
+    "text_content": "Are you ready for a greener and more humane future? Corporate investments and collaborations in the vegan biotech industry are paving the way. Join us as we explore how sustainable alternatives in food and materials are reshaping our world. Full story here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}"
   },
   {
     "platform": "instagram",
-    "text_content": "🔥🌱 Justice for animals, justice for the planet! 🌏🥩 lab-grown meat is on its way to becoming a reality, thanks to Memphis Meats' $600M investment! Join the food revolution by reading our in-depth article. Link in bio. 📄🔗",
+    "text_content": "🌱🌱 Sustainable alternatives in food and materials are taking the world by storm, and corporate investments and collaborations are accelerating this vegan biotech revolution. Discover more about the future of food and materials, and how ethical considerations and a greener planet go hand in hand. 🌎🌱 Link in bio 🔗",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A futuristic scene of a plate with lab-grown meat, vegetables, and a vegan logo, showcasing a harmonious balance between technology, sustainability, and ethics."
+    "image_prompt": "A sequence featuring the growth of plants with the tagline 'Revolutionizing Food & Materials: Sustainable Vegan Biotech'"
   },
   {
     "platform": "bluesky",
-    "text_content": "🔥🔥🌱 Memphis Meats just secured a massive $600M investment to make lab-grown meat a reality. Learn how this could revolutionize the food industry and our planet. Swipe to read our latest long-read article: {{GHOST_ARTICLE_URL}}️",
+    "text_content": "Heads up, vegans and non-vegans alike! The vegan biotech industry is revolutionizing the food and materials sectors through corporate investments and collaborations. Here's a deep-dive into how these collaborations are driving the growth of sustainable alternatives and shaping our greener future. Read all about it here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}"
   },
   {
     "platform": "mastodon",
-    "text_content": "🌱 New hope for a sustainable food future! Memphis Meats has secured $600M to scale up lab-grown meat production. Check out our latest article for insights on environmental impact, animal welfare, cost efficiency, and more: #VeganBioTechReport {{GHOST_ARTICLE_URL}}",
+    "text_content": "Attention, everyone! 📣 Corporate investments and collaborations in the vegan biotech industry are transforming the way we think about food and materials, pushing for a more sustainable and humane future. Don't miss out on this deep-dive into the vegan biotech revolution and its impact on the world. Check it out here: {{GHOST_ARTICLE_URL}} #VeganBiotech #Sustainabilty #FoodAndMaterials",
     "link_to_share": "{{GHOST_ARTICLE_URL}}"
   },
   {
     "platform": "reddit",
-    "text_content": "Why lab-grown meat might be the future of ethical and sustainable food 🌱🥩 Curious about the potential impact of Memphis Meats' latest $600M investment on the industry? Here's a fascinating deep-dive into the environmental, animal welfare, cost efficiency, and consumer acceptance factors: **The Power of Lab-Grown Meat: Insights from the Memphis Meats Investment**. Let's discuss the future of food together: {{GHOST_ARTICLE_URL}}",
+    "text_content": "💡 Exciting news, folks! Corporate investments and collaborations in the vegan biotech industry are shaping the way we produce food and materials, ushering in a greener and more humane future. This deep-dive article discusses the key players, benefits, and long-term implications of these advancements on various sectors. Share your thoughts and read the full article here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "reddit_details": {
       "suggested_subreddit": "r/futurology",
-      "post_title": "The Power of Lab-Grown Meat: Insights from the Memphis Meats Investment",
+      "post_title": "The Vegan Biotech Revolution: How Corporate Investments are Driving the Growth of Sustainable Alternatives",
       "primary_topic_keyword": "Biotech"
     }
   }
