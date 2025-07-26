@@ -70,7 +70,6 @@ def select_best_flair_with_ai(title: str, available_flairs: list, model) -> str 
         response = model.generate_content(prompt)
         chosen_flair_text = response.text.strip().strip("'\"")
         
-        # Verifieer dat de AI een geldige flair heeft gekozen
         for flair in available_flairs:
             if flair['text'] == chosen_flair_text:
                 eprint(f"✅ AI heeft een geldige flair gekozen: '{chosen_flair_text}'")
@@ -132,7 +131,6 @@ def post_to_reddit(post_content, ai_model):
         eprint("❌ FOUT: De 'praw' library is niet geïnstalleerd.")
         return
 
-    # Reddit credentials laden
     client_id = os.getenv('REDDIT_CLIENT_ID')
     client_secret = os.getenv('REDDIT_CLIENT_SECRET')
     username = os.getenv('REDDIT_USERNAME')
@@ -198,7 +196,7 @@ if __name__ == "__main__":
         eprint(f"❌ FOUT: Kan 'social_posts.json' niet lezen of parsen. Fout: {e}")
         sys.exit(1)
 
-    # Initialiseer het AI-model eenmalig voor gebruik in de loop
+    # Initialiseer het AI-model eenmalig voor eventueel gebruik
     ai_model_for_flairs = get_ai_model()
 
     for post in posts_to_publish:
@@ -211,7 +209,8 @@ if __name__ == "__main__":
         if platform == "mastodon":
             post_to_mastodon(post)
         elif platform == "reddit":
-            post_to_reddit(post, ai_model_for_flairs)
+            # De aanroep naar post_to_reddit is hier verwijderd.
+            eprint("INFO: Publicatie naar Reddit is momenteel gepauzeerd. Post wordt overgeslagen.")
         else:
             eprint(f"⚠️ WAARSCHUWING: Geen publicatielogica voor platform '{platform}'. Post wordt overgeslagen.")
             
