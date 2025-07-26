@@ -22,6 +22,52 @@ class ArticleOutline(BaseModel):
     sections: List[ArticleSection] = Field(description="The list of sections to be written for the article.")
     conclusion_summary: str = Field(description="A brief summary of the main idea for the conclusion.")
 
+def parse_outline_from_text(text: str) -> ArticleOutline:
+    """Parses a structured text block into an ArticleOutline object."""
+    eprint("INFO: Parsing response with new Markdown-based parser...")
+    try:
+        # Split de hoofdblokken
+        parts = re.split(r'\[(TITLE|HOOK|CONCLUSION|SECTIONS)\]', text)
+        
+        content_map = {
+            "TITLE": parts[2].strip() if len(parts) > 2 else "",
+            "HOOK": parts[4].strip() if len(parts) > 4 else "",
+            "CONCLUSION": parts[6].strip() if len(parts) > 6 else "",
+            "SECTIONS": parts[8].strip() if len(parts) > 8 else ""
+        }
+
+        # Parse het SECTIONS blok
+        parsed_sections = []
+        current_section = None
+        for line in content_map["SECTIONS"].splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            if line.startswith("# "):
+                if current_section:
+                    parsed_sections.append(current_section)
+                current_section = {"title": line.lstrip("# ").strip(), "talking_points": []}
+            elif line.startswith("- ") and current_section:
+                current_section["talking_points"].append(line.lstrip("- ").strip())
+        
+        if current_section:
+            parsed_sections.append(current_section)
+
+        outline_dict = {
+            "title": content_map["TITLE"],
+            "introduction_hook": content_map["HOOK"],
+            "conclusion_summary": content_map["CONCLUSION"],
+            "sections": parsed_sections
+        }
+        
+        return ArticleOutline.model_validate(outline_dict)
+
+    except Exception as e:
+        eprint(f"--- Fout bij parsen van AI respons ---")
+        eprint(f"Fout: {e}")
+        eprint(f"Ontvangen tekst:\n{text}")
+        raise
+
 def generate_longread_article(topic: str, output_path: str, outline_output_path: str):
     eprint("AI pipeline started (efficient 2-step mode)...")
     API_TYPE = os.getenv('AI_API_TYPE')
@@ -41,21 +87,32 @@ def generate_longread_article(topic: str, output_path: str, outline_output_path:
 
     eprint(f"LangChain model geïnitialiseerd: {getattr(llm, 'model', 'Onbekend')}")
 
-    # --- NIEUWE, GETEMPLATISEERDE PROMPT ---
+    # --- NIEUWE, ROBUUSTERE PROMPT ---
     prompt_outline_text = """
-    You are an expert content strategist. Your task is to generate the content for a structured article outline based on the topic below.
+    You are an expert content strategist. Your task is to generate a structured article outline based on the topic below.
 
     Topic: {topic}
 
-    Please provide the content for the following fields. Use a unique separator `|||` between each field's content.
+    Please provide the content using the following Markdown format. Separate each block with its tag.
 
-    1.  **title**: A catchy, SEO-friendly title for the entire article.
-    2.  **introduction_hook**: A short sentence or a compelling idea to start the introduction.
-    3.  **conclusion_summary**: A brief summary of the main idea for the conclusion.
-    4.  **sections_data**: A list of 3-5 sections. For each section, provide a title and 3-5 comma-separated talking points. Format it as: `Section Title 1: point a, point b, point c|Section Title 2: point d, point e, point f`
+    [TITLE]
+    A catchy, SEO-friendly title for the entire article.
 
-    Your response should be a single line of text with the four pieces of content separated by `|||`.
-    Example format: My Article Title|||This is the hook.|||This is the conclusion.|||Section 1: tp1, tp2|Section 2: tp3, tp4
+    [HOOK]
+    A short sentence or a compelling idea for the introduction.
+
+    [CONCLUSION]
+    A brief summary of the main idea for the conclusion.
+
+    [SECTIONS]
+    # Section 1: A descriptive title for the first section
+    - Talking point 1 for section 1
+    - Talking point 2 for section 1
+    - Talking point 3 for section 1
+    # Section 2: A descriptive title for the second section
+    - Talking point 1 for section 2
+    - Talking point 2 for section 2
+    # ... continue for 3 to 5 sections in total
     """
     prompt_outline = PromptTemplate(template=prompt_outline_text, input_variables=["topic"])
     
@@ -65,45 +122,8 @@ def generate_longread_article(topic: str, output_path: str, outline_output_path:
 
     response_text = chain.invoke({"topic": topic})
     
-    # --- NIEUWE, HANDMATIGE PARSING EN JSON-CONSTRUCTIE ---
-    eprint("INFO: Parsing response and constructing JSON object...")
-    try:
-        parts = response_text.split('|||')
-        if len(parts) != 4:
-            raise ValueError(f"Expected 4 parts separated by '|||', but got {len(parts)}.")
-            
-        title, intro_hook, conclusion_summ, sections_data_str = parts
-        
-        sections = []
-        section_parts = sections_data_str.strip().split('|')
-        for sec_part in section_parts:
-            title_points_split = sec_part.split(':', 1)
-            if len(title_points_split) != 2:
-                eprint(f"Skipping malformed section: {sec_part}")
-                continue
-            
-            # FIX: Indexeer de lijst `title_points_split` correct.
-            sec_title = title_points_split[0].strip()
-            points_string = title_points_split[1]
-            talking_points = [p.strip() for p in points_string.split(',')]
-            
-            sections.append({"title": sec_title, "talking_points": talking_points})
-
-        outline_dict = {
-            "title": title.strip(),
-            "introduction_hook": intro_hook.strip(),
-            "sections": sections,
-            "conclusion_summary": conclusion_summ.strip()
-        }
-        
-        outline = ArticleOutline.model_validate(outline_dict)
-        eprint(f"✓ Outline successfully constructed and validated. Title: '{outline.title}'")
-
-    except Exception as e:
-        eprint(f"--- Fout bij parsen van AI respons ---")
-        eprint(f"Fout: {e}")
-        eprint(f"Ontvangen tekst: {response_text}")
-        raise
+    outline = parse_outline_from_text(response_text)
+    eprint(f"✓ Outline successfully constructed and validated. Title: '{outline.title}'")
 
     with open(outline_output_path, "w", encoding="utf-8") as f:
         f.write(outline.model_dump_json(indent=2))

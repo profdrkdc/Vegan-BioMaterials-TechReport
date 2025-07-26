@@ -1,33 +1,33 @@
 [
   {
     "platform": "facebook",
-    "text_content": "⚡️ Join us as we delve into the groundbreaking world of cellular agriculture! Discover how companies like Perfect Day Foods, Bolt Threads, and Meat the Future are revolutionizing the way we produce proteins and materials. A sustainable future is within reach! 🌎🌍🌱💚 Check out our long-read article here: Transforming Food and Textiles with Cellular Agriculture",
-    "link_to_share": "{{GHOST_POST_URL}}"
+    "text_content": "🙌 Exciting news in the sustainable food world! Lab-grown meat is poised for massive scale-up with Memphis Meats securing a whopping $600M investment. 🌱🥩 Dive into the potential impact on the environment, animal welfare, cost efficiency, and more in our latest long-read article: {{GHOST_ARTICLE_URL}}️",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}"
   },
   {
     "platform": "instagram",
-    "text_content": "💰🌱 Eco-friendly proteins and materials are here! 🌱🌱 Discover how cellular agriculture is reshaping the future with our latest article. 🌟 Read the full story in our bio! 🌟💚 **Image Prompt:** A vibrant and impactful image showcasing cellular agriculture and its positive impact on the environment",
-    "link_to_share": "{{GHOST_POST_URL}}",
-    "image_prompt": "A vibrant and impactful image showcasing cellular agriculture and its positive impact on the environment"
+    "text_content": "🔥🌱 Justice for animals, justice for the planet! 🌏🥩 lab-grown meat is on its way to becoming a reality, thanks to Memphis Meats' $600M investment! Join the food revolution by reading our in-depth article. Link in bio. 📄🔗",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": "A futuristic scene of a plate with lab-grown meat, vegetables, and a vegan logo, showcasing a harmonious balance between technology, sustainability, and ethics."
   },
   {
     "platform": "bluesky",
-    "text_content": "Check out the latest on the #VeganBioTechReport! 🌱💚 It's all about cellular agriculture and its path to reshaping food and textile industries with animal-free proteins and materials! Revisit the way we produce proteins and reduce the environmental impact🌎🌍 Check out our latest article: Transforming Food and Textiles with Cellular Agriculture",
-    "link_to_share": "{{GHOST_POST_URL}}"
+    "text_content": "🔥🔥🌱 Memphis Meats just secured a massive $600M investment to make lab-grown meat a reality. Learn how this could revolutionize the food industry and our planet. Swipe to read our latest long-read article: {{GHOST_ARTICLE_URL}}️",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}"
   },
   {
     "platform": "mastodon",
-    "text_content": "Join us as we explore the sustainable future of cellular agriculture! 🌍💚 The latest article on #VeganBioTechReport delves into how companies like Perfect Day Foods, Bolt Threads, and Meat the Future are changing the game with animal-free proteins and materials. Read the full article here: Transforming Food and Textiles with Cellular Agriculture #proteins #materials #sustainability",
-    "link_to_share": "{{GHOST_POST_URL}}"
+    "text_content": "🌱 New hope for a sustainable food future! Memphis Meats has secured $600M to scale up lab-grown meat production. Check out our latest article for insights on environmental impact, animal welfare, cost efficiency, and more: #VeganBioTechReport {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}"
   },
   {
     "platform": "reddit",
-    "text_content": "🔥 Introducing: A Waste-Free World — The Power of Cellular Agriculture 🔥 Changes are coming, and cellular agriculture promises to lead the charge. In this article, we explore how this revolutionary technology is set to transform food and textile industries by offering animal-free protein sources. From environmental benefits to addressing animal welfare, this is a step toward a sustainable future. Read the full article here: Our Sustainable Future with Cellular Agriculture",
-    "link_to_share": "{{GHOST_POST_URL}}",
+    "text_content": "Why lab-grown meat might be the future of ethical and sustainable food 🌱🥩 Curious about the potential impact of Memphis Meats' latest $600M investment on the industry? Here's a fascinating deep-dive into the environmental, animal welfare, cost efficiency, and consumer acceptance factors: **The Power of Lab-Grown Meat: Insights from the Memphis Meats Investment**. Let's discuss the future of food together: {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "reddit_details": {
       "suggested_subreddit": "r/futurology",
-      "post_title": "Our Sustainable Future with Cellular Agriculture",
-      "suggested_flair_text": "Article"
+      "post_title": "The Power of Lab-Grown Meat: Insights from the Memphis Meats Investment",
+      "primary_topic_keyword": "Biotech"
     }
   }
 ]

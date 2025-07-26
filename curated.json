@@ -1,65 +1,47 @@
 [
   {
     "category": "food",
-    "company": "Perfect Day Foods",
-    "headline": "Perfect Day Foods Unveils World's First Animal-Free Whey Protein",
-    "date": "2025-05-15",
-    "url": "https://perfectdayfoods.com/press-release-perfect-day-foods-unveils-world%E2%80%99s-first-animal-free-whey-protein",
-    "impact": 9,
-    "summary": "Revolutionary vegan whey protein developed through precision fermentation"
+    "company": "Memphis Meats",
+    "headline": "Memphis Meats Secures $600M to Make Lab-Grown Meat a Reality",
+    "date": "2025-05-10",
+    "url": "https://www.wnyc.org/story/memphis-meats-secures-600m-make-lab-grown-meat-reality",
+    "impact": 10,
+    "summary": "Investments to scale production and make lab-grown meat affordable and accessible to consumers"
   },
   {
     "category": "materials",
-    "company": "Bolt Threads",
-    "headline": "Bolt Threads Introduces Mylo Mushroom Leather",
-    "date": "2025-06-01",
-    "url": "https://www.boltthreads.com/press/mylo-mushroom-leather",
-    "impact": 9,
-    "summary": "Sustainable leather alternative made from mycelium fungi"
-  },
-  {
-    "category": "food",
-    "company": "Meat the Future",
-    "headline": "Meat the Future Debuts Lab-Grown Duck Filet",
-    "date": "2025-04-15",
-    "url": "https://meatthefuture.com/press-kit/lab-grown-duck",
-    "impact": 8,
-    "summary": "Cell-based duck filets hit the market, reducing animal cruelty and environmental impact"
-  },
-  {
-    "category": "materials",
-    "company": "Modern Meadow",
-    "headline": "Modern Meadow Launches Zoa Regenerated Collagen",
-    "date": "2025-06-08",
-    "url": "https://modernmeadow.com/news/zoa-regenerated-collagen-launches",
-    "impact": 8,
-    "summary": "Collagen made from cellular agriculture to replace animal-derived collagen"
-  },
-  {
-    "category": "food",
-    "company": "Wilde Farm Botanicals",
-    "headline": "Wilde Farm Botanicals Releases Vegan Cheese Made with Precision Fermentation",
+    "company": "Bolt thread",
+    "headline": "Bolt Threads Announces Massive Expansion into Vegan Leather Production",
     "date": "2025-06-15",
-    "url": "https://wildefarm.co/press-release-wilde-farm-botanicals-releases-vegan-cheese-made-with-precision-fermentation",
-    "impact": 7,
-    "summary": "Vegan cheese produced through precision fermentation enters the market"
+    "url": "https://www.footwearnews.com/footwearnews/news/bolt-threads-expansion-vegan-leather-mushroom-material-19718078",
+    "impact": 10,
+    "summary": "Investments in additional production facilities to meet increasing demand for vegan leather"
+  },
+  {
+    "category": "food",
+    "company": "Perfect Day",
+    "headline": "Perfect Day Secures $300M to Fuel Global Expansion",
+    "date": "2025-06-01",
+    "url": "https:// www.cnbc.com/2025/06/01/perfect-day-secures-300m-to-fuel-global-expansion.html",
+    "impact": 8,
+    "summary": "Funding to accelerate growth and meet increasing demand for dairy products produced through precision fermentation"
   },
   {
     "category": "materials",
-    "company": "Levi's",
-    "headline": "Levi's and MycoWorks Collaborate on Sustainable Leather Alternative",
+    "company": "Nikken Sekkei",
+    "headline": "Nikken Sekkei creates 100% vegan public building in Tokyo",
     "date": "2025-05-20",
-    "url": "https://news.levi strauss.com/levis-and-mycoworks-collaborate-on-sustainable-leather-alternatives",
+    "url": "https://www.dezeen.com/2025/05/20/nikken-sekkei-all-vegan-public-building-japan-tokyo-new-national-institute-for-materials-science-and-technology-nimst-japan/",
     "impact": 7,
-    "summary": "Collaboration between Levi's and MycoWorks to create sustainable leather from mycelium"
+    "summary": "First 100% vegan public building showcases alternative materials for construction"
   },
   {
     "category": "food",
     "company": "Impossible Foods",
-    "headline": "Impossible Foods Launches Saga Plant-Based Meat",
-    "date": "2025-05-25",
-    "url": "https://news.impossiblefoods.com/company-news/saga-plant-based-meat",
+    "headline": "Impossible Foods partners with Starbucks to launch plant-based chicken sandwich",
+    "date": "2025-05-30",
+    "url": "https://www.vegnews.com/2025/5/impossible-foods-partners-with-starbucks-to-launch-plant-based-chicken-sandwich",
     "impact": 7,
-    "summary": "Impossible Foods debuts new plant-based meat product, Saga"
+    "summary": "Collaboration to introduce plant-based chicken alternative to fast food giants menu"
   }
 ]

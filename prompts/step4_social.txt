@@ -17,9 +17,9 @@ Your goal is to generate a series of engaging social media posts to promote the 
 Based on the context provided, generate a series of engaging social media posts.
 
 **CRITICAL CONTENT RULES:**
-1.  You MUST naturally integrate the placeholder link `{{GHOST_POST_URL}}` directly into the `text_content` for each post.
-2.  For Reddit, the `text_content` MUST NOT repeat the `post_title` or invent sources.
-3.  **DO NOT include any XML or HTML-like tags such as `<tag>` or `</tag>` in your response. The output must be pure JSON.**
+1.  **You MUST use the literal placeholder `{{GHOST_ARTICLE_URL}}` in your output.** Do not replace it with a real URL or the article title.
+2.  For Reddit, the `text_content` MUST NOT repeat the `post_title`.
+3.  **DO NOT include any XML or HTML-like tags in your response.** The output must be pure JSON.
 
 You MUST generate one post for EACH of the following platforms:
 
@@ -30,8 +30,8 @@ You MUST generate one post for EACH of the following platforms:
 *   **instagram:** A visually-focused caption. Start with a hook. **Crucially, you MUST also generate a descriptive prompt for an AI image generator.** The post text should mention "Link in bio".
 *   **reddit:**
     1.  **post_title**: Formulate a catchy, non-clickbait title for the article.
-    2.  **text_content**: Write an engaging summary of 2-3 sentences. **This text must include the `{{GHOST_POST_URL}}` link at the end.**
-    3.  **suggested_flair_text**: Suggest a common, single-word flair appropriate for the content, like "Article", "News", or "Discussion".
+    2.  **text_content**: Write a short, engaging summary in a **personal, human tone**, as if you are sharing something interesting you just read. **Start a discussion.** End with a clear call to read the full article, like "Full deep-dive here: {{GHOST_ARTICLE_URL}}".
+    3.  **primary_topic_keyword**: Suggest a single, primary topic keyword for the article that best describes its content (e.g., Biotech, Environment, Economics, Society).
 
 ### OUTPUT FORMAT ###
 **CRITICAL**: Your entire response MUST be a single, flat JSON array of post objects. The response must start with `[` and end with `]`.
@@ -40,13 +40,13 @@ Use this exact structure for each object:
 [
   {
     "platform":  "facebook" | "instagram" | "bluesky" | "mastodon" | "reddit",
-    "text_content": "The full text of the post. This MUST include the placeholder link for all platforms except Instagram.",
-    "link_to_share": "{{GHOST_POST_URL}}",
+    "text_content": "The full text of the post. This MUST include the placeholder {{GHOST_ARTICLE_URL}}.",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": "A descriptive prompt for an AI image generator, or null.",
     "reddit_details": null | {
       "suggested_subreddit": "r/futurology",
       "post_title": "A catchy title for the Reddit post.",
-      "suggested_flair_text": "Article"
+      "primary_topic_keyword": "Biotech"
     }
   }
 ]

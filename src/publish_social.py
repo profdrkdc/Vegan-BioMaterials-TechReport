@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 def eprint(*args, **kwargs):
     """Helper functie om naar stderr te printen."""
     print(*args, file=sys.stderr, **kwargs)
-
+    
+# (De functie post_to_mastodon blijft ongewijzigd)
 def post_to_mastodon(post_content):
     """Publiceert een post op Mastodon."""
     eprint("-> Poging tot publicatie op Mastodon...")
@@ -36,8 +37,20 @@ def post_to_mastodon(post_content):
     except Exception as e:
         eprint(f"❌ FOUT: Een onverwachte fout is opgetreden bij Mastodon: {e}")
 
+def find_flair_id(search_term, available_flairs, flair_type=""):
+    """Hulpfunctie om een flair ID te vinden op basis van een zoekterm."""
+    for flair in available_flairs:
+        if flair['text'].lower() == search_term.lower():
+            eprint(f"INFO ({flair_type}): Exacte flair match gevonden: '{flair['text']}'")
+            return flair['id']
+    for flair in available_flairs:
+        if search_term.lower() in flair['text'].lower():
+            eprint(f"INFO ({flair_type}): Gedeeltelijke flair match gevonden: '{flair['text']}'")
+            return flair['id']
+    return None
+    
 def post_to_reddit(post_content):
-    """Publiceert een post op Reddit met verbeterde flair-logica."""
+    """Publiceert een post op Reddit, inclusief abonneren op de subreddit."""
     reddit_details = post_content.get('reddit_details')
     if not reddit_details:
         eprint("❌ FOUT: Kan niet posten op Reddit. 'reddit_details' object ontbreekt.")
@@ -74,42 +87,38 @@ def post_to_reddit(post_content):
         )
         subreddit = reddit_api.subreddit(target_subreddit)
         
+        # --- NIEUWE LOGICA: Abonneer op subreddit als dat nog niet is gebeurd ---
+        try:
+            if not subreddit.user_is_subscriber:
+                eprint(f"INFO: Account is nog geen lid van r/{target_subreddit}. Poging tot abonneren...")
+                subreddit.subscribe()
+                eprint(f"✅ SUCCES: Geabonneerd op r/{target_subreddit}.")
+        except Exception as e:
+            eprint(f"⚠️ WAARSCHUWING: Kon niet automatisch abonneren op subreddit. Fout: {e}")
+        # --- EINDE NIEUWE LOGICA ---
+
         text_content = post_content.get('text_content')
         title = reddit_details.get('post_title')
         
-        # --- VERBETERDE FLAIR LOGICA ---
-        suggested_flair_text = reddit_details.get('suggested_flair_text')
         flair_id = None
-        
-        if suggested_flair_text:
-            eprint(f"INFO: Zoeken naar flair voor suggestie: '{suggested_flair_text}'...")
-            try:
-                available_flairs = list(subreddit.flair.link_templates)
-                
-                # DIAGNOSTISCH: Print de beschikbare flairs
-                available_texts = [f"'{f['text']}'" for f in available_flairs]
-                eprint(f"DEBUG: Beschikbare flairs op r/{target_subreddit}: {', '.join(available_texts)}")
+        try:
+            available_flairs = list(subreddit.flair.link_templates)
+            preferred_keyword = "biotech"
+            flair_id = find_flair_id(preferred_keyword, available_flairs, "P1 Preferred")
 
-                # 1. Zoek naar een exacte (case-insensitive) match
-                for flair in available_flairs:
-                    if flair['text'].lower() == suggested_flair_text.lower():
-                        flair_id = flair['id']
-                        eprint(f"INFO: Exacte flair match gevonden: '{flair['text']}'")
-                        break
-                
-                # 2. Fallback: Als geen match, zoek naar generieke opties
-                if not flair_id:
-                    eprint("INFO: Geen exacte match. Zoeken naar fallback ('Article' of 'Discussion')...")
-                    fallback_options = ['article', 'discussion']
-                    for flair in available_flairs:
-                        if flair['text'].lower() in fallback_options:
-                            flair_id = flair['id']
-                            eprint(f"INFO: Fallback flair match gevonden: '{flair['text']}'")
-                            break
+            if not flair_id:
+                ai_keyword = reddit_details.get('primary_topic_keyword')
+                if ai_keyword:
+                    flair_id = find_flair_id(ai_keyword, available_flairs, "P2 AI")
 
-            except Exception as e:
-                eprint(f"⚠️ WAARSCHUWING: Kon flairs niet ophalen of verwerken. Fout: {e}")
-        # --- EINDE FLAIR LOGICA ---
+            if not flair_id:
+                fallback_keywords = ['discussion', 'article']
+                for keyword in fallback_keywords:
+                    flair_id = find_flair_id(keyword, available_flairs, "P3 Fallback")
+                    if flair_id: break
+
+        except Exception as e:
+            eprint(f"⚠️ WAARSCHUWING: Kon flairs niet ophalen of verwerken. Fout: {e}")
 
         if not title:
             eprint("❌ FOUT: Kan niet posten op Reddit. 'post_title' ontbreekt.")
@@ -136,10 +145,18 @@ def post_to_reddit(post_content):
 if __name__ == "__main__":
     eprint("--- Starting Social Media Publisher ---")
     load_dotenv()
+    
+    URL_INPUT_FILE = "published_post_url.txt"
+    try:
+        with open(URL_INPUT_FILE, "r", encoding="utf-8") as f:
+            article_url = f.read().strip()
+        eprint(f"INFO: Specifieke artikel-URL geladen: {article_url}")
+    except FileNotFoundError:
+        eprint(f"⚠️ WAARSCHUWING: {URL_INPUT_FILE} niet gevonden. Fallback naar algemene GHOST_PUBLIC_URL.")
+        article_url = os.getenv('GHOST_PUBLIC_URL')
 
-    ghost_public_url = os.getenv('GHOST_PUBLIC_URL')
-    if not ghost_public_url:
-        eprint("❌ FOUT: GHOST_PUBLIC_URL niet gevonden in .env. Kan placeholder niet vervangen.")
+    if not article_url:
+        eprint("❌ FOUT: Geen artikel-URL of GHOST_PUBLIC_URL beschikbaar.")
         sys.exit(1)
 
     try:
@@ -154,7 +171,7 @@ if __name__ == "__main__":
         eprint(f"\nVerwerken van post voor platform: {platform}")
         
         if 'text_content' in post and post['text_content']:
-            post['text_content'] = post['text_content'].replace('{{GHOST_POST_URL}}', ghost_public_url)
+            post['text_content'] = post['text_content'].replace('{{GHOST_ARTICLE_URL}}', article_url)
 
         if platform == "mastodon":
             post_to_mastodon(post)
