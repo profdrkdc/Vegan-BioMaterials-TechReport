@@ -37,7 +37,7 @@ def post_to_mastodon(post_content):
         eprint(f"❌ FOUT: Een onverwachte fout is opgetreden bij Mastodon: {e}")
 
 def post_to_reddit(post_content):
-    """Publiceert een post op Reddit."""
+    """Publiceert een post op Reddit met verbeterde flair-logica."""
     reddit_details = post_content.get('reddit_details')
     if not reddit_details:
         eprint("❌ FOUT: Kan niet posten op Reddit. 'reddit_details' object ontbreekt.")
@@ -48,6 +48,7 @@ def post_to_reddit(post_content):
 
     try:
         import praw
+        from praw.exceptions import RedditAPIException
         from prawcore.exceptions import PrawcoreException
     except ImportError:
         eprint("❌ FOUT: De 'praw' library is niet geïnstalleerd.")
@@ -75,6 +76,40 @@ def post_to_reddit(post_content):
         
         text_content = post_content.get('text_content')
         title = reddit_details.get('post_title')
+        
+        # --- VERBETERDE FLAIR LOGICA ---
+        suggested_flair_text = reddit_details.get('suggested_flair_text')
+        flair_id = None
+        
+        if suggested_flair_text:
+            eprint(f"INFO: Zoeken naar flair voor suggestie: '{suggested_flair_text}'...")
+            try:
+                available_flairs = list(subreddit.flair.link_templates)
+                
+                # DIAGNOSTISCH: Print de beschikbare flairs
+                available_texts = [f"'{f['text']}'" for f in available_flairs]
+                eprint(f"DEBUG: Beschikbare flairs op r/{target_subreddit}: {', '.join(available_texts)}")
+
+                # 1. Zoek naar een exacte (case-insensitive) match
+                for flair in available_flairs:
+                    if flair['text'].lower() == suggested_flair_text.lower():
+                        flair_id = flair['id']
+                        eprint(f"INFO: Exacte flair match gevonden: '{flair['text']}'")
+                        break
+                
+                # 2. Fallback: Als geen match, zoek naar generieke opties
+                if not flair_id:
+                    eprint("INFO: Geen exacte match. Zoeken naar fallback ('Article' of 'Discussion')...")
+                    fallback_options = ['article', 'discussion']
+                    for flair in available_flairs:
+                        if flair['text'].lower() in fallback_options:
+                            flair_id = flair['id']
+                            eprint(f"INFO: Fallback flair match gevonden: '{flair['text']}'")
+                            break
+
+            except Exception as e:
+                eprint(f"⚠️ WAARSCHUWING: Kon flairs niet ophalen of verwerken. Fout: {e}")
+        # --- EINDE FLAIR LOGICA ---
 
         if not title:
             eprint("❌ FOUT: Kan niet posten op Reddit. 'post_title' ontbreekt.")
@@ -84,11 +119,17 @@ def post_to_reddit(post_content):
             eprint("❌ FOUT: Kan niet posten op Reddit. 'text_content' is leeg.")
             return
 
-        submission = subreddit.submit(title=title, selftext=text_content)
+        submission = subreddit.submit(title=title, selftext=text_content, flair_id=flair_id)
         eprint(f"✅ SUCCES: Gepost op Reddit! URL: {submission.shortlink}")
 
+    except RedditAPIException as e:
+        for subexception in e.items:
+            if subexception.error_type == 'SUBMIT_VALIDATION_FLAIR_REQUIRED':
+                eprint(f"❌ FOUT: r/{target_subreddit} vereist een flair, maar een geldige kon niet worden gevonden of ingesteld.")
+                return
+        eprint(f"❌ FOUT: Reddit API fout: {e}")
     except PrawcoreException as e:
-        eprint(f"❌ FOUT: Publicatie op Reddit mislukt: {e}")
+        eprint(f"❌ FOUT: Kon niet verbinden met Reddit. Controleer je credentials. Foutmelding: {e}")
     except Exception as e:
         eprint(f"❌ FOUT: Een onverwachte fout is opgetreden bij Reddit: {e}")
 
@@ -123,4 +164,3 @@ if __name__ == "__main__":
             eprint(f"⚠️ WAARSCHUWING: Geen publicatielogica voor platform '{platform}'. Post wordt overgeslagen.")
             
     eprint("\n--- Social Media Publisher Finished ---")
-    

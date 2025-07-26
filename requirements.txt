@@ -19,3 +19,7 @@ beautifulsoup4
 
 # Environment variable management
 python-dotenv
+
+# Social Media APIs
+Mastodon.py
+praw

@@ -1,39 +1,33 @@
 [
   {
     "platform": "facebook",
-    "text_content": "Exciting news for both foodies and environmentalists! The food industry is about to change as we know it with the rise of lab-grown meat and eco-friendly materials derived from mycelium and bioplastic. Check out our latest article to learn more about this revolutionary change: {{GHOST_POST_URL}}",
-    "link_to_share": "https://www.veganbiotechreport.com/latest-news/revolutionizing-industries-the-rise-of-lab-grown-meat-and-sustainable-materials",
-    "image_prompt": "A futuristic lab producing sustainable materials and lab-grown meat",
-    "reddit_details": {
-      "suggested_subreddit": "r/futurology",
-      "post_title": "Revolutionizing Industries: The Rise of Lab-Grown Meat and Sustainable Materials"
-    }
+    "text_content": "⚡️ Join us as we delve into the groundbreaking world of cellular agriculture! Discover how companies like Perfect Day Foods, Bolt Threads, and Meat the Future are revolutionizing the way we produce proteins and materials. A sustainable future is within reach! 🌎🌍🌱💚 Check out our long-read article here: Transforming Food and Textiles with Cellular Agriculture",
+    "link_to_share": "{{GHOST_POST_URL}}"
   },
   {
     "platform": "instagram",
-    "text_content": "🌱 Revolutionizing the future of food and materials 🌱\nDiscover how lab-grown meat and eco-friendly materials from mycelium and bioplastic are transforming industries. Check our latest article and follow the link in bio! 🔗: {{GHOST_POST_URL}}",
-    "link_to_share": "https://www.veganbiotechreport.com/latest-news/revolutionizing-industries-the-rise-of-lab-grown-meat-and-sustainable-materials",
-    "image_prompt": "A visually stunning image showcasing lab-grown meat and eco-friendly materials derived from mycelium"
+    "text_content": "💰🌱 Eco-friendly proteins and materials are here! 🌱🌱 Discover how cellular agriculture is reshaping the future with our latest article. 🌟 Read the full story in our bio! 🌟💚 **Image Prompt:** A vibrant and impactful image showcasing cellular agriculture and its positive impact on the environment",
+    "link_to_share": "{{GHOST_POST_URL}}",
+    "image_prompt": "A vibrant and impactful image showcasing cellular agriculture and its positive impact on the environment"
   },
   {
     "platform": "bluesky",
-    "text_content": "🚀 Exciting times for sustainability! Lab-grown meat and eco-friendly materials are shaking up the food and construction industries. Check out our latest article: {{GHOST_POST_URL}}\nHave any thoughts or opinions? Let's chat here!",
-    "link_to_share": "https://www.veganbiotechreport.com/latest-news/revolutionizing-industries-the-rise-of-lab-grown-meat-and-sustainable-materials",
-    "image_prompt": "A social gathering of people discussing sustainable growth and innovation"
+    "text_content": "Check out the latest on the #VeganBioTechReport! 🌱💚 It's all about cellular agriculture and its path to reshaping food and textile industries with animal-free proteins and materials! Revisit the way we produce proteins and reduce the environmental impact🌎🌍 Check out our latest article: Transforming Food and Textiles with Cellular Agriculture",
+    "link_to_share": "{{GHOST_POST_URL}}"
   },
   {
     "platform": "mastodon",
-    "text_content": " '-🌳 Sustainability, here we come! Lab-grown meat and eco-friendly materials derived from mycelium and bioplastic are transforming our world. Read all about it: {{GHOST_POST_URL}} #veganbiotechreport #sustainability #labgrownmeat #mycelium #bioplastic",
-    "link_to_share": "https://www.veganbiotechreport.com/latest-news/revolutionizing-industries-the-rise-of-lab-grown-meat-and-sustainable-materials",
-    "image_prompt": "A collage of images showcasing lab-grown meat and eco-friendly materials derived from mycelium"
+    "text_content": "Join us as we explore the sustainable future of cellular agriculture! 🌍💚 The latest article on #VeganBioTechReport delves into how companies like Perfect Day Foods, Bolt Threads, and Meat the Future are changing the game with animal-free proteins and materials. Read the full article here: Transforming Food and Textiles with Cellular Agriculture #proteins #materials #sustainability",
+    "link_to_share": "{{GHOST_POST_URL}}"
   },
   {
     "platform": "reddit",
-    "text_content": "Are you fascinated by the intersection of technology, sustainability, and food? Join us as we delve into the world of lab-grown meat and eco-friendly materials derived from mycelium and bioplastic. Read more in our latest article: {{GHOST_POST_URL}}",
-    "link_to_share": "https://www.veganbiotechreport.com/latest-news/revolutionizing-industries-the-rise-of-lab-grown-meat-and-sustainable-materials",
+    "text_content": "🔥 Introducing: A Waste-Free World — The Power of Cellular Agriculture 🔥 Changes are coming, and cellular agriculture promises to lead the charge. In this article, we explore how this revolutionary technology is set to transform food and textile industries by offering animal-free protein sources. From environmental benefits to addressing animal welfare, this is a step toward a sustainable future. Read the full article here: Our Sustainable Future with Cellular Agriculture",
+    "link_to_share": "{{GHOST_POST_URL}}",
     "reddit_details": {
       "suggested_subreddit": "r/futurology",
-      "post_title": "Revolutionizing Industries: The Rise of Lab-Grown Meat and Sustainable Materials"
+      "post_title": "Our Sustainable Future with Cellular Agriculture",
+      "suggested_flair_text": "Article"
     }
   }
 ]

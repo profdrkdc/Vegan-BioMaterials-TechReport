@@ -1,92 +1,65 @@
 [
   {
     "category": "food",
-    "company": "Mosa Meat",
-    "headline": "Mosa Meat Secures Funding for Large-Scale Burger Production",
+    "company": "Perfect Day Foods",
+    "headline": "Perfect Day Foods Unveils World's First Animal-Free Whey Protein",
     "date": "2025-05-15",
-    "url": "https://www.mosa-meat.com/news/2025-05-15",
-    "impact": 10,
-    "summary": "Dutch company Mosa Meat secures $200M in funding to scale production of lab-grown meat. Set to produce 45,000 lab-grown burgers in 2025."
-  },
-  {
-    "category": "food",
-    "company": "Memphis Meats",
-    "headline": "Memphis Meats Unveils Lab-Grown Chicken",
-    "date": "2025-04-20",
-    "url": "https://memphismeats.com/news/2025-04-20",
+    "url": "https://perfectdayfoods.com/press-release-perfect-day-foods-unveils-world%E2%80%99s-first-animal-free-whey-protein",
     "impact": 9,
-    "summary": "Memphis Meats unveils cultivated chicken showing potential to disrupt the poultry industry. Plans to launch chicken products for consumers by 2027."
+    "summary": "Revolutionary vegan whey protein developed through precision fermentation"
   },
   {
     "category": "materials",
     "company": "Bolt Threads",
-    "headline": "Bolt Threads Launches Mylo™ Leather Alternative",
-    "date": "2025-05-01",
-    "url": "https://www.boltthreads.com/news/2025-05-01",
+    "headline": "Bolt Threads Introduces Mylo Mushroom Leather",
+    "date": "2025-06-01",
+    "url": "https://www.boltthreads.com/press/mylo-mushroom-leather",
     "impact": 9,
-    "summary": "Bolt Threads unveils Mylo™, a mushroom-based leather alternative offering sustainability benefits. Targeting automotive industry as first market to scale."
+    "summary": "Sustainable leather alternative made from mycelium fungi"
   },
   {
     "category": "food",
-    "company": "Perfect Day",
-    "headline": "Perfect Day Launches Animal-Free Whey Protein",
-    "date": "2025-06-01",
-    "url": "https://perfectdayfoods.com/press/2025-06-01",
+    "company": "Meat the Future",
+    "headline": "Meat the Future Debuts Lab-Grown Duck Filet",
+    "date": "2025-04-15",
+    "url": "https://meatthefuture.com/press-kit/lab-grown-duck",
     "impact": 8,
-    "summary": "Perfect Day debuts animal-free whey protein using precision fermentation technology. Expects to conquer 20% of U.S. whey protein market within 3 years."
+    "summary": "Cell-based duck filets hit the market, reducing animal cruelty and environmental impact"
   },
   {
     "category": "materials",
-    "company": "Bio-on",
-    "headline": "Bio-on Launches eco-friendly Bioplastic",
-    "date": "2025-04-05",
-    "url": "https://www.bioon.it/en/news/2025-04-05",
+    "company": "Modern Meadow",
+    "headline": "Modern Meadow Launches Zoa Regenerated Collagen",
+    "date": "2025-06-08",
+    "url": "https://modernmeadow.com/news/zoa-regenerated-collagen-launches",
     "impact": 8,
-    "summary": "Italian company Bio-on introduces eco-friendly bioplastic made from organic waste. Set to replace 30% of traditional plastic in Europe by 2030."
-  },
-  {
-    "category": "materials",
-    "company": "Fungi Perfecti",
-    "headline": "Fungi Perfecti Introduces MycoBoard™ Composite",
-    "date": "2025-05-15",
-    "url": "https://www.fungi.com/media/2025-05-15",
-    "impact": 7,
-    "summary": "Fungi Perfecti debuts MycoBoard™, mycelium-based construction material, reducing carbon emissions by 80%. Targets 10% market share in construction materials within 5 years."
+    "summary": "Collagen made from cellular agriculture to replace animal-derived collagen"
   },
   {
     "category": "food",
-    "company": "Amy's Kitchen",
-    "headline": "Amy's Kitchen Introduces Cultured Meat Pizza",
-    "date": "2025-06-01",
-    "url": "https://www.amys.com/press/2025-06-01",
+    "company": "Wilde Farm Botanicals",
+    "headline": "Wilde Farm Botanicals Releases Vegan Cheese Made with Precision Fermentation",
+    "date": "2025-06-15",
+    "url": "https://wildefarm.co/press-release-wilde-farm-botanicals-releases-vegan-cheese-made-with-precision-fermentation",
     "impact": 7,
-    "summary": "Amy's Kitchen unveils cultured meat pizza using precision fermentation technology. Plans to release in select stores and online by year-end."
+    "summary": "Vegan cheese produced through precision fermentation enters the market"
   },
   {
     "category": "materials",
-    "company": "Apple",
-    "headline": "Apple to Replace Plastic Packaging with MycoComposite™",
-    "date": "2025-04-20",
-    "url": "https://www.apple.com/newsroom/2025-04-20",
+    "company": "Levi's",
+    "headline": "Levi's and MycoWorks Collaborate on Sustainable Leather Alternative",
+    "date": "2025-05-20",
+    "url": "https://news.levi strauss.com/levis-and-mycoworks-collaborate-on-sustainable-leather-alternatives",
     "impact": 7,
-    "summary": "Apple announces partnership with Ecovative Design to replace plastic packaging with mycelium-based MycoComposite™."
+    "summary": "Collaboration between Levi's and MycoWorks to create sustainable leather from mycelium"
   },
   {
     "category": "food",
-    "company": "Just Inc.",
-    "headline": "Just Inc. Launches Eggo™ Plant-Based Egg Whites",
-    "date": "2025-05-01",
-    "url": "https://just.co/news/2025-05-01",
+    "company": "Impossible Foods",
+    "headline": "Impossible Foods Launches Saga Plant-Based Meat",
+    "date": "2025-05-25",
+    "url": "https://news.impossiblefoods.com/company-news/saga-plant-based-meat",
     "impact": 7,
-    "summary": "Just Inc. releases Eggo™, plant-based egg whites created through precision fermentation. Plans to disrupt the egg industry within 3 years."
-  },
-  {
-    "category": "materials",
-    "company": "Newlight Technologies",
-    "headline": "Newlight Technologies Introduces AirCarbon™",
-    "date": "2025-06-01",
-    "url": "https://newlight.global/news/2025-06-01",
-    "impact": 7,
-    "summary": "Newlight Technologies debuts AirCarbon™, a plastic alternative made from greenhouse gas emissions. Set to replace 10% of traditional plastic in packaging by 2027."
+    "summary": "Impossible Foods debuts new plant-based meat product, Saga"
   }
 ]
