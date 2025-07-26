@@ -5,7 +5,7 @@ import datetime
 import time
 import re
 import sys
-import argparse # <-- Belangrijke import
+import argparse
 import google.generativeai as genai
 from openai import OpenAI
 
@@ -17,7 +17,7 @@ def eprint(*args, **kwargs):
 API_TYPE = os.getenv('AI_API_TYPE')
 MODEL_ID = os.getenv('AI_MODEL_ID')
 API_KEY = os.getenv('AI_API_KEY')
-BASE_URL = os.getenv('AI_BASE_URL') # Kan None zijn
+BASE_URL = os.getenv('AI_BASE_URL')
 
 PROMPT_FILE = "prompts/step1.txt"
 OUTPUT_FILE = "raw.json"
@@ -34,38 +34,39 @@ elif API_TYPE == 'openai_compatible':
     class OpenRouterModel:
         def generate_content(self, prompt):
             response = client.chat.completions.create(model=MODEL_ID, messages=[{"role": "user", "content": prompt}])
+            content = ""
+            if response.choices and response.choices:
+                if response.choices.message:
+                    content = response.choices.message.content
+                elif hasattr(response.choices, 'text'):
+                    content = response.choices.text
             class ResponseWrapper:
-                def __init__(self, content): self.text = content
-            return ResponseWrapper(response.choices[0].message.content)
+                def __init__(self, text): self.text = text
+            return ResponseWrapper(content)
     model = OpenRouterModel()
 else:
     raise ValueError(f"Ongeldig AI_API_TYPE: {API_TYPE}")
 
-# --- NIEUWE LOGICA VOOR DATUM ---
-# Parse de command-line argumenten
+# --- Datum Logica ---
 parser = argparse.ArgumentParser(description="Verzamel nieuws voor een specifieke datum.")
 parser.add_argument('--date', type=str, help="De datum voor de nieuws-zoekopdracht in YYYY-MM-DD formaat.")
 args = parser.parse_args()
 
-# Bepaal de te gebruiken datum
+run_date_iso = datetime.date.today().isoformat()
 if args.date:
     try:
-        # Valideer het formaat, hoewel we de string direct gebruiken
         datetime.datetime.strptime(args.date, '%Y-%m-%d')
         run_date_iso = args.date
     except ValueError:
         eprint(f"❌ Ongeldig datumformaat voor --date: '{args.date}'. Gebruik YYYY-MM-DD.")
         exit(1)
-else:
-    run_date_iso = datetime.date.today().isoformat()
 
 eprint(f"Data wordt verzameld met als referentiedatum: {run_date_iso}")
-# --- EINDE NIEUWE LOGICA ---
 
+# --- Hoofdlogica ---
 with open(PROMPT_FILE, "r", encoding="utf-8") as f:
     prompt_template = f.read()
 
-# Vul de datum in de prompt in
 prompt = prompt_template.replace('{today}', run_date_iso)
 
 eprint(f"🤖 Model '{MODEL_ID}' wordt aangeroepen...")
@@ -90,6 +91,6 @@ for attempt in range(MAX_RETRIES):
         eprint(f"⚠️ Poging {attempt + 1}/{MAX_RETRIES} mislukt: {e}")
         if attempt + 1 == MAX_RETRIES:
             eprint("❌ Alle pogingen zijn mislukt. Script stopt.")
-            eprint("--- Laatst ontvangen van AI ---\n" + raw_content)
+            eprint(f"--- Laatst ontvangen van AI ---\n{raw_content}")
             exit(1)
         time.sleep(5)

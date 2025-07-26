@@ -1,47 +1,40 @@
 [
   {
-    "platform": "x_twitter",
-    "text_content": "Our latest Vegan BioTech Report is OUT! 🚀 This week: massive investments in air protein, new sustainable materials from MycoWorks, & cultivated bacon! #veganbiotech #foodtech #sustainablefashion",
-    "link_to_share": "{{GHOST_POST_URL}}",
-    "image_prompt": null,
-    "reddit_details": null
-  },
-  {
     "platform": "bluesky",
-    "text_content": "Huge news! Air Protein just secured $75M to scale up their air-based protein production!  This is HUGE for sustainable food. What do you think? #airprotein #alternativeprotein #veganfuture",
+    "text_content": "Perfect Day halved its whey price and just landed in Walmart 🍦 Meanwhile tofu okara, pea thin-stillage & mycelium scraps are becoming $50 B packaging, hoodies & salmon feed—cancelling 150 Mt CO₂e. The scoop 👇 {{GHOST_POST_URL}} #VeganBiotech #CircularEconomy",
     "link_to_share": "{{GHOST_POST_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "mastodon",
-    "text_content": "Air Protein's $75M Series C funding round signals a major step forward in sustainable protein production.  Their technology, which cultivates protein from air, addresses key environmental and ethical concerns within the food industry.  Read our in-depth analysis! #sustainablefood #proteinproduction #biotech #vegan",
+    "text_content": "50 B-tonne question: what happens to the 9–11 Mt of wet okara, mycelium, thin stillage from alt-protein every year? A new long-read breaks down how innovators are spinning those scraps into compostable snack wraps, Adidas-grade sportswear and farmed-salmon feed—cutting 150 Mt CO₂e. Details here: {{GHOST_POST_URL}} #Altermaterials #ZeroWaste #Biotech",
     "link_to_share": "{{GHOST_POST_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "facebook",
-    "text_content": "The future of food and fashion is here!  This week's Vegan BioTech Report explores the revolutionary advancements in alternative proteins and sustainable biomaterials. From lab-grown meat to mycelium leather, learn how biotech is reshaping industries and creating a more sustainable future. Check out our latest long-read article!",
+    "text_content": "You enjoyed the oat-milk latte & the plant-based burger—but what happens to okara, pea stillage, and mycelium trimming once the protein is extracted? At the moment 45 % ends up in landfills and another 30 % goes to low-grade animal feed, leaking 210 million tonnes of CO₂e yearly.\nA new Vegan BioTech Report shows how start-ups, multinationals and financiers are turning those “wastes” into high-margin compostable chip wrappers, Adidas-grade sportswear and fish-friendly salmon feed. \nThe roadmap is here and the economics already pencil out: a $300 million blended-finance facility could seed 10 flagship plants by 2030 and trigger a $50 billion rebound economy. Read the full deep-dive and open toolkit at: {{GHOST_POST_URL}}",
     "link_to_share": "{{GHOST_POST_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "🤯  The future is sustainable & delicious!  MycoWorks' partnership with Adidas is changing the game in sustainable fashion.  What innovative biomaterials are you excited about? #veganfashion #myceliumleather #sustainablematerials #biotech",
+    "text_content": "⚡ Swipe to see tomorrow’s world: the okara in your morning latte turned into translucent snack wrap, mycelium off-cuts melted into Adidas hoodies, and pea stillage brewed into pink salmon feed—erasing 150 M t CO₂ annually. \nNew long-read drops data + open-source toolkit for founders & investors 🔗 Link in bio {{GHOST_POST_URL}}",
     "link_to_share": "{{GHOST_POST_URL}}",
-    "image_prompt": "A stylish pair of Adidas shoes made from mycelium leather, futuristic and sleek design, vibrant green and white color scheme, high-resolution, photorealistic",
+    "image_prompt": "Hyper-realistic triptych: left panel shows golden okara pulp morphing into shiny compostable film surrounding fresh chips; middle panel reveals white mycelial threads spun into an Adidas zip-up hoodie suspended in space under studio lighting; right panel depicts deep-orange liquid thin-stillage transforming into precision aquafeed pellets pouring into a crystal-clear aquarium with healthy jumping salmon. Background gradients shifting from earthy greens to techy blues, soft studio glow.",
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": null,
+    "text_content": "Start-ups are turning okara, mycelium scraps and other alt-protein leftovers into chip bags, sportswear and salmon feed—scoping out a $50 billion “rebound economy” that could offset 150 Mt of CO₂ by 2038. Full technical deep-dive & open-source model: {{GHOST_POST_URL}}",
     "link_to_share": "{{GHOST_POST_URL}}",
     "image_prompt": null,
     "reddit_details": {
       "suggested_subreddit": "r/futurology",
-      "post_title": "Biotech Revolution: How Alternative Proteins & Sustainable Biomaterials Will Reshape Food & Fashion"
+      "post_title": "From Tofu Scraps to Trillion-Dollar Materials: How Vegan Biotech Is Creating a $50 B Circular Economy"
     }
   }
 ]

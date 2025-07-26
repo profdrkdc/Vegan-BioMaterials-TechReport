@@ -28,9 +28,15 @@ def translate_article(source_path: str, output_path: str, lang_name: str):
         class OpenRouterModel:
             def generate_content(self, prompt):
                 response = client.chat.completions.create(model=MODEL_ID, messages=[{"role": "user", "content": prompt}])
+                content = ""
+                if response.choices and response.choices:
+                    if response.choices.message:
+                        content = response.choices.message.content
+                    elif hasattr(response.choices, 'text'):
+                        content = response.choices.text
                 class ResponseWrapper:
-                    def __init__(self, content): self.text = content
-                return ResponseWrapper(response.choices[0].message.content)
+                    def __init__(self, text): self.text = text
+                return ResponseWrapper(content)
         model = OpenRouterModel()
     else:
         raise ValueError(f"Ongeldig AI_API_TYPE: {API_TYPE}.")
@@ -42,15 +48,14 @@ def translate_article(source_path: str, output_path: str, lang_name: str):
         eprint(f"❌ Fout: Bronbestand niet gevonden op {source_path}", file=sys.stderr)
         exit(1)
 
-
     prompt = f"""
     You are a professional translator specializing in technical and journalistic content.
     Your task is to translate the following article from English to {lang_name}.
 
     **CRITICAL RULES:**
     1.  Translate the text accurately, maintaining the original tone and meaning.
-    2.  Pay close attention to idioms and figurative language (e.g., "a foothold", "a double-edged sword"). Do NOT translate these literally. Find the equivalent idiomatic expression in {lang_name} or rephrase the concept naturally.
-    3.  You MUST preserve ALL original Markdown formatting (e.g., `# `, `## `, `*`, `**`, `_`).
+    2.  Pay close attention to idioms and figurative language. Do NOT translate these literally. Find the equivalent idiomatic expression in {lang_name} or rephrase the concept naturally.
+    3.  You MUST preserve ALL original Markdown formatting.
     4.  Do not add any commentary, notes, or introductions. Your output must be ONLY the translated article text.
 
     --- START OF ARTICLE TO TRANSLATE ---
@@ -58,7 +63,7 @@ def translate_article(source_path: str, output_path: str, lang_name: str):
     --- END OF ARTICLE TO TRANSLATE ---
     """
     
-    eprint(f"🤖 Model '{MODEL_ID}' wordt aangeroepen om artikel naar {lang_name} te vertalen met verbeterde prompt...")
+    eprint(f"🤖 Model '{MODEL_ID}' wordt aangeroepen om artikel naar {lang_name} te vertalen...")
     response = model.generate_content(prompt)
     translated_text = response.text
 

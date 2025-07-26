@@ -8,13 +8,12 @@ def eprint(*args, **kwargs):
 
 def get_latest_newsletter_file(content_dir="content"):
     search_path = os.path.join(content_dir, "*_en.md")
-    files = glob.glob(search_path)
-    if not files:
+    list_of_files = glob.glob(search_path)
+    if not list_of_files:
         raise FileNotFoundError(f"Geen Engelse nieuwsbrief (*_en.md) gevonden in '{content_dir}'.")
-    return max(files)
+    return max(list_of_files, key=os.path.getctime)
 
 def select_best_topic(newsletter_content: str) -> str:
-    # Lees configuratie uit environment
     API_TYPE = os.getenv('AI_API_TYPE')
     MODEL_ID = os.getenv('AI_MODEL_ID')
     API_KEY = os.getenv('AI_API_KEY')
@@ -31,9 +30,15 @@ def select_best_topic(newsletter_content: str) -> str:
         class OpenRouterModel:
             def generate_content(self, prompt):
                 response = client.chat.completions.create(model=MODEL_ID, messages=[{"role": "user", "content": prompt}])
+                content = ""
+                if response.choices and response.choices:
+                    if response.choices.message:
+                        content = response.choices.message.content
+                    elif hasattr(response.choices, 'text'):
+                        content = response.choices.text
                 class ResponseWrapper:
-                    def __init__(self, content): self.text = content
-                return ResponseWrapper(response.choices[0].message.content)
+                    def __init__(self, text): self.text = text
+                return ResponseWrapper(content)
         model = OpenRouterModel()
     else:
         raise ValueError(f"Ongeldig AI_API_TYPE: {API_TYPE}.")
@@ -65,7 +70,6 @@ if __name__ == "__main__":
         with open(latest_newsletter, 'r', encoding='utf-8') as f:
             content = f.read()
         topic = select_best_topic(content)
-        # De enige output naar stdout is de topic zelf
         print(topic)
     except Exception as e:
         eprint(f"❌ Fout: {e}")

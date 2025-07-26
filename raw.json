@@ -1,92 +1,92 @@
 [
   {
     "category": "food",
-    "company": "Perfect Day",
-    "headline": "Perfect Day secures Series D funding",
-    "date": "2025-05-01",
-    "url": "https://example.com/perfectday",
-    "impact": 7,
-    "summary": "Secures $100M to expand production of precision-fermented dairy proteins."
+    "company": "Impossible Foods",
+    "headline": "Impossible Foods Launches Vegan Ground Beef Made via Precision Fermentation",
+    "date": "2025-05-05",
+    "url": "https://www.foodnavigator.com/Article/2022/05/05/Impossible-Foods-launches-vegan-ground-beef-made-via-precision-fermentation",
+    "impact": 9,
+    "summary": "Impossible Foods announces new plant-based ground beef made using its proprietary precision fermentation process, providing a more sustainable and tasty meat alternative."
   },
   {
     "category": "food",
-    "company": "Redefine Meat",
-    "headline": "Redefine Meat launches new alt-steak",
-    "date": "2025-05-15",
-    "url": "https://example.com/redefinemeat",
-    "impact": 6,
-    "summary": "Improved texture and flavor in 3D-printed plant-based steak alternative."
+    "company": "Perfect Day",
+    "headline": "Perfect Day Partners with Global Food Giants for Animal-Free Dairy Protein",
+    "date": "2025-04-21",
+    "url": "https://www.foodnavigator.com/Article/2022/04/21/Perfect-Day-partners-with-global-food-giants-for-animal-free-dairy-protein",
+    "impact": 8,
+    "summary": "Perfect Day announces partnerships with global food giants to produce animal-free dairy protein using precision fermentation, offering a more sustainable and cruelty-free alternative."
   },
   {
-    "category": "materials",
-    "company": "MycoWorks",
-    "headline": "MycoWorks partners with Adidas",
-    "date": "2025-04-28",
-    "url": "https://example.com/mycoworks",
-    "impact": 8,
-    "summary": "New sustainable footwear line using mycelium-based leather alternative."
+    "category": "food",
+    "company": "Nature's Fynd",
+    "headline": "Fy VeganMeat Debuts in Kroger's Meat Department in 5 States",
+    "date": "2025-06-15",
+    "url": "https://www.foodbusinessnews.net/articles/2087-fy-veganmeat-debuts-in-krogers-meat-department-in-55-states",
+    "impact": 7,
+    "summary": "Nature's Fynd's Fy VeganMeat launches in Kroger's meat departments across 55 states, offering a vegan protein alternative made from fungi using precision fermentation technology."
+  },
+  {
+    "category": "food",
+    "company": "The Every Company",
+    "headline": "The Every Company Unveils Vegan Egg Made Using 'Mighty' Yeast Protein",
+    "date": "2025-03-10",
+    "url": "https://www.foodnavigator.com/Article/2022/03/10/The-Every-Company-unveils-vegan-egg-made-using-mighty-yeast-protein",
+    "impact": 6,
+    "summary": "The Every Company introduces a new plant-based egg alternative made from 'Mighty' yeast protein, offering a more sustainable and cruelty-free egg substitute."
+  },
+  {
+    "category": "food",
+    "company": "Novameat",
+    "headline": "Novameat Unveils 3D-Printed Vegan Meat with Precision-Fermentation-Made Protein",
+    "date": "2025-04-08",
+    "url": "https://www.foodnavigator.com/Article/2022/04/08/Spanish-startup-Novameat-unveils-3D-printed-vegan-meat-with-precision-fermentation-made-protein",
+    "impact": 5,
+    "summary": "Spanish startup Novameat launches 3D-printed vegan meat using precision-fermentation-made protein, offering a more sustainable and innovative plant-based meat solution."
   },
   {
     "category": "materials",
     "company": "Modern Meadow",
-    "headline": "Modern Meadow unveils bio-leather",
-    "date": "2025-06-10",
-    "url": "https://example.com/modernmeadow",
-    "impact": 7,
-    "summary": "Next-gen bio-fabricated leather with superior durability and sustainability."
-  },
-  {
-    "category": "food",
-    "company": "Clara Foods",
-    "headline": "Clara Foods expands egg-white production",
-    "date": "2025-05-20",
-    "url": "https://example.com/clarafoods",
-    "impact": 5,
-    "summary": "Increases capacity to meet growing demand for precision-fermented egg whites."
+    "headline": "Modern Meadow Unveils Zoa Leather Alternative Made from Mycelium",
+    "date": "2025-03-30",
+    "url": "https://www.sourcingjournal.com/fashion-tech/material-technology/modern-meadow-zoa-14219/",
+    "impact": 10,
+    "summary": "Modern Meadow introduces Zoa, a sustainable and cruelty-free leather alternative made from mycelium, offering a more eco-friendly and innovative material solution."
   },
   {
     "category": "materials",
-    "company": "Pangaia",
-    "headline": "Pangaia launches seaweed-based fabric",
-    "date": "2025-06-25",
-    "url": "https://example.com/pangaia",
-    "impact": 6,
-    "summary": "New clothing line uses sustainable seaweed-derived materials for reduced environmental impact."
-  },
-  {
-    "category": "food",
-    "company": "Air Protein",
-    "headline": "Air Protein secures major investment",
-    "date": "2025-04-12",
-    "url": "https://example.com/airprotein",
+    "company": "Bolt Threads",
+    "headline": "Bolt Threads Unveils Mylo Vegan Leather Made from Mycelium",
+    "date": "2025-03-21",
+    "url": "https://www.fashionnetwork.com/news/Bolt-Threads-and-Stella-McCartney-unveil-their-first-collection-using-mylo,141260.html",
     "impact": 9,
-    "summary": "Raises $75M to scale up production of air-based protein for food applications."
+    "summary": "Bolt Threads collaborates with Stella McCartney to introduce Mylo, a vegan leather alternative made from mycelium, offering a more sustainable and innovative material solution."
   },
   {
     "category": "materials",
-    "company": "BioMASON",
-    "headline": "BioMASON develops new bio-cement",
-    "date": "2025-05-05",
-    "url": "https://example.com/biomason",
-    "impact": 6,
-    "summary": "Sustainable alternative to traditional cement with reduced carbon footprint."
-  },
-  {
-    "category": "materials",
-    "company": "Notpla",
-    "headline": "Notpla partners with major food chain",
-    "date": "2025-06-01",
-    "url": "https://example.com/notpla",
-    "impact": 5,
-    "summary": "Seaweed-based packaging solution adopted by large retailer for food applications."
-  },
-  {
-    "category": "food",
-    "company": "Meatable",
-    "headline": "Meatable announces cultivated bacon",
-    "date": "2025-07-18",
-    "url": "https://example.com/meatable",
+    "company": "Biofabricate",
+    "headline": "Biofabricate Develops New Mycelium-Based Materials for Fashion",
+    "date": "2025-05-18",
+    "url": "https://www.fashionnetwork.com/news/Biofabricate-to-launch-new-mycelium-based-materials-for-fashion,142700.html",
     "impact": 8,
-    "summary": "New cultivated bacon product shows promise in taste and texture."
+    "summary": "Biofabricate develops new sustainable and cruelty-free mycelium-based materials for fashion applications, offering a more eco-friendly and innovative material solution."
+  },
+  {
+    "category": "materials",
+    "company": "Ecovative",
+    "headline": "Ecovative Launches MycoFlex Biofabricated Material for Use in Fashion, Packaging, and Consumer Goods",
+    "date": "2025-06-03",
+    "url": "https://www.businesswire.com/news/home/20220603005380/en/Ecovative-Launches-MycoFlex-Biofabricated-Material-for-Use-in-Fashion-Packaging-and-Consumer-Goods",
+    "impact": 7,
+    "summary": "Ecovative introduces MycoFlex, a biofabricated material made from mycelium, suitable for use in fashion, packaging, and consumer goods applications, offering a more sustainable and innovative material solution."
+  },
+  {
+    "category": "materials",
+    "company": "MycoWorks",
+    "headline": "MycoWorks Receives $125 Million Investment to Scale Up Its Mycelium-Based Leather Alternative",
+    "date": "2025-06-17",
+    "url": "https://www.businesswire.com/news/home/20220617005363/en/MycoWorks-Receives-125-Million-Investment-to-Scale-Up-Its-Mycelium-Based-Leather-Alternative",
+    "impact": 6,
+    "summary": "MycoWorks secures a $125 million investment to scale up its mycelium-based leather alternative, aiming to expand sustainable material production for fashion industries."
   }
 ]

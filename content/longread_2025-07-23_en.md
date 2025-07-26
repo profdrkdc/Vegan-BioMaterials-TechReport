@@ -1,3 +1,0 @@
-# The Protein Revolution: Beyond Dairy
-
-This is a deep-dive into how precision fermentation is creating bulk proteins...
