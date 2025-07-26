@@ -57,6 +57,16 @@ def get_provider_list():
         return [found_provider] if found_provider else []
     return all_providers
 
+def build_script_env(provider_config: dict) -> dict:
+    """Bouwt de environment dictionary voor subprocessen."""
+    script_env = os.environ.copy()
+    script_env['AI_API_TYPE'] = provider_config['api_type']
+    script_env['AI_MODEL_ID'] = provider_config['model_id']
+    script_env['AI_API_KEY'] = os.getenv(provider_config['api_key_name'])
+    if provider_config.get('base_url'):
+        script_env['AI_BASE_URL'] = provider_config['base_url']
+    return script_env
+
 def run_task(task_name: str, task_function, providers_to_run):
     for i, provider_config in enumerate(providers_to_run):
         if not provider_config:
@@ -96,13 +106,7 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool, publish_so
         sys.exit(1)
 
     def generate_content_task(provider_config):
-        script_env = os.environ.copy()
-        script_env['AI_API_TYPE'] = provider_config['api_type']
-        script_env['AI_MODEL_ID'] = provider_config['model_id']
-        script_env['AI_API_KEY'] = os.getenv(provider_config['api_key_name'])
-        if provider_config.get('base_url'):
-            script_env['AI_BASE_URL'] = provider_config['base_url']
-        
+        script_env = build_script_env(provider_config)
         run_command(["python3", "-m", "src.fetch", "--date", target_date_iso], env=script_env)
         run_command(["python3", "-m", "src.curate"], env=script_env)
         run_command(["python3", "-m", "src.draft", "--date", target_date_iso], env=script_env)
@@ -124,6 +128,17 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool, publish_so
         run_command(["python3", "-m", "src.generate_social_posts"], env=script_env)
         return True
 
+    def publish_social_task(provider_config):
+        if not os.path.exists("social_posts.json"):
+            eprint("❌ FOUT: 'social_posts.json' niet gevonden. Draai eerst de pipeline zonder --publish-social.")
+            # We gooien een exception zodat run_task dit als een mislukking ziet
+            raise FileNotFoundError("social_posts.json niet gevonden.")
+        
+        script_env = build_script_env(provider_config)
+        run_command(["python3", "-m", "src.publish_social"], env=script_env)
+        return True
+
+    # --- Hoofdlogica van de pipeline ---
     if not publish_social:
         _, content_success = run_task("Content Generatie", generate_content_task, providers_to_run)
         if not content_success:
@@ -133,18 +148,10 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool, publish_so
         eprint("INFO: Content generatie overgeslagen vanwege --publish-social vlag.")
 
     if publish_social:
-        eprint("\n" + "="*50)
-        eprint("TAAK: Social Media Publicatie gestart.")
-        eprint("="*50)
-        
-        if not os.path.exists("social_posts.json"):
-            eprint(f"❌ FOUT: 'social_posts.json' niet gevonden. Draai eerst de pipeline zonder --publish-social.")
-        else:
-            try:
-                run_command(["python3", "-m", "src.publish_social"], env=os.environ.copy())
-                eprint("✅ SUCCES: Taak 'Social Media Publicatie' voltooid.")
-            except Exception as e:
-                eprint(f"❌ MISLUKT: Taak 'Social Media Publicatie' gefaald. Fout: {e}")
+        _, publish_success = run_task("Social Media Publicatie", publish_social_task, providers_to_run)
+        if not publish_success:
+            eprint("\n❌ DRAMATISCHE FOUT: Kon met geen enkele provider de social posts publiceren.")
+            sys.exit(1)
     
     eprint("\n✅ Pijplijn voltooid.")
 

@@ -1,47 +1,47 @@
 [
   {
-    "category": "food",
-    "company": "BioMilk",
-    "headline": "BioMilk secures EU approval for fermented casein",
-    "date": "2025-06-25",
-    "url": "https://example.com/biomilk1",
+    "category": "materials",
+    "company": "Modern Meadow",
+    "headline": "Modern Meadow unveils bio-fabricated leather",
+    "date": "2025-06-22",
+    "url": "https://example.com/modernmeadow",
     "impact": 9,
-    "summary": "Regulatory milestone opens doors for wider market access in Europe."
+    "summary": "New bio-fabricated leather offers superior durability and sustainability."
   },
   {
     "category": "food",
     "company": "Perfect Day",
-    "headline": "Perfect Day secures $100M for dairy expansion",
+    "headline": "Perfect Day secures Series D funding",
     "date": "2025-05-01",
-    "url": "https://example.com/perfectday1",
+    "url": "https://example.com/perfectday",
     "impact": 8,
-    "summary": "Series C funding fuels large-scale production of precision-fermentation dairy proteins."
+    "summary": "New funding fuels expansion of precision-fermentation dairy products."
   },
   {
-    "category": "materials",
-    "company": "BioMason",
-    "headline": "BioMason secures contract for sustainable building blocks",
-    "date": "2025-07-22",
-    "url": "https://example.com/biomason1",
+    "category": "food",
+    "company": "Air Protein",
+    "headline": "Air Protein announces new production facility",
+    "date": "2025-07-05",
+    "url": "https://example.com/airprotein",
     "impact": 8,
-    "summary": "Large-scale project utilizes bio-based construction materials."
+    "summary": "Gas fermentation-based protein production scales up significantly."
   },
   {
     "category": "materials",
     "company": "MycoWorks",
-    "headline": "Reishi™ leather debuts in high-fashion line",
-    "date": "2025-05-15",
-    "url": "https://example.com/mycoworks1",
+    "headline": "MycoWorks partners with Adidas",
+    "date": "2025-04-20",
+    "url": "https://example.com/mycoworks",
     "impact": 7,
-    "summary": "Luxury brand adopts sustainable mycelium-based leather alternative."
+    "summary": "Sustainable mushroom leather used in new Adidas shoe line."
   },
   {
-    "category": "materials",
-    "company": "Modern Meadow",
-    "headline": "Modern Meadow partners with Adidas on leather alternative",
-    "date": "2025-05-28",
-    "url": "https://example.com/modernmeadow1",
+    "category": "food",
+    "company": "Clara Foods",
+    "headline": "Clara Foods expands egg-white production",
+    "date": "2025-04-28",
+    "url": "https://example.com/clarafoods",
     "impact": 7,
-    "summary": "Collaboration focuses on scaling up production of bio-fabricated leather."
+    "summary": "Increased production of precision-fermented egg whites meets growing demand."
   }
 ]

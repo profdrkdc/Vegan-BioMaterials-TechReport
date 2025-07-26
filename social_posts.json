@@ -1,40 +1,40 @@
 [
   {
     "platform": "bluesky",
-    "text_content": "Huge news! BioMilk just got EU approval for their fermented casein! 🤯 This changes EVERYTHING for dairy alternatives.  Read our deep dive into the tech, market impact, and future of precision fermentation. What are YOUR thoughts?  Let's discuss! {{GHOST_ARTICLE_URL}}",
+    "text_content": "Whoa, just finished reading about Air Protein's massive new facility! 🤯  They're scaling up their air-based protein production – seriously game-changing stuff for sustainable food.  Check it out! {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "mastodon",
-    "text_content": "BioMilk's fermented casein receives EU approval! This is a major milestone for the vegan biotech industry.  Our latest article explores the technology, market implications, and the future of precision fermentation.  Check it out! {{GHOST_ARTICLE_URL}} #veganbiotech #precisionfermentation #BioMilk #dairyalternatives #EUapproval",
+    "text_content": "Air Protein's new mega-facility is revolutionizing sustainable protein production! This in-depth article explores their technology, impact on global food security, environmental benefits, and competitive landscape. Learn more and join the conversation: {{GHOST_ARTICLE_URL}} #AirProtein #SustainableFood #AlternativeProtein #FoodTech #Biotech",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "facebook",
-    "text_content": "The vegan biotech world is buzzing! BioMilk's fermented casein just secured EU approval, marking a monumental shift in the dairy industry.  This isn't just about a new alternative; it's about a revolutionary technology with the potential to reshape food production. Our in-depth article explores the science behind BioMilk's process, analyzes the market disruption, and delves into the future of precision fermentation.  Learn more and share your thoughts: {{GHOST_ARTICLE_URL}}",
+    "text_content": "The future of food is here! Air Protein just opened a massive new production facility, poised to disrupt the global food system.  Their innovative technology uses air to create protein, offering a sustainable and scalable solution to feed a growing population.  This detailed article dives into the science, the impact, and the challenges ahead. Learn more and share your thoughts: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "Dairy revolution incoming! 🥛🌱 BioMilk's groundbreaking fermented casein just got the green light from the EU.  This is HUGE for sustainable food production.  Learn all about it – link in bio! #vegan #biotech #dairy #sustainablefood #futureoffood",
+    "text_content": "Could this be the future of food? 🤔 Air Protein's game-changing technology is creating protein from air!  Read all about their new mega-facility and the impact it will have on the world. Link in bio! #sustainablefood #futureoffood #airprotein #cleantech #veganbiotech",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A futuristic, sleek image depicting a glass of milk with molecules swirling inside, representing BioMilk's fermented casein.  The background should be a vibrant green, representing sustainability.  Include the BioMilk logo subtly.",
+    "image_prompt": "A futuristic, clean and bright image of a large-scale industrial facility producing protein from air.  Show glowing tubes, sleek machinery, and happy, diverse people working collaboratively.  The overall mood should be optimistic and hopeful.",
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Just finished reading a fascinating article about BioMilk securing EU approval for their fermented casein!  Seriously mind-blowing stuff.  The implications for the dairy industry and sustainable food production are huge.  It got me thinking – what are the ethical considerations of this kind of tech? How will this affect traditional dairy farmers?  What about the long-term environmental impact?  Let's discuss! Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Just finished reading about Air Protein's HUGE new facility – mind blown!  They're making protein from air, seriously.  The article goes deep into the tech, the environmental impact, and how it could change food security globally.  It's a long read, but SO worth it. What are your thoughts on this kind of innovation?  Is this the future of food?  Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": {
-      "suggested_subreddit": "r/science",
-      "post_title": "BioMilk's EU Approval: A Game Changer for Dairy and Sustainable Food?",
+      "suggested_subreddit": "r/futurology",
+      "post_title": "Air Protein's Mega-Facility: Revolutionizing Sustainable Protein Production",
       "primary_topic_keyword": "Biotech"
     }
   }
