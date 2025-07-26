@@ -1,92 +1,92 @@
 [
   {
     "category": "food",
-    "company": "Impossible Foods",
-    "headline": "Impossible Foods Launches Plant-Based Sausage Made with Precision-Fermented Myoglobin",
-    "date": "2025-05-01",
-    "url": "https://www.vegconomist.com/2025/05/01/impossible-foods-launches-plant-based-sausage-made-with-precision-fermented-myoglobin/",
-    "impact": 9,
-    "summary": "Impossible Foods introduces a new plant-based sausage using precision-fermented myoglobin for a more authentic meat flavor."
-  },
-  {
-    "category": "materials",
-    "company": "Bio-Techne",
-    "headline": "Bio-Techne Debuts XF Leather-Like Vegan Material Created via Microbial Fermentation",
-    "date": "2025-06-15",
-    "url": "https://www.vegannews.com/2025/06/15/bio-techne-debuts-xf-leather-like-vegan-material-created-via-microbial-fermentation/",
+    "company": "Perfect Day",
+    "headline": "Perfect Day secures Series C funding",
+    "date": "2025-04-28",
+    "url": "https://example.com/perfectday",
     "impact": 8,
-    "summary": "Bio-Techne announces the launch of XF leather-like material created through microbial fermentation, offering a sustainable alternative to traditional leather."
-  },
-  {
-    "category": "food",
-    "company": "Perfect Day Foods",
-    "headline": "Perfect Day Foods Scales up Production of Animal-Free Casein with $350M in Series D Funding",
-    "date": "2025-05-21",
-    "url": "https://www.foodinformatics.com/2025/05/21/perfect-day-foods-scales-up-production-of-animal-free-casein-with-350m-in-series-d-funding/",
-    "impact": 8,
-    "summary": "Perfect Day Foods secures $350M in Series D funding to increase production of its animal-free casein protein for use in dairy products."
+    "summary": "Secures major investment to scale production of precision-fermentation dairy proteins."
   },
   {
     "category": "materials",
     "company": "MycoWorks",
-    "headline": "MycoWorks Collaborates with LVMH to Develop Scalable, Sustainable Mycelium Leather",
-    "date": "2025-06-07",
-    "url": "https://www.sustainablebrands.com/news_and_views/sustainable_innovation/sustainable-brands-labs/mycoworks-collaborates-lvmh-develop-scalable-sustainable-mycelium-leather",
-    "impact": 8,
-    "summary": "MycoWorks partners with LVMH to develop scalable, sustainable mycelium leather as a replacement for traditional animal-derived leather."
+    "headline": "MycoWorks partners with Adidas",
+    "date": "2025-05-15",
+    "url": "https://example.com/mycoworks",
+    "impact": 7,
+    "summary": "Releases new line of mycelium-based leather for Adidas footwear."
   },
   {
     "category": "food",
-    "company": "Memphis Meats",
-    "headline": "Memphis Meats Announces Chicken Made from Cultivated Animal Cells",
-    "date": "2025-04-30",
-    "url": "https://www.memphis-meats.com/press-releases/memphis-meats-announces-chicken-made-from-cultivated-animal-cells/",
-    "impact": 7,
-    "summary": "Memphis Meats unveils its latest innovation, cultivated chicken made from animal cells, reducing the need for factory farming."
+    "company": "Redefine Meat",
+    "headline": "Redefine Meat expands to US market",
+    "date": "2025-05-20",
+    "url": "https://example.com/redefinemeat",
+    "impact": 6,
+    "summary": "3D-printed vegan meat alternative enters major US grocery chains."
   },
   {
     "category": "materials",
-    "company": "Bolt Threads",
-    "headline": "Bolt Threads Introduces Microsilk, a Sustainable, Plant-Based Silk Alternative",
-    "date": "2025-04-12",
-    "url": "https://www.fastcompany.com/90511665/bolt-threads-introduces-microsilk-a-sustainable-plant-based-silk-alternative",
-    "impact": 7,
-    "summary": "Bolt Threads introduces Microsilk, a sustainable and plant-based silk alternative that helps reduce the demand for traditional silk farming."
-  },
-  {
-    "category": "food",
-    "company": "Fermentation-based Seafood Alternatives",
-    "headline": "Fermentation-based Seafood Alternatives Score Major Investments",
+    "company": "Modern Meadow",
+    "headline": "Modern Meadow unveils biofabricated leather",
     "date": "2025-06-01",
-    "url": "https://vegconomist.com/2025/06/01/fermentation-based-seafood-alternatives-score-major-investments/",
-    "impact": 6,
-    "summary": "Fermentation-based seafood alternatives secure significant investments, paving the way for more sustainable and animal-free seafood options."
-  },
-  {
-    "category": "materials",
-    "company": "Artemis Plant-Based Leather",
-    "headline": "Artemis Plant-Based Leather Partners with Adidas for Sustainable Footwear Production",
-    "date": "2025-04-15",
-    "url": "https://www.adidas.com/us/news/artemis-partnership-04152025",
-    "impact": 6,
-    "summary": "Artemis Plant-Based Leather partners with Adidas to create sustainable footwear, using biodegradable materials instead of animal-derived leathers."
+    "url": "https://example.com/modernmeadow",
+    "impact": 9,
+    "summary": "New biofabricated leather offers superior durability and sustainability."
   },
   {
     "category": "food",
-    "company": "The Better Meat Co.",
-    "headline": "The Better Meat Co. Launches Cultured Beef Burger with $120M in Series B Funding",
+    "company": "Impossible Foods",
+    "headline": "Impossible Foods launches new vegan sausage",
     "date": "2025-06-10",
-    "url": "https://www.thebettermeatco.com/news/cultured-beef-burger-launch/",
-    "impact": 6,
-    "summary": "The Better Meat Co. unveils its cultured beef burger, backed by $120M in Series B funding, aiming to reduce the environmental impact of animal agriculture."
+    "url": "https://example.com/impossiblefoods",
+    "impact": 5,
+    "summary": "New product uses improved fermentation techniques for enhanced flavor."
   },
   {
     "category": "materials",
-    "company": "Naturally Advanced Technologies",
-    "headline": "Naturally Advanced Technologies Announces Commercially Viable Wood-Plastic Composite",
-    "date": "2025-05-05",
-    "url": "https://www.rietermag.com/naturally-advanced-technologies-announces-commercially-viable-wood-plastic-composite/",
+    "company": "Notpla",
+    "headline": "Notpla secures EU funding for seaweed packaging",
+    "date": "2025-06-15",
+    "url": "https://example.com/notpla",
     "impact": 6,
-    "summary": "Naturally Advanced Technologies develops a commercially viable wood-plastic composite, reducing the demand for petroleum-based plastics in the construction industry."
+    "summary": "Significant investment boosts seaweed-based plastic alternative production."
+  },
+  {
+    "category": "food",
+    "company": "Geltor",
+    "headline": "Geltor partners with Unilever for vegan collagen",
+    "date": "2025-06-22",
+    "url": "https://example.com/geltor",
+    "impact": 7,
+    "summary": "Precision fermentation collagen used in Unilever's new beauty products."
+  },
+  {
+    "category": "materials",
+    "company": "BioMason",
+    "headline": "BioMason receives grant for bio-cement",
+    "date": "2025-07-01",
+    "url": "https://example.com/biomason",
+    "impact": 8,
+    "summary": "Government funding accelerates development of sustainable bio-cement."
+  },
+  {
+    "category": "food",
+    "company": "Clara Foods",
+    "headline": "Clara Foods announces egg white expansion",
+    "date": "2025-07-10",
+    "url": "https://example.com/clarafoods",
+    "impact": 4,
+    "summary": "Expands production capacity for its precision-fermentation egg whites."
+  },
+  {
+    "category": "materials",
+    "company": "Pangaia",
+    "headline": "Pangaia launches new line of mushroom leather",
+    "date": "2025-07-20",
+    "url": "https://example.com/pangaia",
+    "impact": 6,
+    "summary": "New clothing line features sustainable mushroom-based leather alternative."
   }
 ]

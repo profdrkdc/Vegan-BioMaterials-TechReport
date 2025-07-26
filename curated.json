@@ -1,56 +1,47 @@
 [
   {
-    "category": "food",
-    "company": "Impossible Foods",
-    "headline": "Impossible Foods Launches Plant-Based Sausage Made with Precision-Fermented Myoglobin",
-    "date": "2025-05-01",
-    "url": "https://www.vegconomist.com/2025/05/01/impossible-foods-launches-plant-based-sausage-made-with-precision-fermented-myoglobin/",
+    "category": "materials",
+    "company": "Modern Meadow",
+    "headline": "Modern Meadow unveils biofabricated leather",
+    "date": "2025-06-01",
+    "url": "https://example.com/modernmeadow",
     "impact": 9,
-    "summary": "Impossible Foods introduces a new plant-based sausage using precision-fermented myoglobin for a more authentic meat flavor."
+    "summary": "New biofabricated leather offers superior durability and sustainability."
+  },
+  {
+    "category": "food",
+    "company": "Perfect Day",
+    "headline": "Perfect Day secures Series C funding",
+    "date": "2025-04-28",
+    "url": "https://example.com/perfectday",
+    "impact": 8,
+    "summary": "Secures major investment to scale production of precision-fermentation dairy proteins."
   },
   {
     "category": "materials",
-    "company": "Bio-Techne",
-    "headline": "Bio-Techne Debuts XF Leather-Like Vegan Material Created via Microbial Fermentation",
-    "date": "2025-06-15",
-    "url": "https://www.vegannews.com/2025/06/15/bio-techne-debuts-xf-leather-like-vegan-material-created-via-microbial-fermentation/",
+    "company": "BioMason",
+    "headline": "BioMason receives grant for bio-cement",
+    "date": "2025-07-01",
+    "url": "https://example.com/biomason",
     "impact": 8,
-    "summary": "Bio-Techne announces the launch of XF leather-like material created through microbial fermentation, offering a sustainable alternative to traditional leather."
-  },
-  {
-    "category": "food",
-    "company": "Perfect Day Foods",
-    "headline": "Perfect Day Foods Scales up Production of Animal-Free Casein with $350M in Series D Funding",
-    "date": "2025-05-21",
-    "url": "https://www.foodinformatics.com/2025/05/21/perfect-day-foods-scales-up-production-of-animal-free-casein-with-350m-in-series-d-funding/",
-    "impact": 8,
-    "summary": "Perfect Day Foods secures $350M in Series D funding to increase production of its animal-free casein protein for use in dairy products."
+    "summary": "Government funding accelerates development of sustainable bio-cement."
   },
   {
     "category": "materials",
     "company": "MycoWorks",
-    "headline": "MycoWorks Collaborates with LVMH to Develop Scalable, Sustainable Mycelium Leather",
-    "date": "2025-06-07",
-    "url": "https://www.sustainablebrands.com/news_and_views/sustainable_innovation/sustainable-brands-labs/mycoworks-collaborates-lvmh-develop-scalable-sustainable-mycelium-leather",
-    "impact": 8,
-    "summary": "MycoWorks partners with LVMH to develop scalable, sustainable mycelium leather as a replacement for traditional animal-derived leather."
+    "headline": "MycoWorks partners with Adidas",
+    "date": "2025-05-15",
+    "url": "https://example.com/mycoworks",
+    "impact": 7,
+    "summary": "Releases new line of mycelium-based leather for Adidas footwear."
   },
   {
     "category": "food",
-    "company": "Memphis Meats",
-    "headline": "Memphis Meats Announces Chicken Made from Cultivated Animal Cells",
-    "date": "2025-04-30",
-    "url": "https://www.memphis-meats.com/press-releases/memphis-meats-announces-chicken-made-from-cultivated-animal-cells/",
+    "company": "Geltor",
+    "headline": "Geltor partners with Unilever for vegan collagen",
+    "date": "2025-06-22",
+    "url": "https://example.com/geltor",
     "impact": 7,
-    "summary": "Memphis Meats unveils its latest innovation, cultivated chicken made from animal cells, reducing the need for factory farming."
-  },
-  {
-    "category": "materials",
-    "company": "Bolt Threads",
-    "headline": "Bolt Threads Introduces Microsilk, a Sustainable, Plant-Based Silk Alternative",
-    "date": "2025-04-12",
-    "url": "https://www.fastcompany.com/90511665/bolt-threads-introduces-microsilk-a-sustainable-plant-based-silk-alternative",
-    "impact": 7,
-    "summary": "Bolt Threads introduces Microsilk, a sustainable and plant-based silk alternative that helps reduce the demand for traditional silk farming."
+    "summary": "Precision fermentation collagen used in Unilever's new beauty products."
   }
 ]

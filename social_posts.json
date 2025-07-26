@@ -1,32 +1,40 @@
 [
   {
-    "platform": "facebook",
-    "text_content": "Are you ready for a greener and more humane future? Corporate investments and collaborations in the vegan biotech industry are paving the way. Join us as we explore how sustainable alternatives in food and materials are reshaping our world. Full story here: {{GHOST_ARTICLE_URL}}",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}"
-  },
-  {
-    "platform": "instagram",
-    "text_content": "🌱🌱 Sustainable alternatives in food and materials are taking the world by storm, and corporate investments and collaborations are accelerating this vegan biotech revolution. Discover more about the future of food and materials, and how ethical considerations and a greener planet go hand in hand. 🌎🌱 Link in bio 🔗",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A sequence featuring the growth of plants with the tagline 'Revolutionizing Food & Materials: Sustainable Vegan Biotech'"
-  },
-  {
     "platform": "bluesky",
-    "text_content": "Heads up, vegans and non-vegans alike! The vegan biotech industry is revolutionizing the food and materials sectors through corporate investments and collaborations. Here's a deep-dive into how these collaborations are driving the growth of sustainable alternatives and shaping our greener future. Read all about it here: {{GHOST_ARTICLE_URL}}",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}"
+    "text_content": "Whoa, check out Modern Meadow's new biofabricated leather! 🤯  It's seriously sustainable AND durable.  Read all about it and how it's revolutionizing the fashion industry in our latest article: {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
   },
   {
     "platform": "mastodon",
-    "text_content": "Attention, everyone! 📣 Corporate investments and collaborations in the vegan biotech industry are transforming the way we think about food and materials, pushing for a more sustainable and humane future. Don't miss out on this deep-dive into the vegan biotech revolution and its impact on the world. Check it out here: {{GHOST_ARTICLE_URL}} #VeganBiotech #Sustainabilty #FoodAndMaterials",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}"
+    "text_content": "Modern Meadow's biofabricated leather is a game-changer! This sustainable alternative to traditional leather is paving the way for a more ethical and environmentally friendly fashion industry. Learn more about the science, the impact, and the future of this innovation in our in-depth article: {{GHOST_ARTICLE_URL}} #BiofabricatedLeather #SustainableFashion #VeganBiotech #ModernMeadow",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
+    "platform": "facebook",
+    "text_content": "The fashion industry is on the cusp of a revolution. Modern Meadow's groundbreaking biofabricated leather offers a sustainable and ethical alternative to traditional animal hides.  Our latest article delves into the science behind this innovative material, explores its environmental impact, and examines its potential to disrupt the fashion industry as we know it.  Learn how this lab-grown leather could change the world – and your wardrobe! {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
+    "platform": "instagram",
+    "text_content": "Is lab-grown leather the future of fashion? 🤔  Modern Meadow thinks so!  Their biofabricated leather is changing the game.  Learn more about this sustainable revolution. Link in bio! #biofabricatedleather #sustainablefashion #veganleather #modernmeadow",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": "A sleek, modern image of a luxurious handbag made from biofabricated leather, with a subtle, futuristic background.  The colors should be earthy and elegant.",
+    "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "💡 Exciting news, folks! Corporate investments and collaborations in the vegan biotech industry are shaping the way we produce food and materials, ushering in a greener and more humane future. This deep-dive article discusses the key players, benefits, and long-term implications of these advancements on various sectors. Share your thoughts and read the full article here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Just finished reading an awesome article about Modern Meadow's biofabricated leather – it's seriously mind-blowing!  They're creating leather in a lab, which is way more sustainable than traditional methods.  I'm curious to hear your thoughts – what are the biggest challenges you see for this type of technology becoming mainstream?  Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
     "reddit_details": {
       "suggested_subreddit": "r/futurology",
-      "post_title": "The Vegan Biotech Revolution: How Corporate Investments are Driving the Growth of Sustainable Alternatives",
+      "post_title": "Lab-Grown Leather: Is This the Future of Sustainable Fashion?",
       "primary_topic_keyword": "Biotech"
     }
   }
