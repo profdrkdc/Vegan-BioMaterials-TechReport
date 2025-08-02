@@ -158,12 +158,14 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool, publish_so
                 longread_file_path = longread_files[0]
                 try:
                     from src.publish_blogger import create_post as create_blogger_post
-                    from src.generate_longread import get_title_from_markdown
+                    import json
                     
+                    with open("longread_outline.json", 'r', encoding='utf-8') as f:
+                        outline_data = json.load(f)
+                    title = outline_data['title']
+
                     with open(longread_file_path, 'r', encoding='utf-8') as f:
                         content_md = f.read()
-                    
-                    title = get_title_from_markdown(content_md)
                     
                     # Converteer Markdown naar HTML voor Blogger
                     import markdown
