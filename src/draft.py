@@ -108,9 +108,26 @@ for lang_config in active_languages:
         elif md.strip().startswith("```"):
              md = md.strip()[3:-3].strip()
         
+        # Extraheer titel en creëer front matter
+        article_title = md.splitlines()[0].lstrip('# ').strip()
+        article_date = target_date.isoformat()
+        
+        front_matter = f"""---
+title: "{article_title.replace('"', '\\"')}"
+date: {article_date}
+---
+
+"""
+        
+        # Combineer front matter en markdown
+        full_content = front_matter + md
+        
+        # --- DE CORRECTIE IS HIER ---
+        # Verwijder de dubbele "/posts" uit het pad
         output_filename = f"{OUTPUT_DIR}/{today_iso}_{lang_code}.md"
+        
         with open(output_filename, "w", encoding="utf-8") as f:
-            f.write(md)
+            f.write(full_content)
         eprint(f"✅ {output_filename} geschreven")
 
     except Exception as e:

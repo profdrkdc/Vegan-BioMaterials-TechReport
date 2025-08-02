@@ -87,32 +87,21 @@ def generate_longread_article(topic: str, output_path: str, outline_output_path:
 
     eprint(f"LangChain model geïnitialiseerd: {getattr(llm, 'model', 'Onbekend')}")
 
-    # --- NIEUWE, ROBUUSTERE PROMPT ---
     prompt_outline_text = """
     You are an expert content strategist. Your task is to generate a structured article outline based on the topic below.
-
     Topic: {topic}
-
     Please provide the content using the following Markdown format. Separate each block with its tag.
-
     [TITLE]
     A catchy, SEO-friendly title for the entire article.
-
     [HOOK]
     A short sentence or a compelling idea for the introduction.
-
     [CONCLUSION]
     A brief summary of the main idea for the conclusion.
-
     [SECTIONS]
     # Section 1: A descriptive title for the first section
     - Talking point 1 for section 1
-    - Talking point 2 for section 1
-    - Talking point 3 for section 1
     # Section 2: A descriptive title for the second section
     - Talking point 1 for section 2
-    - Talking point 2 for section 2
-    # ... continue for 3 to 5 sections in total
     """
     prompt_outline = PromptTemplate(template=prompt_outline_text, input_variables=["topic"])
     
@@ -144,33 +133,41 @@ def generate_longread_article(topic: str, output_path: str, outline_output_path:
     
     prompt_full_article_text = """
     You are a talented writer. Your task is to write a complete, in-depth article based on the provided structured outline.
-    Here is the complete outline to follow:
-    ---
     Article Title: {title}
-    Introduction Hook: {introduction_hook}
-    Conclusion Summary: {conclusion_summary}
-    Sections to write:
-    {sections_list}
-    ---
     Your tasks:
     1. Write a compelling introduction based on the 'Introduction Hook'.
     2. Write a detailed section for EACH item in the 'Sections to write' list.
-    3. Ensure smooth transitions between sections.
-    4. Write a powerful conclusion based on the 'Conclusion Summary'.
-    5. Format the entire result as a single Markdown document. Start with # Title. Use ## for section titles.
+    3. Format the entire result as a single Markdown document. Start with # Title. Use ## for section titles.
     FINAL ARTICLE:
     """
     prompt_full_article = PromptTemplate.from_template(prompt_full_article_text)
     chain_full_article = prompt_full_article | llm | StrOutputParser()
     eprint("✓ Chain 2 (Full Article Writer) has been built.")
     
-    final_article = chain_full_article.invoke(article_input)
+    final_article_markdown = chain_full_article.invoke(article_input)
     eprint("✓ Full article generated!")
     eprint("-" * 50)
     
+    # --- DE WIJZIGING IS HIER ---
+    # Extraheer de datum uit de bestandsnaam voor de front matter
+    date_match = re.search(r'(\d{4}-\d{2}-\d{2})', output_path)
+    article_date = date_match.group(1) if date_match else datetime.date.today().isoformat()
+
+    # Creëer de front matter
+    front_matter = f"""---
+title: "{outline.title.replace('"', '\\"')}"
+date: {article_date}
+---
+
+"""
+    
+    # Combineer front matter en artikel
+    full_content = front_matter + final_article_markdown
+    
+    # Schrijf het volledige bestand naar het meegegeven pad
     with open(output_path, "w", encoding="utf-8") as f:
-        f.write(final_article)
-    eprint(f"✅ Article successfully saved as: {output_path}")
+        f.write(full_content)
+    eprint(f"✅ Article with front matter successfully saved as: {output_path}")
 
 if __name__ == "__main__":
     from datetime import date
@@ -182,6 +179,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     today_iso = date.today().isoformat()
+    # --- DE CORRECTIE IS HIER ---
     output_path = f"content/posts/longread_{today_iso}_{args.lang}.md"
     
     generate_longread_article(args.topic, output_path, args.outline_out)

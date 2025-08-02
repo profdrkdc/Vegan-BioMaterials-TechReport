@@ -121,24 +121,31 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool, skip_conte
         """Taak voor het genereren van alle content- en databestanden."""
         script_env = build_script_env(provider_config)
         
-        # Stappen 1 t/m 6: Fetch, Curate, Draft, Select Topic, Generate Longread, Generate Social Posts
+        # Stappen 1 t/m 3: Fetch, Curate, Draft
         run_command(["python3", "-m", "src.fetch", "--date", target_date_iso], env=script_env)
         run_command(["python3", "-m", "src.curate"], env=script_env)
         run_command(["python3", "-m", "src.draft", "--date", target_date_iso], env=script_env)
         
+        # Stap 4: Select Topic
         process = run_command(["python3", "-m", "src.select_topic"], env=script_env)
         longread_topic = process.stdout.strip()
         
+        # Stap 5: Generate Longread
         if longread_topic:
+            # --- DE LAATSTE WIJZIGING IS HIER ---
+            # Zorg ervoor dat de output naar de "posts" submap gaat
+            longread_filename_en = f"content/posts/longread_{target_date_iso}_en.md"
+            
             run_command([
                 "python3", "-m", "src.generate_longread", 
                 longread_topic, 
-                "-o", f"content/longread_{target_date_iso}_en.md",
+                "-o", longread_filename_en,
                 "--outline-out", "longread_outline.json"
             ], env=script_env)
         else:
              eprint("⚠️ WAARSCHUWING: Kon geen long-read onderwerp selecteren.")
 
+        # Stap 6: Generate Social Posts
         run_command(["python3", "-m", "src.generate_social_posts"], env=script_env)
         return True
 
