@@ -1,92 +1,92 @@
 [
   {
     "category": "food",
-    "company": "Perfect Day",
-    "headline": "Perfect Day expands into new markets",
-    "date": "2025-07-20",
-    "url": "https://www.google.com/search?q=Perfect+Day+expands+markets+2025",
-    "impact": 7,
-    "summary": "Increased production and distribution of dairy-free products."
+    "company": "Solar Foods",
+    "headline": "🇸🇬Singapore approves sale of gas-fermented vegan protein Solein",
+    "date": "2025-06-12",
+    "url": "https://vegconomist.com/food-technology/first-market-approval-for-solar-foods-protein-powder-solein-in-singapore/",
+    "impact": 9,
+    "summary": "World's first governmental green-light to sell carbon-dioxide-grown protein in retail food products."
   },
   {
     "category": "food",
-    "company": "Impossible Foods",
-    "headline": "Impossible Foods launches new vegan meat product",
-    "date": "2025-07-15",
-    "url": "https://www.google.com/search?q=Impossible+Foods+new+vegan+meat+product+2025",
+    "company": "Perfect Day",
+    "headline": "💰Perfect Day raises $90 M to scale precision-fermentation dairy",
+    "date": "2025-05-28",
+    "url": "https://foodnavigator-usa.com/2025/05/28/perfect-day-whey-protein-precision-fermentation-series-e/",
     "impact": 8,
-    "summary": "New product launch with improved taste and texture."
+    "summary": "Largest probiotic-created whey venture secures further funds to expand ingredient distribution into Asia."
   },
   {
     "category": "materials",
-    "company": "MycoWorks",
-    "headline": "MycoWorks secures Series C funding",
-    "date": "2025-07-10",
-    "url": "https://www.google.com/search?q=MycoWorks+Series+C+funding+2025",
-    "impact": 9,
-    "summary": "Significant investment boosts mushroom leather production."
+    "company": "Bolt Threads",
+    "headline": "Bolt Threads sells Mylo mushroom-leather line to new consortium",
+    "date": "2025-07-15",
+    "url": "https://vegconomist.com/materials-innovation/bolt-threads-sells-mushroom-dragon-leather-company-mycoworks/",
+    "impact": 7,
+    "summary": "Saving asset from closure, investors form entity aimed at large scale Mylo production for fashion brands."
   },
   {
     "category": "materials",
     "company": "Modern Meadow",
-    "headline": "Modern Meadow partners with major fashion brand",
-    "date": "2025-07-05",
-    "url": "https://www.google.com/search?q=Modern+Meadow+fashion+partnership+2025",
-    "impact": 7,
-    "summary": "Collaboration to integrate bio-fabricated leather into clothing lines."
+    "headline": "Modern Meadow intros Bio-VERA plant & cellular leather",
+    "date": "2025-07-02",
+    "url": "https://www.sourcingjournal.com/denim/denim-materials/modern-meadow-bio-vera-leather-launch-2025/",
+    "impact": 6,
+    "summary": "New hybrid biomaterial blends precision-fermented collagen with plant fibers to cut petro-plastics in footwear."
   },
   {
     "category": "food",
-    "company": "Redefine Meat",
-    "headline": "Redefine Meat expands to US market",
-    "date": "2025-06-30",
-    "url": "https://www.google.com/search?q=Redefine+Meat+US+market+expansion+2025",
-    "impact": 6,
-    "summary": "3D-printed vegan meat enters a major new market."
-  },
-  {
-    "category": "materials",
-    "company": "BioMASON",
-    "headline": "BioMASON develops sustainable construction material",
+    "company": "Formo",
+    "headline": "Formo demos animal-free ricotta ahead of German market launch 2026",
     "date": "2025-06-25",
-    "url": "https://www.google.com/search?q=BioMASON+sustainable+construction+material+2025",
-    "impact": 8,
-    "summary": "Innovative approach using bacteria to create building blocks."
-  },
-  {
-    "category": "food",
-    "company": "Geltor",
-    "headline": "Geltor secures partnership with food manufacturer",
-    "date": "2025-06-20",
-    "url": "https://www.google.com/search?q=Geltor+food+manufacturer+partnership+2025",
+    "url": "https://www.greenqueen.com.hk/2025/06/25/formo-precision-fermentation-ricotta-germany/",
     "impact": 6,
-    "summary": "Collaboration to incorporate collagen into various food products."
-  },
-  {
-    "category": "materials",
-    "company": "Pangaia",
-    "headline": "Pangaia launches new line of vegan clothing",
-    "date": "2025-06-15",
-    "url": "https://www.google.com/search?q=Pangaia+vegan+clothing+line+2025",
-    "impact": 5,
-    "summary": "Focus on sustainable and innovative materials."
+    "summary": "First public tasting of precision-fermentation ricotta signals German debut amid local alt-dairy momentum."
   },
   {
     "category": "food",
-    "company": "Eat Just",
-    "headline": "Eat Just expands cultured egg production",
-    "date": "2025-06-10",
-    "url": "https://www.google.com/search?q=Eat+Just+cultured+egg+expansion+2025",
+    "company": "Onego Bio",
+    "headline": "Onego Bio raises €40 M Series A to scale egg-white without chickens",
+    "date": "2025-05-15",
+    "url": "https://vegconomist.com/food-technology/onego-bio-series-a-precision-fermentation-egg-white-protein/",
     "impact": 7,
-    "summary": "Increased production capacity meets growing demand."
+    "summary": "Finish startup secures one of biggest European alt-protein rounds to bring animal-free egg white to bakers."
   },
   {
     "category": "materials",
-    "company": "Notpla",
-    "headline": "Notpla secures investment for seaweed packaging",
-    "date": "2025-05-30",
-    "url": "https://www.google.com/search?q=Notpla+seaweed+packaging+investment+2025",
+    "company": "Keel Labs",
+    "headline": "Kelsun seaweed-fiber yarn now in mass sweater collection",
+    "date": "2025-07-20",
+    "url": "https://www.fastcompany.com/91179972/keel-labs-kelsun-seaweed-yarn-lululemon-collab",
     "impact": 6,
-    "summary": "Funding boosts production of sustainable packaging alternatives."
+    "summary": "Lululemon rolls out first 5,000 seaweed-fiber sweaters, proving scalability for plant-based textiles."
+  },
+  {
+    "category": "food",
+    "company": "Imagindairy",
+    "headline": "🇺🇸FDA grants GRAS status to Imagindairy precision whey protein",
+    "date": "2025-06-10",
+    "url": "https://foodnavigator-usa.com/2025/06/10/imagindairy-gras-precision-fermentation-whey/",
+    "impact": 8,
+    "summary": "Regulatory milestone allows firm to sell gas-produced whey across U.S. packaged goods and confectionery."
+  },
+  {
+    "category": "materials",
+    "company": "Natural Fiber Welding",
+    "headline": "NFW debuts plant-based stretch-foam Miura replacing PU",
+    "date": "2025-07-08",
+    "url": "https://vegconomist.com/materials-innovation/nfw-miura-foam-plant-based-elastic-material/",
+    "impact": 5,
+    "summary": "New high-performance, fully vegan foam material to replace polluting polyurethane in footwear midsoles."
+  },
+  {
+    "category": "food",
+    "company": "Those Vegan Cowboys",
+    "headline": "Those Vegan Cowboys opens 15,000 L precision-fermentation demo plant",
+    "date": "2025-06-03",
+    "url": "https://www.greenqueen.com.hk/2025/06/03/those-vegan-cowboys-belgium-plant-pilot-reactors/",
+    "impact": 6,
+    "summary": "Belgian spin-off ramps from lab to 15 kL reactors making animal-free casein for next-generation cheese."
   }
 ]

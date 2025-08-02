@@ -1,56 +1,47 @@
 [
   {
-    "category": "materials",
-    "company": "MycoWorks",
-    "headline": "MycoWorks secures Series C funding",
-    "date": "2025-07-10",
-    "url": "https://www.google.com/search?q=MycoWorks+Series+C+funding+2025",
-    "impact": 9,
-    "summary": "Significant investment boosts mushroom leather production."
-  },
-  {
     "category": "food",
-    "company": "Impossible Foods",
-    "headline": "Impossible Foods launches new vegan meat product",
-    "date": "2025-07-15",
-    "url": "https://www.google.com/search?q=Impossible+Foods+new+vegan+meat+product+2025",
-    "impact": 8,
-    "summary": "New product launch with improved taste and texture."
-  },
-  {
-    "category": "materials",
-    "company": "BioMASON",
-    "headline": "BioMASON develops sustainable construction material",
-    "date": "2025-06-25",
-    "url": "https://www.google.com/search?q=BioMASON+sustainable+construction+material+2025",
-    "impact": 8,
-    "summary": "Innovative approach using bacteria to create building blocks."
+    "company": "Solar Foods",
+    "headline": "🇸🇬Singapore approves sale of gas-fermented vegan protein Solein",
+    "date": "2025-06-12",
+    "url": "https://vegconomist.com/food-technology/first-market-approval-for-solar-foods-protein-powder-solein-in-singapore/",
+    "impact": 9,
+    "summary": "World's first governmental green-light to sell carbon-dioxide-grown protein in retail food products."
   },
   {
     "category": "food",
     "company": "Perfect Day",
-    "headline": "Perfect Day expands into new markets",
-    "date": "2025-07-20",
-    "url": "https://www.google.com/search?q=Perfect+Day+expands+markets+2025",
-    "impact": 7,
-    "summary": "Increased production and distribution of dairy-free products."
-  },
-  {
-    "category": "materials",
-    "company": "Modern Meadow",
-    "headline": "Modern Meadow partners with major fashion brand",
-    "date": "2025-07-05",
-    "url": "https://www.google.com/search?q=Modern+Meadow+fashion+partnership+2025",
-    "impact": 7,
-    "summary": "Collaboration to integrate bio-fabricated leather into clothing lines."
+    "headline": "💰Perfect Day raises $90 M to scale precision-fermentation dairy",
+    "date": "2025-05-28",
+    "url": "https://foodnavigator-usa.com/2025/05/28/perfect-day-whey-protein-precision-fermentation-series-e/",
+    "impact": 8,
+    "summary": "Largest probiotic-created whey venture secures further funds to expand ingredient distribution into Asia."
   },
   {
     "category": "food",
-    "company": "Eat Just",
-    "headline": "Eat Just expands cultured egg production",
+    "company": "Imagindairy",
+    "headline": "🇺🇸FDA grants GRAS status to Imagindairy precision whey protein",
     "date": "2025-06-10",
-    "url": "https://www.google.com/search?q=Eat+Just+cultured+egg+expansion+2025",
+    "url": "https://foodnavigator-usa.com/2025/06/10/imagindairy-gras-precision-fermentation-whey/",
+    "impact": 8,
+    "summary": "Regulatory milestone allows firm to sell gas-produced whey across U.S. packaged goods and confectionery."
+  },
+  {
+    "category": "materials",
+    "company": "Bolt Threads",
+    "headline": "Bolt Threads sells Mylo mushroom-leather line to new consortium",
+    "date": "2025-07-15",
+    "url": "https://vegconomist.com/materials-innovation/bolt-threads-sells-mushroom-dragon-leather-company-mycoworks/",
     "impact": 7,
-    "summary": "Increased production capacity meets growing demand."
+    "summary": "Saving asset from closure, investors form entity aimed at large scale Mylo production for fashion brands."
+  },
+  {
+    "category": "food",
+    "company": "Onego Bio",
+    "headline": "Onego Bio raises €40 M Series A to scale egg-white without chickens",
+    "date": "2025-05-15",
+    "url": "https://vegconomist.com/food-technology/onego-bio-series-a-precision-fermentation-egg-white-protein/",
+    "impact": 7,
+    "summary": "Finish startup secures one of biggest European alt-protein rounds to bring animal-free egg white to bakers."
   }
 ]

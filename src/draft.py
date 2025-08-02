@@ -84,6 +84,7 @@ if not active_languages:
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # --- Hoofdlogica: Loop over actieve talen ---
+successful_drafts = 0
 for lang_config in active_languages:
     lang_code = lang_config['code']
     lang_name = lang_config['name']
@@ -108,31 +109,35 @@ for lang_config in active_languages:
         elif md.strip().startswith("```"):
              md = md.strip()[3:-3].strip()
         
-        # Extraheer titel en creëer front matter
-        article_title = md.splitlines()[0].lstrip('# ').strip()
+        raw_title = md.splitlines()[0].lstrip('# ').strip()
+        safe_title = raw_title.replace('"', '”')
+        
         article_date = target_date.isoformat()
         
         front_matter = f"""---
-title: "{article_title.replace('"', '\\"')}"
+title: "{safe_title}"
 date: {article_date}
 ---
 
 """
         
-        # Combineer front matter en markdown
         full_content = front_matter + md
         
-        # --- DE CORRECTIE IS HIER ---
-        # Verwijder de dubbele "/posts" uit het pad
         output_filename = f"{OUTPUT_DIR}/{today_iso}_{lang_code}.md"
-        
         with open(output_filename, "w", encoding="utf-8") as f:
             f.write(full_content)
         eprint(f"✅ {output_filename} geschreven")
+        successful_drafts += 1 # Tel een succesvolle poging op
 
     except Exception as e:
         eprint(f"❌ Fout bij API aanroep voor {lang_name}: {e}")
-        continue
+        continue # Ga door naar de volgende taal
+
+# --- DE NIEUWE CONTROLE IS HIER ---
+# Controleer na de loop of alle talen zijn verwerkt.
+if successful_drafts < len(active_languages):
+    eprint(f"❌ MISLUKT: Slechts {successful_drafts} van de {len(active_languages)} nieuwsbrieven konden worden gegenereerd.")
+    sys.exit(1) # Sluit af met een foutcode
 
 eprint("-" * 30)
 eprint("✅ Alle ingeschakelde talen zijn verwerkt.")

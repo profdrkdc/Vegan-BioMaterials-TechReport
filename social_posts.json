@@ -1,41 +1,28 @@
 [
   {
     "platform": "bluesky",
-    "text_content": "Huge news! MycoWorks just secured Series C funding! This is a massive step forward for sustainable materials and the vegan biotech revolution.  Read more about how they're changing the game in fashion, automotive, and furniture: {{GHOST_ARTICLE_URL}}",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": null,
-    "reddit_details": null
+    "text_content": "Exciting news in the world of vegan protein! 🌱 We've got updates from Solar Foods, Perfect Day, and Imagindairy. Read up on their recent regulatory approvals and distribution deals. Let's support these game-changing advancements in #biotech and #foodtech! {{GHOST_ARTICLE_URL}}"
   },
   {
     "platform": "mastodon",
-    "text_content": "MycoWorks' Series C funding is a game-changer for sustainable materials!  Their mycelium-based tech is poised to disrupt industries from fashion to automotive. Learn all about it in our latest deep dive: {{GHOST_ARTICLE_URL}} #MycoWorks #SustainableMaterials #VeganBiotech #SeriesC #Innovation",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": null,
-    "reddit_details": null
+    "text_content": "This week in #foodtech: Solar Foods, Perfect Day, and Imagindairy are making waves with their innovative vegan protein products and recent regulatory approvals. Here's a deep dive into their breakthroughs. Read on! {{GHOST_ARTICLE_URL}} #Biotech #VeganProtein"
   },
   {
     "platform": "facebook",
-    "text_content": "The future of sustainable materials is here! MycoWorks, a leader in mycelium-based materials, just received significant Series C funding. This investment will fuel their groundbreaking work in creating eco-friendly alternatives for various industries, from fashion and automotive to furniture.  Their innovative approach uses mushroom roots to create durable, biodegradable materials, offering a compelling solution to the environmental challenges posed by traditional materials.  Learn more about MycoWorks' transformative technology and its impact on the vegan biotech sector in our latest article: {{GHOST_ARTICLE_URL}}",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": null,
-    "reddit_details": null
+    "text_content": "Dive into the world of #bioengineering and discover the recent breakthroughs in the vegan protein market by Solar Foods, Perfect Day, and Imagindairy. Read the full article to learn about their innovative technologies and regulatory approvals transforming the future of plant-based protein. #FoodTechnology #GameChangers {{GHOST_ARTICLE_URL}}"
   },
   {
     "platform": "instagram",
-    "text_content": "🤯  Mushroom leather?  It's REAL and it's revolutionizing sustainable materials!  MycoWorks' Series C funding is HUGE news.  Learn how they're changing the world. Link in bio! #veganbiotech #sustainablefashion #mycelium #innovation #futureofmaterials",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A futuristic, sleek image of a luxury handbag made from mushroom leather, with a subtle, glowing mycelium texture.  The background should be a dark, moody forest scene.",
-    "reddit_details": null
+    "text_content": "Get ready to meet the power players in the #veganprotein market! Solar Foods, Perfect Day, and Imagindairy are redefining foodtech with their innovative plant-based proteins. Step into the future of food with this deep dive. 🌱✨ 🔗: Link in bio",
+    "image_prompt": "A futuristic laboratory showcases cutting-edge equipment used to produce vegan protein by Solar Foods, Perfect Day, and Imagindairy."
   },
   {
     "platform": "reddit",
-    "text_content": "Just finished reading an amazing article about MycoWorks and their recent Series C funding!  Seriously impressed by their mycelium-based materials – it's a total game-changer for sustainable alternatives in so many industries.  They're tackling the environmental impact of traditional materials head-on, and it's inspiring to see this level of innovation.  What do you think is the biggest potential impact of this technology?  Will we see widespread adoption soon? Let's discuss! Full deep-dive here: {{GHOST_ARTICLE_URL}}",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": null,
+    "text_content": "Just discovered this fascinating article diving into the recent breakthroughs in the vegan protein market, specifically focusing on Solar Foods, Perfect Day, and Imagindairy's innovations. It's truly inspiring to see how these companies are revolutionizing the #foodtech industry. Can't wait to see what comes next! Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "reddit_details": {
-      "suggested_subreddit": "r/sustainable",
-      "post_title": "MycoWorks' Series C Funding: A Revolution in Sustainable Materials?",
-      "primary_topic_keyword": "Biomaterials"
+      "suggested_subreddit": "r/futurology",
+      "post_title": "Revolutionizing the Vegan Protein Market: Solar Foods, Perfect Day, and Imagindairy's Innovations",
+      "primary_topic_keyword": "Biotech"
     }
   }
 ]

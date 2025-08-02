@@ -1,5 +1,5 @@
 # src/generate_longread.py
-import os, sys, argparse, json, re
+import os, sys, argparse, json, re, datetime
 from typing import List
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
@@ -148,38 +148,34 @@ def generate_longread_article(topic: str, output_path: str, outline_output_path:
     eprint("✓ Full article generated!")
     eprint("-" * 50)
     
-    # --- DE WIJZIGING IS HIER ---
-    # Extraheer de datum uit de bestandsnaam voor de front matter
     date_match = re.search(r'(\d{4}-\d{2}-\d{2})', output_path)
     article_date = date_match.group(1) if date_match else datetime.date.today().isoformat()
 
-    # Creëer de front matter
+    safe_title = outline.title.replace('"', '”')
+
     front_matter = f"""---
-title: "{outline.title.replace('"', '\\"')}"
+title: "{safe_title}"
 date: {article_date}
 ---
 
 """
     
-    # Combineer front matter en artikel
     full_content = front_matter + final_article_markdown
     
-    # Schrijf het volledige bestand naar het meegegeven pad
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(full_content)
     eprint(f"✅ Article with front matter successfully saved as: {output_path}")
 
 if __name__ == "__main__":
-    from datetime import date
     load_dotenv()
     parser = argparse.ArgumentParser(description="Generate a long-read article on a specific topic using LangChain.")
+    
+    # --- DE WIJZIGING IS HIER ---
     parser.add_argument("topic", type=str, help="The main topic of the article.")
-    parser.add_argument("--lang", type=str, default="en", help="Language code for the output file (e.g., 'en', 'nl').")
+    parser.add_argument("-o", "--output", type=str, required=True, help="The path to the output Markdown file.")
     parser.add_argument("--outline-out", type=str, default="longread_outline.json", help="The path to save the JSON outline.")
+    
     args = parser.parse_args()
     
-    today_iso = date.today().isoformat()
-    # --- DE CORRECTIE IS HIER ---
-    output_path = f"content/posts/longread_{today_iso}_{args.lang}.md"
-    
-    generate_longread_article(args.topic, output_path, args.outline_out)
+    # De output path wordt nu direct vanuit de argumenten gehaald.
+    generate_longread_article(args.topic, args.output, args.outline_out)
