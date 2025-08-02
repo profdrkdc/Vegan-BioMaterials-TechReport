@@ -154,8 +154,7 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool, skip_conte
 
     # Nieuwe stap: Publiceren naar Blogger
     if not skip_blogger_publish and os.getenv('PUBLISH_BLOGGER', 'false').lower() == 'true':
-        eprint("
-INFO: Starten met publicatie naar Blogger...")
+        eprint("INFO: Starten met publicatie naar Blogger...")
         # Zoek het gegenereerde longread-bestand
         longread_files = glob.glob(f"content/longread_{target_date_iso}_en.md")
         if longread_files:
@@ -197,7 +196,7 @@ INFO: Starten met publicatie naar Blogger...")
         eprint("INFO: Social media publicatie overgeslagen vanwege --skip-social-publish vlag.")
     
     eprint("
-✅ Pijplijn voltooid.")
+    eprint("✅ Pijplijn voltooid.")")
 
 if __name__ == "__main__":
     load_dotenv()
