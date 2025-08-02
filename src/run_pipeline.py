@@ -91,13 +91,13 @@ def run_task(task_name: str, task_function, providers_to_run):
                 eprint("Probeer de volgende provider...")
     return None, None
 
-def run_full_pipeline(target_date_str: str or None, no_archive: bool, publish_social: bool):
+def run_full_pipeline(target_date_str: str or None, no_archive: bool, only_publish_social: bool, skip_content_generation: bool, skip_blogger_publish: bool, skip_social_publish: bool):
     # Debugging: Check PUBLISH_BLOGGER env var
     eprint(f"DEBUG: PUBLISH_BLOGGER env var: {os.getenv('PUBLISH_BLOGGER')}")
 
     # --- DE AANPASSING IS HIER ---
     # Voer alleen archivering uit als we NIET in publish-only modus zijn.
-    if not no_archive and not publish_social:
+    if not no_archive and not only_publish_social:
         archive_old_content()
     
     target_date = datetime.date.today()
@@ -143,14 +143,14 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool, publish_so
         return True
 
     # --- Hoofdlogica van de pipeline ---
-    if not publish_social:
+    if not only_publish_social and not skip_content_generation:
         _, content_success = run_task("Content Generatie", generate_content_task, providers_to_run)
         if not content_success:
             eprint("\n❌ DRAMATISCHE FOUT: Kon met geen enkele provider de content genereren.")
             sys.exit(1)
         
         # Nieuwe stap: Publiceren naar Blogger
-        if os.getenv('PUBLISH_BLOGGER', 'false').lower() == 'true':
+        if not skip_blogger_publish and os.getenv('PUBLISH_BLOGGER', 'false').lower() == 'true':
             eprint("\nINFO: Starten met publicatie naar Blogger...")
             # Zoek het gegenereerde longread-bestand
             longread_files = glob.glob(f"content/longread_{target_date_iso}_en.md")
@@ -179,14 +179,18 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool, publish_so
             else:
                 eprint("⚠️ WAARSCHUWING: Geen long-read bestand gevonden om te publiceren naar Blogger.")
 
-    else:
-        eprint("INFO: Content generatie overgeslagen vanwege --publish-social vlag.")
+    elif only_publish_social:
+        eprint("INFO: Content generatie overgeslagen vanwege --only-publish-social vlag.")
+    elif skip_content_generation:
+        eprint("INFO: Content generatie overgeslagen vanwege --skip-content-generation vlag.")
 
-    if publish_social:
+    if not skip_social_publish and (only_publish_social or not skip_content_generation):
         _, publish_success = run_task("Social Media Publicatie", publish_social_task, providers_to_run)
         if not publish_success:
             eprint("\n❌ DRAMATISCHE FOUT: Kon met geen enkele provider de social posts publiceren.")
             sys.exit(1)
+    elif skip_social_publish:
+        eprint("INFO: Social media publicatie overgeslagen vanwege --skip-social-publish vlag.")
     
     eprint("\n✅ Pijplijn voltooid.")
 
@@ -195,7 +199,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Draait de volledige content generatie pijplijn.")
     parser.add_argument("--date", type=str, help="De datum (YYYY-MM-DD) waarvoor content gegenereerd moet worden.")
     parser.add_argument("--no-archive", action='store_true', help="Sla het archiveren van oude content over.")
-    parser.add_argument("--publish-social", action='store_true', help="Publiceer de gegenereerde social posts.")
+    parser.add_argument("--only-publish-social", action='store_true', help="Publiceer ALLEEN de gegenereerde social posts (slaat content generatie over).")
+    parser.add_argument("--skip-content-generation", action='store_true', help="Sla de content generatie stappen over.")
+    parser.add_argument("--skip-blogger-publish", action='store_true', help="Sla de publicatie naar Blogger over.")
+    parser.add_argument("--skip-social-publish", action='store_true', help="Sla de publicatie naar sociale media over.")
     args = parser.parse_args()
     
-    run_full_pipeline(args.date, args.no_archive, args.publish_social)
+    run_full_pipeline(args.date, args.no_archive, args.only_publish_social, args.skip_content_generation, args.skip_blogger_publish, args.skip_social_publish)
