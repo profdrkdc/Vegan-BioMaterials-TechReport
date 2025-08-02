@@ -146,8 +146,7 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool, skip_conte
     if not skip_content_generation:
         _, content_success = run_task("Content Generatie", generate_content_task, providers_to_run)
         if not content_success:
-            eprint("
-❌ DRAMATISCHE FOUT: Kon met geen enkele provider de content genereren.")
+            eprint("❌ DRAMATISCHE FOUT: Kon met geen enkele provider de content genereren.")
             sys.exit(1)
     else:
         eprint("INFO: Content generatie overgeslagen vanwege --skip-content-generation vlag.")
@@ -189,14 +188,12 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool, skip_conte
     if not skip_social_publish and not skip_content_generation:
         _, publish_success = run_task("Social Media Publicatie", publish_social_task, providers_to_run)
         if not publish_success:
-            eprint("
-❌ DRAMATISCHE FOUT: Kon met geen enkele provider de social posts publiceren.")
+            eprint("❌ DRAMATISCHE FOUT: Kon met geen enkele provider de social posts publiceren.")
             sys.exit(1)
     elif skip_social_publish:
         eprint("INFO: Social media publicatie overgeslagen vanwege --skip-social-publish vlag.")
     
-    eprint("
-    eprint("✅ Pijplijn voltooid.")")
+    eprint("✅ Pijplijn voltooid.")
 
 if __name__ == "__main__":
     load_dotenv()
