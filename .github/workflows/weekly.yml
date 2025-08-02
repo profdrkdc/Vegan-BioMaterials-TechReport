@@ -50,3 +50,5 @@ jobs:
           # De publicatielogica zit nu in run_pipeline.py, dus de aparte stappen zijn niet meer nodig.
           # De social media publicatie kan eventueel een aparte stap blijven als dat wenselijk is.
           # Voor nu gaan we ervan uit dat de hoofd-pipeline alles afhandelt.
+          # echo "--- Step 2: Publishing articles to Ghost... ---"
+          # python src/publish_ghost.py # Deze stap wordt nu overgeslagen
