@@ -27,6 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write # Required for google-github-actions/auth@v2
+      contents: write # <-- NIEUW: Toestaan om naar de repository te schrijven
 
     steps:
       - name: Checkout repository
@@ -68,3 +69,11 @@ jobs:
           # Voor nu gaan we ervan uit dat de hoofd-pipeline alles afhandelt.
           # echo "--- Step 2: Publishing articles to Ghost... ---"
           # python src/publish_ghost.py # Deze stap wordt nu overgeslagen
+
+      - name: Commit and Push Generated Content
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add content/ raw.json curated.json social_posts.json longread_outline.json
+          git commit -m "feat: Add generated content from workflow run" || echo "No changes to commit"
+          git push
