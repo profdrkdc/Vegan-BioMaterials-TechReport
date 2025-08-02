@@ -112,25 +112,55 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool, skip_conte
 
     def generate_content_task(provider_config):
         script_env = build_script_env(provider_config)
-        run_command(["python3", "-m", "src.fetch", "--date", target_date_iso], env=script_env)
-        run_command(["python3", "-m", "src.curate"], env=script_env)
-        run_command(["python3", "-m", "src.draft", "--date", target_date_iso], env=script_env)
+
+        # Stap 1: Fetch
+        raw_json_path = "raw.json"
+        if os.path.exists(raw_json_path):
+            eprint(f"INFO: '{raw_json_path}' bestaat al. Overslaan van src.fetch.")
+        else:
+            run_command(["python3", "-m", "src.fetch", "--date", target_date_iso], env=script_env)
+
+        # Stap 2: Curate
+        curated_json_path = "curated.json"
+        if os.path.exists(curated_json_path):
+            eprint(f"INFO: '{curated_json_path}' bestaat al. Overslaan van src.curate.")
+        else:
+            run_command(["python3", "-m", "src.curate"], env=script_env)
+
+        # Stap 3: Draft
+        draft_en_path = f"content/{target_date_iso}_en.md"
+        draft_nl_path = f"content/{target_date_iso}_nl.md"
+        if os.path.exists(draft_en_path) and os.path.exists(draft_nl_path):
+            eprint(f"INFO: '{draft_en_path}' en '{draft_nl_path}' bestaan al. Overslaan van src.draft.")
+        else:
+            run_command(["python3", "-m", "src.draft", "--date", target_date_iso], env=script_env)
+
+        # Stap 4: Select Topic (kan niet worden overgeslagen op basis van bestandsbestaan)
         process = run_command(["python3", "-m", "src.select_topic"], env=script_env)
         longread_topic = process.stdout.strip()
 
+        # Stap 5: Generate Longread
+        longread_filename_en = f"content/longread_{target_date_iso}_en.md"
+        longread_outline_filename = "longread_outline.json"
         if longread_topic:
-            longread_filename_en = f"content/longread_{target_date_iso}_en.md"
-            longread_outline_filename = "longread_outline.json"
-            run_command([
-                "python3", "-m", "src.generate_longread", 
-                longread_topic, 
-                "-o", longread_filename_en,
-                "--outline-out", longread_outline_filename
-            ], env=script_env)
+            if os.path.exists(longread_filename_en) and os.path.exists(longread_outline_filename):
+                eprint(f"INFO: '{longread_filename_en}' en '{longread_outline_filename}' bestaan al. Overslaan van src.generate_longread.")
+            else:
+                run_command([
+                    "python3", "-m", "src.generate_longread", 
+                    longread_topic, 
+                    "-o", longread_filename_en,
+                    "--outline-out", longread_outline_filename
+                ], env=script_env)
         else:
              eprint("⚠️ WAARSCHUWING: Kon geen long-read onderwerp selecteren.")
-        
-        run_command(["python3", "-m", "src.generate_social_posts"], env=script_env)
+
+        # Stap 6: Generate Social Posts
+        social_posts_json_path = "social_posts.json"
+        if os.path.exists(social_posts_json_path):
+            eprint(f"INFO: '{social_posts_json_path}' bestaat al. Overslaan van src.generate_social_posts.")
+        else:
+            run_command(["python3", "-m", "src.generate_social_posts"], env=script_env)
         return True
 
     def publish_social_task(provider_config):
