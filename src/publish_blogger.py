@@ -1,18 +1,11 @@
 
 import os
-from google.oauth2 import service_account
+import google.auth
 from googleapiclient.discovery import build
 
 def get_blogger_service():
-    """Initialiseert de Blogger API-service met service account credentials."""
-    key_file_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
-    if not key_file_path:
-        raise ValueError("GOOGLE_APPLICATION_CREDENTIALS omgevingsvariabele niet ingesteld.")
-
-    credentials = service_account.Credentials.from_service_account_file(
-        key_file_path,
-        scopes=['https://www.googleapis.com/auth/blogger']
-    )
+    """Initialiseert de Blogger API-service met credentials die automatisch worden opgehaald."""
+    credentials, project = google.auth.default(scopes=['https://www.googleapis.com/auth/blogger'])
     service = build('blogger', 'v3', credentials=credentials)
     return service
 
