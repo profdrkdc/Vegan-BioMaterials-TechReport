@@ -146,51 +146,58 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool, skip_conte
     if not skip_content_generation:
         _, content_success = run_task("Content Generatie", generate_content_task, providers_to_run)
         if not content_success:
-            eprint("\n❌ DRAMATISCHE FOUT: Kon met geen enkele provider de content genereren.")
+            eprint("
+❌ DRAMATISCHE FOUT: Kon met geen enkele provider de content genereren.")
             sys.exit(1)
-        
-        # Nieuwe stap: Publiceren naar Blogger
-        if not skip_blogger_publish and os.getenv('PUBLISH_BLOGGER', 'false').lower() == 'true':
-            eprint("\nINFO: Starten met publicatie naar Blogger...")
-            # Zoek het gegenereerde longread-bestand
-            longread_files = glob.glob(f"content/longread_{target_date_iso}_en.md")
-            if longread_files:
-                longread_file_path = longread_files[0]
-                try:
-                    from src.publish_blogger import create_post as create_blogger_post
-                    import json
-                    
-                    with open("longread_outline.json", 'r', encoding='utf-8') as f:
-                        outline_data = json.load(f)
-                    title = outline_data['title']
-
-                    with open(longread_file_path, 'r', encoding='utf-8') as f:
-                        content_md = f.read()
-                    
-                    # Converteer Markdown naar HTML voor Blogger
-                    import markdown
-                    html_content = markdown.markdown(content_md)
-                    
-                    create_blogger_post(title, html_content)
-                    eprint("✅ SUCCES: Long-read gepubliceerd op Blogger.")
-                except Exception as e:
-                    eprint(f"❌ FOUT: Publicatie naar Blogger is mislukt. Fout: {e}")
-                    # We stoppen de pijplijn niet als alleen de publicatie mislukt
-            else:
-                eprint("⚠️ WAARSCHUWING: Geen long-read bestand gevonden om te publiceren naar Blogger.")
-
-    elif skip_content_generation:
+    else:
         eprint("INFO: Content generatie overgeslagen vanwege --skip-content-generation vlag.")
+
+    # Nieuwe stap: Publiceren naar Blogger
+    if not skip_blogger_publish and os.getenv('PUBLISH_BLOGGER', 'false').lower() == 'true':
+        eprint("
+INFO: Starten met publicatie naar Blogger...")
+        # Zoek het gegenereerde longread-bestand
+        longread_files = glob.glob(f"content/longread_{target_date_iso}_en.md")
+        if longread_files:
+            longread_file_path = longread_files[0]
+            try:
+                from src.publish_blogger import create_post as create_blogger_post
+                import json
+                
+                with open("longread_outline.json", 'r', encoding='utf-8') as f:
+                    outline_data = json.load(f)
+                title = outline_data['title']
+
+                with open(longread_file_path, 'r', encoding='utf-8') as f:
+                    content_md = f.read()
+                
+                # Converteer Markdown naar HTML voor Blogger
+                import markdown
+                html_content = markdown.markdown(content_md)
+                
+                create_blogger_post(title, html_content)
+                eprint("✅ SUCCES: Long-read gepubliceerd op Blogger.")
+            except Exception as e:
+                eprint(f"❌ FOUT: Publicatie naar Blogger is mislukt. Fout: {e}")
+                # We stoppen de pijplijn niet als alleen de publicatie mislukt
+        else:
+            eprint("⚠️ WAARSCHUWING: Geen long-read bestand gevonden om te publiceren naar Blogger.")
+    elif skip_blogger_publish:
+        eprint("INFO: Publicatie naar Blogger overgeslagen vanwege --skip-blogger-publish vlag.")
+    elif os.getenv('PUBLISH_BLOGGER', 'false').lower() == 'false':
+        eprint("INFO: Publicatie naar Blogger overgeslagen omdat PUBLISH_BLOGGER niet 'true' is.")
 
     if not skip_social_publish and not skip_content_generation:
         _, publish_success = run_task("Social Media Publicatie", publish_social_task, providers_to_run)
         if not publish_success:
-            eprint("\n❌ DRAMATISCHE FOUT: Kon met geen enkele provider de social posts publiceren.")
+            eprint("
+❌ DRAMATISCHE FOUT: Kon met geen enkele provider de social posts publiceren.")
             sys.exit(1)
     elif skip_social_publish:
         eprint("INFO: Social media publicatie overgeslagen vanwege --skip-social-publish vlag.")
     
-    eprint("\n✅ Pijplijn voltooid.")
+    eprint("
+✅ Pijplijn voltooid.")
 
 if __name__ == "__main__":
     load_dotenv()
