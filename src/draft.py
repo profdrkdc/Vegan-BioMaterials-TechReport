@@ -20,7 +20,7 @@ BASE_URL = os.getenv('AI_BASE_URL')
 PROMPT_TPL_PATH = "prompts/step3.txt"
 CURATED_DATA_PATH = "curated.json"
 LANGUAGES_CONFIG_PATH = "languages.json"
-OUTPUT_DIR = "content"
+OUTPUT_DIR = "content/posts"
 
 model = None
 eprint(f"Provider type: {API_TYPE}, Model: {MODEL_ID}")

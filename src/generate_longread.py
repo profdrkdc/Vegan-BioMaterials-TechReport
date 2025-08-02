@@ -173,10 +173,15 @@ def generate_longread_article(topic: str, output_path: str, outline_output_path:
     eprint(f"✅ Article successfully saved as: {output_path}")
 
 if __name__ == "__main__":
+    from datetime import date
     load_dotenv()
     parser = argparse.ArgumentParser(description="Generate a long-read article on a specific topic using LangChain.")
     parser.add_argument("topic", type=str, help="The main topic of the article.")
-    parser.add_argument("-o", "--output", type=str, default="longread_output.md", help="The path to the output Markdown file.")
+    parser.add_argument("--lang", type=str, default="en", help="Language code for the output file (e.g., 'en', 'nl').")
     parser.add_argument("--outline-out", type=str, default="longread_outline.json", help="The path to save the JSON outline.")
     args = parser.parse_args()
-    generate_longread_article(args.topic, args.output, args.outline_out)
+    
+    today_iso = date.today().isoformat()
+    output_path = f"content/posts/longread_{today_iso}_{args.lang}.md"
+    
+    generate_longread_article(args.topic, output_path, args.outline_out)

@@ -7,6 +7,15 @@
 published_post_url.txt
 archive/
 
+# Hugo / Static Site Generator
+# Ignore the build output directory
+/public/
+# Ignore the resources cache
+/resources/
+# Ignore build stats
+hugo_stats.json
+
+
 # Python
 __pycache__/
 *.pyc

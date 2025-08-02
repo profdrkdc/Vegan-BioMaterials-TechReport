@@ -1,0 +1,21 @@
+# hugo.toml
+
+baseURL = "https://profdrkdc.github.io/Vegan-BioTech-Report/"
+title = "Vegan BioTech Report"
+theme = "ananke"
+defaultContentLanguage = "en"
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    weight = 1
+
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "About"
+  url = "/about/"
+  weight = 2
