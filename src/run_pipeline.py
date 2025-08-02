@@ -204,5 +204,6 @@ if __name__ == "__main__":
     parser.add_argument("--skip-blogger-publish", action='store_true', help="Sla de publicatie naar Blogger over.")
     parser.add_argument("--skip-social-publish", action='store_true', help="Sla de publicatie naar sociale media over.")
     args = parser.parse_args()
+    eprint(f"DEBUG: Parsed arguments: {args}")
     
     run_full_pipeline(args.date, args.no_archive, args.skip_content_generation, args.skip_blogger_publish, args.skip_social_publish)
