@@ -145,6 +145,35 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool, publish_so
         if not content_success:
             eprint("\n❌ DRAMATISCHE FOUT: Kon met geen enkele provider de content genereren.")
             sys.exit(1)
+        
+        # Nieuwe stap: Publiceren naar Blogger
+        if os.getenv('PUBLISH_BLOGGER', 'false').lower() == 'true':
+            eprint("\nINFO: Starten met publicatie naar Blogger...")
+            # Zoek het gegenereerde longread-bestand
+            longread_files = glob.glob(f"content/longread_{target_date_iso}_en.md")
+            if longread_files:
+                longread_file_path = longread_files[0]
+                try:
+                    from src.publish_blogger import create_post as create_blogger_post
+                    from src.generate_longread import get_title_from_markdown
+                    
+                    with open(longread_file_path, 'r', encoding='utf-8') as f:
+                        content_md = f.read()
+                    
+                    title = get_title_from_markdown(content_md)
+                    
+                    # Converteer Markdown naar HTML voor Blogger
+                    import markdown
+                    html_content = markdown.markdown(content_md)
+                    
+                    create_blogger_post(title, html_content)
+                    eprint("✅ SUCCES: Long-read gepubliceerd op Blogger.")
+                except Exception as e:
+                    eprint(f"❌ FOUT: Publicatie naar Blogger is mislukt. Fout: {e}")
+                    # We stoppen de pijplijn niet als alleen de publicatie mislukt
+            else:
+                eprint("⚠️ WAARSCHUWING: Geen long-read bestand gevonden om te publiceren naar Blogger.")
+
     else:
         eprint("INFO: Content generatie overgeslagen vanwege --publish-social vlag.")
 

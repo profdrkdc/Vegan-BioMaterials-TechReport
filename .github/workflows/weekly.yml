@@ -24,32 +24,26 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Authenticate to Google Cloud
+        uses: 'google-github-actions/auth@v2'
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
       - name: Generate and Publish All Content
         env:
-          # AI Provider Keys (Needed for Generation AND Publishing)
+          # AI Provider Keys
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           
-          # Ghost CMS Keys
-          GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
-          GHOST_PUBLIC_URL: ${{ secrets.GHOST_PUBLIC_URL }}
-          GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
+          # Blogger Configuration
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          PUBLISH_BLOGGER: 'true'
 
-          # Social Media Keys
-          MASTODON_API_BASE_URL: ${{ secrets.MASTODON_API_BASE_URL }}
-          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
-          # Reddit keys are included for completeness, though currently paused
-          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
-          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
-          REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
-          REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
-          REDDIT_USER_AGENT: ${{ secrets.REDDIT_USER_AGENT }}
         run: |
           echo "--- Step 1: Generating all content... ---"
-          python3 -m src.run_pipeline
+          python src/run_pipeline.py
           
-          echo "--- Step 2: Publishing articles to Ghost... ---"
-          python3 -m src.publish_ghost
-          
-          echo "--- Step 3: Publishing to social media platforms... ---"
-          python3 -m src.run_pipeline --publish-social
+          # De publicatielogica zit nu in run_pipeline.py, dus de aparte stappen zijn niet meer nodig.
+          # De social media publicatie kan eventueel een aparte stap blijven als dat wenselijk is.
+          # Voor nu gaan we ervan uit dat de hoofd-pipeline alles afhandelt.

@@ -12,6 +12,11 @@ pydantic
 requests
 PyJWT
 
+# Google API
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+
 # HTML/Markdown processing
 markdown
 markdownify
