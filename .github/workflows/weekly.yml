@@ -5,7 +5,27 @@ on:
     # Draait elke maandag om 08:00 UTC
     - cron: '0 8 * * 1'
   workflow_dispatch:
-    # Maakt een handmatige startknop in GitHub Actions mogelijk
+    inputs:
+      skip_content_generation:
+        description: 'Sla de content generatie stappen over.'
+        required: false
+        type: boolean
+        default: false
+      skip_blogger_publish:
+        description: 'Sla de publicatie naar Blogger over.'
+        required: false
+        type: boolean
+        default: false
+      skip_social_publish:
+        description: 'Sla de publicatie naar sociale media over.'
+        required: false
+        type: boolean
+        default: false
+      only_publish_social:
+        description: 'Publiceer ALLEEN de gegenereerde social posts (slaat content generatie over).'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   build-and-publish:
@@ -45,7 +65,11 @@ jobs:
 
         run: |
           echo "--- Step 1: Generating all content... ---"
-          python -m src.run_pipeline
+          python -m src.run_pipeline \
+            ${{ github.event.inputs.skip_content_generation && '--skip-content-generation' || '' }} \
+            ${{ github.event.inputs.skip_blogger_publish && '--skip-blogger-publish' || '' }} \
+            ${{ github.event.inputs.skip_social_publish && '--skip-social-publish' || '' }} \
+            ${{ github.event.inputs.only_publish_social && '--only-publish-social' || '' }}
           
           # De publicatielogica zit nu in run_pipeline.py, dus de aparte stappen zijn niet meer nodig.
           # De social media publicatie kan eventueel een aparte stap blijven als dat wenselijk is.
