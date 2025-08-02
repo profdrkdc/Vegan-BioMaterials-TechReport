@@ -45,7 +45,7 @@ jobs:
 
         run: |
           echo "--- Step 1: Generating all content... ---"
-          python src/run_pipeline.py
+          python -m src.run_pipeline
           
           # De publicatielogica zit nu in run_pipeline.py, dus de aparte stappen zijn niet meer nodig.
           # De social media publicatie kan eventueel een aparte stap blijven als dat wenselijk is.
