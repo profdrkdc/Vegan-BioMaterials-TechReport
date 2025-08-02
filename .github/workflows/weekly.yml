@@ -61,9 +61,7 @@ jobs:
         run: |
           echo "--- Step 1: Generating all content... ---"
           python -m src.run_pipeline \
-            ${{ github.event.inputs.skip_content_generation && '--skip-content-generation' || '' }} \
-            ${{ github.event.inputs.skip_blogger_publish && '--skip-blogger-publish' || '' }} \
-            ${{ github.event.inputs.skip_social_publish && '--skip-social-publish' || '' }}
+            ${{ github.event.inputs.skip_content_generation == 'true' && '--skip-content-generation' || '' }}             ${{ github.event.inputs.skip_blogger_publish == 'true' && '--skip-blogger-publish' || '' }}             ${{ github.event.inputs.skip_social_publish == 'true' && '--skip-social-publish' || '' }}
           
           # De publicatielogica zit nu in run_pipeline.py, dus de aparte stappen zijn niet meer nodig.
           # De social media publicatie kan eventueel een aparte stap blijven als dat wenselijk is.
