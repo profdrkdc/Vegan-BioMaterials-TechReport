@@ -92,6 +92,9 @@ def run_task(task_name: str, task_function, providers_to_run):
     return None, None
 
 def run_full_pipeline(target_date_str: str or None, no_archive: bool, publish_social: bool):
+    # Debugging: Check PUBLISH_BLOGGER env var
+    eprint(f"DEBUG: PUBLISH_BLOGGER env var: {os.getenv('PUBLISH_BLOGGER')}")
+
     # --- DE AANPASSING IS HIER ---
     # Voer alleen archivering uit als we NIET in publish-only modus zijn.
     if not no_archive and not publish_social:
