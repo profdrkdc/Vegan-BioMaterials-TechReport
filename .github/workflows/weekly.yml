@@ -21,11 +21,6 @@ on:
         required: false
         type: boolean
         default: false
-      only_publish_social:
-        description: 'Publiceer ALLEEN de gegenereerde social posts (slaat content generatie over).'
-        required: false
-        type: boolean
-        default: false
 
 jobs:
   build-and-publish:
@@ -68,8 +63,7 @@ jobs:
           python -m src.run_pipeline \
             ${{ github.event.inputs.skip_content_generation && '--skip-content-generation' || '' }} \
             ${{ github.event.inputs.skip_blogger_publish && '--skip-blogger-publish' || '' }} \
-            ${{ github.event.inputs.skip_social_publish && '--skip-social-publish' || '' }} \
-            ${{ github.event.inputs.only_publish_social && '--only-publish-social' || '' }}
+            ${{ github.event.inputs.skip_social_publish && '--skip-social-publish' || '' }}
           
           # De publicatielogica zit nu in run_pipeline.py, dus de aparte stappen zijn niet meer nodig.
           # De social media publicatie kan eventueel een aparte stap blijven als dat wenselijk is.
