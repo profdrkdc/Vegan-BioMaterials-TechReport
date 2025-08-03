@@ -5,6 +5,9 @@ title = "Vegan BioTech Report"
 theme = "ananke"
 defaultContentLanguage = "en"
 
+[services.googleAnalytics]
+  ID = "OYKwPNShOlUwg8ifiRNKgPhXRz8QFMQDZoggyWcXzTw"
+
 [outputs]
   home = ["HTML", "RSS"]
 
