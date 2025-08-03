@@ -68,18 +68,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # --- START DIAGNOSTISCHE STAPPEN ---
-      - name: Create minimal Hugo config (no theme)
-        run: |
-          echo 'baseURL = "https://profdrkdc.github.io/Vegan-BioTech-Report/"' > hugo.toml
-          echo 'title = "Diagnostic Test"' >> hugo.toml
-
-      - name: Create minimal layout (no theme)
-        run: |
-          mkdir -p layouts/_default
-          echo '<html><body><h1>{{ .Title }}</h1><div>{{ .Content }}</div></body></html>' > layouts/_default/single.html
-          echo '<html><body><h1>{{ .Title }}</h1><ul>{{ range .Pages }}<li><a href="{{ .Permalink }}">{{ .Title }}</a></li>{{ end }}</ul></body></html>' > layouts/_default/list.html
-      # --- EINDE DIAGNOSTISCHE STAPPEN ---
+      
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
