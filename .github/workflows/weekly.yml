@@ -5,7 +5,6 @@ on:
     branches:
       - main
   schedule:
-    # Draait elke maandag om 08:00 UTC
     - cron: '0 8 * * 1'
   workflow_dispatch:
     inputs:
@@ -14,27 +13,14 @@ on:
         required: false
         type: boolean
         default: false
-      skip_website_deploy:
-        description: 'Sla de publicatie naar GitHub Pages over.'
-        required: false
-        type: boolean
-        default: false
-      skip_social_publish:
-        description: 'Sla de publicatie naar sociale media over.'
-        required: false
-        type: boolean
-        default: false
 
 jobs:
   # JOB 1: Genereer alle content en data bestanden
   generate-content:
     runs-on: ubuntu-latest
-    outputs:
-      content_generated: ${{ steps.commit.outputs.changes_detected }}
     permissions:
       contents: write
-    # Deze job wordt ALLEEN uitgevoerd als je de 'skip' vlag NIET aanzet.
-    # Dit geldt voor alle triggers (push, schedule, workflow_dispatch).
+    # Regel 1: Draai alleen op schedule, of handmatig zonder 'skip'. NOOIT op push.
     if: |
       github.event_name == 'schedule' ||
       (github.event_name == 'workflow_dispatch' && github.event.inputs.skip_content_generation != 'true')
@@ -46,9 +32,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install dependencies
-        run: |
-          python3 -m pip install --upgrade pip
-          pip install -r requirements.txt
+        run: pip install -r requirements.txt
       - name: Run Content Generation Pipeline
         env:
           SITE_BASE_URL: "https://profdrkdc.github.io/Vegan-BioTech-Report/"
@@ -56,7 +40,6 @@ jobs:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: python3 -m src.run_pipeline
       - name: Commit and Push Generated Content
-        id: commit
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
@@ -64,84 +47,48 @@ jobs:
           if ! git diff --staged --quiet; then
             git commit -m "feat(content): Add generated content from workflow run"
             git push
-            echo "changes_detected=true" >> $GITHUB_OUTPUT
-          else
-            echo "No changes to commit."
-            echo "changes_detected=false" >> $GITHUB_OUTPUT
           fi
 
-  # JOB 2: Bouw de website
-  build-website:
+  # JOB 2: Bouw en publiceer de website
+  build-and-deploy:
     runs-on: ubuntu-latest
+    # Regel 2 & 3: Draai deze job ALTIJD.
+    # needs.generate-content zorgt ervoor dat deze job wacht als de vorige draait.
     needs: generate-content
-    # DEZE CONDITIE IS NU SIMPEL EN CORRECT:
-    # Draai altijd, TENZIJ de vorige job (generate-content) is gestart en gefaald heeft.
-    # Als de vorige job werd overgeslagen (skipped), wordt deze WEL uitgevoerd.
-    if: always() && needs.generate-content.result != 'failure' && github.event.inputs.skip_website_deploy != 'true'
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: 'latest'
-          extended: true
-
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v5
-
-      - name: Build with Hugo
-        run: hugo --cleanDestinationDir --minify --baseURL ${{ steps.pages.outputs.base_url }}
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./public
-
-  # JOB 3: Publiceer de website naar GitHub Pages
-  deploy-pages:
-    runs-on: ubuntu-latest
-    needs: build-website
-    if: needs.build-website.result == 'success'
+    if: always()
     permissions:
+      contents: read
       pages: write
       id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Build with Hugo
+        run: hugo --cleanDestinationDir --minify --baseURL ${{ steps.pages.outputs.base_url }}
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
-  # JOB 4: Publiceer naar sociale media nadat de site live is
+  # JOB 3: Publiceer naar sociale media
   publish-social:
     runs-on: ubuntu-latest
-    needs: deploy-pages
-    if: success() && github.event.inputs.skip_social_publish != 'true'
+    # Regel 4: Draai deze job NOOIT.
+    if: false
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Install dependencies
-        run: |
-          python3 -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Publish to Social Media
-        env:
-          AI_API_TYPE: "google"
-          AI_MODEL_ID: "gemini-1.5-flash-latest"
-          AI_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
-          MASTODON_API_BASE_URL: ${{ secrets.MASTODON_API_BASE_URL }}
-          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
-          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
-          REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
-          REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
-          REDDIT_USER_AGENT: ${{ secrets.REDDIT_USER_AGENT }}
-        run: python3 -m src.publish_social
+      - name: Job Disabled
+        run: echo "Social media publishing is currently disabled."
