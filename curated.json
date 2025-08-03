@@ -1,56 +1,47 @@
 [
   {
     "category": "materials",
-    "company": "MycoWorks",
-    "headline": "MycoWorks partners with luxury brand for Reishi application.",
-    "date": "2025-07-08",
-    "url": "https://www.google.com/search?q=MycoWorks+luxury+brand+Reishi",
-    "impact": 9,
-    "summary": "MycoWorks collaborates with a luxury brand to integrate its Reishi mushroom leather alternative into high-end products."
-  },
-  {
-    "category": "materials",
-    "company": "Modern Meadow",
-    "headline": "Modern Meadow unveils Bio-Alloy leather alternative.",
+    "company": "Modern Synthesis",
+    "headline": "Modern Synthesis Raises $4.1M to Scale Microbial Textile Platform",
     "date": "2025-06-20",
-    "url": "https://www.google.com/search?q=Modern+Meadow+Bio-Alloy+leather+alternative",
+    "url": "https://www.google.com/search?q=Modern+Synthesis+microbial+textile+funding",
     "impact": 8,
-    "summary": "Modern Meadow launches a new biofabricated material, Bio-Alloy, positioned as a leather and plastic substitute."
+    "summary": "Modern Synthesis secured funding to expand its microbial textile platform, aiming to replace traditional leather and textiles."
   },
   {
     "category": "food",
-    "company": "Remilk",
-    "headline": "Remilk partners with major food manufacturer.",
-    "date": "2025-06-10",
-    "url": "https://www.google.com/search?q=Remilk+partners+food+manufacturer",
+    "company": "Formo",
+    "headline": "Formo Announces Partnership for Cellular Agriculture Dairy Production",
+    "date": "2025-07-01",
+    "url": "https://www.google.com/search?q=Formo+cellular+agriculture+dairy+partnership",
     "impact": 8,
-    "summary": "Remilk announces a strategic partnership with a leading food company to integrate its animal-free dairy products."
+    "summary": "Formo is collaborating with a major food company to accelerate the development and commercialization of cell-based dairy products."
   },
   {
     "category": "food",
     "company": "Change Foods",
-    "headline": "Change Foods secures funding for precision-fermented dairy.",
+    "headline": "Change Foods Secures Funding for Animal-Free Dairy Production",
     "date": "2025-07-15",
-    "url": "https://www.google.com/search?q=Change+Foods+precision+fermented+dairy+funding",
+    "url": "https://www.google.com/search?q=Change+Foods+secures+funding+precision+fermentation",
     "impact": 7,
-    "summary": "Change Foods receives investment to scale up its animal-free dairy production using precision fermentation."
+    "summary": "Change Foods raised capital to scale up its precision-fermentation platform for vegan dairy alternatives."
   },
   {
     "category": "materials",
     "company": "Algiknit",
-    "headline": "Algiknit raises Series A for seaweed-based yarns.",
-    "date": "2025-07-01",
-    "url": "https://www.google.com/search?q=Algiknit+seaweed+based+yarns+Series+A",
+    "headline": "Algiknit Partners to Develop Seaweed-Based Yarns for Apparel",
+    "date": "2025-06-10",
+    "url": "https://www.google.com/search?q=Algiknit+seaweed+yarns+apparel",
     "impact": 7,
-    "summary": "Algiknit secures Series A funding to scale the production of its sustainable yarns derived from seaweed."
+    "summary": "Algiknit is partnering with clothing companies to develop yarns made from seaweed, a sustainable alternative to synthetic fabrics."
   },
   {
-    "category": "food",
-    "company": "The Every Co.",
-    "headline": "The Every Co. launches egg white protein in food service.",
+    "category": "materials",
+    "company": "Natural Fiber Welding",
+    "headline": "Natural Fiber Welding Secures Funding for Sustainable Material Expansion",
     "date": "2025-07-28",
-    "url": "https://www.google.com/search?q=The+Every+Co+egg+white+protein+food+service",
+    "url": "https://www.google.com/search?q=Natural+Fiber+Welding+funding+sustainable+materials",
     "impact": 7,
-    "summary": "The Every Company expands its precision fermentation egg white protein into the food service sector."
+    "summary": "Natural Fiber Welding obtained funds to scale up its technology for creating sustainable materials from natural fibers."
   }
 ]

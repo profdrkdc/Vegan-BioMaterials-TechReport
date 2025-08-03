@@ -1,41 +1,41 @@
 [
   {
     "platform": "facebook",
-    "text_content": "Are biofabricated materials the future of luxury? This week, we delve into the groundbreaking work of MycoWorks and Modern Meadow, exploring how mushroom leather and lab-grown collagen are poised to revolutionize industries from fashion to biomedicine. From the science behind Reishi and Bio-Alloy to sustainability considerations and market adoption, we cover it all. Read the full article to discover how these innovative materials are challenging traditional leather and plastics and shaping a more sustainable future. {{GHOST_ARTICLE_URL}}",
+    "text_content": "The fashion industry is ripe for disruption, and these companies are leading the charge! Our latest deep-dive explores how Modern Synthesis, Algiknit, and Natural Fiber Welding are pioneering next-gen textiles using microbial cellulose, seaweed, and enhanced natural fibers. We analyze their funding, partnerships, and potential to replace unsustainable materials. From environmental impact to scalability challenges, we cover it all. Check out the full report to learn more about the future of sustainable textiles! {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "✨ Future Fabrics Alert! ✨ Are you ready to see mushroom leather and lab-grown collagen take over the luxury market? Our latest article explores how companies like MycoWorks and Modern Meadow are revolutionizing materials. From sustainable fashion to biomedical applications, the possibilities are endless. 🍄🔬 Check out the full story – link in bio! #Biofabrication #SustainableMaterials #MycoWorks #ModernMeadow #FutureOfFashion #VeganLeather\n\n**Image Prompt:** A futuristic, luxurious handbag made from mycelium leather next to a petri dish containing lab-grown collagen. The background should be a sleek, modern laboratory with soft, diffused lighting.",
+    "text_content": "✨ Future of Fashion is HERE! ✨ Could microbial, seaweed & natural fiber textiles revolutionize the industry? Our latest report dives deep into the innovative materials from Modern Synthesis, Algiknit, and Natural Fiber Welding. 🌱 We're talking sustainable alternatives, funding breakthroughs, and the potential to ditch unsustainable practices. Learn more about how these companies are shaping a greener future. Link in bio! #sustainablefashion #biotech #textiles #innovation #veganbiotechreport {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A futuristic, luxurious handbag made from mycelium leather next to a petri dish containing lab-grown collagen. The background should be a sleek, modern laboratory with soft, diffused lighting.",
+    "image_prompt": "A futuristic cityscape with towering buildings draped in flowing fabrics made from microbial cellulose and seaweed. Lush greenery and bioluminescent accents create a sense of sustainable innovation.",
     "reddit_details": null
   },
   {
     "platform": "bluesky",
-    "text_content": "Mushroom leather & lab-grown collagen: are they *actually* going to replace traditional materials? 🤔 Diving deep into MycoWorks & Modern Meadow's biofabrication tech this week. Is this the future of sustainable luxury? Let's discuss! {{GHOST_ARTICLE_URL}}",
+    "text_content": "Is the future of fashion microbial? 🤔 Our new report examines Modern Synthesis, Algiknit, and Natural Fiber Welding and their efforts to create sustainable textiles. What are the biggest hurdles they face? Let's discuss! {{GHOST_ARTICLE_URL}} #sustainablefashion #biotech",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "mastodon",
-    "text_content": "Exploring the rise of biofabricated materials! 🍄🔬 Our latest article examines how MycoWorks' Reishi mushroom leather and Modern Meadow's Bio-Alloy collagen are disrupting the luxury goods and materials industries. We dive into the science, sustainability, and future potential. Read the full article here: {{GHOST_ARTICLE_URL}} #Biofabrication #SustainableMaterials #VeganLeather #MycoWorks #ModernMeadow #Innovation",
+    "text_content": "New on Vegan BioTech Report: We delve into the world of next-gen textiles! 🧵 Can microbial, seaweed, and natural fiber materials truly disrupt the fashion industry? We explore the innovations of Modern Synthesis, Algiknit, and Natural Fiber Welding, their funding, and the challenges ahead. Read the full article: {{GHOST_ARTICLE_URL}} #sustainablefashion #biotech #textiles #innovation #vegan #futureoffashion",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Hey Reddit, just finished reading a fascinating piece about biofabricated materials – specifically, mushroom leather from MycoWorks and lab-grown collagen from Modern Meadow. Seriously impressive stuff, and it sounds like they could genuinely change how we make everything from handbags to, potentially, even medical implants. The article dives into the science, the sustainability aspects (which are HUGE), and the challenges they face. What do you all think? Are we ready to embrace lab-grown materials? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Hey everyone! I just read a fascinating article about the future of textiles. Apparently, companies like Modern Synthesis are using microbes to create fabrics, while others are experimenting with seaweed and enhanced natural fibers. It's wild to think that our clothes could be made from such innovative sources. What do you all think? Is this the future of sustainable fashion, or are there too many hurdles to overcome? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": {
-      "suggested_subreddit": "r/science",
-      "post_title": "Mushroom Leather and Lab-Grown Collagen: The Future of Materials?",
-      "primary_topic_keyword": "Biotech"
+      "suggested_subreddit": "r/environment",
+      "post_title": "Microbial Textiles: The Next Big Thing in Sustainable Fashion?",
+      "primary_topic_keyword": "Environment"
     }
   }
 ]
