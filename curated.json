@@ -1,65 +1,74 @@
 [
   {
-    "category": "materials",
-    "company": "Bolt Threads",
-    "headline": "Bolt Threads partners with Adidas for Mylo mushroom leather apparel.",
-    "date": "2025-07-01",
-    "url": "https://www.google.com/search?q=Bolt+Threads+Adidas+Mylo+mushroom+leather",
-    "impact": 10,
-    "summary": "Bolt Threads partners with Adidas to integrate Mylo, a mushroom-based leather alternative, into apparel and footwear lines."
-  },
-  {
     "category": "food",
     "company": "Solar Foods",
-    "headline": "Solar Foods expands Solein production capacity.",
-    "date": "2025-05-25",
-    "url": "https://www.google.com/search?q=Solar+Foods+Solein+production+expansion",
+    "headline": "Solar Foods Opens First Commercial Solein Protein Factory",
+    "date": "2025-05-28",
+    "url": "https://www.google.com/search?q=Solar+Foods+Solein+protein+factory+opens",
     "impact": 9,
-    "summary": "Solar Foods increases production of Solein, a protein produced from air, CO2, and electricity, aiming to disrupt food supply chains."
+    "summary": "Solar Foods commences commercial production of Solein, a protein made from air and electricity via gas fermentation."
   },
   {
     "category": "food",
-    "company": "Formo",
-    "headline": "Formo secures funding for animal-free cheese production.",
-    "date": "2025-07-15",
-    "url": "https://www.google.com/search?q=Formo+animal-free+cheese+funding",
+    "company": "Air Protein",
+    "headline": "Air Protein Breaks Ground on Commercial Production Facility",
+    "date": "2025-05-01",
+    "url": "https://www.google.com/search?q=Air+Protein+breaks+ground+commercial+facility",
+    "impact": 9,
+    "summary": "Air Protein starts building its first large-scale facility for creating protein from air using gas fermentation."
+  },
+  {
+    "category": "materials",
+    "company": "Bolt Threads",
+    "headline": "Bolt Threads Partners with Luxury Brand on Mylo Mushroom Leather Goods",
+    "date": "2025-06-20",
+    "url": "https://www.google.com/search?q=Bolt+Threads+Mylo+mushroom+leather+luxury+brand",
     "impact": 8,
-    "summary": "Formo receives investment to scale up its precision-fermentation based cheese alternatives, targeting wider market availability."
+    "summary": "Partnership scales mushroom leather into luxury market, highlighting sustainable material adoption in fashion."
+  },
+  {
+    "category": "food",
+    "company": "Perfect Day",
+    "headline": "Perfect Day Announces New Ice Cream Line Using Animal-Free Whey",
+    "date": "2025-07-22",
+    "url": "https://www.google.com/search?q=Perfect+Day+new+ice+cream+animal-free+whey",
+    "impact": 8,
+    "summary": "Perfect Day launches a new ice cream line featuring their precision-fermented, animal-free whey protein."
+  },
+  {
+    "category": "materials",
+    "company": "Natural Fiber Welding",
+    "headline": "Natural Fiber Welding Raises Series C Funding for Mirum Material Expansion",
+    "date": "2025-07-29",
+    "url": "https://www.google.com/search?q=Natural+Fiber+Welding+Series+C+Mirum",
+    "impact": 8,
+    "summary": "Raises funds for expanding production of Mirum, a plant-based leather alternative free of plastic."
+  },
+  {
+    "category": "food",
+    "company": "Change Foods",
+    "headline": "Change Foods Secures Funding for Animal-Free Dairy Production",
+    "date": "2025-07-15",
+    "url": "https://www.google.com/search?q=Change+Foods+funding+animal-free+dairy",
+    "impact": 7,
+    "summary": "Change Foods raised capital to scale precision fermentation for dairy alternatives like cheese and yogurt."
   },
   {
     "category": "food",
     "company": "Remilk",
-    "headline": "Remilk obtains regulatory approval for animal-free dairy in Asia.",
-    "date": "2025-07-28",
-    "url": "https://www.google.com/search?q=Remilk+regulatory+approval+Asia",
-    "impact": 8,
-    "summary": "Remilk receives regulatory clearance to sell its animal-free dairy products in key Asian markets, expanding its global footprint."
-  },
-  {
-    "category": "materials",
-    "company": "Modern Synthesis",
-    "headline": "Modern Synthesis raises capital for microbial textile production.",
-    "date": "2025-06-20",
-    "url": "https://www.google.com/search?q=Modern+Synthesis+microbial+textile+funding",
-    "impact": 7,
-    "summary": "Modern Synthesis scales its microbial textile alternative to traditional leather, offering sustainable material options for fashion industry."
-  },
-  {
-    "category": "food",
-    "company": "The EVERY Co.",
-    "headline": "The EVERY Co. launches animal-free egg white protein in new markets.",
+    "headline": "Remilk Announces Expansion into New Global Markets",
     "date": "2025-06-10",
-    "url": "https://www.google.com/search?q=The+EVERY+Co+animal-free+egg+white+expansion",
+    "url": "https://www.google.com/search?q=Remilk+expansion+global+markets",
     "impact": 7,
-    "summary": "EVERY Co. expands the availability of its precision-fermented egg white protein, targeting bakeries and food manufacturers."
+    "summary": "Precision fermentation dairy company Remilk expands distribution to new regions, increasing availability."
   },
   {
     "category": "materials",
-    "company": "Ananas Anam",
-    "headline": "Piñatex partners with automotive manufacturer for vegan leather interiors.",
-    "date": "2025-07-08",
-    "url": "https://www.google.com/search?q=Piñatex+automotive+vegan+leather+interiors",
+    "company": "BioMason",
+    "headline": "BioMason Secures Contract for Bio-Based Cement Production",
+    "date": "2025-06-01",
+    "url": "https://www.google.com/search?q=BioMason+contract+bio-based+cement+production",
     "impact": 7,
-    "summary": "Ananas Anam's Piñatex, a pineapple-leaf based leather alternative, is adopted by an automotive manufacturer for vehicle interiors."
+    "summary": "BioMason wins a major contract to produce bio-based cement alternatives using bacterial processes."
   }
 ]
