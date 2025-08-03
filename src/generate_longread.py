@@ -97,9 +97,15 @@ def generate_longread_article(outline_path: str, output_path: str, lang_name: st
     
     # Pak de titel uit de opgeschoonde content
     lines = cleaned_markdown.splitlines()
-    safe_title = "Untitled"
-    if lines and lines.startswith('# '):
-        safe_title = lines.lstrip('# ').strip().replace('"', '”')
+    raw_title = "Untitled" # Default title
+    # Zoek naar de eerste regel die daadwerkelijk een H1 heading is
+    for line in lines:
+        if line.strip().startswith('# '):
+            raw_title = line.strip().lstrip('# ').strip()
+            break # Stop zodra de eerste titel is gevonden
+            
+    safe_title = raw_title.replace('"', '”')
+
 
     date_match = re.search(r'(\d{4}-\d{2}-\d{2})', output_path)
     article_date = date_match.group(1) if date_match else datetime.date.today().isoformat()
