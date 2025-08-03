@@ -1,41 +1,41 @@
 [
   {
     "platform": "facebook",
-    "text_content": "Is air-based protein the food of the future? Our latest article dives deep into this fascinating technology, exploring how companies like Solar Foods and Air Protein are turning air, water, and electricity into a sustainable protein source. We examine the potential benefits for global food security, the environmental impact, and the challenges that lie ahead. Could this be a game-changer for our food systems? Read the full analysis here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "The fashion industry is ripe for disruption, and these companies are leading the charge! Our latest deep-dive explores how Modern Synthesis, Algiknit, and Natural Fiber Welding are pioneering next-gen textiles using microbial cellulose, seaweed, and enhanced natural fibers. We analyze their funding, partnerships, and potential to replace unsustainable materials. From environmental impact to scalability challenges, we cover it all. Check out the full report to learn more about the future of sustainable textiles! {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "Protein from thin air? 🤯 Yes, it's happening! Our new article explores the revolutionary technology behind air-based protein and its potential to transform the way we eat. Discover how companies like Solar Foods and Air Protein are leading the charge. 🌱 Link in bio for the full story! #vegan #biotech #futureoffood #airprotein #solarfoods #sustainablefood\n\n",
+    "text_content": "✨ Future of Fashion is HERE! ✨ Could microbial, seaweed & natural fiber textiles revolutionize the industry? Our latest report dives deep into the innovative materials from Modern Synthesis, Algiknit, and Natural Fiber Welding. 🌱 We're talking sustainable alternatives, funding breakthroughs, and the potential to ditch unsustainable practices. Learn more about how these companies are shaping a greener future. Link in bio! #sustainablefashion #biotech #textiles #innovation #veganbiotechreport {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A futuristic laboratory with bubbling bioreactors, sleek metallic equipment, and scientists in clean suits examining samples of air-based protein. The overall aesthetic should be clean, modern, and optimistic, suggesting a sustainable and innovative food future.",
+    "image_prompt": "A futuristic cityscape with towering buildings draped in flowing fabrics made from microbial cellulose and seaweed. Lush greenery and bioluminescent accents create a sense of sustainable innovation.",
     "reddit_details": null
   },
   {
     "platform": "bluesky",
-    "text_content": "Air-based protein: the future of food, or just a cool science experiment? 🤔 Our new article looks at companies like @SolarFoods and Air Protein, who are making protein from air! What do you think? Will this tech actually help feed the world? {{GHOST_ARTICLE_URL}}",
+    "text_content": "Is the future of fashion microbial? 🤔 Our new report examines Modern Synthesis, Algiknit, and Natural Fiber Welding and their efforts to create sustainable textiles. What are the biggest hurdles they face? Let's discuss! {{GHOST_ARTICLE_URL}} #sustainablefashion #biotech",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "mastodon",
-    "text_content": "Dive into the world of air-based protein! Our latest article explores the science behind this innovative technology and its potential to revolutionize food systems. Learn how companies like Solar Foods and Air Protein are turning air, water, and electricity into a sustainable protein source. Read the full analysis: {{GHOST_ARTICLE_URL}} #vegan #biotech #futureoffood #sustainablefood #airprotein",
+    "text_content": "New on Vegan BioTech Report: We delve into the world of next-gen textiles! 🧵 Can microbial, seaweed, and natural fiber materials truly disrupt the fashion industry? We explore the innovations of Modern Synthesis, Algiknit, and Natural Fiber Welding, their funding, and the challenges ahead. Read the full article: {{GHOST_ARTICLE_URL}} #sustainablefashion #biotech #textiles #innovation #vegan #futureoffashion",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Hey everyone, I just stumbled upon this incredibly interesting article about creating protein from air! Seriously, air, water, and electricity! 🤯 It dives deep into the tech used by companies like Solar Foods and Air Protein, and the potential impact on food security and the environment. I'm wondering what you all think about the feasibility and ethical considerations of this kind of novel food production. Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Hey everyone! I just read a fascinating article about the future of textiles. Apparently, companies like Modern Synthesis are using microbes to create fabrics, while others are experimenting with seaweed and enhanced natural fibers. It's wild to think that our clothes could be made from such innovative sources. What do you all think? Is this the future of sustainable fashion, or are there too many hurdles to overcome? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": {
-      "suggested_subreddit": "r/science",
-      "post_title": "Protein From Air: Is This the Future of Food?",
-      "primary_topic_keyword": "Biotech"
+      "suggested_subreddit": "r/environment",
+      "post_title": "Microbial Textiles: The Next Big Thing in Sustainable Fashion?",
+      "primary_topic_keyword": "Environment"
     }
   }
 ]
