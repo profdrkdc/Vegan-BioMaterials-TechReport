@@ -1,40 +1,40 @@
 [
   {
     "platform": "facebook",
-    "text_content": "Mind blown! Singapore just approved Solar Foods' Solein, a protein made from CO2. This could be a game-changer for sustainable food production, reducing our reliance on traditional agriculture and helping fight climate change. Imagine protein from thin air becoming a staple! Check out the full article to learn more about this revolutionary technology and its potential impact on our future: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Are biofabricated materials the future of luxury? This week, we delve into the groundbreaking work of MycoWorks and Modern Meadow, exploring how mushroom leather and lab-grown collagen are poised to revolutionize industries from fashion to biomedicine. From the science behind Reishi and Bio-Alloy to sustainability considerations and market adoption, we cover it all. Read the full article to discover how these innovative materials are challenging traditional leather and plastics and shaping a more sustainable future. {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "Protein from thin air?! 🤯 Solar Foods' Solein just got approved in Singapore, and it's a HUGE deal for sustainable food. Learn how CO2 is being turned into food and what it means for our planet. Link in bio! #veganbiotech #solein #sustainablefood #futureoffood #airprotein #singaporefoodagency",
+    "text_content": "✨ Future Fabrics Alert! ✨ Are you ready to see mushroom leather and lab-grown collagen take over the luxury market? Our latest article explores how companies like MycoWorks and Modern Meadow are revolutionizing materials. From sustainable fashion to biomedical applications, the possibilities are endless. 🍄🔬 Check out the full story – link in bio! #Biofabrication #SustainableMaterials #MycoWorks #ModernMeadow #FutureOfFashion #VeganLeather\n\n**Image Prompt:** A futuristic, luxurious handbag made from mycelium leather next to a petri dish containing lab-grown collagen. The background should be a sleek, modern laboratory with soft, diffused lighting.",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "Close-up shot of Solein protein powder next to a futuristic-looking vertical farm with CO2 being captured from the atmosphere. Bright, clean, and futuristic aesthetic.",
+    "image_prompt": "A futuristic, luxurious handbag made from mycelium leather next to a petri dish containing lab-grown collagen. The background should be a sleek, modern laboratory with soft, diffused lighting.",
     "reddit_details": null
   },
   {
     "platform": "bluesky",
-    "text_content": "Singapore just greenlit Solein – protein made from CO2! 🤯 Is this the future of food? Sustainable, resource-efficient, and could revolutionize agriculture. What do you think? Read more here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Mushroom leather & lab-grown collagen: are they *actually* going to replace traditional materials? 🤔 Diving deep into MycoWorks & Modern Meadow's biofabrication tech this week. Is this the future of sustainable luxury? Let's discuss! {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "mastodon",
-    "text_content": "Huge news in the world of #veganbiotech! Singapore has approved Solar Foods' Solein, a novel protein source derived from CO2. This breakthrough could revolutionize food production by offering a sustainable and resource-efficient alternative to traditional agriculture. Learn more about the process, the implications for food security, and the challenges ahead. {{GHOST_ARTICLE_URL}} #sustainablefood #futureoffood #carboncapture #innovation",
+    "text_content": "Exploring the rise of biofabricated materials! 🍄🔬 Our latest article examines how MycoWorks' Reishi mushroom leather and Modern Meadow's Bio-Alloy collagen are disrupting the luxury goods and materials industries. We dive into the science, sustainability, and future potential. Read the full article here: {{GHOST_ARTICLE_URL}} #Biofabrication #SustainableMaterials #VeganLeather #MycoWorks #ModernMeadow #Innovation",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Hey everyone, I just read something absolutely mind-blowing! Apparently, scientists have figured out how to make protein from CO2, and Singapore just approved it for consumption. It's called Solein, and it's supposed to be super sustainable and resource-efficient. Could this be a real solution for food security and climate change? I'm really curious to hear your thoughts! Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Hey Reddit, just finished reading a fascinating piece about biofabricated materials – specifically, mushroom leather from MycoWorks and lab-grown collagen from Modern Meadow. Seriously impressive stuff, and it sounds like they could genuinely change how we make everything from handbags to, potentially, even medical implants. The article dives into the science, the sustainability aspects (which are HUGE), and the challenges they face. What do you all think? Are we ready to embrace lab-grown materials? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": {
       "suggested_subreddit": "r/science",
-      "post_title": "Singapore Approves CO2-Derived Protein: A Game Changer for Food Security?",
+      "post_title": "Mushroom Leather and Lab-Grown Collagen: The Future of Materials?",
       "primary_topic_keyword": "Biotech"
     }
   }
