@@ -1,5 +1,11 @@
 name: Weekly Content Generation and Deploy
 
+# --- PERMISSIES VOOR DE HELE WORKFLOW ---
+permissions:
+  contents: write  # Toestemming om content te committen
+  pages: write     # Toestemming om naar GitHub Pages te schrijven
+  id-token: write  # Toestemming voor authenticatie met de deploy-actie
+
 on:
   push:
     branches:
@@ -9,7 +15,7 @@ on:
   workflow_dispatch:
     inputs:
       skip_content_generation:
-        description: 'Sla de content generatie stappen over (om bv. de site opnieuw te deployen).'
+        description: 'Sla de content generatie stappen over.'
         required: false
         type: boolean
         default: false
@@ -18,9 +24,6 @@ jobs:
   # JOB 1: Genereer alle content en data bestanden
   generate-content:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    # Regel 1: Draai alleen op schedule, of handmatig zonder 'skip'. NOOIT op push.
     if: |
       github.event_name == 'schedule' ||
       (github.event_name == 'workflow_dispatch' && github.event.inputs.skip_content_generation != 'true')
@@ -49,17 +52,11 @@ jobs:
             git push
           fi
 
-  # JOB 2: Bouw en publiceer de website
+  # JOB 2: Bouw en Publiceer de website
   build-and-deploy:
     runs-on: ubuntu-latest
-    # Regel 2 & 3: Draai deze job ALTIJD.
-    # needs.generate-content zorgt ervoor dat deze job wacht als de vorige draait.
     needs: generate-content
-    if: always()
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
+    if: always() # Draai altijd (tenzij de hele workflow wordt geannuleerd)
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -72,7 +69,6 @@ jobs:
           hugo-version: 'latest'
           extended: true
       - name: Setup Pages
-        id: pages
         uses: actions/configure-pages@v5
       - name: Build with Hugo
         run: hugo --cleanDestinationDir --minify --baseURL ${{ steps.pages.outputs.base_url }}
@@ -83,12 +79,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-  # JOB 3: Publiceer naar sociale media
-  publish-social:
-    runs-on: ubuntu-latest
-    # Regel 4: Draai deze job NOOIT.
-    if: false
-    steps:
-      - name: Job Disabled
-        run: echo "Social media publishing is currently disabled."
