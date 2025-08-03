@@ -90,7 +90,7 @@ jobs:
       github.event.inputs.skip_website_deploy != 'true' && (
         (github.event.inputs.skip_content_generation == 'true') ||
         (needs.generate-content.result == 'success' && needs.generate-content.outputs.content_generated == 'true') ||
-        (github.event_name == 'push' && github.ref == 'refs/heads/main' && github.event.inputs.skip_content_generation != 'true') # Extra check for initial push where no content was generated, but we still want to deploy
+        (github.event_name == 'push' && github.ref == 'refs/heads/main' && github.event.inputs.skip_content_generation != 'true') 
       )
     steps:
       - name: Checkout repository
