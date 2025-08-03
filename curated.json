@@ -2,37 +2,55 @@
   {
     "category": "food",
     "company": "Solar Foods",
-    "headline": "Solar Foods Opens First Commercial Solein Facility",
-    "date": "2025-06-10",
-    "url": "https://www.google.com/search?q=Solar+Foods+Solein+commercial+facility",
+    "headline": "Solar Foods Factory Opens, Producing Solein Protein from Air",
+    "date": "2025-05-28",
+    "url": "https://www.google.com/search?q=Solar+Foods+factory+opens+Solein+protein",
     "impact": 9,
-    "summary": "Solar Foods commences production at its first commercial facility for Solein, a protein made from air."
+    "summary": "Solar Foods commences production at its factory, using gas fermentation to create Solein, a protein from air."
+  },
+  {
+    "category": "food",
+    "company": "Formo",
+    "headline": "Formo Raises $50M to Scale Animal-Free Dairy Production",
+    "date": "2025-07-15",
+    "url": "https://www.google.com/search?q=Formo+raises+$50M+animal-free+dairy",
+    "impact": 8,
+    "summary": "German startup Formo secured funding to expand its precision-fermentation-based vegan cheese production capabilities."
+  },
+  {
+    "category": "food",
+    "company": "Air Protein",
+    "headline": "Air Protein Receives Regulatory Approval for Novel Protein",
+    "date": "2025-05-01",
+    "url": "https://www.google.com/search?q=Air+Protein+regulatory+approval",
+    "impact": 8,
+    "summary": "Air Protein secures regulatory clearance for its air-based protein, paving the way for commercialization."
   },
   {
     "category": "materials",
     "company": "Bolt Threads",
-    "headline": "Bolt Threads Mylo Material Used in New Adidas Collection",
-    "date": "2025-05-20",
-    "url": "https://www.google.com/search?q=Bolt+Threads+Mylo+Adidas+collection",
-    "impact": 8,
-    "summary": "Adidas releases a new collection featuring Mylo, Bolt Threads' mushroom-based leather alternative."
-  },
-  {
-    "category": "food",
-    "company": "Change Foods",
-    "headline": "Change Foods Secures Funding for Animal-Free Dairy",
-    "date": "2025-07-15",
-    "url": "https://www.google.com/search?q=Change+Foods+animal-free+dairy+funding",
+    "headline": "Bolt Threads Partners with Adidas for Mylo Leather Apparel",
+    "date": "2025-06-20",
+    "url": "https://www.google.com/search?q=Bolt+Threads+Adidas+Mylo+leather+apparel",
     "impact": 7,
-    "summary": "Change Foods receives investment to scale precision-fermentation for dairy alternatives, aiming for cost parity."
+    "summary": "Bolt Threads collaborates with Adidas to incorporate Mylo, its mushroom-based leather alternative, into apparel lines."
   },
   {
     "category": "food",
     "company": "Perfect Day",
-    "headline": "Perfect Day Announces New Ice Cream Launch",
-    "date": "2025-05-05",
-    "url": "https://www.google.com/search?q=Perfect+Day+new+ice+cream+launch",
+    "headline": "Perfect Day Announces Ice Cream Partnership with Major Retailer",
+    "date": "2025-06-10",
+    "url": "https://www.google.com/search?q=Perfect+Day+ice+cream+partnership+retailer",
     "impact": 7,
-    "summary": "Perfect Day expands its portfolio with a new ice cream product featuring their animal-free dairy protein."
+    "summary": "Perfect Day's animal-free dairy protein is used in a new ice cream line sold through a major retail chain."
+  },
+  {
+    "category": "materials",
+    "company": "BioMason",
+    "headline": "BioMason Raises Series B to Expand Production of Bio-bricks",
+    "date": "2025-07-29",
+    "url": "https://www.google.com/search?q=BioMason+Series+B+bio-bricks",
+    "impact": 7,
+    "summary": "BioMason secures funding to increase production capacity of its cement-free bio-bricks."
   }
 ]

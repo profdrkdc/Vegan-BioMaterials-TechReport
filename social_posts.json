@@ -1,40 +1,40 @@
 [
   {
     "platform": "facebook",
-    "text_content": "The future of food is here! Solar Foods has officially opened its first commercial Solein facility, marking a huge step forward in sustainable protein production. This innovative technology could revolutionize how we feed the world, reducing our reliance on traditional agriculture and livestock farming. Read our in-depth analysis of Solein's potential and challenges, and join the conversation about the future of food. {{GHOST_ARTICLE_URL}}",
+    "text_content": "Is air-based protein the food of the future? Our latest article dives deep into this fascinating technology, exploring how companies like Solar Foods and Air Protein are turning air, water, and electricity into a sustainable protein source. We examine the potential benefits for global food security, the environmental impact, and the challenges that lie ahead. Could this be a game-changer for our food systems? Read the full analysis here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "Protein from thin air? 🤯 Solar Foods just opened their first Solein facility! This could be a game-changer for sustainable food production. Learn about the science, the impact, and the future of this revolutionary protein in our latest article. Link in bio! #veganbiotech #solein #solarfoods #futureoffood #sustainableprotein #foodtech",
+    "text_content": "Protein from thin air? 🤯 Yes, it's happening! Our new article explores the revolutionary technology behind air-based protein and its potential to transform the way we eat. Discover how companies like Solar Foods and Air Protein are leading the charge. 🌱 Link in bio for the full story! #vegan #biotech #futureoffood #airprotein #solarfoods #sustainablefood\n\n",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A futuristic, brightly lit indoor vertical farm facility. In the foreground, a scientist in a lab coat smiles and holds a petri dish containing golden powder, representing Solein. Background shows complex machinery and glowing tubes. The overall image conveys innovation, sustainability, and hope.",
+    "image_prompt": "A futuristic laboratory with bubbling bioreactors, sleek metallic equipment, and scientists in clean suits examining samples of air-based protein. The overall aesthetic should be clean, modern, and optimistic, suggesting a sustainable and innovative food future.",
     "reddit_details": null
   },
   {
     "platform": "bluesky",
-    "text_content": "Solar Foods' Solein facility is officially online! 🤩 Is this the start of a new era for protein production? Our deep dive explores the possibilities and the challenges. Thoughts? {{GHOST_ARTICLE_URL}} #veganbiotech #futureoffood",
+    "text_content": "Air-based protein: the future of food, or just a cool science experiment? 🤔 Our new article looks at companies like @SolarFoods and Air Protein, who are making protein from air! What do you think? Will this tech actually help feed the world? {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "mastodon",
-    "text_content": "Big news in vegan biotech! Solar Foods has opened its first commercial facility for Solein, a protein made from air. This marks a significant step towards sustainable food production. Read our analysis of the technology, its potential impact, and the challenges ahead. #veganbiotech #solarfoods #solein #futureoffood #sustainableprotein {{GHOST_ARTICLE_URL}}",
+    "text_content": "Dive into the world of air-based protein! Our latest article explores the science behind this innovative technology and its potential to revolutionize food systems. Learn how companies like Solar Foods and Air Protein are turning air, water, and electricity into a sustainable protein source. Read the full analysis: {{GHOST_ARTICLE_URL}} #vegan #biotech #futureoffood #sustainablefood #airprotein",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Hey everyone, I just read this fascinating article about Solar Foods and their new Solein facility. They're basically making protein out of thin air using fermentation! It sounds like something out of science fiction, but it could be a real game-changer for food security and sustainability. What do you guys think about this kind of technology? Are you excited about the potential, or are you worried about the implications? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Hey everyone, I just stumbled upon this incredibly interesting article about creating protein from air! Seriously, air, water, and electricity! 🤯 It dives deep into the tech used by companies like Solar Foods and Air Protein, and the potential impact on food security and the environment. I'm wondering what you all think about the feasibility and ethical considerations of this kind of novel food production. Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": {
       "suggested_subreddit": "r/science",
-      "post_title": "Solar Foods Opens First Solein Facility: Protein from Thin Air - The Future of Food?",
+      "post_title": "Protein From Air: Is This the Future of Food?",
       "primary_topic_keyword": "Biotech"
     }
   }

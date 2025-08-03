@@ -1,92 +1,92 @@
 [
   {
     "category": "food",
-    "company": "Change Foods",
-    "headline": "Change Foods Secures Funding for Animal-Free Dairy",
+    "company": "Formo",
+    "headline": "Formo Raises $50M to Scale Animal-Free Dairy Production",
     "date": "2025-07-15",
-    "url": "https://www.google.com/search?q=Change+Foods+animal-free+dairy+funding",
-    "impact": 7,
-    "summary": "Change Foods receives investment to scale precision-fermentation for dairy alternatives, aiming for cost parity."
-  },
-  {
-    "category": "materials",
-    "company": "Modern Meadow",
-    "headline": "Modern Meadow Announces Bio-Based Material Partnership",
-    "date": "2025-06-28",
-    "url": "https://www.google.com/search?q=Modern+Meadow+bio-based+material+partnership",
-    "impact": 6,
-    "summary": "Modern Meadow collaborates to expand applications of their biofabricated materials in various industries."
-  },
-  {
-    "category": "food",
-    "company": "Solar Foods",
-    "headline": "Solar Foods Opens First Commercial Solein Facility",
-    "date": "2025-06-10",
-    "url": "https://www.google.com/search?q=Solar+Foods+Solein+commercial+facility",
-    "impact": 9,
-    "summary": "Solar Foods commences production at its first commercial facility for Solein, a protein made from air."
+    "url": "https://www.google.com/search?q=Formo+raises+$50M+animal-free+dairy",
+    "impact": 8,
+    "summary": "German startup Formo secured funding to expand its precision-fermentation-based vegan cheese production capabilities."
   },
   {
     "category": "materials",
     "company": "Bolt Threads",
-    "headline": "Bolt Threads Mylo Material Used in New Adidas Collection",
-    "date": "2025-05-20",
-    "url": "https://www.google.com/search?q=Bolt+Threads+Mylo+Adidas+collection",
-    "impact": 8,
-    "summary": "Adidas releases a new collection featuring Mylo, Bolt Threads' mushroom-based leather alternative."
+    "headline": "Bolt Threads Partners with Adidas for Mylo Leather Apparel",
+    "date": "2025-06-20",
+    "url": "https://www.google.com/search?q=Bolt+Threads+Adidas+Mylo+leather+apparel",
+    "impact": 7,
+    "summary": "Bolt Threads collaborates with Adidas to incorporate Mylo, its mushroom-based leather alternative, into apparel lines."
+  },
+  {
+    "category": "food",
+    "company": "Solar Foods",
+    "headline": "Solar Foods Factory Opens, Producing Solein Protein from Air",
+    "date": "2025-05-28",
+    "url": "https://www.google.com/search?q=Solar+Foods+factory+opens+Solein+protein",
+    "impact": 9,
+    "summary": "Solar Foods commences production at its factory, using gas fermentation to create Solein, a protein from air."
+  },
+  {
+    "category": "materials",
+    "company": "Modern Meadow",
+    "headline": "Modern Meadow Bio-leather Material Used in Luxury Car Interiors",
+    "date": "2025-07-01",
+    "url": "https://www.google.com/search?q=Modern+Meadow+bio-leather+car+interiors",
+    "impact": 6,
+    "summary": "Modern Meadow's lab-grown leather alternative is adopted by a luxury automaker for its vehicle interiors."
   },
   {
     "category": "food",
     "company": "Perfect Day",
-    "headline": "Perfect Day Announces New Ice Cream Launch",
-    "date": "2025-05-05",
-    "url": "https://www.google.com/search?q=Perfect+Day+new+ice+cream+launch",
+    "headline": "Perfect Day Announces Ice Cream Partnership with Major Retailer",
+    "date": "2025-06-10",
+    "url": "https://www.google.com/search?q=Perfect+Day+ice+cream+partnership+retailer",
     "impact": 7,
-    "summary": "Perfect Day expands its portfolio with a new ice cream product featuring their animal-free dairy protein."
-  },
-  {
-    "category": "materials",
-    "company": "BioMason",
-    "headline": "BioMason Secures Funding to Scale Sustainable Cement",
-    "date": "2025-04-22",
-    "url": "https://www.google.com/search?q=BioMason+funding+sustainable+cement",
-    "impact": 6,
-    "summary": "BioMason raises capital to expand production of their bio-based cement alternative."
-  },
-  {
-    "category": "food",
-    "company": "Air Protein",
-    "headline": "Air Protein Announces Partnership with Food Manufacturer",
-    "date": "2025-07-01",
-    "url": "https://www.google.com/search?q=Air+Protein+partnership+food+manufacturer",
-    "impact": 5,
-    "summary": "Air Protein partners with a major food manufacturer to develop new air-based protein products."
-  },
-  {
-    "category": "materials",
-    "company": "Ananas Anam",
-    "headline": "Piñatex Featured in New Car Interior Design",
-    "date": "2025-06-15",
-    "url": "https://www.google.com/search?q=Piñatex+car+interior+design",
-    "impact": 5,
-    "summary": "Piñatex, a pineapple leaf fiber material, is incorporated into the interior design of a new car model."
-  },
-  {
-    "category": "food",
-    "company": "Nature's Fynd",
-    "headline": "Nature's Fynd Expands Distribution of Fy Protein Products",
-    "date": "2025-04-10",
-    "url": "https://www.google.com/search?q=Nature's+Fynd+Fy+protein+distribution",
-    "impact": 4,
-    "summary": "Nature's Fynd broadens the availability of its Fy protein-based food products to more retailers."
+    "summary": "Perfect Day's animal-free dairy protein is used in a new ice cream line sold through a major retail chain."
   },
   {
     "category": "materials",
     "company": "Algiknit",
-    "headline": "Algiknit Develops New Algae-Based Yarn for Textiles",
-    "date": "2025-05-28",
-    "url": "https://www.google.com/search?q=Algiknit+algae-based+yarn+textiles",
-    "impact": 4,
-    "summary": "Algiknit announces advancements in its algae-derived yarn for sustainable textile applications."
+    "headline": "Algiknit Secures Funding for Seaweed-Based Yarn Production",
+    "date": "2025-05-15",
+    "url": "https://www.google.com/search?q=Algiknit+funding+seaweed-based+yarn",
+    "impact": 5,
+    "summary": "Algiknit receives investment to scale its production of biodegradable yarn made from seaweed."
+  },
+  {
+    "category": "food",
+    "company": "Nature's Fynd",
+    "headline": "Nature's Fynd Announces Expansion into European Markets",
+    "date": "2025-07-22",
+    "url": "https://www.google.com/search?q=Nature's+Fynd+expansion+European+markets",
+    "impact": 6,
+    "summary": "Nature's Fynd, producer of fungi-based foods, expands its distribution to European countries."
+  },
+  {
+    "category": "materials",
+    "company": "Mango Materials",
+    "headline": "Mango Materials Partners to Create PHA-Based Packaging",
+    "date": "2025-06-01",
+    "url": "https://www.google.com/search?q=Mango+Materials+PHA-based+packaging",
+    "impact": 5,
+    "summary": "Mango Materials collaborates on creating packaging using PHA, a biodegradable plastic alternative."
+  },
+  {
+    "category": "food",
+    "company": "Air Protein",
+    "headline": "Air Protein Receives Regulatory Approval for Novel Protein",
+    "date": "2025-05-01",
+    "url": "https://www.google.com/search?q=Air+Protein+regulatory+approval",
+    "impact": 8,
+    "summary": "Air Protein secures regulatory clearance for its air-based protein, paving the way for commercialization."
+  },
+  {
+    "category": "materials",
+    "company": "BioMason",
+    "headline": "BioMason Raises Series B to Expand Production of Bio-bricks",
+    "date": "2025-07-29",
+    "url": "https://www.google.com/search?q=BioMason+Series+B+bio-bricks",
+    "impact": 7,
+    "summary": "BioMason secures funding to increase production capacity of its cement-free bio-bricks."
   }
 ]
