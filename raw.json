@@ -1,92 +1,92 @@
 [
   {
     "category": "food",
-    "company": "Change Foods",
-    "headline": "Change Foods Secures Funding for Animal-Free Dairy Production",
+    "company": "Formo",
+    "headline": "Formo Secures $50M to Scale Precision Fermentation Cheese",
     "date": "2025-07-15",
-    "url": "https://www.google.com/search?q=Change+Foods+animal-free+dairy+funding",
-    "impact": 7,
-    "summary": "Change Foods gains investment to scale up its precision-fermentation process for creating vegan dairy products."
+    "url": "https://www.google.com/search?q=Formo+$50M+precision+fermentation+cheese",
+    "impact": 8,
+    "summary": "Formo raises $50M to scale its animal-free cheese production using precision fermentation technology. Aiming for commercial launch."
   },
   {
     "category": "materials",
-    "company": "Modern Synthesis",
-    "headline": "Modern Synthesis Raises $4.1M to Scale Microbial Textile Production",
-    "date": "2025-07-01",
-    "url": "https://www.google.com/search?q=Modern+Synthesis+microbial+textile+funding",
-    "impact": 8,
-    "summary": "Modern Synthesis secured funding to expand production of its microbial textile, a sustainable leather alternative."
+    "company": "Modern Meadow",
+    "headline": "Modern Meadow Partners with Textile Company for Bio-Based Leather Alternative",
+    "date": "2025-06-20",
+    "url": "https://www.google.com/search?q=Modern+Meadow+textile+bio-based+leather+alternative",
+    "impact": 7,
+    "summary": "Modern Meadow collaborates to develop and distribute its bio-based leather alternative material for the textile industry."
   },
   {
     "category": "food",
     "company": "Solar Foods",
     "headline": "Solar Foods Opens First Commercial Solein Production Facility",
-    "date": "2025-06-20",
-    "url": "https://www.google.com/search?q=Solar+Foods+Solein+production+facility",
+    "date": "2025-05-25",
+    "url": "https://www.google.com/search?q=Solar+Foods+commercial+Solein+production+facility",
     "impact": 9,
-    "summary": "Solar Foods launches its first factory for Solein, a protein made from air, electricity, and microbes."
+    "summary": "Solar Foods inaugurates its first large-scale production facility for Solein, a protein powder made from air and electricity."
   },
   {
     "category": "materials",
     "company": "Algiknit",
-    "headline": "Algiknit Partners with Fashion Brand for Sustainable Apparel Line",
-    "date": "2025-06-10",
-    "url": "https://www.google.com/search?q=Algiknit+fashion+brand+partnership",
+    "headline": "Algiknit Raises Seed Funding for Seaweed-Based Yarn Production",
+    "date": "2025-05-10",
+    "url": "https://www.google.com/search?q=Algiknit+seed+funding+seaweed-based+yarn",
     "impact": 6,
-    "summary": "Algiknit partners to create apparel from kelp-derived yarns, reducing reliance on synthetic materials."
+    "summary": "Algiknit secures seed funding to expand production of its biodegradable yarn made from seaweed for apparel industry."
   },
   {
     "category": "food",
-    "company": "Formo",
-    "headline": "Formo Announces Launch of First Precision-Fermented Cheese Product",
-    "date": "2025-05-25",
-    "url": "https://www.google.com/search?q=Formo+precision-fermented+cheese+launch",
-    "impact": 8,
-    "summary": "Formo introduces its inaugural cheese made using precision fermentation, marking a milestone for animal-free dairy."
+    "company": "The Every Co.",
+    "headline": "The Every Co. Announces New Animal-Free Egg Protein Partnership",
+    "date": "2025-07-01",
+    "url": "https://www.google.com/search?q=The+Every+Co+animal-free+egg+protein+partnership",
+    "impact": 7,
+    "summary": "The Every Co. partners with a major food manufacturer to incorporate its animal-free egg white protein into new products."
   },
   {
     "category": "materials",
     "company": "MycoWorks",
-    "headline": "MycoWorks Announces New Reishi Production Plant Expansion",
-    "date": "2025-05-10",
-    "url": "https://www.google.com/search?q=MycoWorks+Reishi+production+plant+expansion",
-    "impact": 7,
-    "summary": "MycoWorks expands its Reishi production capacity to meet growing demand for its mushroom-based leather alternative."
+    "headline": "MycoWorks Expands Production Capacity of Reishi Fine Mycelium Leather",
+    "date": "2025-06-15",
+    "url": "https://www.google.com/search?q=MycoWorks+expands+Reishi+mycelium+leather+production",
+    "impact": 8,
+    "summary": "MycoWorks increases its production capacity of Reishi, its mycelium-based leather alternative, to meet growing demand."
   },
   {
     "category": "food",
-    "company": "The EVERY Co.",
-    "headline": "The EVERY Co. Expands Animal-Free Egg Protein into New Markets",
-    "date": "2025-04-30",
-    "url": "https://www.google.com/search?q=The+EVERY+Co.+animal-free+egg+protein+markets",
-    "impact": 6,
-    "summary": "The EVERY Co. widens distribution of its egg white alternative made through precision fermentation."
-  },
-  {
-    "category": "materials",
-    "company": "BioMason",
-    "headline": "BioMason Receives Investment to Scale Sustainable Cement Alternative",
-    "date": "2025-04-15",
-    "url": "https://www.google.com/search?q=BioMason+sustainable+cement+alternative+investment",
+    "company": "Perfect Day",
+    "headline": "Perfect Day Launches Animal-Free Ice Cream Nationwide",
+    "date": "2025-05-01",
+    "url": "https://www.google.com/search?q=Perfect+Day+animal-free+ice+cream+nationwide+launch",
     "impact": 9,
-    "summary": "BioMason secures funding to increase production of its biologically-based cement alternative."
-  },
-  {
-    "category": "food",
-    "company": "Air Protein",
-    "headline": "Air Protein Announces Partnership with Major Food Distributor",
-    "date": "2025-04-05",
-    "url": "https://www.google.com/search?q=Air+Protein+food+distributor+partnership",
-    "impact": 7,
-    "summary": "Air Protein partners with a large distributor to bring its air-based protein to a wider audience."
+    "summary": "Perfect Day expands the availability of its animal-free ice cream, made with precision-fermented whey protein, across the United States."
   },
   {
     "category": "materials",
     "company": "Mango Materials",
-    "headline": "Mango Materials Expands Production of PHA-Based Bioplastics",
-    "date": "2025-05-01",
-    "url": "https://www.google.com/search?q=Mango+Materials+PHA+bioplastics+expansion",
+    "headline": "Mango Materials Partners to Create Biodegradable Plastic Alternative",
+    "date": "2025-07-28",
+    "url": "https://www.google.com/search?q=Mango+Materials+biodegradable+plastic+alternative",
     "impact": 6,
-    "summary": "Mango Materials increases capacity for producing PHA, a biodegradable plastic alternative."
+    "summary": "Mango Materials collaborates to develop and market a biodegradable plastic alternative made from methane gas for packaging."
+  },
+  {
+    "category": "food",
+    "company": "Air Protein",
+    "headline": "Air Protein Announces New Pilot Facility for Air-Based Meat",
+    "date": "2025-06-01",
+    "url": "https://www.google.com/search?q=Air+Protein+pilot+facility+air-based+meat",
+    "impact": 7,
+    "summary": "Air Protein reveals plans for a pilot facility to produce its air-based meat alternative using carbon transformation technology."
+  },
+  {
+    "category": "materials",
+    "company": "BioMason",
+    "headline": "BioMason Secures Funding to Scale Biocement Brick Production",
+    "date": "2025-05-15",
+    "url": "https://www.google.com/search?q=BioMason+funding+biocement+brick+production",
+    "impact": 5,
+    "summary": "BioMason receives new funding to expand its production of biocement bricks, a sustainable alternative to traditional concrete."
   }
 ]

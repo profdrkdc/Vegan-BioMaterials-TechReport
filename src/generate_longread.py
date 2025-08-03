@@ -153,6 +153,30 @@ def generate_longread_article(topic: str, output_path: str, outline_output_path:
 
     safe_title = outline.title.replace('"', '”')
 
+    # --- DE ROBUUSTE OPSCHOONLOGICA ---
+    # Start met de ruwe AI-respons
+    content = final_article_markdown
+
+    # 1. Verwijder eventuele code fences die de AI kan toevoegen
+    if content.strip().startswith("```markdown"):
+        content = content.strip()[10:]
+    if content.strip().startswith("```"):
+        content = content.strip()[3:]
+    if content.strip().endswith("```"):
+        content = content.strip()[:-3]
+    
+    content = content.strip()
+
+    # 2. VIND het begin van de ECHTE content (de eerste H1 heading)
+    #    en gooi alle eventuele junk ervoor (zoals de 'n') weg.
+    heading_pos = content.find('# ')
+    if heading_pos > 0: # Als er tekst vóór de heading staat
+        content = content[heading_pos:]
+
+    # 'content' is nu gegarandeerd schoon.
+    cleaned_markdown = content
+    # --- EINDE OPSCHOONLOGICA ---
+
     front_matter = f"""---
 title: "{safe_title}"
 date: {article_date}
@@ -160,7 +184,8 @@ date: {article_date}
 
 """
     
-    full_content = front_matter + final_article_markdown
+    # Gebruik de definitief opgeschoonde markdown
+    full_content = front_matter + cleaned_markdown
     
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(full_content)

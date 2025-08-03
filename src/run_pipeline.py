@@ -9,6 +9,7 @@ import argparse
 import shutil
 import glob
 from dotenv import load_dotenv
+load_dotenv()
 from urllib.parse import urljoin
 
 def eprint(*args, **kwargs):
@@ -202,7 +203,6 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
     eprint("\n✅ Pijplijn voor content generatie voltooid.")
 
 if __name__ == "__main__":
-    load_dotenv()
     parser = argparse.ArgumentParser(description="Draait de content generatie pijplijn voor de SSG.")
     parser.add_argument("--date", type=str, help="De datum (YYYY-MM-DD) waarvoor content gegenereerd moet worden.")
     parser.add_argument("--no-archive", action='store_true', help="Sla het archiveren van oude content over.")
