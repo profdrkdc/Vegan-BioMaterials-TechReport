@@ -1,1 +1,21 @@
-test home
+{{ define "main" }}
+<main class="ph3 ph5-l pv3 pv4-l">
+    <div class="center measure-wide">
+        <h1 class="f1 athelas mt3 mb1">Latest Reports</h1>
+        <ul class="list pl0">
+            {{ range .Site.RegularPages.ByDate.Reverse }}
+            {{ if eq .Section "posts" }}
+            <li class="pv3">
+                <a href="{{ .Permalink }}" class="db f3 fw1 athelas mt0 lh-title dim link">
+                    {{ .Title }}
+                </a>
+                <time class="f6 mv1 dib tracked">
+                    {{ .Date.Format "January 2, 2006" }}
+                </time>
+            </li>
+            {{ end }}
+            {{ end }}
+        </ul>
+    </div>
+</main>
+{{ end }}
