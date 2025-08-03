@@ -52,7 +52,6 @@ jobs:
             git push
           fi
 
-  # JOB 2: Bouw en Publiceer de website (DIAGNOSTISCHE MODUS)
   build-and-deploy:
     runs-on: ubuntu-latest
     needs: generate-content
@@ -67,8 +66,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      
+        with:
+          submodules: true
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
