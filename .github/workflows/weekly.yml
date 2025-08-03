@@ -35,7 +35,9 @@ jobs:
       contents: write
     # Deze job wordt ALLEEN uitgevoerd als je de 'skip' vlag NIET aanzet.
     # Dit geldt voor alle triggers (push, schedule, workflow_dispatch).
-    if: github.event.inputs.skip_content_generation != 'true'
+    if: |
+      github.event_name == 'schedule' ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.skip_content_generation != 'true')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
