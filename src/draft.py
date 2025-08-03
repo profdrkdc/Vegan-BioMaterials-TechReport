@@ -109,7 +109,23 @@ for lang_config in active_languages:
         elif md.strip().startswith("```"):
              md = md.strip()[3:-3].strip()
         
-        raw_title = md.splitlines()[0].lstrip('# ').strip()
+        # Zoek de positie van de eerste H1 heading om ruis te verwijderen
+        heading_pos = md.find('# ')
+        if heading_pos != -1:
+            # Verwijder alle ruis vóór de eerste heading
+            clean_md = md[heading_pos:]
+        else:
+            # Fallback voor het geval er geen heading wordt gevonden
+            clean_md = md.lstrip()
+
+        # Extra controle om zeker te zijn dat we de titel pakken
+        lines = clean_md.splitlines()
+        raw_title = "Untitled" # Default titel
+        for line in lines:
+            if line.startswith('# '):
+                raw_title = line.lstrip('# ').strip()
+                break # Stop zodra de eerste titel is gevonden
+        
         safe_title = raw_title.replace('"', '”')
         
         article_date = target_date.isoformat()
@@ -121,7 +137,8 @@ date: {article_date}
 
 """
         
-        full_content = front_matter + md
+        # Gebruik de opgeschoonde markdown voor de body
+        full_content = front_matter + clean_md
         
         output_filename = f"{OUTPUT_DIR}/{today_iso}_{lang_code}.md"
         with open(output_filename, "w", encoding="utf-8") as f:
