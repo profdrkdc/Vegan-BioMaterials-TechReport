@@ -56,7 +56,11 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     needs: generate-content
-    if: always() # Draai altijd (tenzij de hele workflow wordt geannuleerd)
+    if: always()
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -68,10 +72,10 @@ jobs:
         with:
           hugo-version: 'latest'
           extended: true
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      # De 'Setup Pages' stap is niet langer nodig om de URL te bepalen
       - name: Build with Hugo
-        run: hugo --cleanDestinationDir --minify --baseURL ${{ steps.pages.outputs.base_url }}
+        # DE URL IS NU EXPLICIET INGEVULD
+        run: hugo --cleanDestinationDir --minify --baseURL "https://profdrkdc.github.io/Vegan-BioTech-Report/"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
