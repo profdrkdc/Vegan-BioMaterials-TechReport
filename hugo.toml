@@ -5,6 +5,9 @@ title = "Vegan BioTech Report"
 theme = "ananke"
 defaultContentLanguage = "en"
 
+[outputs]
+  home = ["HTML", "RSS"]
+
 [languages]
   [languages.en]
     languageName = "English"
