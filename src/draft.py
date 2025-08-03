@@ -130,9 +130,20 @@ for lang_config in active_languages:
         
         article_date = target_date.isoformat()
         
+        # Zoek de eerste paragraaf na de titel voor de description
+        first_paragraph = ""
+        for line in lines:
+            # Sla de titel en lege regels direct na de titel over
+            if line.startswith('# ') or not line.strip():
+                continue
+            # De eerste niet-lege regel die geen titel is, is onze paragraaf
+            first_paragraph = line.strip().replace('"', '”')
+            break
+
         front_matter = f"""---
 title: "{safe_title}"
 date: {article_date}
+description: "{first_paragraph}"
 ---
 
 """
