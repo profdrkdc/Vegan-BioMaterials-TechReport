@@ -1,40 +1,40 @@
 [
   {
-    "platform": "bluesky",
-    "text_content": "Wow, Solar Foods just opened their first commercial Solein production plant! 🤯 This could seriously change the game for sustainable protein. Air-based protein, who would've thought? Check out the long-read for all the deets: {{GHOST_ARTICLE_URL}}",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": null,
-    "reddit_details": null
-  },
-  {
-    "platform": "mastodon",
-    "text_content": "Solar Foods has officially launched its first commercial Solein production plant, marking a significant step towards sustainable protein production. Solein, a protein made from air and electricity, offers a potentially revolutionary alternative to traditional food sources. Read our in-depth analysis of the long-term implications: {{GHOST_ARTICLE_URL}} #VeganBiotech #SustainableFood #FutureofFood #Solein #SolarFoods",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": null,
-    "reddit_details": null
-  },
-  {
     "platform": "facebook",
-    "text_content": "The future of food is here, and it's powered by the sun! Solar Foods has just opened its first commercial Solein production plant, a groundbreaking achievement in sustainable protein production. This innovative technology uses air and electricity to create a protein source that could revolutionize our food system, reduce our reliance on traditional agriculture, and help address global food security. We delve into the long-term implications of this development in our latest article. Learn more about the possibilities and challenges of Solein production: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Is air-based protein the food of the future, or just a futuristic fantasy? Our latest long-read dives deep into the potential of companies like Solar Foods and Air Protein to revolutionize food production. We explore scalability, environmental impact, nutritional value, cost-effectiveness, and the regulatory hurdles they face. Can this novel approach truly feed the world sustainably? Read the full analysis and share your thoughts! {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "☀️ Food from thin air? 🤯 Solar Foods just opened its first commercial Solein production plant! This could be a game-changer for sustainable protein. Learn how air and electricity are being used to create a food source that could revolutionize our food system. 🌱 Link in bio for the full article! #VeganBiotech #SustainableFood #FutureofFood #Solein #SolarFoods\n\n",
+    "text_content": "🌱🌬️ Could air be the next big thing in protein? 🤯 We're exploring the revolutionary world of air-based protein and its potential to transform food production. From reducing land use to tackling global food security, the possibilities are mind-blowing! What do you think? Link in bio! #veganbiotech #futureoffood #airprotein #sustainablefood #foodtech {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A futuristic, brightly lit indoor vertical farm with sleek, modern bioreactors filled with a glowing pink liquid (Solein). Close-up shot showing the texture of the Solein liquid. Emphasize clean, sustainable energy and technological innovation.",
+    "image_prompt": "A futuristic, brightly lit indoor vertical farm filled with sleek, high-tech bioreactors producing protein from air, CO2, and electricity. In the foreground, a diverse group of scientists in lab coats are observing the process with expressions of optimism and wonder. The overall tone should be clean, modern, and hopeful.",
+    "reddit_details": null
+  },
+  {
+    "platform": "bluesky",
+    "text_content": "Air-based protein: game-changer or hype? 🤔 Our latest deep dive looks at the tech, the potential, and the challenges. Companies like Solar Foods and Air Protein are really pushing the boundaries. What do you think about this new wave of food production? Let's discuss! {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
+    "platform": "mastodon",
+    "text_content": "New on the Vegan BioTech Report: Is air-based protein the key to a sustainable food future? We explore the science, the companies, and the challenges of this novel approach to food production. Read our long-read article here: {{GHOST_ARTICLE_URL}} #veganbiotech #futureoffood #airprotein #sustainablefood #foodtech",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Hey everyone, I just dove into an absolutely fascinating article about Solein, this new protein being made from air and electricity by Solar Foods. They just opened their first commercial production plant! It's wild to think about how this could impact everything from land use to food security. I was particularly struck by the section discussing the potential to reduce our reliance on traditional agriculture. What are your thoughts on lab-grown/air-grown protein? Anyone else find this as mind-blowing as I do? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Hey Reddit, I just finished reading a fascinating article about air-based protein and how it could revolutionize food production! It covers companies like Solar Foods and Air Protein, and really gets into the nitty-gritty about scalability, environmental impact, and whether we'll all be eating food made from air in the future. What are your thoughts? Do you think this could be a real solution to food security? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": {
       "suggested_subreddit": "r/science",
-      "post_title": "Solar Foods Opens First Commercial Solein Plant: Is Air-Based Protein the Future?",
+      "post_title": "Air-Based Protein: Sustainable Food Revolution or Pipe Dream?",
       "primary_topic_keyword": "Biotech"
     }
   }

@@ -2,73 +2,46 @@
   {
     "category": "food",
     "company": "Solar Foods",
-    "headline": "Solar Foods Opens First Commercial Solein Production Plant",
-    "date": "2025-05-25",
-    "url": "https://www.google.com/search?q=Solar+Foods+opens+first+Solein+production+plant",
+    "headline": "Solar Foods Begins Commercial Production of Solein Protein",
+    "date": "2025-05-28",
+    "url": "https://www.google.com/search?q=Solar+Foods+Solein+commercial+production",
     "impact": 9,
-    "summary": "Finnish company Solar Foods starts commercial production of Solein, a protein made from air and electricity."
+    "summary": "Solar Foods starts large-scale production of its Solein protein made from air and electricity."
   },
   {
     "category": "materials",
-    "company": "Modern Synthesis",
-    "headline": "Modern Synthesis Raises $4.1M to Scale Microbial Textile Platform",
-    "date": "2025-06-15",
-    "url": "https://techcrunch.com/2025/06/15/modern-synthesis-raises-4-1m-to-scale-microbial-textile-platform/",
+    "company": "Bolt Threads",
+    "headline": "Bolt Threads Partners with Luxury Brand for Mylo Mushroom Leather Bags",
+    "date": "2025-06-20",
+    "url": "https://www.google.com/search?q=Bolt+Threads+Mylo+mushroom+leather+bags",
     "impact": 8,
-    "summary": "Funding accelerates development of sustainable textiles using microbial biofabrication to replace leather and synthetics."
-  },
-  {
-    "category": "materials",
-    "company": "Mylo (Bolt Threads)",
-    "headline": "Mylo Mushroom Leather Featured in New Luxury Handbag Line",
-    "date": "2025-07-05",
-    "url": "https://www.google.com/search?q=Mylo+mushroom+leather+luxury+handbag",
-    "impact": 8,
-    "summary": "Bolt Threads' Mylo mushroom leather is used in a new line of high-end handbags, showcasing its potential."
+    "summary": "Bolt Threads' Mylo material is adopted by a major luxury brand for a new line of bags."
   },
   {
     "category": "food",
     "company": "Air Protein",
-    "headline": "Air Protein Partners with NASA for Space Food Research",
-    "date": "2025-07-12",
-    "url": "https://www.google.com/search?q=Air+Protein+partners+NASA+space+food",
+    "headline": "Air Protein Launches First Product Line in Select Markets",
+    "date": "2025-07-22",
+    "url": "https://www.google.com/search?q=Air+Protein+product+launch",
     "impact": 8,
-    "summary": "Air Protein partners with NASA to explore using gas fermentation to create food for space exploration."
+    "summary": "Air Protein's first consumer product made from air-based protein becomes available in test markets."
   },
   {
     "category": "food",
     "company": "Change Foods",
     "headline": "Change Foods Secures Funding for Animal-Free Dairy Production",
-    "date": "2025-07-20",
-    "url": "https://www.google.com/search?q=Change+Foods+secures+funding+animal-free+dairy",
+    "date": "2025-07-15",
+    "url": "https://www.google.com/search?q=Change+Foods+animal-free+dairy+funding",
     "impact": 7,
-    "summary": "Change Foods receives funding to scale up production of dairy proteins made via precision fermentation."
-  },
-  {
-    "category": "food",
-    "company": "Remilk",
-    "headline": "Remilk Announces Expansion into US Market",
-    "date": "2025-06-28",
-    "url": "https://www.google.com/search?q=Remilk+expansion+US+market",
-    "impact": 7,
-    "summary": "Precision-fermentation dairy company Remilk announces plans to launch its products in the United States."
-  },
-  {
-    "category": "food",
-    "company": "The EVERY Co.",
-    "headline": "The EVERY Co. Launches Animal-Free Egg White Protein",
-    "date": "2025-05-18",
-    "url": "https://www.google.com/search?q=The+EVERY+Co.+launches+animal-free+egg+white",
-    "impact": 7,
-    "summary": "The EVERY Co. releases its first product: an egg white protein made without chickens via precision fermentation."
+    "summary": "Change Foods receives investment to scale up its precision-fermentation dairy alternative production."
   },
   {
     "category": "materials",
-    "company": "Mango Materials",
-    "headline": "Mango Materials Announces New PHA Production Facility",
-    "date": "2025-05-20",
-    "url": "https://www.google.com/search?q=Mango+Materials+PHA+production+facility",
+    "company": "BioMason",
+    "headline": "BioMason Secures Funding to Scale Up Bio-Cement Production",
+    "date": "2025-05-15",
+    "url": "https://www.google.com/search?q=BioMason+bio-cement+funding",
     "impact": 7,
-    "summary": "Mango Materials is building a new facility to increase production of PHA, a biodegradable plastic alternative."
+    "summary": "BioMason receives investment to expand production of its bio-cement bricks."
   }
 ]
