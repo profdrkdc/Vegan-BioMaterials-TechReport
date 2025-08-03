@@ -1,73 +1,41 @@
 [
   {
+    "platform": "bluesky",
+    "text_content": "Wow, Solar Foods just opened their first commercial Solein production plant! 🤯 This could seriously change the game for sustainable protein. Air-based protein, who would've thought? Check out the long-read for all the deets: {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
+    "platform": "mastodon",
+    "text_content": "Solar Foods has officially launched its first commercial Solein production plant, marking a significant step towards sustainable protein production. Solein, a protein made from air and electricity, offers a potentially revolutionary alternative to traditional food sources. Read our in-depth analysis of the long-term implications: {{GHOST_ARTICLE_URL}} #VeganBiotech #SustainableFood #FutureofFood #Solein #SolarFoods",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
     "platform": "facebook",
-    "text_content": "Is Solein the future of food? Solar Foods is pioneering a revolutionary protein source made from air, electricity, and microbes. Our latest deep-dive explores the science, environmental impact, scalability, and potential of Solein to disrupt traditional agriculture and address global food security. From its nutritional profile to its potential for reducing reliance on livestock farming, we break down everything you need to know about this game-changing innovation. Read the full article here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "The future of food is here, and it's powered by the sun! Solar Foods has just opened its first commercial Solein production plant, a groundbreaking achievement in sustainable protein production. This innovative technology uses air and electricity to create a protein source that could revolutionize our food system, reduce our reliance on traditional agriculture, and help address global food security. We delve into the long-term implications of this development in our latest article. Learn more about the possibilities and challenges of Solein production: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "Imagine a world where protein comes from thin air! 🌬️💡 Solar Foods is making it a reality with Solein, a sustainable protein source that could revolutionize food production. Our new article dives into the science, impact, and future of this incredible innovation. Learn how Solein is made, its potential to combat food insecurity, and what it means for our planet. Link in bio! #VeganBiotech #Solein #FutureFood #SustainableProtein #FoodTech {{GHOST_ARTICLE_URL}}",
+    "text_content": "☀️ Food from thin air? 🤯 Solar Foods just opened its first commercial Solein production plant! This could be a game-changer for sustainable protein. Learn how air and electricity are being used to create a food source that could revolutionize our food system. 🌱 Link in bio for the full article! #VeganBiotech #SustainableFood #FutureofFood #Solein #SolarFoods\n\n",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A futuristic cityscape with vertical farms powered by solar panels. In the foreground, a microscopic view of Solein protein crystals, glowing with a soft, ethereal light. The overall tone is optimistic and forward-thinking, emphasizing sustainability and innovation.",
-    "reddit_details": null
-  },
-  {
-    "platform": "bluesky",
-    "text_content": "Solar Foods is doing some wild stuff with Solein! Protein from air and microbes? 🤔 Could this be a real solution for food security? Our new article breaks it down. What do you think - future food or sci-fi fantasy? 👇 {{GHOST_ARTICLE_URL}}",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": null,
-    "reddit_details": null
-  },
-  {
-    "platform": "mastodon",
-    "text_content": "Dive into the world of Solein, a protein produced from air, electricity, and microbes, with our latest long-read article! We explore the science, environmental impact, and potential of this innovative technology to revolutionize sustainable protein production and address global food security. Read more here: {{GHOST_ARTICLE_URL}} #VeganBiotech #Solein #SustainableFood #FoodTech #FutureofFood",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": null,
+    "image_prompt": "A futuristic, brightly lit indoor vertical farm with sleek, modern bioreactors filled with a glowing pink liquid (Solein). Close-up shot showing the texture of the Solein liquid. Emphasize clean, sustainable energy and technological innovation.",
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Hey everyone, I just read this fascinating article about Solar Foods and their Solein protein. It's made from air, electricity, and microbes – basically, they're creating protein out of thin air (literally!). The article goes into detail about the environmental impact, the scalability, and the potential to disrupt traditional agriculture. Honestly, it sounds like something out of a sci-fi novel, but it could be a game-changer for food security! What are your thoughts on synthetic protein sources? Are you excited or skeptical? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Hey everyone, I just dove into an absolutely fascinating article about Solein, this new protein being made from air and electricity by Solar Foods. They just opened their first commercial production plant! It's wild to think about how this could impact everything from land use to food security. I was particularly struck by the section discussing the potential to reduce our reliance on traditional agriculture. What are your thoughts on lab-grown/air-grown protein? Anyone else find this as mind-blowing as I do? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": {
       "suggested_subreddit": "r/science",
-      "post_title": "Protein from Air: Will Solein Revolutionize Food Production?",
+      "post_title": "Solar Foods Opens First Commercial Solein Plant: Is Air-Based Protein the Future?",
       "primary_topic_keyword": "Biotech"
     }
-  },
-  {
-    "platform": "bluesky",
-    "text_content": "Mushroom leather taking over the luxury market?! 🍄 MycoWorks is partnering with a big brand to create new products. Sustainable materials are having a MOMENT. Check out the article for more details! {{GHOST_ARTICLE_URL}}",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": null,
-    "reddit_details": null
-  },
-  {
-    "platform": "mastodon",
-    "text_content": "Exciting news in sustainable materials! MycoWorks is collaborating with a luxury brand to launch new products made from their innovative Reishi mushroom leather. This partnership highlights the growing demand for eco-friendly alternatives in the fashion industry. Read the full story: {{GHOST_ARTICLE_URL}} #MushroomLeather #SustainableFashion #VeganBiotech #MycoWorks #Reishi",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": null,
-    "reddit_details": null
-  },
-  {
-    "platform": "reddit",
-    "text_content": "Just saw that MycoWorks is teaming up with a luxury brand to make stuff out of Reishi mushroom leather! I've been following this for a while now, and it's awesome to see it gaining traction in the high-end market. It feels like a real win for sustainable materials. What are your favorite vegan leather alternatives? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": null,
-    "reddit_details": {
-      "suggested_subreddit": "r/vegan",
-      "post_title": "Luxury Brand Embraces Mushroom Leather with MycoWorks Partnership!",
-      "primary_topic_keyword": "Environment"
-    }
-  },
-  {
-    "platform": "x_twitter",
-    "text_content": "From air to protein, fungi to fashion, the #VeganBiotech revolution continues. @solarfoods_ makes protein from air & @MycoWorks' mushroom leather hits the luxury market. The future is here! More details: {{GHOST_ARTICLE_URL}}",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": null,
-    "reddit_details": null
   }
 ]
