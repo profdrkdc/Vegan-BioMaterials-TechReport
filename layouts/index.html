@@ -1,13 +1,12 @@
-{{ define "main" }}
-<main class="pb7" role="main">
-    <section class="flex-ns flex-wrap justify-around mt5">
-        {{ $paginator := .Paginate (where .Site.RegularPages "Section" "posts") }}
-        {{ range $paginator.Pages }}
-        <div class="w-100 w-30-l mb4 pa3">
-            {{ .Render "summary" }}
-        </div>
-        {{ end }}
-    </section>
-    {{- template "_internal/pagination.html" . -}}
-</main>
-{{ end }}
+<!doctype html>
+<html lang=nl>
+    <head>
+        <meta name=generator content="Hugo 0.148.2">
+        <meta charset=UTF-8>
+        <title>Minimale Hugo Test</title>
+    </head>
+    <body>
+        <h1>Hallo, Hugo Wereld!</h1>
+        <p>Deze pagina is gebouwd door Hugo met een correcte layout.</p>
+    </body>
+</html>
