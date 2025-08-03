@@ -2,73 +2,55 @@
   {
     "category": "materials",
     "company": "MycoWorks",
-    "headline": "MycoWorks partners with major fashion house for mushroom leather garments.",
-    "date": "2025-05-20",
-    "url": "https://www.google.com/search?q=MycoWorks+mushroom+leather+fashion+partnership",
+    "headline": "MycoWorks partners with luxury brand for Reishi application.",
+    "date": "2025-07-08",
+    "url": "https://www.google.com/search?q=MycoWorks+luxury+brand+Reishi",
     "impact": 9,
-    "summary": "MycoWorks announced a collaboration with a leading fashion brand to create apparel using their Reishi mushroom leather."
-  },
-  {
-    "category": "food",
-    "company": "Air Protein",
-    "headline": "Air Protein announces construction of large-scale production facility.",
-    "date": "2025-07-20",
-    "url": "https://www.google.com/search?q=Air+Protein+production+facility+construction",
-    "impact": 9,
-    "summary": "Air Protein commenced building a large-scale production plant for its protein made from air (CO2)."
-  },
-  {
-    "category": "food",
-    "company": "Formo",
-    "headline": "Formo raises $50M to scale precision-fermented cheese production.",
-    "date": "2025-06-15",
-    "url": "https://www.google.com/search?q=Formo+precision+fermented+cheese+funding",
-    "impact": 8,
-    "summary": "German startup Formo secured $50M to expand its production of animal-free cheese made via precision fermentation."
-  },
-  {
-    "category": "food",
-    "company": "Perfect Day",
-    "headline": "Perfect Day launches animal-free whey protein ice cream nationwide.",
-    "date": "2025-05-10",
-    "url": "https://www.google.com/search?q=Perfect+Day+animal+free+ice+cream+nationwide",
-    "impact": 8,
-    "summary": "Perfect Day expanded its reach with a nationwide launch of its ice cream made with precision-fermented whey protein."
-  },
-  {
-    "category": "materials",
-    "company": "Natural Fiber Welding",
-    "headline": "Natural Fiber Welding raises Series C to expand production of Mirum.",
-    "date": "2025-06-10",
-    "url": "https://www.google.com/search?q=Natural+Fiber+Welding+Mirum+Series+C",
-    "impact": 8,
-    "summary": "Natural Fiber Welding secured Series C funding to scale up the production of Mirum, a plant-based leather alternative."
-  },
-  {
-    "category": "food",
-    "company": "Solar Foods",
-    "headline": "Solar Foods secures regulatory approval for Solein protein in Singapore.",
-    "date": "2025-07-01",
-    "url": "https://www.google.com/search?q=Solar+Foods+Solein+Singapore+approval",
-    "impact": 7,
-    "summary": "Solar Foods' Solein, a protein made from CO2, received regulatory clearance in Singapore, paving the way for commercialization."
-  },
-  {
-    "category": "food",
-    "company": "Change Foods",
-    "headline": "Change Foods unveils prototype of precision-fermented mozzarella.",
-    "date": "2025-06-01",
-    "url": "https://www.google.com/search?q=Change+Foods+precision+fermented+mozzarella",
-    "impact": 7,
-    "summary": "Change Foods showcased its first prototype of mozzarella cheese produced through precision fermentation."
+    "summary": "MycoWorks collaborates with a luxury brand to integrate its Reishi mushroom leather alternative into high-end products."
   },
   {
     "category": "materials",
     "company": "Modern Meadow",
-    "headline": "Modern Meadow partners with athletic apparel company to develop biofabricated leather.",
-    "date": "2025-05-25",
-    "url": "https://www.google.com/search?q=Modern+Meadow+biofabricated+leather+athletic+apparel",
+    "headline": "Modern Meadow unveils Bio-Alloy leather alternative.",
+    "date": "2025-06-20",
+    "url": "https://www.google.com/search?q=Modern+Meadow+Bio-Alloy+leather+alternative",
+    "impact": 8,
+    "summary": "Modern Meadow launches a new biofabricated material, Bio-Alloy, positioned as a leather and plastic substitute."
+  },
+  {
+    "category": "food",
+    "company": "Remilk",
+    "headline": "Remilk partners with major food manufacturer.",
+    "date": "2025-06-10",
+    "url": "https://www.google.com/search?q=Remilk+partners+food+manufacturer",
+    "impact": 8,
+    "summary": "Remilk announces a strategic partnership with a leading food company to integrate its animal-free dairy products."
+  },
+  {
+    "category": "food",
+    "company": "Change Foods",
+    "headline": "Change Foods secures funding for precision-fermented dairy.",
+    "date": "2025-07-15",
+    "url": "https://www.google.com/search?q=Change+Foods+precision+fermented+dairy+funding",
     "impact": 7,
-    "summary": "Modern Meadow is collaborating with an athletic brand to create performance wear using its biofabricated leather material."
+    "summary": "Change Foods receives investment to scale up its animal-free dairy production using precision fermentation."
+  },
+  {
+    "category": "materials",
+    "company": "Algiknit",
+    "headline": "Algiknit raises Series A for seaweed-based yarns.",
+    "date": "2025-07-01",
+    "url": "https://www.google.com/search?q=Algiknit+seaweed+based+yarns+Series+A",
+    "impact": 7,
+    "summary": "Algiknit secures Series A funding to scale the production of its sustainable yarns derived from seaweed."
+  },
+  {
+    "category": "food",
+    "company": "The Every Co.",
+    "headline": "The Every Co. launches egg white protein in food service.",
+    "date": "2025-07-28",
+    "url": "https://www.google.com/search?q=The+Every+Co+egg+white+protein+food+service",
+    "impact": 7,
+    "summary": "The Every Company expands its precision fermentation egg white protein into the food service sector."
   }
 ]
