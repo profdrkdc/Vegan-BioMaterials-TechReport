@@ -7,7 +7,6 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_openai import ChatOpenAI
-from openai import OpenAI
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
@@ -22,54 +21,8 @@ class ArticleOutline(BaseModel):
     sections: List[ArticleSection] = Field(description="The list of sections to be written for the article.")
     conclusion_summary: str = Field(description="A brief summary of the main idea for the conclusion.")
 
-def parse_outline_from_text(text: str) -> ArticleOutline:
-    """Parses a structured text block into an ArticleOutline object."""
-    eprint("INFO: Parsing response with new Markdown-based parser...")
-    try:
-        # Split de hoofdblokken
-        parts = re.split(r'\[(TITLE|HOOK|CONCLUSION|SECTIONS)\]', text)
-        
-        content_map = {
-            "TITLE": parts[2].strip() if len(parts) > 2 else "",
-            "HOOK": parts[4].strip() if len(parts) > 4 else "",
-            "CONCLUSION": parts[6].strip() if len(parts) > 6 else "",
-            "SECTIONS": parts[8].strip() if len(parts) > 8 else ""
-        }
-
-        # Parse het SECTIONS blok
-        parsed_sections = []
-        current_section = None
-        for line in content_map["SECTIONS"].splitlines():
-            line = line.strip()
-            if not line:
-                continue
-            if line.startswith("# "):
-                if current_section:
-                    parsed_sections.append(current_section)
-                current_section = {"title": line.lstrip("# ").strip(), "talking_points": []}
-            elif line.startswith("- ") and current_section:
-                current_section["talking_points"].append(line.lstrip("- ").strip())
-        
-        if current_section:
-            parsed_sections.append(current_section)
-
-        outline_dict = {
-            "title": content_map["TITLE"],
-            "introduction_hook": content_map["HOOK"],
-            "conclusion_summary": content_map["CONCLUSION"],
-            "sections": parsed_sections
-        }
-        
-        return ArticleOutline.model_validate(outline_dict)
-
-    except Exception as e:
-        eprint(f"--- Fout bij parsen van AI respons ---")
-        eprint(f"Fout: {e}")
-        eprint(f"Ontvangen tekst:\n{text}")
-        raise
-
-def generate_longread_article(topic: str, output_path: str, outline_output_path: str):
-    eprint("AI pipeline started (efficient 2-step mode)...")
+def generate_longread_article(outline_path: str, output_path: str, lang_name: str):
+    eprint(f"AI pipeline started for language: {lang_name}...")
     API_TYPE = os.getenv('AI_API_TYPE')
     MODEL_ID = os.getenv('AI_MODEL_ID')
     API_KEY = os.getenv('AI_API_KEY')
@@ -87,39 +40,15 @@ def generate_longread_article(topic: str, output_path: str, outline_output_path:
 
     eprint(f"LangChain model geïnitialiseerd: {getattr(llm, 'model', 'Onbekend')}")
 
-    prompt_outline_text = """
-    You are an expert content strategist. Your task is to generate a structured article outline based on the topic below.
-    Topic: {topic}
-    Please provide the content using the following Markdown format. Separate each block with its tag.
-    [TITLE]
-    A catchy, SEO-friendly title for the entire article.
-    [HOOK]
-    A short sentence or a compelling idea for the introduction.
-    [CONCLUSION]
-    A brief summary of the main idea for the conclusion.
-    [SECTIONS]
-    # Section 1: A descriptive title for the first section
-    - Talking point 1 for section 1
-    # Section 2: A descriptive title for the second section
-    - Talking point 1 for section 2
-    """
-    prompt_outline = PromptTemplate(template=prompt_outline_text, input_variables=["topic"])
-    
-    chain = prompt_outline | llm | StrOutputParser()
-    eprint("✓ Chain 1 (Outline Content Generator) has been built.")
-    eprint("Step 1: Generating outline content...")
+    try:
+        with open(outline_path, "r", encoding="utf-8") as f:
+            outline = ArticleOutline.model_validate_json(f.read())
+        eprint(f"✓ Outline successfully loaded. English Title: '{outline.title}'")
+    except FileNotFoundError:
+        eprint(f"❌ Fout: Outline bestand niet gevonden op {outline_path}")
+        sys.exit(1)
 
-    response_text = chain.invoke({"topic": topic})
-    
-    outline = parse_outline_from_text(response_text)
-    eprint(f"✓ Outline successfully constructed and validated. Title: '{outline.title}'")
-
-    with open(outline_output_path, "w", encoding="utf-8") as f:
-        f.write(outline.model_dump_json(indent=2))
-    eprint(f"✅ Outline successfully saved as: {outline_output_path}")
-    eprint("-" * 50)
-
-    eprint("Step 2: Generating full article from outline...")
+    eprint(f"Generating full article in {lang_name} from outline...")
     sections_list_str = ""
     for i, section in enumerate(outline.sections):
         sections_list_str += f"{i+1}. Title: {section.title}\n   Talking Points: {', '.join(section.talking_points)}\n"
@@ -128,54 +57,60 @@ def generate_longread_article(topic: str, output_path: str, outline_output_path:
         "title": outline.title,
         "introduction_hook": outline.introduction_hook,
         "conclusion_summary": outline.conclusion_summary,
-        "sections_list": sections_list_str
+        "sections_list": sections_list_str,
+        "lang_name": lang_name
     }
     
     prompt_full_article_text = """
-    You are a talented writer. Your task is to write a complete, in-depth article based on the provided structured outline.
-    Article Title: {title}
+    You are a talented writer. Your task is to write a complete, in-depth article in {lang_name} based on the provided structured English outline.
+
+    CRITICAL: The ENTIRE article, including the title, must be written in {lang_name}.
+
+    English Outline:
+    - Article Title: {title}
+    - Introduction Hook: {introduction_hook}
+    - Conclusion Summary: {conclusion_summary}
+    - Sections to write:
+    {sections_list}
+
     Your tasks:
-    1. Write a compelling introduction based on the 'Introduction Hook'.
-    2. Write a detailed section for EACH item in the 'Sections to write' list.
-    3. Format the entire result as a single Markdown document. Start with # Title. Use ## for section titles.
-    FINAL ARTICLE:
+    1.  Create a new, catchy, and natural-sounding title for the article in {lang_name}. Do NOT literally translate the English title.
+    2.  Write a compelling introduction in {lang_name} based on the 'Introduction Hook'.
+    3.  Write a detailed section in {lang_name} for EACH item in the 'Sections to write' list.
+    4.  Format the entire result as a single Markdown document. Start with the new # Title in {lang_name}. Use ## for section titles.
+
+    FINAL ARTICLE IN {lang_name}:
     """
     prompt_full_article = PromptTemplate.from_template(prompt_full_article_text)
     chain_full_article = prompt_full_article | llm | StrOutputParser()
-    eprint("✓ Chain 2 (Full Article Writer) has been built.")
+    eprint("✓ Full Article Writer Chain has been built.")
     
     final_article_markdown = chain_full_article.invoke(article_input)
-    eprint("✓ Full article generated!")
+    eprint(f"✓ Full article in {lang_name} generated!")
     eprint("-" * 50)
     
-    date_match = re.search(r'(\d{4}-\d{2}-\d{2})', output_path)
-    article_date = date_match.group(1) if date_match else datetime.date.today().isoformat()
-
-    safe_title = outline.title.replace('"', '”')
-
     # --- DE ROBUUSTE OPSCHOONLOGICA ---
-    # Start met de ruwe AI-respons
     content = final_article_markdown
-
-    # 1. Verwijder eventuele code fences die de AI kan toevoegen
     if content.strip().startswith("```markdown"):
         content = content.strip()[10:]
     if content.strip().startswith("```"):
         content = content.strip()[3:]
     if content.strip().endswith("```"):
         content = content.strip()[:-3]
-    
     content = content.strip()
-
-    # 2. VIND het begin van de ECHTE content (de eerste H1 heading)
-    #    en gooi alle eventuele junk ervoor (zoals de 'n') weg.
     heading_pos = content.find('# ')
-    if heading_pos > 0: # Als er tekst vóór de heading staat
+    if heading_pos > 0:
         content = content[heading_pos:]
-
-    # 'content' is nu gegarandeerd schoon.
     cleaned_markdown = content
-    # --- EINDE OPSCHOONLOGICA ---
+    
+    # Pak de titel uit de opgeschoonde content
+    lines = cleaned_markdown.splitlines()
+    safe_title = "Untitled"
+    if lines and lines.startswith('# '):
+        safe_title = lines.lstrip('# ').strip().replace('"', '”')
+
+    date_match = re.search(r'(\d{4}-\d{2}-\d{2})', output_path)
+    article_date = date_match.group(1) if date_match else datetime.date.today().isoformat()
 
     front_matter = f"""---
 title: "{safe_title}"
@@ -184,7 +119,6 @@ date: {article_date}
 
 """
     
-    # Gebruik de definitief opgeschoonde markdown
     full_content = front_matter + cleaned_markdown
     
     with open(output_path, "w", encoding="utf-8") as f:
@@ -193,14 +127,11 @@ date: {article_date}
 
 if __name__ == "__main__":
     load_dotenv()
-    parser = argparse.ArgumentParser(description="Generate a long-read article on a specific topic using LangChain.")
-    
-    # --- DE WIJZIGING IS HIER ---
-    parser.add_argument("topic", type=str, help="The main topic of the article.")
+    parser = argparse.ArgumentParser(description="Generate a long-read article from an outline in a specific language.")
+    parser.add_argument("--outline-in", type=str, required=True, help="The path to the input JSON outline.")
     parser.add_argument("-o", "--output", type=str, required=True, help="The path to the output Markdown file.")
-    parser.add_argument("--outline-out", type=str, default="longread_outline.json", help="The path to save the JSON outline.")
+    parser.add_argument("--lang-name", required=True, type=str, help="The full name of the target language (e.g., 'Nederlands').")
     
     args = parser.parse_args()
     
-    # De output path wordt nu direct vanuit de argumenten gehaald.
-    generate_longread_article(args.topic, args.output, args.outline_out)
+    generate_longread_article(args.outline_in, args.output, args.lang_name)

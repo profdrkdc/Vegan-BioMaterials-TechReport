@@ -137,68 +137,56 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
     if not providers_to_run:
         eprint("❌ Geen geldige providers gevonden.")
         sys.exit(1)
-
-    # Stap 1: Fetch
-    if not os.path.exists("raw.json"):
-        def task_fetch(provider_config):
-            run_command(["python3", "-m", "src.fetch", "--date", target_date_iso], env=build_script_env(provider_config))
-        run_task_with_fallback("Fetch Data", task_fetch, providers_to_run)
-    else:
-        eprint("INFO: Stap 1 (Fetch) overgeslagen, 'raw.json' bestaat al.")
-
-    # Stap 2: Curate
-    if not os.path.exists("curated.json"):
-        eprint("\n" + "="*50 + "\nINFO: Stap 2 (Curate) uitvoeren...\n" + "="*50)
-        run_command(["python3", "-m", "src.curate"], env=os.environ.copy())
-    else:
-        eprint("INFO: Stap 2 (Curate) overgeslagen, 'curated.json' bestaat al.")
-
-    # Stap 3: Draft
+        
     enabled_langs = [lang for lang in json.load(open('languages.json')) if lang.get('enabled')]
-    draft_files_exist = all(os.path.exists(f"content/posts/{target_date_iso}_{lang['code']}.md") for lang in enabled_langs)
-    if not draft_files_exist:
-        def task_draft(provider_config):
-            run_command(["python3", "-m", "src.draft", "--date", target_date_iso], env=build_script_env(provider_config))
-        run_task_with_fallback("Draft Newsletters", task_draft, providers_to_run)
-    else:
-        eprint("INFO: Stap 3 (Draft) overgeslagen, alle nieuwsbrieven bestaan al.")
 
-    # Stap 4 & 5: Select Topic & Generate Longread
-    longread_filename_en = f"content/posts/longread_{target_date_iso}_en.md"
-    if not os.path.exists(longread_filename_en):
-        if not os.path.exists("longread_outline.json"):
-            def task_select_topic(provider_config):
-                process = run_command(["python3", "-m", "src.select_topic"], env=build_script_env(provider_config))
-                return process.stdout.strip()
-            longread_topic = run_task_with_fallback("Select Topic", task_select_topic, providers_to_run)
-            
-            def task_generate_longread(provider_config):
-                run_command([
-                    "python3", "-m", "src.generate_longread", 
-                    longread_topic, 
-                    "-o", longread_filename_en,
-                    "--outline-out", "longread_outline.json"
-                ], env=build_script_env(provider_config))
-            run_task_with_fallback("Generate Longread", task_generate_longread, providers_to_run)
-        else:
-            eprint("INFO: Stap 4/5 (Longread) overgeslagen, outline bestaat al maar .md niet. U kunt het .md bestand handmatig verwijderen om opnieuw te genereren.")
+    # Stap 1-3: Fetch, Curate, Draft
+    if not os.path.exists("raw.json"):
+        run_task_with_fallback("Fetch Data", lambda p: run_command(["python3", "-m", "src.fetch", "--date", target_date_iso], env=build_script_env(p)), providers_to_run)
+    if not os.path.exists("curated.json"):
+        run_command(["python3", "-m", "src.curate"], env=os.environ.copy())
+    if not all(os.path.exists(f"content/posts/{target_date_iso}_{lang['code']}.md") for lang in enabled_langs):
+        run_task_with_fallback("Draft Newsletters", lambda p: run_command(["python3", "-m", "src.draft", "--date", target_date_iso], env=build_script_env(p)), providers_to_run)
+
+    # Stap 4: Genereer de Engelse outline (één keer)
+    if not os.path.exists("longread_outline.json"):
+        def task_select_and_generate_outline(provider_config):
+            env = build_script_env(provider_config)
+            # Stap 4a: Selecteer onderwerp
+            topic_process = run_command(["python3", "-m", "src.select_topic"], env=env)
+            longread_topic = topic_process.stdout.strip()
+            # Stap 4b: Genereer alleen de outline
+            run_command(["python3", "-m", "src.generate_longread_outline", longread_topic, "--outline-out", "longread_outline.json"], env=env)
+        run_task_with_fallback("Generate Long-Read Outline", task_select_and_generate_outline, providers_to_run)
     else:
-        eprint("INFO: Stap 4/5 (Longread) overgeslagen, long-read bestand bestaat al.")
+        eprint("INFO: Stap 4 (Outline) overgeslagen, bestand bestaat al.")
+
+    # Stap 5: Genereer de longread voor elke actieve taal
+    if os.path.exists("longread_outline.json"):
+        for lang_config in enabled_langs:
+            lang_code = lang_config['code']
+            lang_name = lang_config['name']
+            output_path = f"content/posts/longread_{target_date_iso}_{lang_code}.md"
+            if not os.path.exists(output_path):
+                def task_generate_article(provider_config):
+                    run_command([
+                        "python3", "-m", "src.generate_longread", 
+                        "--outline-in", "longread_outline.json",
+                        "-o", output_path,
+                        "--lang-name", lang_name
+                    ], env=build_script_env(provider_config))
+                run_task_with_fallback(f"Generate Long-Read ({lang_name})", task_generate_article, providers_to_run)
+            else:
+                eprint(f"INFO: Long-read ({lang_name}) overgeslagen, bestand bestaat al.")
     
-    # Stap 5.5: Schrijf publicatie-URL
+    # Stap 5.5: Schrijf publicatie-URL (van de Engelse versie)
+    longread_filename_en = f"content/posts/longread_{target_date_iso}_en.md"
     if os.path.exists(longread_filename_en) and not os.path.exists("published_post_url.txt"):
         write_publication_url(os.getenv("SITE_BASE_URL"), longread_filename_en)
 
     # Stap 6: Generate Social Posts
     if not os.path.exists("social_posts.json"):
-        if os.path.exists("longread_outline.json"):
-            def task_generate_social(provider_config):
-                run_command(["python3", "-m", "src.generate_social_posts"], env=build_script_env(provider_config))
-            run_task_with_fallback("Generate Social Posts", task_generate_social, providers_to_run)
-        else:
-            eprint("INFO: Stap 6 (Social Posts) overgeslagen, geen longread outline gevonden.")
-    else:
-        eprint("INFO: Stap 6 (Social Posts) overgeslagen, 'social_posts.json' bestaat al.")
+        run_task_with_fallback("Generate Social Posts", lambda p: run_command(["python3", "-m", "src.generate_social_posts"], env=build_script_env(p)), providers_to_run)
 
     eprint("\n✅ Pijplijn voor content generatie voltooid.")
 
