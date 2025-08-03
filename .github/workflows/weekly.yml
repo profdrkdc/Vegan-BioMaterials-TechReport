@@ -73,25 +73,28 @@ jobs:
   # JOB 2: Bouw de website
   build-website:
     runs-on: ubuntu-latest
-    # Deze job heeft 'generate-content' nodig om de volgorde te bepalen,
-    # maar we controleren de uitkomst niet meer in de 'if' hier.
     needs: generate-content
-    # Draai DEZE JOB ALTIJD, tenzij je expliciet de deploy overslaat.
-    # 'always()' zorgt ervoor dat deze job ook draait als 'generate-content' werd overgeslagen.
-    if: always() && github.event.inputs.skip_website_deploy != 'true'
+    # DEZE CONDITIE IS NU SIMPEL EN CORRECT:
+    # Draai altijd, TENZIJ de vorige job (generate-content) is gestart en gefaald heeft.
+    # Als de vorige job werd overgeslagen (skipped), wordt deze WEL uitgevoerd.
+    if: always() && needs.generate-content.result != 'failure' && github.event.inputs.skip_website_deploy != 'true'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: 'latest'
           extended: true
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+
       - name: Build with Hugo
         run: hugo --cleanDestinationDir --minify --baseURL ${{ steps.pages.outputs.base_url }}
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
