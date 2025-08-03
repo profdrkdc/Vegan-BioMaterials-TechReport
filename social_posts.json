@@ -1,41 +1,41 @@
 [
   {
     "platform": "facebook",
-    "text_content": "The fashion industry is ripe for disruption, and these companies are leading the charge! Our latest deep-dive explores how Modern Synthesis, Algiknit, and Natural Fiber Welding are pioneering next-gen textiles using microbial cellulose, seaweed, and enhanced natural fibers. We analyze their funding, partnerships, and potential to replace unsustainable materials. From environmental impact to scalability challenges, we cover it all. Check out the full report to learn more about the future of sustainable textiles! {{GHOST_ARTICLE_URL}}",
+    "text_content": "Is precision-fermented cheese about to revolutionize the dairy industry? Formo's potential EU regulatory approval could be a game-changer, impacting everything from traditional dairy farming to consumer choices. Our latest article dives deep into the implications, exploring the science, the regulations, the market competition, and what it all means for the future of food. Check it out and join the discussion! {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "✨ Future of Fashion is HERE! ✨ Could microbial, seaweed & natural fiber textiles revolutionize the industry? Our latest report dives deep into the innovative materials from Modern Synthesis, Algiknit, and Natural Fiber Welding. 🌱 We're talking sustainable alternatives, funding breakthroughs, and the potential to ditch unsustainable practices. Learn more about how these companies are shaping a greener future. Link in bio! #sustainablefashion #biotech #textiles #innovation #veganbiotechreport {{GHOST_ARTICLE_URL}}",
+    "text_content": "Cheese without cows? 🤯 Formo is leading the charge with precision fermentation, and their potential EU approval is HUGE. We're breaking down everything you need to know about this game-changing technology, its impact on the dairy industry, and what it means for the future of food. Link in bio for the full story! #veganbiotech #precisionfermentation #futureoffood #formo #dairyfree #innovation {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A futuristic cityscape with towering buildings draped in flowing fabrics made from microbial cellulose and seaweed. Lush greenery and bioluminescent accents create a sense of sustainable innovation.",
+    "image_prompt": "A close-up shot of a perfectly sliced, creamy-looking cheese alongside a microscopic view of the precision fermentation process, highlighting the contrast between traditional food and cutting-edge biotechnology.",
     "reddit_details": null
   },
   {
     "platform": "bluesky",
-    "text_content": "Is the future of fashion microbial? 🤔 Our new report examines Modern Synthesis, Algiknit, and Natural Fiber Welding and their efforts to create sustainable textiles. What are the biggest hurdles they face? Let's discuss! {{GHOST_ARTICLE_URL}} #sustainablefashion #biotech",
+    "text_content": "Formo might be getting EU approval for their precision-fermented cheese! What does this mean for the future of dairy and the environment? 🤔 Read our deep dive to find out more! {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "mastodon",
-    "text_content": "New on Vegan BioTech Report: We delve into the world of next-gen textiles! 🧵 Can microbial, seaweed, and natural fiber materials truly disrupt the fashion industry? We explore the innovations of Modern Synthesis, Algiknit, and Natural Fiber Welding, their funding, and the challenges ahead. Read the full article: {{GHOST_ARTICLE_URL}} #sustainablefashion #biotech #textiles #innovation #vegan #futureoffashion",
+    "text_content": "Formo's potential EU regulatory approval could revolutionize the cheese industry! Our latest long-read explores the impact of precision fermentation on dairy, regulations, competition, and consumer acceptance. Read the full article here: {{GHOST_ARTICLE_URL}} #veganbiotech #precisionfermentation #futureoffood #dairytech #formo",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Hey everyone! I just read a fascinating article about the future of textiles. Apparently, companies like Modern Synthesis are using microbes to create fabrics, while others are experimenting with seaweed and enhanced natural fibers. It's wild to think that our clothes could be made from such innovative sources. What do you all think? Is this the future of sustainable fashion, or are there too many hurdles to overcome? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Hey fellow futurists! I just stumbled upon a fascinating article about Formo and their quest to get EU approval for precision-fermented cheese. Imagine cheese made without cows! The article dives deep into the science, the regulatory hurdles, and what this all means for the dairy industry. Seriously interesting stuff. What are your thoughts on lab-grown dairy? Could this be the future? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": {
-      "suggested_subreddit": "r/environment",
-      "post_title": "Microbial Textiles: The Next Big Thing in Sustainable Fashion?",
-      "primary_topic_keyword": "Environment"
+      "suggested_subreddit": "r/futurology",
+      "post_title": "Precision-Fermented Cheese: The Future of Dairy?",
+      "primary_topic_keyword": "Biotech"
     }
   }
 ]
