@@ -1,56 +1,38 @@
 [
   {
-    "category": "materials",
-    "company": "MycoWorks",
-    "headline": "MycoWorks partners with luxury brand for Reishi application.",
-    "date": "2025-07-08",
-    "url": "https://www.google.com/search?q=MycoWorks+luxury+brand+Reishi",
-    "impact": 9,
-    "summary": "MycoWorks collaborates with a luxury brand to integrate its Reishi mushroom leather alternative into high-end products."
-  },
-  {
-    "category": "materials",
-    "company": "Modern Meadow",
-    "headline": "Modern Meadow unveils Bio-Alloy leather alternative.",
-    "date": "2025-06-20",
-    "url": "https://www.google.com/search?q=Modern+Meadow+Bio-Alloy+leather+alternative",
-    "impact": 8,
-    "summary": "Modern Meadow launches a new biofabricated material, Bio-Alloy, positioned as a leather and plastic substitute."
-  },
-  {
     "category": "food",
-    "company": "Remilk",
-    "headline": "Remilk partners with major food manufacturer.",
+    "company": "Solar Foods",
+    "headline": "Solar Foods Opens First Commercial Solein Facility",
     "date": "2025-06-10",
-    "url": "https://www.google.com/search?q=Remilk+partners+food+manufacturer",
+    "url": "https://www.google.com/search?q=Solar+Foods+Solein+commercial+facility",
+    "impact": 9,
+    "summary": "Solar Foods commences production at its first commercial facility for Solein, a protein made from air."
+  },
+  {
+    "category": "materials",
+    "company": "Bolt Threads",
+    "headline": "Bolt Threads Mylo Material Used in New Adidas Collection",
+    "date": "2025-05-20",
+    "url": "https://www.google.com/search?q=Bolt+Threads+Mylo+Adidas+collection",
     "impact": 8,
-    "summary": "Remilk announces a strategic partnership with a leading food company to integrate its animal-free dairy products."
+    "summary": "Adidas releases a new collection featuring Mylo, Bolt Threads' mushroom-based leather alternative."
   },
   {
     "category": "food",
     "company": "Change Foods",
-    "headline": "Change Foods secures funding for precision-fermented dairy.",
+    "headline": "Change Foods Secures Funding for Animal-Free Dairy",
     "date": "2025-07-15",
-    "url": "https://www.google.com/search?q=Change+Foods+precision+fermented+dairy+funding",
+    "url": "https://www.google.com/search?q=Change+Foods+animal-free+dairy+funding",
     "impact": 7,
-    "summary": "Change Foods receives investment to scale up its animal-free dairy production using precision fermentation."
-  },
-  {
-    "category": "materials",
-    "company": "Algiknit",
-    "headline": "Algiknit raises Series A for seaweed-based yarns.",
-    "date": "2025-07-01",
-    "url": "https://www.google.com/search?q=Algiknit+seaweed+based+yarns+Series+A",
-    "impact": 7,
-    "summary": "Algiknit secures Series A funding to scale the production of its sustainable yarns derived from seaweed."
+    "summary": "Change Foods receives investment to scale precision-fermentation for dairy alternatives, aiming for cost parity."
   },
   {
     "category": "food",
-    "company": "The Every Co.",
-    "headline": "The Every Co. launches egg white protein in food service.",
-    "date": "2025-07-28",
-    "url": "https://www.google.com/search?q=The+Every+Co+egg+white+protein+food+service",
+    "company": "Perfect Day",
+    "headline": "Perfect Day Announces New Ice Cream Launch",
+    "date": "2025-05-05",
+    "url": "https://www.google.com/search?q=Perfect+Day+new+ice+cream+launch",
     "impact": 7,
-    "summary": "The Every Company expands its precision fermentation egg white protein into the food service sector."
+    "summary": "Perfect Day expands its portfolio with a new ice cream product featuring their animal-free dairy protein."
   }
 ]

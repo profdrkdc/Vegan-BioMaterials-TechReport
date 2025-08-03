@@ -1,40 +1,40 @@
 [
   {
     "platform": "facebook",
-    "text_content": "Are biofabricated materials the future of luxury? This week, we delve into the groundbreaking work of MycoWorks and Modern Meadow, exploring how mushroom leather and lab-grown collagen are poised to revolutionize industries from fashion to biomedicine. From the science behind Reishi and Bio-Alloy to sustainability considerations and market adoption, we cover it all. Read the full article to discover how these innovative materials are challenging traditional leather and plastics and shaping a more sustainable future. {{GHOST_ARTICLE_URL}}",
+    "text_content": "The future of food is here! Solar Foods has officially opened its first commercial Solein facility, marking a huge step forward in sustainable protein production. This innovative technology could revolutionize how we feed the world, reducing our reliance on traditional agriculture and livestock farming. Read our in-depth analysis of Solein's potential and challenges, and join the conversation about the future of food. {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "✨ Future Fabrics Alert! ✨ Are you ready to see mushroom leather and lab-grown collagen take over the luxury market? Our latest article explores how companies like MycoWorks and Modern Meadow are revolutionizing materials. From sustainable fashion to biomedical applications, the possibilities are endless. 🍄🔬 Check out the full story – link in bio! #Biofabrication #SustainableMaterials #MycoWorks #ModernMeadow #FutureOfFashion #VeganLeather\n\n**Image Prompt:** A futuristic, luxurious handbag made from mycelium leather next to a petri dish containing lab-grown collagen. The background should be a sleek, modern laboratory with soft, diffused lighting.",
+    "text_content": "Protein from thin air? 🤯 Solar Foods just opened their first Solein facility! This could be a game-changer for sustainable food production. Learn about the science, the impact, and the future of this revolutionary protein in our latest article. Link in bio! #veganbiotech #solein #solarfoods #futureoffood #sustainableprotein #foodtech",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A futuristic, luxurious handbag made from mycelium leather next to a petri dish containing lab-grown collagen. The background should be a sleek, modern laboratory with soft, diffused lighting.",
+    "image_prompt": "A futuristic, brightly lit indoor vertical farm facility. In the foreground, a scientist in a lab coat smiles and holds a petri dish containing golden powder, representing Solein. Background shows complex machinery and glowing tubes. The overall image conveys innovation, sustainability, and hope.",
     "reddit_details": null
   },
   {
     "platform": "bluesky",
-    "text_content": "Mushroom leather & lab-grown collagen: are they *actually* going to replace traditional materials? 🤔 Diving deep into MycoWorks & Modern Meadow's biofabrication tech this week. Is this the future of sustainable luxury? Let's discuss! {{GHOST_ARTICLE_URL}}",
+    "text_content": "Solar Foods' Solein facility is officially online! 🤩 Is this the start of a new era for protein production? Our deep dive explores the possibilities and the challenges. Thoughts? {{GHOST_ARTICLE_URL}} #veganbiotech #futureoffood",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "mastodon",
-    "text_content": "Exploring the rise of biofabricated materials! 🍄🔬 Our latest article examines how MycoWorks' Reishi mushroom leather and Modern Meadow's Bio-Alloy collagen are disrupting the luxury goods and materials industries. We dive into the science, sustainability, and future potential. Read the full article here: {{GHOST_ARTICLE_URL}} #Biofabrication #SustainableMaterials #VeganLeather #MycoWorks #ModernMeadow #Innovation",
+    "text_content": "Big news in vegan biotech! Solar Foods has opened its first commercial facility for Solein, a protein made from air. This marks a significant step towards sustainable food production. Read our analysis of the technology, its potential impact, and the challenges ahead. #veganbiotech #solarfoods #solein #futureoffood #sustainableprotein {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Hey Reddit, just finished reading a fascinating piece about biofabricated materials – specifically, mushroom leather from MycoWorks and lab-grown collagen from Modern Meadow. Seriously impressive stuff, and it sounds like they could genuinely change how we make everything from handbags to, potentially, even medical implants. The article dives into the science, the sustainability aspects (which are HUGE), and the challenges they face. What do you all think? Are we ready to embrace lab-grown materials? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Hey everyone, I just read this fascinating article about Solar Foods and their new Solein facility. They're basically making protein out of thin air using fermentation! It sounds like something out of science fiction, but it could be a real game-changer for food security and sustainability. What do you guys think about this kind of technology? Are you excited about the potential, or are you worried about the implications? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": {
       "suggested_subreddit": "r/science",
-      "post_title": "Mushroom Leather and Lab-Grown Collagen: The Future of Materials?",
+      "post_title": "Solar Foods Opens First Solein Facility: Protein from Thin Air - The Future of Food?",
       "primary_topic_keyword": "Biotech"
     }
   }
