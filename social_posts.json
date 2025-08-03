@@ -1,40 +1,40 @@
 [
   {
     "platform": "facebook",
-    "text_content": "Is air-based protein the food of the future? 🌱 Our latest article dives deep into Solar Foods and Air Protein to explore the scalability, sustainability, and economic viability of making protein from thin air. Can this technology revolutionize global food systems, or is it just a pipe dream? Read our long-term impact analysis and join the discussion! {{GHOST_ARTICLE_URL}}",
+    "text_content": "Mind blown! Singapore just approved Solar Foods' Solein, a protein made from CO2. This could be a game-changer for sustainable food production, reducing our reliance on traditional agriculture and helping fight climate change. Imagine protein from thin air becoming a staple! Check out the full article to learn more about this revolutionary technology and its potential impact on our future: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "☁️🍴 Protein from thin air? Mind blown! 🤯 We're exploring the groundbreaking work of Solar Foods and Air Protein and their potential to revolutionize how we feed the world. Is this the future of sustainable food, or are there too many hurdles to overcome? 🤔 Link in bio to read our in-depth analysis! #vegan #biotech #futureoffood #sustainablefood #airprotein #solarfoods",
+    "text_content": "Protein from thin air?! 🤯 Solar Foods' Solein just got approved in Singapore, and it's a HUGE deal for sustainable food. Learn how CO2 is being turned into food and what it means for our planet. Link in bio! #veganbiotech #solein #sustainablefood #futureoffood #airprotein #singaporefoodagency",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A futuristic food factory with large bioreactors extracting protein from air, showcasing a clean and sustainable environment. Microscopic view of Solein protein crystals. Blue and green color scheme.",
+    "image_prompt": "Close-up shot of Solein protein powder next to a futuristic-looking vertical farm with CO2 being captured from the atmosphere. Bright, clean, and futuristic aesthetic.",
     "reddit_details": null
   },
   {
     "platform": "bluesky",
-    "text_content": "Air-based protein: revolution or just hype? 🤔 Our new article examines Solar Foods & Air Protein's tech, looking at scalability, sustainability, & economic viability. Could this really change our food system? Let's discuss! {{GHOST_ARTICLE_URL}}",
+    "text_content": "Singapore just greenlit Solein – protein made from CO2! 🤯 Is this the future of food? Sustainable, resource-efficient, and could revolutionize agriculture. What do you think? Read more here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "mastodon",
-    "text_content": "New on Vegan BioTech Report: Is air-based protein the food of the future? We delve into the innovations of Solar Foods and Air Protein, analyzing their potential impact on global food systems. From scalability to sustainability, we cover all the key aspects. Read the full article here: {{GHOST_ARTICLE_URL}} #veganbiotech #futureoffood #airprotein #solarfoods #sustainablefood #alternativeprotein",
+    "text_content": "Huge news in the world of #veganbiotech! Singapore has approved Solar Foods' Solein, a novel protein source derived from CO2. This breakthrough could revolutionize food production by offering a sustainable and resource-efficient alternative to traditional agriculture. Learn more about the process, the implications for food security, and the challenges ahead. {{GHOST_ARTICLE_URL}} #sustainablefood #futureoffood #carboncapture #innovation",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Hey everyone, I just read a fascinating article about Solar Foods and Air Protein, two companies making protein out of thin air! It's wild to think we could potentially produce food without relying on traditional agriculture. The article goes deep into the science, the potential environmental benefits, and the economic challenges. What do you guys think? Is this a real solution for food security, or is it too good to be true? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Hey everyone, I just read something absolutely mind-blowing! Apparently, scientists have figured out how to make protein from CO2, and Singapore just approved it for consumption. It's called Solein, and it's supposed to be super sustainable and resource-efficient. Could this be a real solution for food security and climate change? I'm really curious to hear your thoughts! Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": {
       "suggested_subreddit": "r/science",
-      "post_title": "Protein from Air: A Real Solution to Food Security?",
+      "post_title": "Singapore Approves CO2-Derived Protein: A Game Changer for Food Security?",
       "primary_topic_keyword": "Biotech"
     }
   }
