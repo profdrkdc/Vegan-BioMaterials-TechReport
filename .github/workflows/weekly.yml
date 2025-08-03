@@ -5,13 +5,11 @@ on:
     branches:
       - main
   schedule:
-    # Draait elke maandag om 08:00 UTC
     - cron: '0 8 * * 1'
   workflow_dispatch:
     inputs:
-      # DE OPTIE IS HIER TERUGGEZET
       skip_content_generation:
-        description: 'Sla de content generatie stappen over (om bv. de site opnieuw te deployen).'
+        description: 'Sla de content generatie stappen over.'
         required: false
         type: boolean
         default: false
@@ -50,7 +48,6 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Content Generation Pipeline
-        # DEZE STAP IS NU CONDITIONEEL
         if: github.event.inputs.skip_content_generation != 'true'
         env:
           SITE_BASE_URL: "https://profdrkdc.github.io/Vegan-BioTech-Report/"
@@ -61,7 +58,6 @@ jobs:
 
       - name: Commit and Push Generated Content
         id: commit
-        # DEZE STAP IS NU CONDITIONEEL
         if: github.event.inputs.skip_content_generation != 'true'
         run: |
           git config user.name "GitHub Actions Bot"
@@ -76,19 +72,13 @@ jobs:
             echo "changes_detected=false" >> $GITHUB_OUTPUT
           fi
 
-  # JOB 2: Bouw en publiceer de website naar GitHub Pages
-  deploy-website:
+  # JOB 2: Bouw de website
+  build-website:
     runs-on: ubuntu-latest
     needs: generate-content
-    # DE LOGICA HIER IS NU VEEL SLIMMER
     if: >
       (github.event.inputs.skip_content_generation == 'true' || needs.generate-content.outputs.content_generated == 'true') &&
       github.event.inputs.skip_website_deploy != 'true'
-    permissions:
-      contents: write 
-      pages: write
-      id-token: write
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -99,20 +89,39 @@ jobs:
           hugo-version: 'latest'
           extended: true
 
-      - name: Build website
-        run: hugo --cleanDestinationDir --minify
-        
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public 
-          commit_message: "docs(deploy): Deploy latest content to GitHub Pages"
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
 
-  # JOB 3: Publiceer naar sociale media nadat de site live is
+      - name: Build with Hugo
+        run: hugo --cleanDestinationDir --minify --baseURL ${{ steps.pages.outputs.base_url }}
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  # JOB 3: Publiceer de website naar GitHub Pages
+  deploy-pages:
+    runs-on: ubuntu-latest
+    needs: build-website
+    if: needs.build-website.result == 'success'
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # JOB 4: Publiceer naar sociale media nadat de site live is
   publish-social:
     runs-on: ubuntu-latest
-    needs: deploy-website
+    # BELANGRIJK: HANGT NU AF VAN DE NIEUWE DEPLOY JOB
+    needs: deploy-pages
     if: success() && github.event.inputs.skip_social_publish != 'true'
     
     steps:
