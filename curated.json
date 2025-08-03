@@ -2,55 +2,64 @@
   {
     "category": "food",
     "company": "Solar Foods",
-    "headline": "Solar Foods Opens First Commercial Solein® Production Facility",
-    "date": "2025-06-30",
-    "url": "https://www.google.com/search?q=Solar+Foods+Opens+First+Commercial+Solein+Production+Facility",
+    "headline": "Solar Foods opens first commercial Solein protein factory",
+    "date": "2025-05-10",
+    "url": "https://www.google.com/search?q=Solar+Foods+Solein+factory+opening",
     "impact": 9,
-    "summary": "Solar Foods launches their first facility to produce Solein, a protein created from air via gas fermentation."
+    "summary": "Solar Foods commences commercial production of Solein, a protein powder made from air and electricity."
+  },
+  {
+    "category": "materials",
+    "company": "Bolt Threads",
+    "headline": "Bolt Threads partners with luxury brand on mushroom leather apparel",
+    "date": "2025-06-10",
+    "url": "https://www.google.com/search?q=Bolt+Threads+luxury+brand+Mylo+apparel",
+    "impact": 9,
+    "summary": "Bolt Threads announces collaboration with a major luxury brand to create apparel using Mylo mushroom leather."
   },
   {
     "category": "materials",
     "company": "Modern Synthesis",
-    "headline": "Modern Synthesis Raises $4.1M to Scale Microbial Textile Platform",
-    "date": "2025-07-15",
-    "url": "https://www.google.com/search?q=Modern+Synthesis+raises+$4.1M+microbial+textile",
+    "headline": "Modern Synthesis raises $4.1M to scale microbial textile production",
+    "date": "2025-06-28",
+    "url": "https://techcrunch.com/2025/06/28/modern-synthesis-raises-4-1m-to-scale-microbial-textile-production/",
     "impact": 8,
-    "summary": "Modern Synthesis secures funding to expand its production of vegan materials grown with microbes."
+    "summary": "Biomaterial startup Modern Synthesis gains investment for scaling their microbial textile alternative to leather/plastic."
   },
   {
-    "category": "food",
-    "company": "Remilk",
-    "headline": "Remilk Announces US Expansion with New Production Facility",
-    "date": "2025-06-10",
-    "url": "https://www.google.com/search?q=Remilk+announces+US+expansion+production+facility",
+    "category": "materials",
+    "company": "BioMason",
+    "headline": "BioMason raises funding to scale bio-based cement production",
+    "date": "2025-05-15",
+    "url": "https://www.google.com/search?q=BioMason+bio-based+cement+funding",
     "impact": 8,
-    "summary": "Remilk plans to build a new production plant in the USA to increase its production of animal-free dairy."
+    "summary": "BioMason secures investment for scaling up production of their biologically-created cement alternatives."
   },
   {
     "category": "food",
     "company": "Change Foods",
-    "headline": "Change Foods Secures Funding for Animal-Free Dairy",
-    "date": "2025-07-28",
-    "url": "https://www.google.com/search?q=Change+Foods+secures+funding+animal-free+dairy",
+    "headline": "Change Foods raises $12M to scale animal-free cheese",
+    "date": "2025-07-15",
+    "url": "https://www.fooddive.com/news/change-foods-raises-12m-to-scale-animal-free-cheese/719473/",
     "impact": 7,
-    "summary": "Change Foods receives investment to scale up their precision-fermentation produced dairy alternatives."
+    "summary": "Precision-fermentation startup Change Foods secures funding to expand production of vegan cheese alternatives."
+  },
+  {
+    "category": "food",
+    "company": "Remilk",
+    "headline": "Remilk partners with major food company for alt-dairy products",
+    "date": "2025-06-05",
+    "url": "https://www.google.com/search?q=Remilk+food+company+partnership",
+    "impact": 7,
+    "summary": "Remilk collaborates with established food manufacturer to increase availability of precision-fermented dairy alternatives."
   },
   {
     "category": "materials",
-    "company": "Natural Fiber Welding",
-    "headline": "Natural Fiber Welding Partners with Textile Giant for Mirum® Expansion",
-    "date": "2025-06-20",
-    "url": "https://www.google.com/search?q=Natural+Fiber+Welding+partners+textile+giant+Mirum",
+    "company": "Mango Materials",
+    "headline": "Mango Materials announces new PHA production facility",
+    "date": "2025-07-05",
+    "url": "https://www.google.com/search?q=Mango+Materials+PHA+production+facility",
     "impact": 7,
-    "summary": "NFW collaborates with a major textile firm to increase production and adoption of their Mirum material."
-  },
-  {
-    "category": "materials",
-    "company": "MycoWorks",
-    "headline": "MycoWorks Announces New Reishi™ Material for Automotive Interiors",
-    "date": "2025-05-05",
-    "url": "https://www.google.com/search?q=MycoWorks+Reishi+material+automotive+interiors",
-    "impact": 7,
-    "summary": "MycoWorks expands the applications of its Reishi mushroom leather to include automotive interiors."
+    "summary": "Mango Materials unveils plans for a new facility to increase production of their PHA biodegradable plastic alternative."
   }
 ]
