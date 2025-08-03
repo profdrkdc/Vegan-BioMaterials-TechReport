@@ -1,40 +1,40 @@
 [
   {
     "platform": "facebook",
-    "text_content": "Exciting news for the future of dairy! Remilk's recent regulatory approval in key Asian markets is a game-changer, potentially revolutionizing the global dairy industry. This breakthrough could lead to wider acceptance of animal-free dairy, prompting traditional dairy industries to adapt and inspiring further innovation in the biotech space. Read our in-depth analysis of the implications for traditional dairy industries, consumer adoption, and the evolving regulatory landscape. Full article here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Is air-based protein the food of the future? 🌱 Our latest article dives deep into Solar Foods and Air Protein to explore the scalability, sustainability, and economic viability of making protein from thin air. Can this technology revolutionize global food systems, or is it just a pipe dream? Read our long-term impact analysis and join the discussion! {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "Is this the future of milk? 🥛 Remilk's groundbreaking approval in Asia is making waves in the dairy industry! Learn about the potential impact on traditional dairy, consumer adoption in Asian markets, and the innovative technologies driving this change. Link in bio for the full story! #vegan #biotech #futureoffood #dairyfree #remilk\n\nAI Image Prompt: A futuristic cityscape with sleek, modern buildings. In the foreground, a diverse group of people are enjoying dairy-free desserts and milkshakes. The Remilk logo is subtly displayed on a building in the background. The overall tone is optimistic and innovative.",
+    "text_content": "☁️🍴 Protein from thin air? Mind blown! 🤯 We're exploring the groundbreaking work of Solar Foods and Air Protein and their potential to revolutionize how we feed the world. Is this the future of sustainable food, or are there too many hurdles to overcome? 🤔 Link in bio to read our in-depth analysis! #vegan #biotech #futureoffood #sustainablefood #airprotein #solarfoods",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A futuristic cityscape with sleek, modern buildings. In the foreground, a diverse group of people are enjoying dairy-free desserts and milkshakes. The Remilk logo is subtly displayed on a building in the background. The overall tone is optimistic and innovative.",
+    "image_prompt": "A futuristic food factory with large bioreactors extracting protein from air, showcasing a clean and sustainable environment. Microscopic view of Solein protein crystals. Blue and green color scheme.",
     "reddit_details": null
   },
   {
     "platform": "bluesky",
-    "text_content": "Remilk just got the green light in Asia - is this a tipping point for animal-free dairy? 🤔 What does this mean for traditional dairy farmers and our future food systems? Dive into our analysis! {{GHOST_ARTICLE_URL}} #veganbiotech #futureoffood",
+    "text_content": "Air-based protein: revolution or just hype? 🤔 Our new article examines Solar Foods & Air Protein's tech, looking at scalability, sustainability, & economic viability. Could this really change our food system? Let's discuss! {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "mastodon",
-    "text_content": "Exciting news! Remilk's regulatory approval in key Asian markets signals a potential paradigm shift in the global dairy industry. Our latest article explores the implications for traditional dairy industries, consumer adoption, and the regulatory landscape. What are your thoughts on animal-free dairy? Share in the comments! #vegan #biotech #futureoffood #dairyfree\n\nRead the full analysis: {{GHOST_ARTICLE_URL}}",
+    "text_content": "New on Vegan BioTech Report: Is air-based protein the food of the future? We delve into the innovations of Solar Foods and Air Protein, analyzing their potential impact on global food systems. From scalability to sustainability, we cover all the key aspects. Read the full article here: {{GHOST_ARTICLE_URL}} #veganbiotech #futureoffood #airprotein #solarfoods #sustainablefood #alternativeprotein",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Hey Reddit! Just read a fascinating article about Remilk's recent approval in Asia and its potential to disrupt the dairy industry. It's got me thinking about the future of food and how biotech is changing everything. What are your thoughts on animal-free dairy? Is it the future, or just a fad? What are the implications for traditional dairy farmers? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Hey everyone, I just read a fascinating article about Solar Foods and Air Protein, two companies making protein out of thin air! It's wild to think we could potentially produce food without relying on traditional agriculture. The article goes deep into the science, the potential environmental benefits, and the economic challenges. What do you guys think? Is this a real solution for food security, or is it too good to be true? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": {
-      "suggested_subreddit": "r/futurology",
-      "post_title": "Remilk's Asian Approval: Is This the Future of Dairy?",
+      "suggested_subreddit": "r/science",
+      "post_title": "Protein from Air: A Real Solution to Food Security?",
       "primary_topic_keyword": "Biotech"
     }
   }
