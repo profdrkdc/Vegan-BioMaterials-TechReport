@@ -1,92 +1,92 @@
 [
   {
     "category": "food",
-    "company": "Change Foods",
-    "headline": "Change Foods Secures Funding for Animal-Free Dairy Production",
+    "company": "Formo",
+    "headline": "Formo secures funding for animal-free cheese production.",
     "date": "2025-07-15",
-    "url": "https://www.google.com/search?q=Change+Foods+animal-free+dairy+funding",
-    "impact": 7,
-    "summary": "Change Foods receives investment to scale up its precision-fermentation dairy alternative production."
+    "url": "https://www.google.com/search?q=Formo+animal-free+cheese+funding",
+    "impact": 8,
+    "summary": "Formo receives investment to scale up its precision-fermentation based cheese alternatives, targeting wider market availability."
   },
   {
     "category": "materials",
-    "company": "Bolt Threads",
-    "headline": "Bolt Threads Partners with Luxury Brand for Mylo Mushroom Leather Bags",
+    "company": "Modern Synthesis",
+    "headline": "Modern Synthesis raises capital for microbial textile production.",
     "date": "2025-06-20",
-    "url": "https://www.google.com/search?q=Bolt+Threads+Mylo+mushroom+leather+bags",
-    "impact": 8,
-    "summary": "Bolt Threads' Mylo material is adopted by a major luxury brand for a new line of bags."
+    "url": "https://www.google.com/search?q=Modern+Synthesis+microbial+textile+funding",
+    "impact": 7,
+    "summary": "Modern Synthesis scales its microbial textile alternative to traditional leather, offering sustainable material options for fashion industry."
   },
   {
     "category": "food",
     "company": "Solar Foods",
-    "headline": "Solar Foods Begins Commercial Production of Solein Protein",
-    "date": "2025-05-28",
-    "url": "https://www.google.com/search?q=Solar+Foods+Solein+commercial+production",
+    "headline": "Solar Foods expands Solein production capacity.",
+    "date": "2025-05-25",
+    "url": "https://www.google.com/search?q=Solar+Foods+Solein+production+expansion",
     "impact": 9,
-    "summary": "Solar Foods starts large-scale production of its Solein protein made from air and electricity."
+    "summary": "Solar Foods increases production of Solein, a protein produced from air, CO2, and electricity, aiming to disrupt food supply chains."
   },
   {
     "category": "materials",
-    "company": "Modern Meadow",
-    "headline": "Modern Meadow Announces New Bio-Based Textile Material",
+    "company": "Bolt Threads",
+    "headline": "Bolt Threads partners with Adidas for Mylo mushroom leather apparel.",
     "date": "2025-07-01",
-    "url": "https://www.google.com/search?q=Modern+Meadow+bio-based+textile",
-    "impact": 6,
-    "summary": "Modern Meadow unveils a novel bio-based textile aimed at replacing synthetic fabrics."
+    "url": "https://www.google.com/search?q=Bolt+Threads+Adidas+Mylo+mushroom+leather",
+    "impact": 10,
+    "summary": "Bolt Threads partners with Adidas to integrate Mylo, a mushroom-based leather alternative, into apparel and footwear lines."
   },
   {
     "category": "food",
-    "company": "Perfect Day",
-    "headline": "Perfect Day Announces New Ice Cream Flavors Using Animal-Free Whey",
+    "company": "The EVERY Co.",
+    "headline": "The EVERY Co. launches animal-free egg white protein in new markets.",
     "date": "2025-06-10",
-    "url": "https://www.google.com/search?q=Perfect+Day+ice+cream+flavors",
-    "impact": 5,
-    "summary": "Perfect Day expands its ice cream line with new flavors made with precision-fermented whey."
-  },
-  {
-    "category": "materials",
-    "company": "BioMason",
-    "headline": "BioMason Secures Funding to Scale Up Bio-Cement Production",
-    "date": "2025-05-15",
-    "url": "https://www.google.com/search?q=BioMason+bio-cement+funding",
+    "url": "https://www.google.com/search?q=The+EVERY+Co+animal-free+egg+white+expansion",
     "impact": 7,
-    "summary": "BioMason receives investment to expand production of its bio-cement bricks."
-  },
-  {
-    "category": "food",
-    "company": "Air Protein",
-    "headline": "Air Protein Launches First Product Line in Select Markets",
-    "date": "2025-07-22",
-    "url": "https://www.google.com/search?q=Air+Protein+product+launch",
-    "impact": 8,
-    "summary": "Air Protein's first consumer product made from air-based protein becomes available in test markets."
+    "summary": "EVERY Co. expands the availability of its precision-fermented egg white protein, targeting bakeries and food manufacturers."
   },
   {
     "category": "materials",
     "company": "Algiknit",
-    "headline": "Algiknit Partners with Fashion Brand for Algae-Based Apparel",
-    "date": "2025-06-01",
-    "url": "https://www.google.com/search?q=Algiknit+algae+apparel",
+    "headline": "Algiknit secures partnerships to develop seaweed-based textiles.",
+    "date": "2025-05-15",
+    "url": "https://www.google.com/search?q=Algiknit+seaweed+textile+partnerships",
     "impact": 6,
-    "summary": "Algiknit collaborates with a fashion company to create clothing from algae-derived yarns."
+    "summary": "Algiknit forges partnerships to accelerate the development and commercialization of seaweed-derived textiles, aiming for sustainable alternatives."
+  },
+  {
+    "category": "food",
+    "company": "Remilk",
+    "headline": "Remilk obtains regulatory approval for animal-free dairy in Asia.",
+    "date": "2025-07-28",
+    "url": "https://www.google.com/search?q=Remilk+regulatory+approval+Asia",
+    "impact": 8,
+    "summary": "Remilk receives regulatory clearance to sell its animal-free dairy products in key Asian markets, expanding its global footprint."
+  },
+  {
+    "category": "materials",
+    "company": "Mango Materials",
+    "headline": "Mango Materials develops PHA-based construction materials.",
+    "date": "2025-06-01",
+    "url": "https://www.google.com/search?q=Mango+Materials+PHA+construction+materials",
+    "impact": 5,
+    "summary": "Mango Materials innovates with PHA, a biodegradable plastic, to create sustainable construction materials reducing reliance on conventional plastics."
   },
   {
     "category": "food",
     "company": "Nature's Fynd",
-    "headline": "Nature's Fynd Announces Expansion into New Retail Locations",
+    "headline": "Nature's Fynd launches Fy protein-based ice cream.",
     "date": "2025-05-01",
-    "url": "https://www.google.com/search?q=Nature%27s+Fynd+retail+expansion",
-    "impact": 4,
-    "summary": "Nature's Fynd's fungi-based products become available in more retail stores nationwide."
+    "url": "https://www.google.com/search?q=Nature's+Fynd+Fy+protein+ice+cream",
+    "impact": 6,
+    "summary": "Nature's Fynd introduces ice cream made with Fy, a fungi-based protein, further diversifying its product line of vegan alternatives."
   },
   {
     "category": "materials",
     "company": "Ananas Anam",
-    "headline": "Piñatex Pineapple Leather Used in New Sustainable Shoe Collection",
-    "date": "2025-07-10",
-    "url": "https://www.google.com/search?q=Pinatex+pineapple+leather+shoe+collection",
-    "impact": 5,
-    "summary": "Piñatex, made from pineapple leaf fibers, is featured in a new line of sustainable footwear."
+    "headline": "Piñatex partners with automotive manufacturer for vegan leather interiors.",
+    "date": "2025-07-08",
+    "url": "https://www.google.com/search?q=Piñatex+automotive+vegan+leather+interiors",
+    "impact": 7,
+    "summary": "Ananas Anam's Piñatex, a pineapple-leaf based leather alternative, is adopted by an automotive manufacturer for vehicle interiors."
   }
 ]
