@@ -1,16 +1,1 @@
-{{ define "main" }}
-<main class="pb7" role="main">
-    <section class="flex-ns flex-wrap justify-around mt5">
-        {{/* We pakken alle reguliere pagina's uit de 'posts' sectie en maken er een lijst van */}}
-        {{ $paginator := .Paginate (where .Site.RegularPages "Section" "posts") }}
-        {{ range $paginator.Pages }}
-        <div class="w-100 w-30-l mb4 pa3 bg-white">
-            {{/* Dit gebruikt de 'summary' weergave van het Ananke-thema voor elke post */}}
-            {{ .Render "summary" }}
-        </div>
-        {{ end }}
-    </section>
-    {{/* Dit voegt de 'Volgende Pagina' / 'Vorige Pagina' knoppen toe indien nodig */}}
-    {{- template "_internal/pagination.html" . -}}
-</main>
-{{ end }}
+test home
