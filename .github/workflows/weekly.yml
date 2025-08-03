@@ -32,37 +32,27 @@ jobs:
     outputs:
       content_generated: ${{ steps.commit.outputs.changes_detected }}
     permissions:
-      contents: write 
-
-    # --- DEZE LOGICA IS NU ROBUUSTER ---
-    # Draait alleen als:
-    # 1. Het een geplande run is (dan genereert het altijd content)
-    # 2. OF het een handmatige run is EN de 'skip_content_generation' VLAG NIET is aangevinkt
-    if: |
-      github.event_name == 'schedule' ||
-      (github.event_name == 'workflow_dispatch' && github.event.inputs.skip_content_generation != 'true')
+      contents: write
+    # Deze job wordt ALLEEN uitgevoerd als je de 'skip' vlag NIET aanzet.
+    # Dit geldt voor alle triggers (push, schedule, workflow_dispatch).
+    if: github.event.inputs.skip_content_generation != 'true'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
           pip install -r requirements.txt
-
       - name: Run Content Generation Pipeline
         env:
           SITE_BASE_URL: "https://profdrkdc.github.io/Vegan-BioTech-Report/"
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: |
-          python3 -m src.run_pipeline
-
+        run: python3 -m src.run_pipeline
       - name: Commit and Push Generated Content
         id: commit
         run: |
@@ -81,34 +71,25 @@ jobs:
   # JOB 2: Bouw de website
   build-website:
     runs-on: ubuntu-latest
-    # Deze job heeft 'generate-content' nodig als die draait,
-    # MAAR als 'generate-content' werd overgeslagen (omdat we alleen willen deployen),
-    # dan hoeft deze er niet op te wachten.
-    # Ook, als 'skip_website_deploy' is aangevinkt, slaan we deze job over.
+    # Deze job heeft 'generate-content' nodig om de volgorde te bepalen,
+    # maar we controleren de uitkomst niet meer in de 'if' hier.
     needs: generate-content
-    if: >
-      github.event.inputs.skip_website_deploy != 'true' && (
-        (github.event.inputs.skip_content_generation == 'true') ||
-        (needs.generate-content.result == 'success' && needs.generate-content.outputs.content_generated == 'true') ||
-        (github.event_name == 'push' && github.ref == 'refs/heads/main' && github.event.inputs.skip_content_generation != 'true') 
-      )
+    # Draai DEZE JOB ALTIJD, tenzij je expliciet de deploy overslaat.
+    # 'always()' zorgt ervoor dat deze job ook draait als 'generate-content' werd overgeslagen.
+    if: always() && github.event.inputs.skip_website_deploy != 'true'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: 'latest'
           extended: true
-
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
-
       - name: Build with Hugo
         run: hugo --cleanDestinationDir --minify --baseURL ${{ steps.pages.outputs.base_url }}
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -135,25 +116,21 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy-pages
     if: success() && github.event.inputs.skip_social_publish != 'true'
-    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
           pip install -r requirements.txt
-      
       - name: Publish to Social Media
         env:
           AI_API_TYPE: "google"
-          AI_MODEL_ID: "gemini-1.5-flash-latest" 
+          AI_MODEL_ID: "gemini-1.5-flash-latest"
           AI_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
           MASTODON_API_BASE_URL: ${{ secrets.MASTODON_API_BASE_URL }}
@@ -162,5 +139,4 @@ jobs:
           REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
           REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
           REDDIT_USER_AGENT: ${{ secrets.REDDIT_USER_AGENT }}
-        run: |
-          python3 -m src.publish_social
+        run: python3 -m src.publish_social
