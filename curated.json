@@ -1,47 +1,74 @@
 [
   {
-    "category": "materials",
-    "company": "Modern Synthesis",
-    "headline": "Modern Synthesis Raises $4.1M to Scale Microbial Textile Platform",
-    "date": "2025-06-20",
-    "url": "https://www.google.com/search?q=Modern+Synthesis+microbial+textile+funding",
-    "impact": 8,
-    "summary": "Modern Synthesis secured funding to expand its microbial textile platform, aiming to replace traditional leather and textiles."
+    "category": "food",
+    "company": "Formo",
+    "headline": "Formo Gains Regulatory Approval for Precision-Fermented Cheese in Europe",
+    "date": "2025-05-10",
+    "url": "https://www.google.com/search?q=Formo+regulatory+approval+precision-fermented+cheese+Europe",
+    "impact": 10,
+    "summary": "Formo secures regulatory clearance to sell its animal-free cheese made via precision fermentation in Europe."
   },
   {
     "category": "food",
-    "company": "Formo",
-    "headline": "Formo Announces Partnership for Cellular Agriculture Dairy Production",
-    "date": "2025-07-01",
-    "url": "https://www.google.com/search?q=Formo+cellular+agriculture+dairy+partnership",
+    "company": "Solar Foods",
+    "headline": "Solar Foods Announces Commercial Launch of Solein in Singapore",
+    "date": "2025-06-01",
+    "url": "https://www.google.com/search?q=Solar+Foods+commercial+launch+Solein+Singapore",
+    "impact": 9,
+    "summary": "Solar Foods begins selling its air-based protein, Solein, marking a milestone for gas-fermentation-derived foods."
+  },
+  {
+    "category": "food",
+    "company": "Air Protein",
+    "headline": "Air Protein Achieves Breakthrough in CO2 Conversion Efficiency",
+    "date": "2025-05-25",
+    "url": "https://www.google.com/search?q=Air+Protein+breakthrough+CO2+conversion+efficiency",
+    "impact": 9,
+    "summary": "Air Protein reports a major advancement in the efficiency of converting CO2 into edible protein."
+  },
+  {
+    "category": "materials",
+    "company": "Modern Synthesis",
+    "headline": "Modern Synthesis Raises $4.1M To Scale Microbial Textile Platform",
+    "date": "2025-06-27",
+    "url": "https://www.google.com/search?q=Modern+Synthesis+Raises+$4.1M+To+Scale+Microbial+Textile+Platform",
     "impact": 8,
-    "summary": "Formo is collaborating with a major food company to accelerate the development and commercialization of cell-based dairy products."
+    "summary": "Modern Synthesis gets funding to expand its microbial textile production, offering leather and plastic alternatives."
+  },
+  {
+    "category": "materials",
+    "company": "MycoWorks",
+    "headline": "MycoWorks Announces New Production Facility for Reishi",
+    "date": "2025-05-20",
+    "url": "https://www.google.com/search?q=MycoWorks+new+production+facility+Reishi",
+    "impact": 8,
+    "summary": "MycoWorks expands its manufacturing capacity for Reishi, its mushroom-based leather alternative."
   },
   {
     "category": "food",
     "company": "Change Foods",
-    "headline": "Change Foods Secures Funding for Animal-Free Dairy Production",
+    "headline": "Change Foods Secures Funding for Animal-Free Dairy",
     "date": "2025-07-15",
-    "url": "https://www.google.com/search?q=Change+Foods+secures+funding+precision+fermentation",
+    "url": "https://www.google.com/search?q=Change+Foods+secures+funding+animal-free+dairy",
     "impact": 7,
-    "summary": "Change Foods raised capital to scale up its precision-fermentation platform for vegan dairy alternatives."
+    "summary": "Change Foods receives investment to scale up its precision-fermentation process for creating dairy alternatives."
+  },
+  {
+    "category": "food",
+    "company": "Perfect Day",
+    "headline": "Perfect Day Launches New Line of Animal-Free Ice Cream",
+    "date": "2025-06-15",
+    "url": "https://www.google.com/search?q=Perfect+Day+launches+new+animal-free+ice+cream",
+    "impact": 7,
+    "summary": "Perfect Day releases a new line of ice cream made with their precision-fermented whey protein."
   },
   {
     "category": "materials",
-    "company": "Algiknit",
-    "headline": "Algiknit Partners to Develop Seaweed-Based Yarns for Apparel",
-    "date": "2025-06-10",
-    "url": "https://www.google.com/search?q=Algiknit+seaweed+yarns+apparel",
+    "company": "Checkerspot",
+    "headline": "Checkerspot Develops New High-Performance Algae-Based Polyurethane",
+    "date": "2025-06-08",
+    "url": "https://www.google.com/search?q=Checkerspot+develops+algae-based+polyurethane",
     "impact": 7,
-    "summary": "Algiknit is partnering with clothing companies to develop yarns made from seaweed, a sustainable alternative to synthetic fabrics."
-  },
-  {
-    "category": "materials",
-    "company": "Natural Fiber Welding",
-    "headline": "Natural Fiber Welding Secures Funding for Sustainable Material Expansion",
-    "date": "2025-07-28",
-    "url": "https://www.google.com/search?q=Natural+Fiber+Welding+funding+sustainable+materials",
-    "impact": 7,
-    "summary": "Natural Fiber Welding obtained funds to scale up its technology for creating sustainable materials from natural fibers."
+    "summary": "Checkerspot unveils a novel polyurethane material derived from algae oil, targeting various applications."
   }
 ]
