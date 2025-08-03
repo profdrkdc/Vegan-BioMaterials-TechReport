@@ -5,7 +5,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_openai import ChatOpenAI
-from src.generate_longread import parse_outline_from_text, ArticleOutline
+from src.models import parse_outline_from_text, ArticleOutline
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)

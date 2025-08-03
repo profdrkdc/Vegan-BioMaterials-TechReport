@@ -7,19 +7,11 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_openai import ChatOpenAI
+from src.models import ArticleOutline
+
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
-
-class ArticleSection(BaseModel):
-    title: str = Field(description="The title of this section of the article.")
-    talking_points: List[str] = Field(description="A list of 3-5 key points to be covered in this section.")
-
-class ArticleOutline(BaseModel):
-    title: str = Field(description="A catchy, SEO-friendly title for the entire article.")
-    introduction_hook: str = Field(description="A short sentence or a compelling idea to start the introduction.")
-    sections: List[ArticleSection] = Field(description="The list of sections to be written for the article.")
-    conclusion_summary: str = Field(description="A brief summary of the main idea for the conclusion.")
 
 def generate_longread_article(outline_path: str, output_path: str, lang_name: str):
     eprint(f"AI pipeline started for language: {lang_name}...")
