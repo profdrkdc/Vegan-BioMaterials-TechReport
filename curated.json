@@ -2,64 +2,73 @@
   {
     "category": "food",
     "company": "Solar Foods",
-    "headline": "Solar Foods opens first commercial Solein protein factory",
-    "date": "2025-05-10",
+    "headline": "Solar Foods Factory Producing Solein Air-Based Protein Opens",
+    "date": "2025-05-28",
     "url": "https://www.google.com/search?q=Solar+Foods+Solein+factory+opening",
     "impact": 9,
-    "summary": "Solar Foods commences commercial production of Solein, a protein powder made from air and electricity."
-  },
-  {
-    "category": "materials",
-    "company": "Bolt Threads",
-    "headline": "Bolt Threads partners with luxury brand on mushroom leather apparel",
-    "date": "2025-06-10",
-    "url": "https://www.google.com/search?q=Bolt+Threads+luxury+brand+Mylo+apparel",
-    "impact": 9,
-    "summary": "Bolt Threads announces collaboration with a major luxury brand to create apparel using Mylo mushroom leather."
-  },
-  {
-    "category": "materials",
-    "company": "Modern Synthesis",
-    "headline": "Modern Synthesis raises $4.1M to scale microbial textile production",
-    "date": "2025-06-28",
-    "url": "https://techcrunch.com/2025/06/28/modern-synthesis-raises-4-1m-to-scale-microbial-textile-production/",
-    "impact": 8,
-    "summary": "Biomaterial startup Modern Synthesis gains investment for scaling their microbial textile alternative to leather/plastic."
+    "summary": "Solar Foods begins production at its first commercial facility, producing Solein protein from air and electricity."
   },
   {
     "category": "materials",
     "company": "BioMason",
-    "headline": "BioMason raises funding to scale bio-based cement production",
-    "date": "2025-05-15",
-    "url": "https://www.google.com/search?q=BioMason+bio-based+cement+funding",
+    "headline": "BioMason Announces Collaboration to Develop Bio-Based Cement Alternative",
+    "date": "2025-06-01",
+    "url": "https://www.google.com/search?q=BioMason+bio-based+cement+alternative",
+    "impact": 9,
+    "summary": "BioMason collaborates to develop a sustainable alternative to traditional cement using biological processes and reducing CO2 emissions."
+  },
+  {
+    "category": "materials",
+    "company": "Modern Synthesis",
+    "headline": "Modern Synthesis Raises $4.1M to Scale Microbial Textile Platform",
+    "date": "2025-06-20",
+    "url": "https://www.google.com/search?q=Modern+Synthesis+microbial+textile+funding",
     "impact": 8,
-    "summary": "BioMason secures investment for scaling up production of their biologically-created cement alternatives."
+    "summary": "Modern Synthesis gets investment to expand its platform for creating textiles from microbes, replacing traditional fabrics."
+  },
+  {
+    "category": "materials",
+    "company": "Bolt Threads",
+    "headline": "Bolt Threads Partners with Adidas for Mushroom Leather Apparel Line",
+    "date": "2025-06-10",
+    "url": "https://www.google.com/search?q=Bolt+Threads+Adidas+mushroom+leather+apparel",
+    "impact": 8,
+    "summary": "Bolt Threads collaborates with Adidas to create apparel using Mylo, a mushroom-based leather alternative."
+  },
+  {
+    "category": "materials",
+    "company": "Genecis",
+    "headline": "Genecis Bioplastics Raises Series A for PHA Production from Food Waste",
+    "date": "2025-07-22",
+    "url": "https://www.google.com/search?q=Genecis+Bioplastics+PHA+funding",
+    "impact": 8,
+    "summary": "Genecis secures Series A funding to scale production of PHA bioplastics derived from food waste, replacing petroleum plastics."
   },
   {
     "category": "food",
     "company": "Change Foods",
-    "headline": "Change Foods raises $12M to scale animal-free cheese",
+    "headline": "Change Foods Secures Funding to Scale Precision Fermentation Cheese",
     "date": "2025-07-15",
-    "url": "https://www.fooddive.com/news/change-foods-raises-12m-to-scale-animal-free-cheese/719473/",
+    "url": "https://www.google.com/search?q=Change+Foods+precision+fermentation+cheese+funding",
     "impact": 7,
-    "summary": "Precision-fermentation startup Change Foods secures funding to expand production of vegan cheese alternatives."
-  },
-  {
-    "category": "food",
-    "company": "Remilk",
-    "headline": "Remilk partners with major food company for alt-dairy products",
-    "date": "2025-06-05",
-    "url": "https://www.google.com/search?q=Remilk+food+company+partnership",
-    "impact": 7,
-    "summary": "Remilk collaborates with established food manufacturer to increase availability of precision-fermented dairy alternatives."
+    "summary": "Change Foods receives investment to expand production of animal-free cheese using precision fermentation technology."
   },
   {
     "category": "materials",
-    "company": "Mango Materials",
-    "headline": "Mango Materials announces new PHA production facility",
-    "date": "2025-07-05",
-    "url": "https://www.google.com/search?q=Mango+Materials+PHA+production+facility",
+    "company": "Algiknit",
+    "headline": "Algiknit Secures Seed Funding for Seaweed-Based Yarn Alternative",
+    "date": "2025-05-15",
+    "url": "https://www.google.com/search?q=Algiknit+seed+funding+seaweed+yarn",
     "impact": 7,
-    "summary": "Mango Materials unveils plans for a new facility to increase production of their PHA biodegradable plastic alternative."
+    "summary": "Algiknit obtains seed funding to further develop its sustainable yarn made from seaweed, replacing synthetic materials."
+  },
+  {
+    "category": "food",
+    "company": "The EVERY Co.",
+    "headline": "The EVERY Co. Launches New Animal-Free Egg Product for Food Manufacturers",
+    "date": "2025-06-25",
+    "url": "https://www.google.com/search?q=The+EVERY+Co+animal-free+egg+product",
+    "impact": 7,
+    "summary": "The EVERY Co. releases a new egg alternative produced via precision fermentation, aimed at food manufacturers."
   }
 ]
