@@ -5,6 +5,11 @@ title = "Vegan BioTech Report"
 theme = "ananke"
 defaultContentLanguage = "en"
 
+paginate = 20 # Toon 20 posts per pagina
+
+[params]
+  mainSections = ["posts"]
+  
 [outputs]
   home = ["HTML", "RSS"]
 
