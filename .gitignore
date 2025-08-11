@@ -4,7 +4,6 @@
 !.env.example
 
 # Generated data files and content
-published_post_url.txt
 
 
 # Hugo / Static Site Generator
