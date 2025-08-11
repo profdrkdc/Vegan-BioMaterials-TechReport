@@ -1,41 +1,41 @@
 [
   {
     "platform": "facebook",
-    "text_content": "Is gas fermentation the food of the future? Solar Foods and Air Protein are leading the charge, but can they overcome the hurdles? Our latest article dives deep into the environmental impact, scalability challenges, regulatory landscape, and consumer perception of this revolutionary technology. We analyze the potential for gas fermentation to disrupt traditional agriculture and enhance food security. What do you think – will we be eating air-based protein anytime soon? Read the full analysis here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "The future of food is changing, and it might be fowl-free! Our latest article dives deep into the FDA approval of animal-free egg white protein and its potential to revolutionize the egg industry. We explore the economic impacts, manufacturing opportunities, consumer perceptions, and ethical considerations surrounding this innovative technology. How will this affect traditional egg farmers and the sustainability of our food systems? Read the full analysis and share your thoughts! {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "🌱 Food from thin air? It sounds like science fiction, but companies like Solar Foods and Air Protein are turning gas fermentation into a reality! Our new long-read explores whether this tech is truly the future of food or just a pipe dream. Environmental impact, scalability, consumer acceptance – we cover it all. 🤔 Link in bio for the full article! #veganbiotech #futureoffood #gasfermentation #sustainablefood #airprotein #solarfoods\n\nAI Image Prompt: A futuristic cityscape with gleaming towers, interspersed with vertical farms growing luminous green protein sources. In the foreground, stylized representations of CO2 and methane molecules are being converted into food.",
+    "text_content": "🍳 Revolutionizing breakfast as we know it! 🍳 Animal-free egg white is here, and it's got the potential to change everything. From baking to ethical concerns, we're breaking it all down in our latest article. Check it out and let us know your thoughts in the comments! Link in bio. #veganbiotech #futureoffood #animalfree #eggwhite #cellularagriculture #foodtech",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A futuristic cityscape with gleaming towers, interspersed with vertical farms growing luminous green protein sources. In the foreground, stylized representations of CO2 and methane molecules are being converted into food.",
+    "image_prompt": "A futuristic lab setting where a scientist is examining a clear, egg-white-like substance in a petri dish. In the background, there are beakers and lab equipment, and holographic projections show images of chickens in a free-range environment. The overall tone is clean, modern, and optimistic, suggesting a positive future for food technology.",
     "reddit_details": null
   },
   {
     "platform": "bluesky",
-    "text_content": "Gas fermentation: legit future food or just hype? 🤔 Our latest deep dive looks at Solar Foods & Air Protein's efforts to turn CO2 & methane into protein. Scalability, regulation, & consumer acceptance are BIG hurdles. Thoughts? {{GHOST_ARTICLE_URL}}",
+    "text_content": "Animal-free egg white is here and the FDA has given it the green light! What does this mean for the future of our food system? Is this the end of factory farming for eggs? So many questions! 🤔 Read the full report and join the discussion! {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "mastodon",
-    "text_content": "Exciting (or terrifying?) advancements in #veganbiotech! 🧪 Our newest long-read explores the potential of gas fermentation with Solar Foods and Air Protein leading the charge. We cover environmental impacts, scalability challenges, and the looming regulatory landscape. Is this truly the #futureoffood? Read the full article and join the discussion! {{GHOST_ARTICLE_URL}} #sustainablefood #foodtech #airprotein #solarfoods",
+    "text_content": "Dive into the world of animal-free egg white! Our new article explores the impact of precision-fermented egg white protein, from its economic implications to ethical considerations. How will it change the food industry? Read the full analysis: {{GHOST_ARTICLE_URL}} #veganbiotech #cellularagriculture #futureoffood #eggwhite #sustainablefood",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Hey everyone, just finished reading a fascinating article about gas fermentation and how companies like Solar Foods and Air Protein are trying to make protein from thin air (literally!). It's got me thinking a lot about the future of food and whether this could be a real solution to our environmental and food security problems. The article really dives into the pros and cons, the challenges they face, and how consumers might react to eating this stuff. What do you all think? Is this the next big thing, or just a passing fad? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Hey everyone, I just finished reading a fascinating article about animal-free egg white protein and how it's poised to disrupt the entire egg industry! Apparently, the FDA just approved it, which is a HUGE step. The article goes deep into the economic implications, ethical considerations, and potential benefits for food manufacturers. It's really got me thinking about the future of food and how these kinds of innovations could revolutionize our food system. What do you all think about cellular agriculture and animal-free alternatives? Are you excited, skeptical, or somewhere in between? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": {
-      "suggested_subreddit": "r/FoodScience",
-      "post_title": "Gas Fermentation: Food Revolution or Just Hot Air?",
-      "primary_topic_keyword": "FoodScience"
+      "suggested_subreddit": "r/food",
+      "post_title": "Animal-Free Egg White: Revolutionizing the Food Industry?",
+      "primary_topic_keyword": "Food"
     }
   }
 ]

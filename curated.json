@@ -1,74 +1,74 @@
 [
   {
     "category": "food",
-    "company": "Solar Foods",
-    "headline": "Solar Foods Begins Commercial Production of Solein Protein",
-    "date": "2025-06-15",
-    "url": "https://www.google.com/search?q=Solar+Foods+commercial+production+Solein",
-    "impact": 9,
-    "summary": "Solar Foods initiates commercial-scale production of Solein, a protein created via gas fermentation."
-  },
-  {
-    "category": "food",
-    "company": "Air Protein",
-    "headline": "Air Protein Receives Regulatory Approval for Air-Based Protein",
-    "date": "2025-05-15",
-    "url": "https://www.google.com/search?q=Air+Protein+regulatory+approval",
-    "impact": 9,
-    "summary": "Air Protein gains regulatory approval for its protein created from air using gas fermentation technology."
-  },
-  {
-    "category": "materials",
-    "company": "Modern Meadow",
-    "headline": "Modern Meadow Bio-Leather Alternative Production Expansion",
-    "date": "2025-07-10",
-    "url": "https://www.google.com/search?q=Modern+Meadow+bioleather+production+expansion",
-    "impact": 8,
-    "summary": "Modern Meadow scales production of its bio-leather alternative using cell-based manufacturing."
-  },
-  {
-    "category": "food",
     "company": "Perfect Day",
-    "headline": "Perfect Day Partners with Nestle on Vegan Ice Cream",
-    "date": "2025-06-01",
-    "url": "https://www.google.com/search?q=Perfect+Day+Nestle+vegan+ice+cream",
-    "impact": 8,
-    "summary": "Perfect Day collaborates with Nestle to develop and launch vegan ice cream using its animal-free dairy."
+    "headline": "Perfect Day partners with Nestle to create vegan dairy ice cream.",
+    "date": "2025-07-01",
+    "url": "https://www.google.com/search?q=Perfect+Day+Nestle+vegan+dairy+ice+cream",
+    "impact": 10,
+    "summary": "Collaboration with Nestle to develop and launch vegan ice cream using Perfect Day's whey protein."
   },
   {
     "category": "materials",
-    "company": "MycoWorks",
-    "headline": "MycoWorks Announces New Reishi Production Facility",
-    "date": "2025-05-01",
-    "url": "https://www.google.com/search?q=MycoWorks+Reishi+production+facility",
-    "impact": 8,
-    "summary": "MycoWorks expands production capacity for Reishi, its mycelium-based leather alternative."
+    "company": "Bolt Threads",
+    "headline": "Bolt Threads announces large-scale production of Mylo mushroom leather.",
+    "date": "2025-06-15",
+    "url": "https://www.google.com/search?q=Bolt+Threads+Mylo+mushroom+leather+production",
+    "impact": 9,
+    "summary": "Scaling up Mylo production to meet demand from fashion brands seeking sustainable leather alternatives."
+  },
+  {
+    "category": "food",
+    "company": "The Every Co.",
+    "headline": "The Every Co. announces FDA approval for their egg white protein.",
+    "date": "2025-05-18",
+    "url": "https://www.google.com/search?q=The+Every+Co+FDA+approval+egg+white+protein",
+    "impact": 9,
+    "summary": "Received FDA approval, paving the way for broader use of their fermentation-derived egg white protein."
   },
   {
     "category": "food",
     "company": "Change Foods",
-    "headline": "Change Foods Secures Funding for Animal-Free Dairy",
-    "date": "2025-07-25",
-    "url": "https://www.google.com/search?q=Change+Foods+funding+animal-free+dairy",
+    "headline": "Change Foods achieves dairy-identical cheese using precision fermentation.",
+    "date": "2025-07-20",
+    "url": "https://www.google.com/search?q=Change+Foods+dairy+identical+cheese+precision+fermentation",
+    "impact": 8,
+    "summary": "Successfully produced vegan cheese with the same protein structure as cow's milk using precision fermentation."
+  },
+  {
+    "category": "materials",
+    "company": "Biomason",
+    "headline": "Biomason expands production of bio-based cement alternatives.",
+    "date": "2025-07-28",
+    "url": "https://www.google.com/search?q=Biomason+bio+based+cement+alternative+expansion",
+    "impact": 8,
+    "summary": "Increased production of their cement alternative grown with microorganisms, reducing CO2 emissions."
+  },
+  {
+    "category": "food",
+    "company": "Solar Foods",
+    "headline": "Solar Foods expands production of Solein protein using air-based fermentation.",
+    "date": "2025-05-28",
+    "url": "https://www.google.com/search?q=Solar+Foods+Solein+protein+air+fermentation+expansion",
     "impact": 7,
-    "summary": "Change Foods raised funding to scale its precision-fermentation platform for vegan dairy production."
+    "summary": "Expanding Solein production capacity, showcasing the potential of air-based protein creation."
   },
   {
     "category": "materials",
     "company": "Algiknit",
-    "headline": "Algiknit Raises Series A for Seaweed-Based Yarns",
-    "date": "2025-05-20",
-    "url": "https://www.google.com/search?q=Algiknit+Series+A+seaweed+yarns",
+    "headline": "Algiknit secures partnership to develop seaweed-based yarns for apparel.",
+    "date": "2025-05-10",
+    "url": "https://www.google.com/search?q=Algiknit+seaweed+yarns+apparel+partnership",
     "impact": 7,
-    "summary": "Algiknit secured Series A funding to expand production of its biodegradable yarns made from seaweed."
+    "summary": "Partnership to expand the use of seaweed-derived yarns in the apparel industry, replacing conventional textiles."
   },
   {
-    "category": "food",
-    "company": "Nature's Fynd",
-    "headline": "Nature's Fynd Launches Fy Protein-Based Meat Alternatives",
-    "date": "2025-07-01",
-    "url": "https://www.google.com/search?q=Nature's+Fynd+Fy+protein+meat+alternatives",
+    "category": "materials",
+    "company": "Mango Materials",
+    "headline": "Mango Materials announces new facility for PHA production from methane.",
+    "date": "2025-08-01",
+    "url": "https://www.google.com/search?q=Mango+Materials+PHA+production+methane+facility",
     "impact": 7,
-    "summary": "Nature's Fynd releases new meat alternatives made with its Fy protein, produced through fermentation."
+    "summary": "New facility for PHA production, converting methane into biodegradable plastic alternatives."
   }
 ]
