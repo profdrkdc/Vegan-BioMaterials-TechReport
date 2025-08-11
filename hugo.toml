@@ -3,8 +3,9 @@ title = "Vegan BioTech Report"
 theme = "ananke"
 defaultContentLanguage = "en"
 
-paginate = 20
-
+[pagination]
+  pagerSize = 20
+  
 [params]
   mainSections = ["posts"]
   
