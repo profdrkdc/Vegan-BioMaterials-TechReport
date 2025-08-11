@@ -1,11 +1,9 @@
-# hugo.toml
-
 baseURL = "https://profdrkdc.github.io/Vegan-BioTech-Report/"
 title = "Vegan BioTech Report"
 theme = "ananke"
 defaultContentLanguage = "en"
 
-paginate = 20 # Toon 20 posts per pagina
+paginate = 20
 
 [params]
   mainSections = ["posts"]
