@@ -1,0 +1,74 @@
+[
+  {
+    "category": "food",
+    "company": "Solar Foods",
+    "headline": "Solar Foods Begins Commercial Production of Solein Protein",
+    "date": "2025-06-15",
+    "url": "https://www.google.com/search?q=Solar+Foods+commercial+production+Solein",
+    "impact": 9,
+    "summary": "Solar Foods initiates commercial-scale production of Solein, a protein created via gas fermentation."
+  },
+  {
+    "category": "food",
+    "company": "Air Protein",
+    "headline": "Air Protein Receives Regulatory Approval for Air-Based Protein",
+    "date": "2025-05-15",
+    "url": "https://www.google.com/search?q=Air+Protein+regulatory+approval",
+    "impact": 9,
+    "summary": "Air Protein gains regulatory approval for its protein created from air using gas fermentation technology."
+  },
+  {
+    "category": "materials",
+    "company": "Modern Meadow",
+    "headline": "Modern Meadow Bio-Leather Alternative Production Expansion",
+    "date": "2025-07-10",
+    "url": "https://www.google.com/search?q=Modern+Meadow+bioleather+production+expansion",
+    "impact": 8,
+    "summary": "Modern Meadow scales production of its bio-leather alternative using cell-based manufacturing."
+  },
+  {
+    "category": "food",
+    "company": "Perfect Day",
+    "headline": "Perfect Day Partners with Nestle on Vegan Ice Cream",
+    "date": "2025-06-01",
+    "url": "https://www.google.com/search?q=Perfect+Day+Nestle+vegan+ice+cream",
+    "impact": 8,
+    "summary": "Perfect Day collaborates with Nestle to develop and launch vegan ice cream using its animal-free dairy."
+  },
+  {
+    "category": "materials",
+    "company": "MycoWorks",
+    "headline": "MycoWorks Announces New Reishi Production Facility",
+    "date": "2025-05-01",
+    "url": "https://www.google.com/search?q=MycoWorks+Reishi+production+facility",
+    "impact": 8,
+    "summary": "MycoWorks expands production capacity for Reishi, its mycelium-based leather alternative."
+  },
+  {
+    "category": "food",
+    "company": "Change Foods",
+    "headline": "Change Foods Secures Funding for Animal-Free Dairy",
+    "date": "2025-07-25",
+    "url": "https://www.google.com/search?q=Change+Foods+funding+animal-free+dairy",
+    "impact": 7,
+    "summary": "Change Foods raised funding to scale its precision-fermentation platform for vegan dairy production."
+  },
+  {
+    "category": "materials",
+    "company": "Algiknit",
+    "headline": "Algiknit Raises Series A for Seaweed-Based Yarns",
+    "date": "2025-05-20",
+    "url": "https://www.google.com/search?q=Algiknit+Series+A+seaweed+yarns",
+    "impact": 7,
+    "summary": "Algiknit secured Series A funding to expand production of its biodegradable yarns made from seaweed."
+  },
+  {
+    "category": "food",
+    "company": "Nature's Fynd",
+    "headline": "Nature's Fynd Launches Fy Protein-Based Meat Alternatives",
+    "date": "2025-07-01",
+    "url": "https://www.google.com/search?q=Nature's+Fynd+Fy+protein+meat+alternatives",
+    "impact": 7,
+    "summary": "Nature's Fynd releases new meat alternatives made with its Fy protein, produced through fermentation."
+  }
+]

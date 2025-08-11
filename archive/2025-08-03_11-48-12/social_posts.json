@@ -1,0 +1,41 @@
+[
+  {
+    "platform": "facebook",
+    "text_content": "Is air the new food? 🌬️ Companies like Air Protein are pioneering a revolutionary approach to food production by creating protein from... well, air! Our latest deep dive explores the science behind carbon transformation, the scalability challenges, consumer perception, and the regulatory landscape of this fascinating technology. Could this be the key to a more sustainable food future? 🤔 Read the full article and let us know what you think! {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
+    "platform": "instagram",
+    "text_content": "Imagine a world where food comes from air! 🌍 Air Protein is making this a reality with their innovative carbon transformation technology. This week, we delve into the science, challenges, and future of air-based protein. Is this the answer to sustainable food production? Link in bio! #airprotein #futureoffood #veganbiotech #sustainablefood #alternativeprotein {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": "A futuristic food production facility with sleek, modern bioreactors converting air into edible protein. The scene should be brightly lit and convey a sense of innovation and sustainability. Consider incorporating a diverse group of scientists and engineers working on the technology.",
+    "reddit_details": null
+  },
+  {
+    "platform": "bluesky",
+    "text_content": "Air protein? Seriously? 🤯 New article dives deep into the companies turning air into food! From the science to the skepticism, we cover it all. Worth a read if you're into the future of food. {{GHOST_ARTICLE_URL}} #futureoffood #vegan",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
+    "platform": "mastodon",
+    "text_content": "New on the Vegan BioTech Report: A comprehensive analysis of air-based protein and its potential to revolutionize the food industry. We explore the science behind carbon transformation, scalability challenges, and consumer perception. Is air the future of food? Read the full article here: {{GHOST_ARTICLE_URL}} #veganbiotech #futureoffood #airprotein #sustainablefood #alternativeprotein",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
+    "platform": "reddit",
+    "text_content": "Just read a fascinating article about Air Protein and the possibility of creating food from...air! 🤯 They're using carbon transformation technology to convert CO2 into protein. It sounds like science fiction, but it could be a game-changer for sustainable food production. What do you all think about this? Is air-based protein the future? Any concerns about consumer acceptance or scalability? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": {
+      "suggested_subreddit": "r/science",
+      "post_title": "Can We Really Eat Air? Exploring the Potential of Air-Based Protein",
+      "primary_topic_keyword": "Biotech"
+    }
+  }
+]
