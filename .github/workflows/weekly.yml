@@ -70,6 +70,22 @@ jobs:
           submodules: true
           ref: main
 
+      # --- NIEUWE STAP HIERONDER TOEVOEGEN ---
+      - name: Prepare Content for Build by Including Archive
+        run: |
+          echo "Checking for archived content..."
+          if [ -d "archive" ]; then
+            echo "Archive directory found. Copying content..."
+            # Maak de doelmap aan als deze niet bestaat
+            mkdir -p content/posts
+            # Kopieer alle markdown-bestanden uit alle submappen van het archief
+            # naar de actieve contentmap.
+            find archive -type f -name "*.md" -exec cp {} content/posts/ \;
+            echo "Archived content has been copied to the build directory."
+          else
+            echo "No archive directory found to include."
+          fi
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
