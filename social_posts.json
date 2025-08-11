@@ -1,41 +1,41 @@
 [
   {
     "platform": "facebook",
-    "text_content": "Solar Foods is making headlines with their new factory that produces Solein, a protein made from air and electricity! This groundbreaking technology could revolutionize sustainable food systems. Our long-read article dives deep into the promise of air-based protein, its environmental and economic impacts, and the challenges of scaling up this innovative approach. Is this the future of food? Find out more: {{GHOST_ARTICLE_URL}}",
+    "text_content": "The future of food is changing, and it might be fowl-free! Our latest article dives deep into the FDA approval of animal-free egg white protein and its potential to revolutionize the egg industry. We explore the economic impacts, manufacturing opportunities, consumer perceptions, and ethical considerations surrounding this innovative technology. How will this affect traditional egg farmers and the sustainability of our food systems? Read the full analysis and share your thoughts! {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "🌱 Imagine a world where we can produce protein from thin air! 😮 Solar Foods just launched its first commercial Solein factory, and it's a game-changer for sustainable food. Our in-depth article explores the incredible potential of air-based protein to transform our food systems. Link in bio to learn more! #SolarFoods #Solein #AirBasedProtein #SustainableFood #FutureofFood #VeganBiotechReport\n\n",
+    "text_content": "🍳 Revolutionizing breakfast as we know it! 🍳 Animal-free egg white is here, and it's got the potential to change everything. From baking to ethical concerns, we're breaking it all down in our latest article. Check it out and let us know your thoughts in the comments! Link in bio. #veganbiotech #futureoffood #animalfree #eggwhite #cellularagriculture #foodtech",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A futuristic, brightly lit factory interior with large, transparent bioreactors filled with a swirling, golden liquid. Green plants are growing on the walls, and the overall aesthetic is clean and sustainable, with a soft, diffused light creating a sense of hope and innovation. In the background, stylized representations of air molecules are visible.",
+    "image_prompt": "A futuristic lab setting where a scientist is examining a clear, egg-white-like substance in a petri dish. In the background, there are beakers and lab equipment, and holographic projections show images of chickens in a free-range environment. The overall tone is clean, modern, and optimistic, suggesting a positive future for food technology.",
     "reddit_details": null
   },
   {
     "platform": "bluesky",
-    "text_content": "Solar Foods' new Solein factory is officially open! 🤯 Air-based protein is no longer just a concept, it's a reality. Is this the key to a more sustainable food future? Our latest article dives deep into the tech, the impact, and the challenges. Check it out: {{GHOST_ARTICLE_URL}} #futureoffood",
+    "text_content": "Animal-free egg white is here and the FDA has given it the green light! What does this mean for the future of our food system? Is this the end of factory farming for eggs? So many questions! 🤔 Read the full report and join the discussion! {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "mastodon",
-    "text_content": "Exciting news in the world of #veganbiotech! Solar Foods has launched their first commercial factory producing Solein, a protein derived from air and electricity. This could be a major step towards a more sustainable food system. Our in-depth article explores the environmental, economic, and social implications of this groundbreaking technology. Read the full story here: {{GHOST_ARTICLE_URL}} #SolarFoods #Solein #AirBasedProtein #SustainableFood #FutureofFood #Biotech",
+    "text_content": "Dive into the world of animal-free egg white! Our new article explores the impact of precision-fermented egg white protein, from its economic implications to ethical considerations. How will it change the food industry? Read the full analysis: {{GHOST_ARTICLE_URL}} #veganbiotech #cellularagriculture #futureoffood #eggwhite #sustainablefood",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Hey everyone, I just read the most fascinating article about Solar Foods and their new factory that produces Solein – protein from air! It's mind-blowing to think we can create food with such a small environmental footprint. The article really digs into the potential benefits (and challenges) of this tech. What do you all think about air-based protein? Is it the future of food, or are there too many hurdles to overcome? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Hey everyone, I just finished reading a fascinating article about animal-free egg white protein and how it's poised to disrupt the entire egg industry! Apparently, the FDA just approved it, which is a HUGE step. The article goes deep into the economic implications, ethical considerations, and potential benefits for food manufacturers. It's really got me thinking about the future of food and how these kinds of innovations could revolutionize our food system. What do you all think about cellular agriculture and animal-free alternatives? Are you excited, skeptical, or somewhere in between? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": {
-      "suggested_subreddit": "r/science",
-      "post_title": "Solar Foods Opens First Factory Producing Protein from Air",
-      "primary_topic_keyword": "Biotech"
+      "suggested_subreddit": "r/food",
+      "post_title": "Animal-Free Egg White: Revolutionizing the Food Industry?",
+      "primary_topic_keyword": "Food"
     }
   }
 ]

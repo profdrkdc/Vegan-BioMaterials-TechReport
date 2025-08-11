@@ -1,0 +1,92 @@
+[
+  {
+    "category": "food",
+    "company": "Change Foods",
+    "headline": "Change Foods Secures Funding to Scale Precision Fermentation Cheese",
+    "date": "2025-07-15",
+    "url": "https://www.google.com/search?q=Change+Foods+precision+fermentation+cheese+funding",
+    "impact": 7,
+    "summary": "Change Foods receives investment to expand production of animal-free cheese using precision fermentation technology."
+  },
+  {
+    "category": "materials",
+    "company": "Modern Synthesis",
+    "headline": "Modern Synthesis Raises $4.1M to Scale Microbial Textile Platform",
+    "date": "2025-06-20",
+    "url": "https://www.google.com/search?q=Modern+Synthesis+microbial+textile+funding",
+    "impact": 8,
+    "summary": "Modern Synthesis gets investment to expand its platform for creating textiles from microbes, replacing traditional fabrics."
+  },
+  {
+    "category": "food",
+    "company": "Solar Foods",
+    "headline": "Solar Foods Factory Producing Solein Air-Based Protein Opens",
+    "date": "2025-05-28",
+    "url": "https://www.google.com/search?q=Solar+Foods+Solein+factory+opening",
+    "impact": 9,
+    "summary": "Solar Foods begins production at its first commercial facility, producing Solein protein from air and electricity."
+  },
+  {
+    "category": "materials",
+    "company": "Bolt Threads",
+    "headline": "Bolt Threads Partners with Adidas for Mushroom Leather Apparel Line",
+    "date": "2025-06-10",
+    "url": "https://www.google.com/search?q=Bolt+Threads+Adidas+mushroom+leather+apparel",
+    "impact": 8,
+    "summary": "Bolt Threads collaborates with Adidas to create apparel using Mylo, a mushroom-based leather alternative."
+  },
+  {
+    "category": "food",
+    "company": "Perfect Day",
+    "headline": "Perfect Day Announces New Partnership for Animal-Free Ice Cream Expansion",
+    "date": "2025-07-01",
+    "url": "https://www.google.com/search?q=Perfect+Day+animal-free+ice+cream+partnership",
+    "impact": 6,
+    "summary": "Perfect Day expands its animal-free ice cream production through a new partnership, increasing market availability."
+  },
+  {
+    "category": "materials",
+    "company": "Algiknit",
+    "headline": "Algiknit Secures Seed Funding for Seaweed-Based Yarn Alternative",
+    "date": "2025-05-15",
+    "url": "https://www.google.com/search?q=Algiknit+seed+funding+seaweed+yarn",
+    "impact": 7,
+    "summary": "Algiknit obtains seed funding to further develop its sustainable yarn made from seaweed, replacing synthetic materials."
+  },
+  {
+    "category": "food",
+    "company": "The EVERY Co.",
+    "headline": "The EVERY Co. Launches New Animal-Free Egg Product for Food Manufacturers",
+    "date": "2025-06-25",
+    "url": "https://www.google.com/search?q=The+EVERY+Co+animal-free+egg+product",
+    "impact": 7,
+    "summary": "The EVERY Co. releases a new egg alternative produced via precision fermentation, aimed at food manufacturers."
+  },
+  {
+    "category": "materials",
+    "company": "Genecis",
+    "headline": "Genecis Bioplastics Raises Series A for PHA Production from Food Waste",
+    "date": "2025-07-22",
+    "url": "https://www.google.com/search?q=Genecis+Bioplastics+PHA+funding",
+    "impact": 8,
+    "summary": "Genecis secures Series A funding to scale production of PHA bioplastics derived from food waste, replacing petroleum plastics."
+  },
+  {
+    "category": "food",
+    "company": "Nature's Fynd",
+    "headline": "Nature's Fynd Expands Distribution of Fy Protein-Based Products",
+    "date": "2025-05-05",
+    "url": "https://www.google.com/search?q=Nature%27s+Fynd+distribution+expansion",
+    "impact": 6,
+    "summary": "Nature's Fynd increases the availability of its food products made from Fy, a fungi-derived protein."
+  },
+  {
+    "category": "materials",
+    "company": "BioMason",
+    "headline": "BioMason Announces Collaboration to Develop Bio-Based Cement Alternative",
+    "date": "2025-06-01",
+    "url": "https://www.google.com/search?q=BioMason+bio-based+cement+alternative",
+    "impact": 9,
+    "summary": "BioMason collaborates to develop a sustainable alternative to traditional cement using biological processes and reducing CO2 emissions."
+  }
+]
