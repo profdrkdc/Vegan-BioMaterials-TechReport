@@ -20,7 +20,10 @@ BASE_URL = os.getenv('AI_BASE_URL')
 PROMPT_TPL_PATH = "prompts/step3.txt"
 CURATED_DATA_PATH = "curated.json"
 LANGUAGES_CONFIG_PATH = "languages.json"
-OUTPUT_DIR = "content/posts"
+OUTPUT_DIR = os.getenv('VBR_CONTENT_DIR')
+if not OUTPUT_DIR or not os.path.exists(OUTPUT_DIR):
+    eprint(f"❌ Kritieke fout: VBR_CONTENT_DIR environment variabele is niet ingesteld of de map bestaat niet.")
+    sys.exit(1)
 
 model = None
 eprint(f"Provider type: {API_TYPE}, Model: {MODEL_ID}")
@@ -150,8 +153,8 @@ description: "{first_paragraph}"
         
         # Gebruik de opgeschoonde markdown voor de body
         full_content = front_matter + clean_md
-        
-        output_filename = f"{OUTPUT_DIR}/{today_iso}_{lang_code}.md"
+
+        output_filename = f"{OUTPUT_DIR}/{target_date.strftime('%Y-%m-%d')}_{lang_code}.md"
         with open(output_filename, "w", encoding="utf-8") as f:
             f.write(full_content)
         eprint(f"✅ {output_filename} geschreven")

@@ -7,11 +7,10 @@ def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
 def get_latest_newsletter_file(content_dir="content"):
-    # --- DE WIJZIGING IS HIER ---
-    # We zoeken nu specifiek in de "posts" submap.
-    search_path = os.path.join(content_dir, "posts", "*_en.md")
-    
-    list_of_files = glob.glob(search_path)
+    # Gebruik een glob patroon met ** voor recursief zoeken in alle submappen van posts.
+    search_path = os.path.join(content_dir, "posts", "**", "*_en.md")    
+    # Voeg de recursive=True vlag toe aan glob.glob
+    list_of_files = glob.glob(search_path, recursive=True)
     if not list_of_files:
         raise FileNotFoundError(f"Geen Engelse nieuwsbrief (*_en.md) gevonden in '{os.path.join(content_dir, 'posts')}'.")
     return max(list_of_files, key=os.path.getctime)

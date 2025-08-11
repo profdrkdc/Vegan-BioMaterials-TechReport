@@ -71,7 +71,7 @@ def get_provider_list():
         return [found_provider] if found_provider else []
     return all_providers
 
-def build_script_env(provider_config: dict) -> dict:
+def build_script_env(provider_config: dict, content_dir: str) -> dict: 
     """Bouwt de environment dictionary voor subprocessen."""
     script_env = os.environ.copy()
     script_env['AI_API_TYPE'] = provider_config['api_type']
@@ -79,6 +79,8 @@ def build_script_env(provider_config: dict) -> dict:
     script_env['AI_API_KEY'] = os.getenv(provider_config['api_key_name'])
     if provider_config.get('base_url'):
         script_env['AI_BASE_URL'] = provider_config['base_url']
+    # Voeg de unieke content directory toe aan de environment
+    script_env['VBR_CONTENT_DIR'] = content_dir
     return script_env
 
 def run_task_with_fallback(task_name: str, task_function, providers_to_run):
@@ -125,8 +127,6 @@ def write_publication_url(base_url: str, longread_filename: str):
 
 def run_full_pipeline(target_date_str: str or None, no_archive: bool):
     """De hoofd-pipeline die alle stappen voor contentgeneratie coördineert."""
-    if not no_archive:
-        archive_old_content()
     
     target_date = datetime.date.today()
     if target_date_str:
@@ -137,7 +137,12 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
     if not providers_to_run:
         eprint("❌ Geen geldige providers gevonden.")
         sys.exit(1)
-        
+
+    run_timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H%M%S')
+    run_content_dir = os.path.join("content", "posts", run_timestamp)
+    os.makedirs(run_content_dir, exist_ok=True)
+    eprint(f"Content voor deze run wordt opgeslagen in: {run_content_dir}")
+
     enabled_langs = [lang for lang in json.load(open('languages.json')) if lang.get('enabled')]
 
     # Stap 1-3: Fetch, Curate, Draft
@@ -145,8 +150,8 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
         run_task_with_fallback("Fetch Data", lambda p: run_command(["python3", "-m", "src.fetch", "--date", target_date_iso], env=build_script_env(p)), providers_to_run)
     if not os.path.exists("curated.json"):
         run_command(["python3", "-m", "src.curate"], env=os.environ.copy())
-    if not all(os.path.exists(f"content/posts/{target_date_iso}_{lang['code']}.md") for lang in enabled_langs):
-        run_task_with_fallback("Draft Newsletters", lambda p: run_command(["python3", "-m", "src.draft", "--date", target_date_iso], env=build_script_env(p)), providers_to_run)
+    if not os.path.exists(f"{run_content_dir}/{target_date_iso}_{enabled_langs[0]['code']}.md"):
+        run_task_with_fallback("Draft Newsletters", lambda p: run_command(["python3", "-m", "src.draft", "--date", target_date_iso], env=build_script_env(p, run_content_dir)), providers_to_run)
 
     # Stap 4: Genereer de Engelse outline (één keer)
     if not os.path.exists("longread_outline.json"):
@@ -166,15 +171,15 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
         for lang_config in enabled_langs:
             lang_code = lang_config['code']
             lang_name = lang_config['name']
-            output_path = f"content/posts/longread_{target_date_iso}_{lang_code}.md"
+            output_path = os.path.join(run_content_dir, f"longread_{target_date_iso}_{lang_code}.md")
             if not os.path.exists(output_path):
                 def task_generate_article(provider_config):
                     run_command([
                         "python3", "-m", "src.generate_longread", 
                         "--outline-in", "longread_outline.json",
-                        "-o", output_path,
+                        "-o", output_path, 
                         "--lang-name", lang_name
-                    ], env=build_script_env(provider_config))
+                    ], env=build_script_env(p, run_content_dir)) 
                 run_task_with_fallback(f"Generate Long-Read ({lang_name})", task_generate_article, providers_to_run)
             else:
                 eprint(f"INFO: Long-read ({lang_name}) overgeslagen, bestand bestaat al.")
