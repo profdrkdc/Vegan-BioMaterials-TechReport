@@ -179,7 +179,7 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
                         "--outline-in", "longread_outline.json",
                         "-o", output_path, 
                         "--lang-name", lang_name
-                    ], env=build_script_env(p, run_content_dir)) 
+                    ], env=build_script_env(provider_config, run_content_dir))
                 run_task_with_fallback(f"Generate Long-Read ({lang_name})", task_generate_article, providers_to_run)
             else:
                 eprint(f"INFO: Long-read ({lang_name}) overgeslagen, bestand bestaat al.")
