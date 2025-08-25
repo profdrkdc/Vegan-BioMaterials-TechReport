@@ -28,6 +28,17 @@ jobs:
       github.event_name == 'schedule' ||
       (github.event_name == 'workflow_dispatch' && github.event.inputs.skip_content_generation != 'true')
     steps:
+      - name: Check if week is even
+        if: github.event_name == 'schedule'
+        run: |
+          week_number=$(date +%V)
+          if [ $((week_number % 2)) -ne 0 ]; then
+            echo "Skipping on odd week number: $week_number"
+            # Use exit code 78 to gracefully skip the job
+            exit 78
+          else
+            echo "Running on even week number: $week_number"
+          fi
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Set up Python
