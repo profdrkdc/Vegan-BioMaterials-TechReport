@@ -46,7 +46,7 @@ jobs:
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
-          git add archive/ content/ raw.json curated.json social_posts.json longread_outline.json published_post_url.txt
+          git add .
           if ! git diff --staged --quiet; then
             git commit -m "feat(content): Add generated content from workflow run"
             git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
